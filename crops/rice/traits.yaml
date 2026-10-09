@@ -1,0 +1,48 @@
+traits:
+  grain_yield:
+    dtype: continuous
+    unit: kg_per_ha
+    direction: higher_is_better
+    primary_target: true
+    source_col: Kg_ha
+  flowering_time:
+    dtype: continuous
+    unit: days
+    direction: lower_is_better
+    primary_target: false
+    source_col: FL
+  plant_height:
+    dtype: continuous
+    unit: cm
+    direction: neutral
+    primary_target: false
+    source_col: PLTHGT
+  maturity:
+    dtype: continuous
+    unit: days
+    direction: lower_is_better
+    primary_target: false
+    source_col: MAT
+  tiller_count:
+    dtype: continuous
+    unit: count
+    direction: higher_is_better
+    primary_target: false
+    source_col: TILLER
+  lodging_score:
+    dtype: ordinal
+    unit: 0_to_9_scale
+    direction: lower_is_better
+    primary_target: false
+    source_col: LDG
+
+covariates:
+  missing_hill:
+    dtype: integer
+    imputation: zero
+    source_col: Missing_Hill
+  moisture_content:
+    dtype: continuous
+    unit: percent
+    imputation: mean
+    source_col: MC

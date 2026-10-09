@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Helix and Harvest — An immersive gene structure experience. Explore the cinematic intersection of genotype and phenotype through a bioluminescent double-helix rendered in WebGL.">
+    <title>The Seed Genome</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        body {
+            min-height: 900vh;
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        * { cursor: none !important; }
+
+        ::-webkit-scrollbar { display: none; width: 0; }
+
+        #webgl {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            outline: none;
+        }
+
+        /* --- Custom Cursor --- */
+        .cursor-inner {
+            position: fixed; top: 0; left: 0;
+            width: 6px; height: 6px;
+            border: 2px solid rgba(255, 255, 255, 1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .cursor-outer {
+            position: fixed; top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+
+        /* --- Cinematic Container --- */
+        .cinematic-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0 60px 40px 60px;
+            box-sizing: border-box;
+        }
+
+        /* --- Header --- */
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            width: 100%; z-index: 20;
+            pointer-events: auto;
+            padding: 20px 0;
+        }
+        .brand { font-size: 14px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; }
+        .header-nav { display: flex; align-items: center; gap: 24px; }
+        .nav-link {
+            color: #ffffff; text-decoration: none;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 500; transition: color 0.3s;
+        }
+        .nav-link:hover { color: #ffffff; }
+        .nav-dot { width: 3px; height: 3px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px;
+            background: #ffffff; color: #000000;
+            text-decoration: none;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+            border-radius: 20px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .btn-circle {
+            display: inline-block; width: 6px; height: 6px;
+            border: 1px solid #000000; border-radius: 50%; background: transparent;
+        }
+        .contact-btn:hover { transform: scale(1.05); background: #f0f0f0; }
+
+        /* --- Slides --- */
+        .slide { position: absolute; bottom: 12%; pointer-events: none; }
+
+        #slide-1 { left: 0; width: 100%; }
+        #slide-1 .slide-title { margin-left: 60px; }
+        #slide-1 .desc-row { position: relative; display: flex; width: 100%; }
+        #slide-1 .col-1 {
+            margin-left: 60px;
+            width: calc(25vw - 60px);
+            max-width: calc(25vw - 60px);
+        }
+        #slide-1 .col-2 {
+            position: absolute;
+            left: calc(25vw + 40px);
+            width: calc(25vw - 60px);
+            max-width: calc(25vw - 60px);
+        }
+
+        #slide-2 { left: 0; width: 100%; }
+        #slide-2 .slide-title {
+            margin-left: 60px;
+            max-width: calc(42vw - 60px);
+        }
+        #slide-2 .slide-desc {
+            margin-left: 60px;
+            width: calc(30vw - 60px);
+            max-width: 440px;
+        }
+
+        #slide-3 {
+            left: calc(52vw + 30px);
+            width: calc(28vw - 60px);
+            max-width: 440px;
+        }
+        #slide-3 .slide-title { white-space: nowrap; }
+
+        #slide-4 { left: 60px; max-width: 440px; }
+
+        .slide-title {
+            font-family: 'Italiana', serif;
+            font-size: clamp(56px, 5.0vw, 102px);
+            line-height: 1.04;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #f4ffe9;
+        }
+        .slide-desc {
+            font-size: 16px; line-height: 1.7; font-weight: 300;
+            color: #d1d5db; letter-spacing: 0.5px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transition-delay: 0.4s;
+        }
+        .slide.active .slide-desc { opacity: 1; transform: translateY(0); }
+
+        .slide-title .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px);
+            filter: blur(12px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        filter 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .slide.active .slide-title .char { opacity: 1; transform: translateY(0); filter: blur(0); }
+        .slide.active { pointer-events: auto; }
+
+        /* --- Grid Overlay --- */
+        .story-dashes {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .story-dash { width: 2px; height: 40px; background: rgba(255, 255, 255, 0.15); border-radius: 2px; }
+        .story-dash-fill { width: 100%; height: 0%; background: #ffffff; border-radius: 2px; }
+
+        .grid-horizontal-line {
+            position: fixed; top: 70px; left: 0; right: 0;
+            width: 100%; height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            z-index: 5; pointer-events: none;
+        }
+        .grid-lines {
+            position: fixed; top: 0; left: 40px; right: 40px;
+            width: calc(100% - 80px); height: 100vh;
+            display: flex; justify-content: space-between;
+            z-index: 5; pointer-events: none;
+        }
+        .grid-line {
+            position: relative; width: 1px; height: 100%;
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .grid-line:nth-child(3) { margin-top: 70px; height: calc(100vh - 70px); }
+        .grid-dot {
+            position: absolute; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+        }
+    </style>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/examples/jsm/loaders/GLTFLoader.js": "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-inner"></div>
+    <div class="cursor-outer"></div>
+
+    <!-- Cinematic Overlay Container -->
+    <div class="cinematic-container">
+        <!-- Header -->
+        <div class="main-header">
+            <div class="brand">Genome</div>
+            <nav class="header-nav">
+                <a href="#slide-1" class="nav-link">Genotype</a>
+                <span class="nav-dot"></span>
+                <a href="#slide-2" class="nav-link">Phenotype</a>
+                <span class="nav-dot"></span>
+                <a href="#slide-3" class="nav-link">Expression</a>
+                <span class="nav-dot"></span>
+                <a href="#slide-4" class="nav-link">Harvest</a>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="contact-btn">Contact <span class="btn-circle"></span></a>
+            </div>
+        </div>
+
+        <!-- Slide 1 -->
+        <div class="slide" id="slide-1">
+            <h2 class="slide-title">Helix <br>and Harvest</h2>
+            <div class="desc-row">
+                <p class="slide-desc col-1">A sequence of code holding centuries of survival and selection. Fluid in wild grasses, eternal in cultivated form. Each strand encodes a quiet, patient story.</p>
+                <p class="slide-desc col-2">Born of ancient seed and patient breeding, it stands to bridge our agricultural memory and genomic vision. A living code fixed in dormant, waiting seed.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" id="slide-2">
+            <h2 class="slide-title">Phenotype <br>Unfolding</h2>
+            <p class="slide-desc">A kernel formed at the meeting point of inheritance and climate — genotype and environment, bound by quiet expression.</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" id="slide-3">
+            <h2 class="slide-title">Living Code</h2>
+            <p class="slide-desc">Biology that breathes. Mesmerizing currents of chlorophyll and signal flow through the structure, reflecting every switch and silence within the sequence.</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" id="slide-4">
+            <h2 class="slide-title">Digital <br>Harvest</h2>
+            <p class="slide-desc">Contemplating ancient grain through the lens of new dimensions. A field's wisdom reborn in the currents of radiant agricultural data.</p>
+        </div>
+    </div>
+
+    <!-- Grid Overlay -->
+    <div class="grid-horizontal-line"></div>
+    <div class="grid-lines">
+        <div class="grid-line"><div class="grid-dot top"></div><div class="grid-dot bottom"></div></div>
+        <div class="grid-line"><div class="grid-dot top"></div><div class="grid-dot bottom"></div></div>
+        <div class="grid-line"><div class="grid-dot top"></div><div class="grid-dot bottom"></div></div>
+        <div class="grid-line"><div class="grid-dot top"></div><div class="grid-dot bottom"></div></div>
+        <div class="grid-line story-progress-container">
+            <div class="grid-dot top"></div>
+            <div class="grid-dot bottom"></div>
+            <div class="story-dashes">
+                <div class="story-dash"><div class="story-dash-fill" id="dash-fill-1"></div></div>
+                <div class="story-dash"><div class="story-dash-fill" id="dash-fill-2"></div></div>
+                <div class="story-dash"><div class="story-dash-fill" id="dash-fill-3"></div></div>
+                <div class="story-dash"><div class="story-dash-fill" id="dash-fill-4"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WebGL Canvas -->
+    <canvas id="webgl"></canvas>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+        // ─── Globals ────────────────────────────────────────────────────
+        const canvas = document.querySelector('#webgl');
+        let scene, camera, renderer;
+        let geneGroup;
+        let helixPivot;
+        let haloGroup;
+        const clock = new THREE.Clock();
+        let currentScroll = 0;
+
+        let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
+
+        let cursorX = window.innerWidth / 2, cursorY = window.innerHeight / 2;
+        let outerCursorX = window.innerWidth / 2, outerCursorY = window.innerHeight / 2;
+
+        let bgMaterial;
+        const shaderUniforms = {
+            uTime: { value: 0 },
+            uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+            uMouse: { value: new THREE.Vector2(0, 0) },
+            uScroll: { value: 0 }
+        };
+
+        let moteParticles;
+        const moteCount = 450;
+        const moteData = [];
+
+        const sizes = { width: window.innerWidth, height: window.innerHeight };
+
+        // ─── Gene Structure Constants ───────────────────────────────────
+        const HELIX_RADIUS = 0.38;       // narrow helix, like real DNA
+        const HELIX_HALF_HEIGHT = 2.4;   // tall structure
+        const HELIX_TURNS = 3.0;         // fewer turns = open elegant pitch (height/diam ~1.68)
+        const STRAND_SEGMENTS = 400;
+        const RUNG_COUNT = 30;
+        const MARKER_RADIUS = 0.06;
+        const DNA_ZONE = 0.52;           // 0–52%  = pure DNA
+        const TRANSITION_ZONE = 0.72;    // 52–72% = morphing
+        // 72–100% = full plant phenotype
+        const NUM_STRAND_SEGS = 10;      // segments for gradient backbone
+
+        // ─── Mote Texture ───────────────────────────────────────────────
+        function createMoteTexture() {
+            const c = document.createElement('canvas');
+            c.width = 16; c.height = 16;
+            const ctx = c.getContext('2d');
+            const gradient = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            gradient.addColorStop(0.25, 'rgba(255, 255, 255, 0.85)');
+            gradient.addColorStop(0.6, 'rgba(255, 255, 255, 0.3)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 16, 16);
+            return new THREE.CanvasTexture(c);
+        }
+
+        // ─── Motes ──────────────────────────────────────────────────────
+        function createMotes() {
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(moteCount * 3);
+            const colors = new Float32Array(moteCount * 3);
+
+            for (let i = 0; i < moteCount; i++) {
+                const x = (Math.random() - 0.5) * 6.5;
+                const y = (Math.random() - 0.5) * 5.0 - 0.5;
+                const z = (Math.random() - 0.5) * 6.5;
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
+
+                if (Math.random() < 0.6) {
+                    colors[i * 3] = 1.0;
+                    colors[i * 3 + 1] = 0.78 + Math.random() * 0.15;
+                    colors[i * 3 + 2] = 0.25 + Math.random() * 0.15;
+                } else {
+                    colors[i * 3] = 0.35 + Math.random() * 0.15;
+                    colors[i * 3 + 1] = 0.95 + Math.random() * 0.05;
+                    colors[i * 3 + 2] = 0.55 + Math.random() * 0.15;
+                }
+
+                moteData.push({
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    speedY: 0.15 + Math.random() * 0.3,
+                    speedZ: (Math.random() - 0.5) * 0.4,
+                    swaySpeed: 0.5 + Math.random() * 1.5,
+                    swayRadius: 0.05 + Math.random() * 0.15,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.025,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                map: createMoteTexture()
+            });
+
+            moteParticles = new THREE.Points(geometry, material);
+            scene.add(moteParticles);
+        }
+
+        // ─── Background Living-Soil Wave Shader ─────────────────────────
+        function createBackgroundShader() {
+            const vertexShader = `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `;
+
+            const fragmentShader = `
+                varying vec2 vUv;
+                uniform float uTime;
+                uniform vec2 uResolution;
+                uniform vec2 uMouse;
+                uniform float uScroll;
+
+                float hash(float n) { return fract(sin(n) * 43758.5453123); }
+                float noise(in vec3 x) {
+                    vec3 p = floor(x);
+                    vec3 f = fract(x);
+                    f = f*f*(3.0-2.0*f);
+                    float n = p.x + p.y*57.0 + 113.0*p.z;
+                    return mix(mix(mix(hash(n+  0.0), hash(n+  1.0), f.x),
+                                   mix(hash(n+ 57.0), hash(n+ 58.0), f.x), f.y),
+                               mix(mix(hash(n+113.0), hash(n+114.0), f.x),
+                                   mix(hash(n+170.0), hash(n+171.0), f.x), f.y), f.z);
+                }
+
+                void main() {
+                    vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
+                    float aspect = uResolution.x / uResolution.y;
+                    
+                    float time = uTime * 0.08;
+                    float scroll = uScroll;
+                    
+                    float angle1 = 0.6;
+                    float angle2 = -0.7;
+                    float angle3 = 1.2;
+                    
+                    float freq1 = 2.4;
+                    float freq2 = 3.2;
+                    float freq3 = 4.0;
+                    
+                    vec2 warpedUv = uv;
+                    
+                    float scrollDeform = scroll * 5.0;
+                    
+                    warpedUv.x += sin(uv.y * 2.5 + time * 0.2 + scrollDeform) * 0.35;
+                    warpedUv.y += cos(uv.x * 2.5 - time * 0.15 - scrollDeform * 0.8) * 0.35;
+                    
+                    warpedUv.x += sin(uv.y * 1.2 - time * 0.1 - scrollDeform * 1.5) * 0.25;
+                    warpedUv.y += cos(uv.x * 1.2 + time * 0.18 + scrollDeform * 1.2) * 0.25;
+                    
+                    vec2 scrollDrift = vec2(scroll * 0.04, -scroll * 0.02);
+                    vec2 mouseShift = vec2(uMouse.x * aspect * 0.05, uMouse.y * 0.05);
+                    warpedUv += scrollDrift + mouseShift;
+                    
+                    vec2 dir1 = vec2(cos(angle1), sin(angle1));
+                    vec2 dir2 = vec2(cos(angle2), sin(angle2));
+                    vec2 dir3 = vec2(cos(angle3), sin(angle3));
+                    
+                    float w1 = sin(dot(warpedUv, dir1) * freq1 + time * 1.0);
+                    float w2 = cos(dot(warpedUv, dir2) * freq2 - time * 1.4 + w1 * 0.4);
+                    float w3 = sin(dot(warpedUv, dir3) * freq3 + time * 1.8 + w2 * 0.5);
+                    
+                    float waveField = w1 * 0.50 + w2 * 0.35 + w3 * 0.15;
+                    
+                    float wideSheen = pow(max(0.0, 1.0 - abs(waveField - 0.1)), 2.5);
+                    float crispSpecular = pow(max(0.0, 1.0 - abs(waveField - 0.15)), 8.0);
+                    float crest = wideSheen * 0.5 + crispSpecular * 0.9;
+                    
+                    vec3 c0_shadow = vec3(0.0008, 0.0005, 0.0002);
+                    vec3 c0_wave1  = vec3(0.075, 0.045, 0.012);
+                    vec3 c0_wave2  = vec3(0.045, 0.026, 0.006);
+                    vec3 c0_crest  = vec3(0.55, 0.38, 0.14);
+                    
+                    vec3 c1_shadow = vec3(0.0003, 0.0008, 0.0004);
+                    vec3 c1_wave1  = vec3(0.012, 0.055, 0.028);
+                    vec3 c1_wave2  = vec3(0.006, 0.032, 0.016);
+                    vec3 c1_crest  = vec3(0.16, 0.55, 0.30);
+                    
+                    float t = smoothstep(0.0, 1.0, scroll);
+                    vec3 colShadow = mix(c0_shadow, c1_shadow, t);
+                    vec3 colWave1  = mix(c0_wave1, c1_wave1, t);
+                    vec3 colWave2  = mix(c0_wave2, c1_wave2, t);
+                    vec3 colCrest  = mix(c0_crest, c1_crest, t);
+                    
+                    vec3 color = colShadow;
+                    color = mix(color, colWave2, smoothstep(-0.6, 0.2, waveField));
+                    color = mix(color, colWave1, smoothstep(0.0, 0.8, waveField));
+                    
+                    color += colCrest * crest * 1.4;
+                    
+                    float vignette = 1.0 - dot(uv, uv) * 0.12;
+                    color *= vignette;
+                    
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `;
+
+            bgMaterial = new THREE.ShaderMaterial({
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                uniforms: shaderUniforms,
+                depthWrite: false,
+                depthTest: false
+            });
+
+            const bgGeometry = new THREE.PlaneGeometry(30, 30);
+            const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+            bgMesh.position.set(0.0, 0.0, -8.0);
+            bgMesh.renderOrder = -10;
+            camera.add(bgMesh);
+        }
+
+        // ─── Glow Sprite Factory ─────────────────────────────────────────
+        function createGlowSprite(hexColor, size) {
+            const c = document.createElement('canvas');
+            c.width = 64; c.height = 64;
+            const ctx = c.getContext('2d');
+            const col = new THREE.Color(hexColor);
+            const r = Math.floor(col.r * 255);
+            const g = Math.floor(col.g * 255);
+            const b = Math.floor(col.b * 255);
+            const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+            gradient.addColorStop(0, `rgba(${r},${g},${b},1)`);
+            gradient.addColorStop(0.25, `rgba(${r},${g},${b},0.5)`);
+            gradient.addColorStop(0.6, `rgba(${r},${g},${b},0.12)`);
+            gradient.addColorStop(1, `rgba(0,0,0,0)`);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 64, 64);
+            const texture = new THREE.CanvasTexture(c);
+            const spriteMat = new THREE.SpriteMaterial({
+                map: texture, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.7
+            });
+            const sprite = new THREE.Sprite(spriteMat);
+            sprite.scale.setScalar(size);
+            return sprite;
+        }
+
+        // ─── Leaf Shape Factory ──────────────────────────────────────────
+        function createLeafMesh(length, width, color, emissiveColor, opacity) {
+            const shape = new THREE.Shape();
+            shape.moveTo(0, 0);
+            shape.bezierCurveTo(width * 0.55, length * 0.2, width * 0.45, length * 0.55, width * 0.08, length);
+            shape.bezierCurveTo(-width * 0.08, length * 0.95, -width * 0.45, length * 0.55, 0, 0);
+            const geo = new THREE.ShapeGeometry(shape, 12);
+            const mat = new THREE.MeshPhysicalMaterial({
+                color: color,
+                emissive: emissiveColor,
+                emissiveIntensity: 0.9,
+                roughness: 0.35,
+                metalness: 0.0,
+                clearcoat: 0.6,
+                clearcoatRoughness: 0.4,
+                transmission: 0.25,
+                transparent: true,
+                opacity: opacity,
+                side: THREE.DoubleSide
+            });
+            return new THREE.Mesh(geo, mat);
+        }
+
+        // ─── Wheat Spike Factory ─────────────────────────────────────────
+        function createWheatSpike(height) {
+            const group = new THREE.Group();
+            const kernelGeo = new THREE.CapsuleGeometry(0.028, 0.065, 4, 8);
+            const kernelMat = new THREE.MeshPhysicalMaterial({
+                color: '#daa520', emissive: '#9b7414', emissiveIntensity: 0.8,
+                roughness: 0.25, metalness: 0.05, clearcoat: 0.9
+            });
+            const kernelCount = 14;
+            for (let i = 0; i < kernelCount; i++) {
+                const kernel = new THREE.Mesh(kernelGeo, kernelMat);
+                const row = Math.floor(i / 2);
+                const side = i % 2 === 0 ? 1 : -1;
+                const ang = row * 0.95 + (side > 0 ? 0 : 0.5);
+                kernel.position.set(
+                    Math.cos(ang) * 0.04 * side,
+                    row * 0.05,
+                    Math.sin(ang) * 0.035
+                );
+                kernel.rotation.z = side * 0.35;
+                kernel.rotation.x = Math.sin(ang) * 0.2;
+                group.add(kernel);
+            }
+            // Awns — thin bristles at top
+            const awnMat = new THREE.MeshBasicMaterial({ color: '#c4a84d', transparent: true, opacity: 0.7 });
+            for (let i = 0; i < 6; i++) {
+                const awnGeo = new THREE.CylinderGeometry(0.0015, 0.001, 0.2 + Math.random() * 0.15, 3);
+                const awn = new THREE.Mesh(awnGeo, awnMat);
+                awn.position.set(
+                    (Math.random() - 0.5) * 0.06,
+                    kernelCount * 0.025 + 0.08 + i * 0.02,
+                    (Math.random() - 0.5) * 0.04
+                );
+                awn.rotation.z = (Math.random() - 0.5) * 0.6;
+                awn.rotation.x = (Math.random() - 0.5) * 0.4;
+                group.add(awn);
+            }
+            return group;
+        }
+
+        // ─── Gene Structure Build (Organic Morphing Helix) ──────────────
+        function buildGeneStructure() {
+            geneGroup = new THREE.Group();
+            helixPivot = new THREE.Group();
+            scene.add(helixPivot);
+            helixPivot.add(geneGroup);
+
+            // ──────────────────────────────────────────────────────────────
+            // 1. Build helix point arrays with organic variation
+            // ──────────────────────────────────────────────────────────────
+            const pointsA = [];
+            const pointsB = [];
+            for (let i = 0; i <= STRAND_SEGMENTS; i++) {
+                const t = i / STRAND_SEGMENTS;
+                const angle = t * Math.PI * 2 * HELIX_TURNS;
+                const y = -HELIX_HALF_HEIGHT + t * HELIX_HALF_HEIGHT * 2;
+                // Radius gently widens toward the top (DNA → plant)
+                const r = HELIX_RADIUS * (1.0 + t * 0.35);
+                // Subtle organic wobble
+                const wobble = Math.sin(t * 19.3) * 0.008 + Math.sin(t * 37.1) * 0.005;
+                const rA = r + wobble;
+                const rB = r - wobble;
+                pointsA.push(new THREE.Vector3(Math.cos(angle) * rA, y, Math.sin(angle) * rA));
+                pointsB.push(new THREE.Vector3(Math.cos(angle + Math.PI) * rB, y, Math.sin(angle + Math.PI) * rB));
+            }
+
+            // ──────────────────────────────────────────────────────────────
+            // 2. Segmented gradient backbone strands (gold/cyan → green)
+            // ──────────────────────────────────────────────────────────────
+            const colBottomA = new THREE.Color('#ffd98e');
+            const colBottomB = new THREE.Color('#60d4ff');
+            const colTopPlant = new THREE.Color('#3deb82');
+            const emBottomA   = new THREE.Color('#7a4b00');
+            const emBottomB   = new THREE.Color('#004466');
+            const emTopPlant  = new THREE.Color('#0a6b33');
+
+            function makeStrandMat(t, isA) {
+                const baseCol = (isA ? colBottomA : colBottomB).clone().lerp(colTopPlant, t);
+                const emCol   = (isA ? emBottomA : emBottomB).clone().lerp(emTopPlant, t);
+                return new THREE.MeshPhysicalMaterial({
+                    color: baseCol, emissive: emCol,
+                    emissiveIntensity: 0.55 + t * 0.5,
+                    roughness: 0.28 - t * 0.08,
+                    metalness: 0.08,
+                    clearcoat: 1.0, clearcoatRoughness: 0.2,
+                    transmission: 0.12 + t * 0.22,
+                    transparent: true, opacity: 0.95
+                });
+            }
+
+            for (let seg = 0; seg < NUM_STRAND_SEGS; seg++) {
+                const t0 = seg / NUM_STRAND_SEGS;
+                const t1 = (seg + 1) / NUM_STRAND_SEGS;
+                const iStart = Math.floor(t0 * STRAND_SEGMENTS);
+                const iEnd   = Math.min(Math.floor(t1 * STRAND_SEGMENTS) + 1, STRAND_SEGMENTS + 1);
+                const segA = pointsA.slice(iStart, iEnd);
+                const segB = pointsB.slice(iStart, iEnd);
+                if (segA.length < 2) continue;
+
+                const tMid = (t0 + t1) / 2;
+                // Thin backbone tubes so rungs are visually dominant
+                const tubeR = 0.016 + tMid * 0.012;
+                const tubularSegs = Math.max(20, Math.floor((iEnd - iStart) * 0.85));
+
+                const curveA = new THREE.CatmullRomCurve3(segA);
+                const curveB = new THREE.CatmullRomCurve3(segB);
+                const tubeA = new THREE.Mesh(
+                    new THREE.TubeGeometry(curveA, tubularSegs, tubeR, 8, false),
+                    makeStrandMat(tMid, true)
+                );
+                const tubeB = new THREE.Mesh(
+                    new THREE.TubeGeometry(curveB, tubularSegs, tubeR, 8, false),
+                    makeStrandMat(tMid, false)
+                );
+                tubeA.castShadow = tubeB.castShadow = true;
+                tubeA.receiveShadow = tubeB.receiveShadow = true;
+                geneGroup.add(tubeA, tubeB);
+            }
+
+            // ──────────────────────────────────────────────────────────────
+            // 3. Base-pair rungs + glowing SNP marker nodes (lower 65%)
+            // ──────────────────────────────────────────────────────────────
+            const markerPalette = ['#ffd166', '#06d6a0', '#4cc9f0'];
+            const markerGeometry = new THREE.IcosahedronGeometry(MARKER_RADIUS, 2);
+
+            for (let i = 0; i < RUNG_COUNT; i++) {
+                const t = i / (RUNG_COUNT - 1);
+                if (t > 0.65) continue; // base pairs only in lower 65%
+                const idx = Math.floor(t * STRAND_SEGMENTS);
+                const pA = pointsA[idx];
+                const pB = pointsB[idx];
+
+                // --- Base pair rung (split into two halves with colors) ---
+                const midpoint = pA.clone().lerp(pB, 0.5);
+                const rungColorIdx = i % 3;
+                const rungHalfMatA = new THREE.MeshStandardMaterial({
+                    color: rungColorIdx === 0 ? '#a8783a' : rungColorIdx === 1 ? '#2a8a6a' : '#3a7a9a',
+                    roughness: 0.5, metalness: 0.15,
+                    emissive: rungColorIdx === 0 ? '#5a3a10' : rungColorIdx === 1 ? '#0a4a3a' : '#1a3a5a',
+                    emissiveIntensity: 0.4
+                });
+                const rungHalfMatB = new THREE.MeshStandardMaterial({
+                    color: rungColorIdx === 0 ? '#c4943e' : rungColorIdx === 1 ? '#3aaa7a' : '#4a9aba',
+                    roughness: 0.5, metalness: 0.15,
+                    emissive: rungColorIdx === 0 ? '#6a4a18' : rungColorIdx === 1 ? '#1a5a4a' : '#2a4a6a',
+                    emissiveIntensity: 0.4
+                });
+
+                const halfA = new THREE.LineCurve3(pA, midpoint);
+                const halfB = new THREE.LineCurve3(midpoint, pB);
+                // Rungs are THICKER than backbone so they read as the ladder
+                const rungTubeR = 0.022 + (1 - t) * 0.006;
+                const meshA = new THREE.Mesh(new THREE.TubeGeometry(halfA, 1, rungTubeR, 6, false), rungHalfMatA);
+                const meshB = new THREE.Mesh(new THREE.TubeGeometry(halfB, 1, rungTubeR, 6, false), rungHalfMatB);
+                geneGroup.add(meshA, meshB);
+
+                // --- Glowing SNP marker at midpoint ---
+                const markerColor = markerPalette[rungColorIdx];
+                const markerMat = new THREE.MeshPhysicalMaterial({
+                    color: markerColor, emissive: markerColor,
+                    emissiveIntensity: 1.8,
+                    roughness: 0.15, metalness: 0.0, clearcoat: 1.0
+                });
+                const marker = new THREE.Mesh(markerGeometry, markerMat);
+                marker.position.copy(midpoint);
+                marker.castShadow = true;
+                geneGroup.add(marker);
+
+                // --- Glow sprite behind the marker ---
+                const glow = createGlowSprite(markerColor, 0.28 + (1 - t) * 0.12);
+                glow.position.copy(midpoint);
+                geneGroup.add(glow);
+            }
+
+            // ──────────────────────────────────────────────────────────────
+            // 4. Crown leaves — only at the very top (~last 10%) for a
+            //    clean, studyable helix with phenotype concentrated at apex
+            // ──────────────────────────────────────────────────────────────
+            const leafColors = [
+                { col: '#2ecc71', em: '#0a5c33' },
+                { col: '#27ae60', em: '#0d4a28' },
+                { col: '#1abc9c', em: '#0a6b55' },
+                { col: '#3deb82', em: '#1a7a40' }
+            ];
+
+            // Only 6 leaves, clustered at the very top of the structure
+            for (let i = 0; i < 6; i++) {
+                const t = 0.90 + (i / 6) * 0.10; // 90%–100% of height only
+                const idx = Math.min(Math.floor(t * STRAND_SEGMENTS), STRAND_SEGMENTS);
+                const useA = i % 2 === 0;
+                const attachPt = (useA ? pointsA[idx] : pointsB[idx]);
+                if (!attachPt) continue;
+
+                const lc = leafColors[i % leafColors.length];
+                const progress = i / 6;
+                const leafLen = 0.35 + progress * 0.40;
+                const leafW   = leafLen * 0.38;
+                const leaf = createLeafMesh(leafLen, leafW, lc.col, lc.em, 0.70 + progress * 0.15);
+
+                leaf.position.copy(attachPt);
+                const outDir = new THREE.Vector3(attachPt.x, 0, attachPt.z).normalize();
+                leaf.lookAt(attachPt.clone().add(outDir));
+                leaf.rotation.x += Math.PI * 0.5 - progress * 0.25;
+                leaf.rotation.z += (useA ? 1 : -1) * (0.15 + progress * 0.35);
+                leaf.rotation.y += (Math.random() - 0.5) * 0.4;
+                geneGroup.add(leaf);
+            }
+
+            // --- Wheat spikes at the very top ---
+            const topIdx = STRAND_SEGMENTS;
+            const topA = pointsA[topIdx];
+            const topB = pointsB[topIdx];
+
+            const spike1 = createWheatSpike(0.5);
+            spike1.position.copy(topA);
+            spike1.position.y += 0.1;
+            spike1.rotation.z = 0.15;
+            spike1.rotation.x = -0.1;
+            geneGroup.add(spike1);
+
+            const spike2 = createWheatSpike(0.45);
+            spike2.position.copy(topB);
+            spike2.position.y += 0.08;
+            spike2.rotation.z = -0.2;
+            spike2.rotation.x = 0.12;
+            geneGroup.add(spike2);
+
+            // Crown center spike
+            const topCenter = topA.clone().lerp(topB, 0.5);
+            const spike3 = createWheatSpike(0.55);
+            spike3.position.copy(topCenter);
+            spike3.position.y += 0.18;
+            geneGroup.add(spike3);
+
+            // ──────────────────────────────────────────────────────────────
+            // 6. Orbiting phenotype halos (subtler, organic)
+            // ──────────────────────────────────────────────────────────────
+            haloGroup = new THREE.Group();
+            helixPivot.add(haloGroup);
+            const haloDefs = [
+                { radius: 0.95, tube: 0.004, color: '#ffd166', tilt: 0.35, speed: 0.06 },
+                { radius: 1.25, tube: 0.003, color: '#06d6a0', tilt: -0.50, speed: -0.04 },
+                { radius: 1.55, tube: 0.003, color: '#4cc9f0', tilt: 0.15, speed: 0.03 }
+            ];
+            haloDefs.forEach((def) => {
+                const torus = new THREE.Mesh(
+                    new THREE.TorusGeometry(def.radius, def.tube, 8, 128),
+                    new THREE.MeshBasicMaterial({ color: def.color, transparent: true, opacity: 0.25 })
+                );
+                torus.rotation.x = Math.PI / 2 + def.tilt;
+                torus.userData.spinSpeed = def.speed;
+                haloGroup.add(torus);
+            });
+
+            // ──────────────────────────────────────────────────────────────
+            // 7. Position pivot and reveal
+            // ──────────────────────────────────────────────────────────────
+            helixPivot.position.y = -0.25;
+
+            geneGroup.scale.setScalar(0.001);
+            haloGroup.scale.setScalar(0.001);
+            const revealStart = clock.getElapsedTime();
+            function revealTick() {
+                const elapsed = clock.getElapsedTime() - revealStart;
+                const p = Math.min(1, elapsed / 1.5);
+                const eased = 1 - Math.pow(1 - p, 3);
+                geneGroup.scale.setScalar(0.001 + eased * 0.999);
+                haloGroup.scale.setScalar(0.001 + eased * 0.999);
+                if (p < 1) requestAnimationFrame(revealTick);
+            }
+            revealTick();
+        }
+
+        // ─── Resize Handler ─────────────────────────────────────────────
+        function onWindowResize() {
+            sizes.width = window.innerWidth;
+            sizes.height = window.innerHeight;
+            camera.aspect = sizes.width / sizes.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(sizes.width, sizes.height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            if (shaderUniforms) shaderUniforms.uResolution.value.set(sizes.width, sizes.height);
+        }
+
+        // ─── Pointer Handling ───────────────────────────────────────────
+        window.addEventListener('mousemove', (event) => {
+            cursorX = event.clientX;
+            cursorY = event.clientY;
+            const cursorInner = document.querySelector('.cursor-inner');
+            if (cursorInner) { cursorInner.style.left = `${cursorX}px`; cursorInner.style.top = `${cursorY}px`; }
+            targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            targetMouseY = (event.clientY / window.innerHeight) * 2 - 1;
+        });
+        window.addEventListener('resize', onWindowResize);
+
+        // ─── Per-Letter Title Split ──────────────────────────────────────
+        function splitTitlesIntoChars() {
+            const titles = document.querySelectorAll('.slide-title');
+            titles.forEach(title => {
+                const text = title.innerHTML;
+                let newHTML = '';
+                let delayCounter = 0;
+                const parts = text.split(/(<br\s*\/?>)/i);
+                parts.forEach(part => {
+                    if (part.toLowerCase().startsWith('<br')) {
+                        newHTML += part;
+                    } else {
+                        for (let i = 0; i < part.length; i++) {
+                            if (part[i] === ' ') {
+                                newHTML += ' ';
+                            } else {
+                                newHTML += `<span class="char" style="transition-delay: ${delayCounter * 0.035}s">${part[i]}</span>`;
+                                delayCounter++;
+                            }
+                        }
+                    }
+                });
+                title.innerHTML = newHTML;
+            });
+        }
+
+        // ─── Grid Dots Drift ────────────────────────────────────────────
+        function updateGridDots(scroll) {
+            const dots = document.querySelectorAll('.grid-dot');
+            dots.forEach((dot, i) => {
+                const startY = (i * 17) % 80 + 10;
+                let speed = 90 + (i * 55) % 180;
+                if (i % 2 === 0) speed = -speed;
+                let y = startY + scroll * speed;
+                y = ((y % 100) + 100) % 100;
+                dot.style.top = `${y}%`;
+            });
+        }
+
+        // ─── Slides + Stories Progress ──────────────────────────────────
+        function updateSlides(scroll) {
+            const slide1 = document.getElementById('slide-1');
+            const slide2 = document.getElementById('slide-2');
+            const slide3 = document.getElementById('slide-3');
+            const slide4 = document.getElementById('slide-4');
+
+            for (let i = 1; i <= 4; i++) {
+                const fill = document.getElementById(`dash-fill-${i}`);
+                if (fill) {
+                    const start = (i - 1) * 0.25;
+                    const end = i * 0.25;
+                    let progress = (scroll - start) / (end - start);
+                    progress = Math.max(0, Math.min(1, progress));
+                    fill.style.height = `${progress * 100}%`;
+                }
+            }
+
+            function isActive(val, start, end) { return val >= start && val <= end; }
+
+            if (slide1) slide1.classList.toggle('active', isActive(scroll, -0.10, 0.12));
+            if (slide2) slide2.classList.toggle('active', isActive(scroll, 0.28, 0.40));
+            if (slide3) slide3.classList.toggle('active', isActive(scroll, 0.56, 0.68));
+            if (slide4) slide4.classList.toggle('active', isActive(scroll, 0.84, 1.05));
+        }
+
+        // ─── Navigation ─────────────────────────────────────────────────
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const targetScrolls = [0.0, 0.34, 0.62, 0.94];
+            navLinks.forEach((link, index) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    const targetY = maxScroll * targetScrolls[index];
+                    window.scrollTo({ top: targetY, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // ─── Animation Loop ─────────────────────────────────────────────
+        function animate() {
+            requestAnimationFrame(animate);
+            const deltaTime = clock.getDelta();
+
+            // 1. target scroll [0..1], cross-browser
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollTop = window.scrollY !== undefined ? window.scrollY
+                : (window.pageYOffset !== undefined ? window.pageYOffset : document.documentElement.scrollTop);
+            const targetScroll = maxScroll > 0 ? scrollTop / maxScroll : 0;
+
+            // smooth physical lerp (inertia)
+            currentScroll += (targetScroll - currentScroll) * 0.025;
+
+            // smooth structure rotation lerp
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+
+            // outer cursor ring lerps toward inner
+            outerCursorX += (cursorX - outerCursorX) * 0.2;
+            outerCursorY += (cursorY - outerCursorY) * 0.2;
+            const cursorOuter = document.querySelector('.cursor-outer');
+            if (cursorOuter) { cursorOuter.style.left = `${outerCursorX}px`; cursorOuter.style.top = `${outerCursorY}px`; }
+
+            // gentle autonomous spin + subtle interactive nudge from mouse
+            if (helixPivot) {
+                helixPivot.rotation.y += deltaTime * 0.05;
+                helixPivot.rotation.y += mouseX * 0.001;
+                helixPivot.rotation.x = mouseY * 0.08;
+            }
+            // phenotype halos spin independently
+            if (haloGroup) {
+                haloGroup.children.forEach((torus) => {
+                    torus.rotation.z += deltaTime * torus.userData.spinSpeed;
+                });
+            }
+
+            // 2. mote physics
+            if (moteParticles) {
+                const positions = moteParticles.geometry.attributes.position.array;
+                const time = clock.getElapsedTime();
+                const scrollVelocity = Math.abs(targetScroll - currentScroll);
+                const speedMultiplier = 1.0 + scrollVelocity * 9.0;
+                const turbulence = scrollVelocity * 0.8;
+
+                for (let i = 0; i < moteCount; i++) {
+                    const idx = i * 3;
+                    const data = moteData[i];
+                    positions[idx]     += data.speedX * deltaTime * speedMultiplier;
+                    positions[idx + 1] += data.speedY * deltaTime * speedMultiplier;
+                    positions[idx + 2] += data.speedZ * deltaTime * speedMultiplier;
+
+                    const currentSway = data.swayRadius * (1.0 + turbulence * 4.0);
+                    positions[idx]     += Math.sin(time * data.swaySpeed + data.phase) * currentSway * deltaTime;
+                    positions[idx + 2] += Math.cos(time * data.swaySpeed + data.phase) * currentSway * deltaTime;
+
+                    // recycle when out of bounds
+                    if (positions[idx + 1] > 3.0 || Math.abs(positions[idx]) > 3.5 || Math.abs(positions[idx + 2]) > 3.5) {
+                        positions[idx + 1] = -2.5;
+                        positions[idx]     = (Math.random() - 0.5) * 3.0;
+                        positions[idx + 2] = (Math.random() - 0.5) * 3.0;
+                    }
+                }
+                moteParticles.geometry.attributes.position.needsUpdate = true;
+            }
+
+            // 3. camera orbits the structure 360° driven by scroll
+            const phi = currentScroll * Math.PI * 2.0;
+            const y = 0.35 + Math.sin(currentScroll * Math.PI) * 0.8;
+            const radius = 4.2 - Math.sin(currentScroll * Math.PI) * 0.6;
+            const x = radius * Math.sin(phi);
+            const z = radius * Math.cos(phi);
+
+            // Dynamic framing: keep helix separated from active typography across scroll
+            function getFramingOffset(s) {
+                // Slide 1 (0.00-0.12) & Slide 2 (0.28-0.40): typography on LEFT -> helix framed on RIGHT (+0.75)
+                if (s <= 0.42) {
+                    return 0.75;
+                } else if (s < 0.56) {
+                    // Transition to Slide 3 (0.56-0.68): typography on RIGHT -> helix framed on LEFT (-0.65)
+                    const t = (s - 0.42) / (0.56 - 0.42);
+                    const ease = 0.5 - 0.5 * Math.cos(t * Math.PI);
+                    return 0.75 * (1 - ease) + (-0.65) * ease;
+                } else if (s <= 0.70) {
+                    return -0.65;
+                } else if (s < 0.84) {
+                    // Transition to Slide 4 (0.84-1.05): typography on LEFT -> helix framed on RIGHT (+0.70)
+                    const t = (s - 0.70) / (0.84 - 0.70);
+                    const ease = 0.5 - 0.5 * Math.cos(t * Math.PI);
+                    return (-0.65) * (1 - ease) + 0.70 * ease;
+                } else {
+                    return 0.70;
+                }
+            }
+
+            const lateral = getFramingOffset(currentScroll);
+            const targetLookAt = new THREE.Vector3(
+                -lateral * Math.cos(phi),
+                -0.20,
+                lateral * Math.sin(phi)
+            );
+            const targetPos = new THREE.Vector3(x, y, z);
+            camera.position.lerp(targetPos, 0.025);
+            camera.lookAt(targetLookAt);
+
+            // background shader uniforms
+            if (shaderUniforms) {
+                shaderUniforms.uTime.value = clock.getElapsedTime();
+                shaderUniforms.uMouse.value.set(mouseX, -mouseY);
+                shaderUniforms.uScroll.value = currentScroll;
+            }
+
+            updateSlides(currentScroll);
+            updateGridDots(currentScroll);
+            renderer.render(scene, camera);
+        }
+
+        // ─── Bootstrap ──────────────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', () => {
+            splitTitlesIntoChars();
+
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color('#000000');
+            scene.fog = new THREE.FogExp2('#020402', 0.01);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100);
+            camera.position.set(0, 0.2, 3.0);
+            scene.add(camera);
+
+            // Background Shader (must be after camera is added to scene)
+            createBackgroundShader();
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: false,
+                powerPreference: "high-performance"
+            });
+            renderer.setSize(sizes.width, sizes.height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.9;
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight('#ffffff', 0.12);
+            scene.add(ambientLight);
+
+            const keyLight = new THREE.SpotLight('#fff4d6', 16.0);
+            keyLight.position.set(4, 6, 3);
+            keyLight.angle = Math.PI / 4;
+            keyLight.penumbra = 0.9;
+            keyLight.castShadow = true;
+            keyLight.shadow.mapSize.width = 2048;
+            keyLight.shadow.mapSize.height = 2048;
+            keyLight.shadow.camera.near = 1.0;
+            keyLight.shadow.camera.far = 15;
+            keyLight.shadow.bias = -0.001;
+            scene.add(keyLight);
+
+            const rimLight = new THREE.DirectionalLight('#8fffc0', 9.0);
+            rimLight.position.set(-5, 3, -4);
+            scene.add(rimLight);
+
+            const fillLight = new THREE.DirectionalLight('#ffe9c4', 0.8);
+            fillLight.position.set(-2, -4, 2);
+            scene.add(fillLight);
+
+            // Motes
+            createMotes();
+
+            // Gene Structure
+            buildGeneStructure();
+
+            // Initial sync
+            onWindowResize();
+
+            // Start animation
+            animate();
+
+            // Navigation
+            setupNavigation();
+        });
+    </script>
+</body>
+</html>

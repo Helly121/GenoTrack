@@ -1,0 +1,30 @@
+crop_name: rice
+ploidy: 2
+
+raw_files:
+  genotype: data/raw/rice/MET_crfilt_.75_allchrom.hmp.txt
+  phenotype: data/raw/rice/phenotype
+  source_format: hapmap
+
+qc:
+  missingness_threshold: 0.20
+  maf_threshold: 0.05
+  imputation_strategy: per_marker_mean
+
+cv:
+  strategy: auto                  # auto | population_label | pca_cluster
+  population_label_column: null   # set if phenotype table has one; else Patterson-scaled PCA is used
+  n_folds: 5
+  min_cluster_size: 15            # guardrail against degenerate single-sample clusters
+
+modeling:
+  gxe_enabled: true               # mandatory GxE awareness
+  gxe_architecture: hierarchical  # hierarchical (main genetic + env interaction)
+  baseline: ridge
+  challenger: xgboost             # xgboost | lightgbm
+  gate:
+    min_relative_improvement_over_baseline: 0.0
+    max_single_fold_regression: 0.05
+
+serving:
+  framework: fastapi

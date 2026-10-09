@@ -1,0 +1,97 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.hypothesis/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# MLflow tracking
+mlruns/
+.mlflow/
+mlartifacts/
+
+# DVC local storage & cache
+.dvc/cache
+.dvc/tmp
+
+# Large raw datasets and binary interim/processed files (GitHub 100MB limit)
+datasets/
+data/raw/
+data/interim/*.parquet
+data/interim/*.csv
+data/processed/*.parquet
+data/models/*.joblib
+*.hmp.txt
+*.vcf
+*.vcf.gz
+*.bed
+*.bim
+*.fam
+
+# Keep processed audit reports and manifest
+!data/processed/manifest.json
+!data/processed/feature_metadata.json
+!data/processed/validation_gate_report_*.json
+
+# Scratch & temporary workspace artifacts
+implementation_plan_*
+scratch/
+.tempmediaStorage/
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini

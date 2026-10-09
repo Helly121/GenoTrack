@@ -1,0 +1,30 @@
+{
+  "status": "FAILED",
+  "crop_name": "rice",
+  "target_trait": "grain_yield",
+  "run_id": null,
+  "checks": {
+    "beats_baseline": {
+      "passed": false,
+      "challenger_mean_r": 0.4,
+      "baseline_mean_r": 0.55,
+      "relative_improvement": -0.15000000000000002,
+      "required_threshold": 0.0
+    },
+    "fold_stability": {
+      "passed": false,
+      "max_observed_fold_regression": 0.2,
+      "allowed_margin": 0.05,
+      "fold_values": [
+        0.2,
+        0.6
+      ]
+    },
+    "beats_current_production": {
+      "passed": true,
+      "current_production_r": null,
+      "challenger_r": 0.4
+    }
+  },
+  "recommendation": "Reject run: Model failed validation gate."
+}

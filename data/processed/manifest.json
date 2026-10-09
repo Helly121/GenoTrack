@@ -1,0 +1,50 @@
+{
+  "crop_name": "rice",
+  "data_hash": "02c99660ca0ac571e9934b2f7b7f5c53ab3d529362133661eabde9d43e92f6f0",
+  "config_hash": "22d3ec0c3f95c6d6d45fac63fa24bcca13c475a3728f92d8d9da37a2975013f5",
+  "qc_thresholds": {
+    "missingness_threshold": 0.2,
+    "maf_threshold": 0.05
+  },
+  "counts": {
+    "raw_markers": 108024,
+    "retained_markers": 67084,
+    "quarantined_markers_missingness": 3133,
+    "quarantined_markers_maf": 37807,
+    "raw_samples": 368,
+    "retained_samples": 354,
+    "quarantined_samples": 14
+  },
+  "batch_effects_audit": {
+    "flowering_time": {
+      "f_stat": 32.87817917213385,
+      "p_value": 6.331942336119636e-15,
+      "confounding_flag": true
+    },
+    "grain_yield": {
+      "f_stat": 62.20131319276004,
+      "p_value": 1.873362846783761e-27,
+      "confounding_flag": true
+    },
+    "lodging_score": {
+      "f_stat": 7.318850976545114,
+      "p_value": 0.0006690606799490778,
+      "confounding_flag": true
+    },
+    "maturity": {
+      "f_stat": 32.87817917213385,
+      "p_value": 6.331942336119636e-15,
+      "confounding_flag": true
+    },
+    "plant_height": {
+      "f_stat": 6.5014303425242455,
+      "p_value": 0.0015132689114269206,
+      "confounding_flag": true
+    },
+    "tiller_count": {
+      "f_stat": 16.4654763266862,
+      "p_value": 7.433974910689149e-08,
+      "confounding_flag": true
+    }
+  }
+}

@@ -1,0 +1,58 @@
+stages:
+  setup_data:
+    cmd: python pipelines/setup_data.py
+    deps:
+      - datasets/Rice Diversity
+    outs:
+      - data/raw/rice/MET_crfilt_.75_allchrom.hmp.txt
+      - data/raw/rice/phenotype
+
+  ingest:
+    cmd: python -m src.ingest.pipeline
+    deps:
+      - data/raw/rice/MET_crfilt_.75_allchrom.hmp.txt
+      - data/raw/rice/phenotype
+      - crops/rice/adapter.py
+      - crops/rice/config.yaml
+      - src/ingest/pipeline.py
+    outs:
+      - data/interim/canonical_genotype.parquet
+      - data/interim/canonical_phenotype.parquet
+
+  clean:
+    cmd: python -m src.clean.qc
+    deps:
+      - data/interim/canonical_genotype.parquet
+      - data/interim/canonical_phenotype.parquet
+      - crops/rice/config.yaml
+      - src/clean/qc.py
+    outs:
+      - data/interim/cleaned_genotype.parquet
+      - data/interim/cleaned_phenotype.parquet
+      - data/processed/manifest.json
+
+  features:
+    cmd: python -m src.features.pipeline
+    deps:
+      - data/interim/cleaned_genotype.parquet
+      - data/interim/cleaned_phenotype.parquet
+      - crops/rice/config.yaml
+      - crops/rice/traits.yaml
+      - src/features/pipeline.py
+    outs:
+      - data/processed/dosage_matrix.parquet
+      - data/processed/model_dataset_grain_yield.parquet
+      - data/processed/feature_metadata.json
+
+  train:
+    cmd: python -m src.models.train
+    deps:
+      - data/processed/model_dataset_grain_yield.parquet
+      - data/processed/feature_metadata.json
+      - crops/rice/config.yaml
+      - src/models/train.py
+      - src/models/gxe.py
+    outs:
+      - data/models/baseline_rice_grain_yield.joblib
+      - data/models/challenger_rice_grain_yield.joblib
+      - data/processed/training_results_grain_yield.json
