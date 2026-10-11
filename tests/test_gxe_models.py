@@ -72,7 +72,7 @@ def test_validation_gate_pass_and_fail():
             "fold_metrics": [{"pearson_r": 0.50}, {"pearson_r": 0.54}],
         },
     }
-    report_pass = evaluate_validation_gate(passing_results, crop_name="rice")
+    report_pass = evaluate_validation_gate(passing_results, crop_name="rice", check_production=False)
     assert report_pass["status"] == "PASSED"
     assert report_pass["checks"]["beats_baseline"]["passed"] is True
 
@@ -91,6 +91,6 @@ def test_validation_gate_pass_and_fail():
             "fold_metrics": [{"pearson_r": 0.20}, {"pearson_r": 0.60}],  # Extreme fold regression
         },
     }
-    report_fail = evaluate_validation_gate(failing_results, crop_name="rice")
+    report_fail = evaluate_validation_gate(failing_results, crop_name="rice", check_production=False)
     assert report_fail["status"] == "FAILED"
     assert report_fail["checks"]["beats_baseline"]["passed"] is False

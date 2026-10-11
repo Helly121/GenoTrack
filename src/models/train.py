@@ -76,11 +76,15 @@ def train_and_track(
 
     # Extract target y, environments E, and marker matrix X
     marker_cols = metadata["marker_ids"]
-    X_geno = df_data[marker_cols].values
+    X_geno = df_data[marker_cols].values.astype(np.float32)
     envs = df_data["environment"].values
-    y = df_data["value"].values
+    y = df_data["value"].values.astype(np.float32)
     sample_ids = df_data["sample_id"].values
     clusters = df_data["subpopulation_cluster"]
+    n_obs = len(df_data)
+    del df_data
+    import gc
+    gc.collect()
 
     n_folds = int(config["cv"].get("n_folds", 5))
 
@@ -93,7 +97,7 @@ def train_and_track(
     splits = build_cv_splits(
         sample_ids=sample_ids,
         clusters=clusters,
-        environments=df_data["environment"],
+        environments=envs,
         n_folds=n_folds,
         cv_type="within_environment",
     )
@@ -104,7 +108,7 @@ def train_and_track(
             "target_trait": target_trait,
             "n_samples": metadata["n_samples"],
             "n_markers": metadata["n_markers"],
-            "n_observations": len(df_data),
+            "n_observations": len(y),
             "n_environments": len(metadata["environments"]),
             "cv_strategy": "population_structure_stratified",
             "n_folds": n_folds,

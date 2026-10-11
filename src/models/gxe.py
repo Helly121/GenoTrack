@@ -29,8 +29,8 @@ class GxERidgeModel(BaseEstimator, RegressorMixin):
         self.environments_ = []
 
     def fit(self, X_geno: np.ndarray, envs: np.ndarray, y: np.ndarray):
-        y = np.asarray(y, dtype=float)
-        X_geno = np.asarray(X_geno, dtype=float)
+        y = np.asarray(y, dtype=np.float32)
+        X_geno = np.asarray(X_geno, dtype=np.float32)
         envs = np.asarray(envs, dtype=str)
 
         self.global_mean_ = float(np.mean(y))
@@ -65,7 +65,7 @@ class GxERidgeModel(BaseEstimator, RegressorMixin):
         return self
 
     def predict(self, X_geno: np.ndarray, envs: np.ndarray | str) -> np.ndarray:
-        X_geno = np.asarray(X_geno, dtype=float)
+        X_geno = np.asarray(X_geno, dtype=np.float32)
         single_env = isinstance(envs, str)
         if single_env:
             envs = np.full(X_geno.shape[0], envs)
@@ -107,8 +107,8 @@ class GxEXGBoostModel(BaseEstimator, RegressorMixin):
         self.feature_names_ = None
 
     def fit(self, X_geno: np.ndarray, envs: np.ndarray, y: np.ndarray):
-        y = np.asarray(y, dtype=float)
-        X_geno = np.asarray(X_geno, dtype=float)
+        y = np.asarray(y, dtype=np.float32)
+        X_geno = np.asarray(X_geno, dtype=np.float32)
         envs = np.asarray(envs, dtype=str)
 
         self.global_mean_ = float(np.mean(y))
@@ -121,7 +121,7 @@ class GxEXGBoostModel(BaseEstimator, RegressorMixin):
             self.env_effects_[env] = env_mean - self.global_mean_
 
         # One-hot encode environments for joint interaction modeling
-        env_one_hot = np.zeros((len(envs), len(self.environments_)), dtype=float)
+        env_one_hot = np.zeros((len(envs), len(self.environments_)), dtype=np.float32)
         for j, env_name in enumerate(self.environments_):
             env_one_hot[envs == env_name, j] = 1.0
 
@@ -134,23 +134,23 @@ class GxEXGBoostModel(BaseEstimator, RegressorMixin):
             learning_rate=self.learning_rate,
             random_state=self.random_state,
             tree_method="hist",
+            max_bin=64,
             subsample=0.8,
             colsample_bytree=0.2,
-            n_jobs=-1,
+            n_jobs=4,
         )
         self.model_.fit(X_joint, y)
         return self
-        return self
 
     def predict(self, X_geno: np.ndarray, envs: np.ndarray | str) -> np.ndarray:
-        X_geno = np.asarray(X_geno, dtype=float)
+        X_geno = np.asarray(X_geno, dtype=np.float32)
         single_env = isinstance(envs, str)
         if single_env:
             envs = np.full(X_geno.shape[0], envs)
         else:
             envs = np.asarray(envs, dtype=str)
 
-        env_one_hot = np.zeros((len(envs), len(self.environments_)), dtype=float)
+        env_one_hot = np.zeros((len(envs), len(self.environments_)), dtype=np.float32)
         for i, env_name in enumerate(envs):
             if env_name == "across_environments":
                 # Average across all environments

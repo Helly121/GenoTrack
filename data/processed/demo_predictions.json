@@ -1,0 +1,1902 @@
+{
+  "A1256": {
+    "across_environments": {
+      "predicted_value": 5344.51,
+      "genetic_component": 5344.51,
+      "environmental_effect": 0.0,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.43,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.04,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 8.96,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_DS": {
+      "predicted_value": 6251.57,
+      "genetic_component": 4743.85,
+      "environmental_effect": 1507.72,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.8,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 18.35,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S5_24613544",
+          "chrom": "5",
+          "pos": 24613544,
+          "shap_value": -8.71,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_WS": {
+      "predicted_value": 4662.33,
+      "genetic_component": 5455.9,
+      "environmental_effect": -793.58,
+      "top_markers": [
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.04,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.78,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S2_2938834",
+          "chrom": "2",
+          "pos": 2938834,
+          "shap_value": 19.19,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2010_DS": {
+      "predicted_value": 6282.14,
+      "genetic_component": 4232.53,
+      "environmental_effect": 2049.61,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.43,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 19.32,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S8_25628400",
+          "chrom": "8",
+          "pos": 25628400,
+          "shap_value": -15.0,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 8.96,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2010_WS": {
+      "predicted_value": 4763.38,
+      "genetic_component": 5448.74,
+      "environmental_effect": -685.36,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.38,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.53,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S1_24779705",
+          "chrom": "1",
+          "pos": 24779705,
+          "shap_value": -10.48,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_34176457",
+          "chrom": "2",
+          "pos": 34176457,
+          "shap_value": 9.56,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_DS": {
+      "predicted_value": 5790.8,
+      "genetic_component": 5382.02,
+      "environmental_effect": 408.78,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.43,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.04,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_980677",
+          "chrom": "3",
+          "pos": 980677,
+          "shap_value": 11.04,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 8.96,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_WS": {
+      "predicted_value": 4730.62,
+      "genetic_component": 5730.42,
+      "environmental_effect": -999.79,
+      "top_markers": [
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 31.57,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.43,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_964681",
+          "chrom": "3",
+          "pos": 964681,
+          "shap_value": 21.54,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 16.74,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_980677",
+          "chrom": "3",
+          "pos": 980677,
+          "shap_value": 13.35,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_DS": {
+      "predicted_value": 5386.26,
+      "genetic_component": 5331.35,
+      "environmental_effect": 54.91,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.43,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.04,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 8.96,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_WS": {
+      "predicted_value": 5298.86,
+      "genetic_component": 5423.7,
+      "environmental_effect": -124.84,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 23.49,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.04,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 8.96,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_2016720",
+          "chrom": "2",
+          "pos": 2016720,
+          "shap_value": 8.7,
+          "dosage": 2.0
+        }
+      ]
+    }
+  },
+  "A1203": {
+    "across_environments": {
+      "predicted_value": 4736.11,
+      "genetic_component": 4736.11,
+      "environmental_effect": 0.0,
+      "top_markers": [
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.07,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_DS": {
+      "predicted_value": 5813.79,
+      "genetic_component": 4306.07,
+      "environmental_effect": 1507.72,
+      "top_markers": [
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -20.72,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_WS": {
+      "predicted_value": 3934.25,
+      "genetic_component": 4727.83,
+      "environmental_effect": -793.58,
+      "top_markers": [
+        {
+          "marker_id": "S9_15132830",
+          "chrom": "9",
+          "pos": 15132830,
+          "shap_value": -23.76,
+          "dosage": 0.17595307528972626
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2010_DS": {
+      "predicted_value": 5992.35,
+      "genetic_component": 3942.74,
+      "environmental_effect": 2049.61,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.07,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S1_42060824",
+          "chrom": "1",
+          "pos": 42060824,
+          "shap_value": -20.55,
+          "dosage": 0.2409638613462448
+        }
+      ]
+    },
+    "2010_WS": {
+      "predicted_value": 4329.93,
+      "genetic_component": 5015.29,
+      "environmental_effect": -685.36,
+      "top_markers": [
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -20.71,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S1_42060824",
+          "chrom": "1",
+          "pos": 42060824,
+          "shap_value": -20.55,
+          "dosage": 0.2409638613462448
+        }
+      ]
+    },
+    "2011_DS": {
+      "predicted_value": 5190.64,
+      "genetic_component": 4781.86,
+      "environmental_effect": 408.78,
+      "top_markers": [
+        {
+          "marker_id": "S2_1153814",
+          "chrom": "2",
+          "pos": 1153814,
+          "shap_value": -29.13,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.07,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_WS": {
+      "predicted_value": 3949.62,
+      "genetic_component": 4949.42,
+      "environmental_effect": -999.79,
+      "top_markers": [
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -26.53,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.07,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        }
+      ]
+    },
+    "2012_DS": {
+      "predicted_value": 4819.29,
+      "genetic_component": 4764.38,
+      "environmental_effect": 54.91,
+      "top_markers": [
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.07,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_WS": {
+      "predicted_value": 4706.09,
+      "genetic_component": 4830.93,
+      "environmental_effect": -124.84,
+      "top_markers": [
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -23.41,
+          "dosage": 0.6190476417541504
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": -23.1,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S2_4738801",
+          "chrom": "2",
+          "pos": 4738801,
+          "shap_value": -22.76,
+          "dosage": 0.10273972898721695
+        },
+        {
+          "marker_id": "S9_14826917",
+          "chrom": "9",
+          "pos": 14826917,
+          "shap_value": -22.74,
+          "dosage": 0.10334346443414688
+        },
+        {
+          "marker_id": "S3_31196620",
+          "chrom": "3",
+          "pos": 31196620,
+          "shap_value": -21.1,
+          "dosage": 2.0
+        }
+      ]
+    }
+  },
+  "A1254": {
+    "across_environments": {
+      "predicted_value": 4918.6,
+      "genetic_component": 4918.6,
+      "environmental_effect": 0.0,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.44,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 17.6,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -14.72,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_DS": {
+      "predicted_value": 5854.14,
+      "genetic_component": 4346.42,
+      "environmental_effect": 1507.72,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -22.58,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 18.81,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -16.75,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.59,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2009_WS": {
+      "predicted_value": 4434.32,
+      "genetic_component": 5227.89,
+      "environmental_effect": -793.58,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 18.79,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 17.6,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S2_35173312",
+          "chrom": "2",
+          "pos": 35173312,
+          "shap_value": 16.38,
+          "dosage": 0.14685314893722534
+        }
+      ]
+    },
+    "2010_DS": {
+      "predicted_value": 6171.34,
+      "genetic_component": 4121.73,
+      "environmental_effect": 2049.61,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.44,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -14.72,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 14.19,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2010_WS": {
+      "predicted_value": 4344.57,
+      "genetic_component": 5029.92,
+      "environmental_effect": -685.36,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 17.57,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -14.72,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S9_20541361",
+          "chrom": "9",
+          "pos": 20541361,
+          "shap_value": -13.89,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_DS": {
+      "predicted_value": 5213.94,
+      "genetic_component": 4805.15,
+      "environmental_effect": 408.78,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.44,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_28333061",
+          "chrom": "3",
+          "pos": 28333061,
+          "shap_value": -19.75,
+          "dosage": 0.12790697813034058
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 17.6,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2011_WS": {
+      "predicted_value": 4370.88,
+      "genetic_component": 5370.68,
+      "environmental_effect": -999.79,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 23.99,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_964681",
+          "chrom": "3",
+          "pos": 964681,
+          "shap_value": 21.85,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.44,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 19.69,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_DS": {
+      "predicted_value": 5004.44,
+      "genetic_component": 4949.53,
+      "environmental_effect": 54.91,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.44,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 17.6,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -14.72,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_WS": {
+      "predicted_value": 4883.28,
+      "genetic_component": 5008.12,
+      "environmental_effect": -124.84,
+      "top_markers": [
+        {
+          "marker_id": "S5_21585107",
+          "chrom": "5",
+          "pos": 21585107,
+          "shap_value": -40.05,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 20.5,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_25731087",
+          "chrom": "12",
+          "pos": 25731087,
+          "shap_value": -18.26,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 17.6,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857221",
+          "chrom": "10",
+          "pos": 20857221,
+          "shap_value": -14.72,
+          "dosage": 2.0
+        }
+      ]
+    }
+  },
+  "A1258": {
+    "across_environments": {
+      "predicted_value": 5307.13,
+      "genetic_component": 5307.13,
+      "environmental_effect": 0.0,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.16,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.72,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857195",
+          "chrom": "10",
+          "pos": 20857195,
+          "shap_value": 11.56,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_DS": {
+      "predicted_value": 6439.97,
+      "genetic_component": 4932.25,
+      "environmental_effect": 1507.72,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 17.53,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 16.33,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 13.1,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S8_4334148",
+          "chrom": "8",
+          "pos": 4334148,
+          "shap_value": 9.76,
+          "dosage": 0.2118380069732666
+        }
+      ]
+    },
+    "2009_WS": {
+      "predicted_value": 4981.36,
+      "genetic_component": 5774.94,
+      "environmental_effect": -793.58,
+      "top_markers": [
+        {
+          "marker_id": "S1_24628042",
+          "chrom": "1",
+          "pos": 24628042,
+          "shap_value": 46.54,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 17.51,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.72,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S2_5581937",
+          "chrom": "2",
+          "pos": 5581937,
+          "shap_value": 14.41,
+          "dosage": 0.2817869484424591
+        }
+      ]
+    },
+    "2010_DS": {
+      "predicted_value": 6266.28,
+      "genetic_component": 4216.67,
+      "environmental_effect": 2049.61,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.16,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 13.0,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857195",
+          "chrom": "10",
+          "pos": 20857195,
+          "shap_value": 11.56,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 10.22,
+          "dosage": 0.9739130139350891
+        }
+      ]
+    },
+    "2010_WS": {
+      "predicted_value": 4873.99,
+      "genetic_component": 5559.35,
+      "environmental_effect": -685.36,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 17.95,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S2_34176457",
+          "chrom": "2",
+          "pos": 34176457,
+          "shap_value": 17.83,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 13.57,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857195",
+          "chrom": "10",
+          "pos": 20857195,
+          "shap_value": 11.56,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2011_DS": {
+      "predicted_value": 5618.78,
+      "genetic_component": 5210.0,
+      "environmental_effect": 408.78,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.16,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_21771717",
+          "chrom": "10",
+          "pos": 21771717,
+          "shap_value": -16.51,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S8_25493154",
+          "chrom": "8",
+          "pos": 25493154,
+          "shap_value": 15.92,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.72,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2011_WS": {
+      "predicted_value": 4644.37,
+      "genetic_component": 5644.16,
+      "environmental_effect": -999.79,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 22.11,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.16,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_964681",
+          "chrom": "3",
+          "pos": 964681,
+          "shap_value": 14.52,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": 13.61,
+          "dosage": 0.9739130139350891
+        }
+      ]
+    },
+    "2012_DS": {
+      "predicted_value": 5360.45,
+      "genetic_component": 5305.54,
+      "environmental_effect": 54.91,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.16,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.72,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S2_16569215",
+          "chrom": "2",
+          "pos": 16569215,
+          "shap_value": 12.58,
+          "dosage": 0.39116719365119934
+        },
+        {
+          "marker_id": "S10_20857195",
+          "chrom": "10",
+          "pos": 20857195,
+          "shap_value": 11.6,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2012_WS": {
+      "predicted_value": 5276.74,
+      "genetic_component": 5401.58,
+      "environmental_effect": -124.84,
+      "top_markers": [
+        {
+          "marker_id": "S12_21842077",
+          "chrom": "12",
+          "pos": 21842077,
+          "shap_value": 28.62,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.19,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": 15.72,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S10_20857195",
+          "chrom": "10",
+          "pos": 20857195,
+          "shap_value": 11.56,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        }
+      ]
+    }
+  },
+  "A1260": {
+    "across_environments": {
+      "predicted_value": 5180.21,
+      "genetic_component": 5180.21,
+      "environmental_effect": 0.0,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.15,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.99,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_DS": {
+      "predicted_value": 6110.59,
+      "genetic_component": 4602.88,
+      "environmental_effect": 1507.72,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.52,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -16.95,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2009_WS": {
+      "predicted_value": 4417.43,
+      "genetic_component": 5211.01,
+      "environmental_effect": -793.58,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.5,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.99,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S12_2954823",
+          "chrom": "12",
+          "pos": 2954823,
+          "shap_value": -16.51,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_36041245",
+          "chrom": "3",
+          "pos": 36041245,
+          "shap_value": -13.73,
+          "dosage": 0.24624624848365784
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2010_DS": {
+      "predicted_value": 6170.86,
+      "genetic_component": 4121.25,
+      "environmental_effect": 2049.61,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.15,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.17,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S4_33987811",
+          "chrom": "4",
+          "pos": 33987811,
+          "shap_value": -12.5,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S11_20582170",
+          "chrom": "11",
+          "pos": 20582170,
+          "shap_value": 10.81,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2010_WS": {
+      "predicted_value": 4691.99,
+      "genetic_component": 5377.35,
+      "environmental_effect": -685.36,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 19.83,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -16.07,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S12_25732724",
+          "chrom": "12",
+          "pos": 25732724,
+          "shap_value": 11.01,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_DS": {
+      "predicted_value": 5542.1,
+      "genetic_component": 5133.32,
+      "environmental_effect": 408.78,
+      "top_markers": [
+        {
+          "marker_id": "S2_1153814",
+          "chrom": "2",
+          "pos": 1153814,
+          "shap_value": -23.7,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.15,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.99,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2011_WS": {
+      "predicted_value": 4308.16,
+      "genetic_component": 5307.95,
+      "environmental_effect": -999.79,
+      "top_markers": [
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -25.01,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_964681",
+          "chrom": "3",
+          "pos": 964681,
+          "shap_value": -23.44,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.15,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_984915",
+          "chrom": "3",
+          "pos": 984915,
+          "shap_value": -17.21,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_980677",
+          "chrom": "3",
+          "pos": 980677,
+          "shap_value": -12.79,
+          "dosage": 0.0
+        }
+      ]
+    },
+    "2012_DS": {
+      "predicted_value": 5227.0,
+      "genetic_component": 5172.09,
+      "environmental_effect": 54.91,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.15,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.99,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    },
+    "2012_WS": {
+      "predicted_value": 5134.56,
+      "genetic_component": 5259.4,
+      "environmental_effect": -124.84,
+      "top_markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "shap_value": 21.21,
+          "dosage": 0.0
+        },
+        {
+          "marker_id": "S3_1320779",
+          "chrom": "3",
+          "pos": 1320779,
+          "shap_value": -18.99,
+          "dosage": 0.9245283007621765
+        },
+        {
+          "marker_id": "S3_518763",
+          "chrom": "3",
+          "pos": 518763,
+          "shap_value": -11.99,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "shap_value": 11.23,
+          "dosage": 2.0
+        },
+        {
+          "marker_id": "S3_1394477",
+          "chrom": "3",
+          "pos": 1394477,
+          "shap_value": -10.76,
+          "dosage": 2.0
+        }
+      ]
+    }
+  }
+}

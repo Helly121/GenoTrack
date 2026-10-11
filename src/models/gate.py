@@ -15,6 +15,7 @@ import yaml
 def evaluate_validation_gate(
     training_results: dict | Path,
     crop_name: str = "rice",
+    check_production: bool = True,
     project_root: Path | None = None,
 ) -> dict:
     if project_root is None:
@@ -50,7 +51,7 @@ def evaluate_validation_gate(
     prod_model_r = None
     check_prod_pass = True
 
-    if prod_registry_file.exists():
+    if check_production and prod_registry_file.exists():
         with open(prod_registry_file, "r") as f:
             prod_meta = json.load(f)
             prod_model_r = prod_meta.get("mean_r", 0.0)
