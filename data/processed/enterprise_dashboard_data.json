@@ -1,0 +1,3252 @@
+{
+  "A1256": {
+    "across_environments": {
+      "predicted_value": 5344.51,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1134.51,
+      "environmental_shift": 0.0,
+      "ci_lower": 5193.91,
+      "ci_upper": 5495.11,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.58,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.96,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.03,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.05,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.61,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6251.57,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 533.85,
+      "environmental_shift": 1507.72,
+      "ci_lower": 6100.97,
+      "ci_upper": 6402.17,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.37,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.85,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.29,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4662.33,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1245.9,
+      "environmental_shift": -793.58,
+      "ci_lower": 4511.73,
+      "ci_upper": 4812.93,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.93,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.9,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.27,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.83,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6282.14,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1382.07,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6131.54,
+      "ci_upper": 6432.74,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.52,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.81,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.65,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.54,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4763.38,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1238.74,
+      "environmental_shift": -685.36,
+      "ci_lower": 4612.78,
+      "ci_upper": 4913.98,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.31,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.6,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.89,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5790.8,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1172.02,
+      "environmental_shift": 408.78,
+      "ci_lower": 5640.2,
+      "ci_upper": 5941.4,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.83,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.89,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.14,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.49,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.08,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4730.62,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1520.42,
+      "environmental_shift": -999.79,
+      "ci_lower": 4580.02,
+      "ci_upper": 4881.22,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.06,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.22,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.46,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.24,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5386.26,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1121.35,
+      "environmental_shift": 54.91,
+      "ci_lower": 5235.66,
+      "ci_upper": 5536.86,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.46,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.71,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.81,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.76,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5298.86,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1213.7,
+      "environmental_shift": -124.84,
+      "ci_lower": 5148.26,
+      "ci_upper": 5449.46,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.67,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.66,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.82,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.72,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1203": {
+    "across_environments": {
+      "predicted_value": 4736.11,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 526.11,
+      "environmental_shift": 0.0,
+      "ci_lower": 4585.51,
+      "ci_upper": 4886.71,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.48,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.05,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.39,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.61,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 5813.79,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1279.03,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5663.19,
+      "ci_upper": 5964.39,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.16,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.2,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 3934.25,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 517.83,
+      "environmental_shift": -793.58,
+      "ci_lower": 3783.65,
+      "ci_upper": 4084.85,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.27,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.39,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.48,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.97,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.05,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 5992.35,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1318.32,
+      "environmental_shift": 2049.61,
+      "ci_lower": 5841.75,
+      "ci_upper": 6142.95,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.45,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.3,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.59,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4329.93,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 805.29,
+      "environmental_shift": -685.36,
+      "ci_lower": 4179.33,
+      "ci_upper": 4480.53,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.25,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.55,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.58,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.32,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.47,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5190.64,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 571.86,
+      "environmental_shift": 408.78,
+      "ci_lower": 5040.04,
+      "ci_upper": 5341.24,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.82,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.72,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.8,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 3949.62,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 739.42,
+      "environmental_shift": -999.79,
+      "ci_lower": 3799.02,
+      "ci_upper": 4100.22,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.65,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.79,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 4819.29,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 554.38,
+      "environmental_shift": 54.91,
+      "ci_lower": 4668.69,
+      "ci_upper": 4969.89,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.31,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.26,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.7,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 4706.09,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 620.93,
+      "environmental_shift": -124.84,
+      "ci_lower": 4555.49,
+      "ci_upper": 4856.69,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.66,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.58,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1254": {
+    "across_environments": {
+      "predicted_value": 4918.6,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 708.6,
+      "environmental_shift": 0.0,
+      "ci_lower": 4768.0,
+      "ci_upper": 5069.2,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.96,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.78,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.99,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.66,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 5854.14,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1287.91,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5703.54,
+      "ci_upper": 6004.74,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.93,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.65,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.78,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.52,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4434.32,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1017.89,
+      "environmental_shift": -793.58,
+      "ci_lower": 4283.72,
+      "ci_upper": 4584.92,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.29,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.48,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.36,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.5,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6171.34,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1357.69,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6020.74,
+      "ci_upper": 6321.94,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.8,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.27,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.55,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4344.57,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 819.92,
+      "environmental_shift": -685.36,
+      "ci_lower": 4193.97,
+      "ci_upper": 4495.17,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.04,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.38,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5213.94,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 595.15,
+      "environmental_shift": 408.78,
+      "ci_lower": 5063.34,
+      "ci_upper": 5364.54,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.16,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.63,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.46,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.15,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4370.88,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1160.68,
+      "environmental_shift": -999.79,
+      "ci_lower": 4220.28,
+      "ci_upper": 4521.48,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.97,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.56,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.62,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.22,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.86,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5004.44,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 739.53,
+      "environmental_shift": 54.91,
+      "ci_lower": 4853.84,
+      "ci_upper": 5155.04,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.49,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.52,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 4883.28,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 798.12,
+      "environmental_shift": -124.84,
+      "ci_lower": 4732.68,
+      "ci_upper": 5033.88,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.53,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.71,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1258": {
+    "across_environments": {
+      "predicted_value": 5307.13,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1097.13,
+      "environmental_shift": 0.0,
+      "ci_lower": 5156.53,
+      "ci_upper": 5457.73,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.0,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.13,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.67,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6439.97,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 722.25,
+      "environmental_shift": 1507.72,
+      "ci_lower": 6289.37,
+      "ci_upper": 6590.57,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.88,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.28,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.08,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4981.36,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1564.94,
+      "environmental_shift": -793.58,
+      "ci_lower": 4830.76,
+      "ci_upper": 5131.96,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.32,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.04,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.35,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.36,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.01,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6266.28,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1378.58,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6115.68,
+      "ci_upper": 6416.88,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.54,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.65,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.4,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.96,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4873.99,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1349.35,
+      "environmental_shift": -685.36,
+      "ci_lower": 4723.39,
+      "ci_upper": 5024.59,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.5,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.3,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.26,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.4,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.4,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5618.78,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1000.0,
+      "environmental_shift": 408.78,
+      "ci_lower": 5468.18,
+      "ci_upper": 5769.38,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.79,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -11.78,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.51,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.2,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4644.37,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1434.16,
+      "environmental_shift": -999.79,
+      "ci_lower": 4493.77,
+      "ci_upper": 4794.97,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.32,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.5,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.68,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5360.45,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1095.54,
+      "environmental_shift": 54.91,
+      "ci_lower": 5209.85,
+      "ci_upper": 5511.05,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.3,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.98,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.51,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.22,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5276.74,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1191.58,
+      "environmental_shift": -124.84,
+      "ci_lower": 5126.14,
+      "ci_upper": 5427.34,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.57,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.86,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.54,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.58,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1260": {
+    "across_environments": {
+      "predicted_value": 5180.21,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 970.21,
+      "environmental_shift": 0.0,
+      "ci_lower": 5029.61,
+      "ci_upper": 5330.81,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.7,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.66,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.75,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.41,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6110.59,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 392.88,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5959.99,
+      "ci_upper": 6261.19,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.9,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.89,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.04,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.38,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.04,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4417.43,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1001.01,
+      "environmental_shift": -793.58,
+      "ci_lower": 4266.83,
+      "ci_upper": 4568.03,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.44,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.64,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.8,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.53,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6170.86,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1357.59,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6020.26,
+      "ci_upper": 6321.46,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.81,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.05,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.11,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 8.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4691.99,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1167.35,
+      "environmental_shift": -685.36,
+      "ci_lower": 4541.39,
+      "ci_upper": 4842.59,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.87,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.84,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -11.72,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.6,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5542.1,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 923.32,
+      "environmental_shift": 408.78,
+      "ci_lower": 5391.5,
+      "ci_upper": 5692.7,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.53,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.6,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.06,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.75,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4308.16,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1097.95,
+      "environmental_shift": -999.79,
+      "ci_lower": 4157.56,
+      "ci_upper": 4458.76,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.54,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.84,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.22,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5227.0,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 962.09,
+      "environmental_shift": 54.91,
+      "ci_lower": 5076.4,
+      "ci_upper": 5377.6,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.21,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.98,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.59,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.81,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5134.56,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1049.4,
+      "environmental_shift": -124.84,
+      "ci_lower": 4983.96,
+      "ci_upper": 5285.16,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.95,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.28,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.44,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  }
+}

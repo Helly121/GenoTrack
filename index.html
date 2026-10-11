@@ -772,6 +772,821 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
+    
+        body.dashboard-active {
+            overflow: hidden !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+            max-height: 100vh !important;
+        }
+
+        /* ==========================================================================
+           ENTERPRISE MLOps AGRONOMIC DASHBOARD (High-Tech Dark Mode)
+           ========================================================================== */
+        :root {
+            --bg-deep-charcoal: #080c0a;
+            --bg-panel: rgba(13, 20, 16, 0.88);
+            --bg-card: rgba(18, 28, 22, 0.75);
+            --border-glow: rgba(52, 211, 153, 0.28);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --accent-green: #00ff88;
+            --accent-green-glow: rgba(0, 255, 136, 0.35);
+            --accent-teal: #00e5ff;
+            --accent-teal-glow: rgba(0, 229, 255, 0.35);
+            --accent-amber: #f5c542;
+            --accent-red: #f87171;
+            --slate-mean: #334155;
+            --text-primary: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+        }
+
+        #enterprise-dashboard-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                        #050807;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        #enterprise-dashboard-container.hidden-view {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* --- Top Header & Telemetry Strip --- */
+        .ent-top-header {
+            width: 100%;
+            height: 64px;
+            background: rgba(9, 14, 11, 0.94);
+            border-bottom: 1px solid var(--border-glow);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 120;
+            flex-shrink: 0;
+        }
+
+        .ent-brand-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ent-brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 229, 255, 0.2));
+            border: 1px solid var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 0 15px var(--accent-green-glow);
+        }
+
+        .ent-lab-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ent-lab-title span {
+            color: var(--accent-green);
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* Horizontal Telemetry Strip */
+        .ent-telemetry-strip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 4px 6px;
+            max-width: calc(100vw - 370px);
+            flex-shrink: 1;
+        }
+        .ent-telemetry-strip .telemetry-pill {
+            font-size: 9.5px;
+            padding: 3px 8px;
+        }
+        .ent-telemetry-strip::-webkit-scrollbar { display: none; }
+
+        .telemetry-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        .telemetry-pill.pill-green {
+            background: rgba(0, 255, 136, 0.12);
+            border-color: rgba(0, 255, 136, 0.35);
+            color: var(--accent-green);
+        }
+        .telemetry-pill.pill-gold {
+            background: rgba(245, 197, 66, 0.12);
+            border-color: rgba(245, 197, 66, 0.35);
+            color: var(--accent-amber);
+        }
+        .telemetry-pill.pill-cyan {
+            background: rgba(0, 229, 255, 0.12);
+            border-color: rgba(0, 229, 255, 0.35);
+            color: var(--accent-teal);
+        }
+
+        .beacon-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 6px var(--accent-green);
+            animation: pulse-beacon-anim 1.8s infinite;
+        }
+
+        .ent-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .view-switch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            cursor: pointer !important;
+            transition: all 0.25s ease;
+        }
+        .view-switch-btn:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: #ffffff;
+        }
+
+        /* --- Main Layout Grid --- */
+        .ent-main-layout {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media (max-width: 1100px) {
+            .ent-main-layout {
+                grid-template-columns: 310px 1fr;
+            }
+        }
+
+        /* ==========================================================================
+           LEFT INPUT SIDEBAR
+           ========================================================================== */
+        .ent-left-sidebar {
+            background: rgba(9, 14, 11, 0.85);
+            border-right: 1px solid var(--border-glow);
+            backdrop-filter: blur(20px);
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+            z-index: 10;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .input-group-stacked {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-label-styled {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+        .input-label-styled .hint {
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: none;
+            font-weight: 400;
+        }
+
+        .ent-select-box {
+            width: 100%;
+            background: rgba(16, 25, 20, 0.95);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 12.5px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer !important;
+            transition: all 0.3s ease;
+        }
+        .ent-select-box:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 14px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Environmental Covariates Mini-Card */
+        .covariates-mini-card {
+            background: rgba(14, 22, 17, 0.9);
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cov-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cov-card-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cov-env-badge {
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--accent-teal);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            font-size: 9px;
+            font-family: monospace;
+            padding: 2px 7px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .cov-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .cov-item {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cov-icon {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .cov-text-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+        .cov-name {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+        }
+        .cov-val {
+            font-size: 12px;
+            font-weight: 600;
+            color: #f1f5f9;
+            font-family: monospace;
+        }
+
+        /* Glowing Primary Action Button */
+        .glowing-predict-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
+            border: none;
+            border-radius: 12px;
+            color: #03150b;
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.45), 0 8px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 4px;
+        }
+        .glowing-predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(0, 255, 136, 0.7), 0 12px 25px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #26ff98 0%, #10b981 100%);
+        }
+        .glowing-predict-btn .btn-icon {
+            font-size: 15px;
+        }
+
+        .ent-sidebar-footer {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 10px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           MAIN RIGHT DATA CANVAS
+           ========================================================================== */
+        .ent-main-canvas {
+            background: transparent;
+            padding: 20px 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+            height: calc(100vh - 64px);
+            position: relative;
+        }
+
+        /* SVG Connection Line Layer */
+        #helix-connector-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 25;
+        }
+
+        /* --- Top Right: Hero Prediction Card with 3D DNA Helix --- */
+        .ent-hero-card {
+            background: linear-gradient(135deg, rgba(16, 26, 20, 0.92) 0%, rgba(9, 16, 12, 0.92) 100%);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 22px 28px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            position: relative;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 255, 136, 0.08);
+            backdrop-filter: blur(20px);
+            min-height: 190px;
+        }
+
+        @media (max-width: 1280px) {
+            .ent-hero-card {
+                grid-template-columns: 1fr 280px;
+            }
+        }
+
+        .hero-left-metrics {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .hero-category-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hero-category-label .indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+        }
+
+        .hero-yield-num {
+            font-size: 52px;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+        }
+        .hero-yield-num .unit {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+
+        .hero-ci-text {
+            font-size: 12px;
+            color: #94a3b8;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .trend-badge-positive {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 14px;
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            color: var(--accent-green);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-sub-badge {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-family: monospace;
+        }
+
+        /* 3D DNA Canvas Viewport inside Hero Card */
+        .hero-dna-viewport {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 160px;
+            border-radius: 14px;
+            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, rgba(0, 0, 0, 0.4) 80%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hero-dna-canvas {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            display: block;
+        }
+
+        .dna-overlay-tag {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 9px;
+            font-family: monospace;
+            color: var(--accent-green);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* --- Middle Right: Mathematical Component Decomposition --- */
+        .ent-decomp-section {
+            background: rgba(14, 22, 17, 0.88);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 18px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .decomp-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .decomp-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .decomp-formula-badge {
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--accent-teal);
+            background: rgba(0, 229, 255, 0.08);
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Single Sleek Horizontal Stacked Bar Chart */
+        .stacked-bar-container {
+            width: 100%;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .bar-seg {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            font-family: monospace;
+            color: #ffffff;
+            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .bar-seg-mean {
+            background: #334155;
+            color: #cbd5e1;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bar-seg-genetic {
+            background: linear-gradient(90deg, #10b981, #00ff88);
+            color: #03150b;
+            box-shadow: 0 0 16px rgba(0, 255, 136, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bar-seg-env {
+            background: linear-gradient(90deg, #0284c7, #00e5ff);
+            color: #041926;
+            box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Segment Legends */
+        .decomp-legend-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 4px;
+        }
+
+        .legend-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #cbd5e1;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+        }
+        .legend-dot.dot-mean { background: #475569; }
+        .legend-dot.dot-genetic { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green-glow); }
+        .legend-dot.dot-env { background: var(--accent-teal); box-shadow: 0 0 8px var(--accent-teal-glow); }
+
+        .legend-val {
+            font-family: monospace;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* --- Bottom Right: Explainability Data Grid --- */
+        .ent-grid-section {
+            background: rgba(14, 22, 17, 0.88);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 18px 24px 22px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .grid-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .grid-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .grid-section-sub {
+            font-size: 10px;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+
+        .ent-data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+            font-size: 12px;
+        }
+
+        .ent-data-table th {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .ent-data-table th:last-child {
+            text-align: right;
+        }
+
+        .ent-data-row {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer !important;
+            border-radius: 8px;
+        }
+
+        .ent-data-row td {
+            padding: 10px 12px;
+            vertical-align: middle;
+        }
+
+        .ent-data-row td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        .ent-data-row td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            text-align: right;
+        }
+
+        /* Subtle glowing hover state */
+        .ent-data-row:hover,
+        .ent-data-row.active-row {
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.45);
+            box-shadow: 0 0 18px rgba(0, 255, 136, 0.18), inset 0 0 10px rgba(0, 255, 136, 0.05);
+            transform: scale(1.006) translateX(4px);
+        }
+
+        .cell-marker {
+            font-family: monospace;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .cell-chrom {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.14);
+            border: 1px solid rgba(0, 229, 255, 0.35);
+            color: var(--accent-teal);
+            font-size: 10px;
+            font-family: monospace;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+        }
+
+        .cell-annotation {
+            color: #cbd5e1;
+            font-size: 11.5px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .cell-annotation .gene-name {
+            color: var(--accent-green);
+            font-family: monospace;
+            font-size: 10px;
+        }
+
+        .cell-dosage {
+            font-family: monospace;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* Crucial: Impact Score with mix of positive (green) and negative (amber/red) badges */
+        .impact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .impact-pill.impact-positive {
+            background: rgba(0, 255, 136, 0.16);
+            border: 1px solid rgba(0, 255, 136, 0.45);
+            color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+
+        .impact-pill.impact-negative {
+            background: rgba(248, 113, 113, 0.16);
+            border: 1px solid rgba(248, 113, 113, 0.45);
+            color: var(--accent-red);
+            box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
+        }
+
     </style>
 
     <script type="importmap">
@@ -788,6 +1603,293 @@
     <!-- Custom Cursor -->
     <div class="cursor-inner"></div>
     <div class="cursor-outer"></div>
+
+
+    <!-- ==========================================================================
+         ENTERPRISE-GRADE MLOps BIOINFORMATICS DASHBOARD
+         ========================================================================== -->
+    <div id="enterprise-dashboard-container">
+        <!-- Top Header Navigation & Telemetry Strip -->
+        <header class="ent-top-header">
+            <div class="ent-brand-group">
+                <div class="ent-brand-logo">&#9670;</div>
+                <div class="ent-lab-title">
+                    GenoTrack
+                    <span>// MLOps Agro-Genomic Platform</span>
+                </div>
+            </div>
+
+            <!-- Horizontal Telemetry Strip (Pill Badges) -->
+            <div class="ent-telemetry-strip">
+                <div class="telemetry-pill pill-green">
+                    <span class="beacon-dot"></span>
+                    <span>MODEL: GxE-XGBoost-v2.1</span>
+                </div>
+                <div class="telemetry-pill pill-green">
+                    <span>STATUS: Production ●</span>
+                </div>
+                <div class="telemetry-pill pill-gold">
+                    <span>CV ACCURACY: r = 0.8122</span>
+                </div>
+                <div class="telemetry-pill">
+                    <span>RMSE: 768.76 kg/ha</span>
+                </div>
+                <div class="telemetry-pill pill-cyan">
+                    <span>GATE: PASSED</span>
+                </div>
+                <div class="telemetry-pill">
+                    <span>DATA HASH: 7f17c1f2</span>
+                </div>
+                <div class="telemetry-pill">
+                    <span>RUN ID: 3d30f134</span>
+                </div>
+                <div class="telemetry-pill">
+                    <span>LATENCY: 8.4ms</span>
+                </div>
+            </div>
+
+            <div class="ent-header-actions">
+                <button class="view-switch-btn" id="btn-toggle-narrative" title="Switch to 3D Story Mode">
+                    <span>&#9672; 3D Story</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Layout: Left Sidebar + Right Canvas -->
+        <div class="ent-main-layout">
+            <!-- LEFT INPUT SIDEBAR -->
+            <aside class="ent-left-sidebar">
+                <div class="sidebar-section-title">
+                    <span>&#9638;</span> Input Configuration
+                </div>
+
+                <!-- Genotype Dropdown -->
+                <div class="input-group-stacked">
+                    <label for="ent-genotype-select" class="input-label-styled">
+                        <span>Genotype (Accession)</span>
+                        <span class="hint">Panel Lines</span>
+                    </label>
+                    <select id="ent-genotype-select" class="ent-select-box">
+                        <option value="A1256">A1256 — High-Yielding Tropical Japonica</option>
+                        <option value="A1203">A1203 — Elite Lowland Inbred</option>
+                        <option value="A1254">A1254 — Standard Breeding Check</option>
+                        <option value="A1258">A1258 — Drought-Resilient Candidate</option>
+                        <option value="A1260">A1260 — Wet Season Adapted Line</option>
+                    </select>
+                </div>
+
+                <!-- Environment Dropdown -->
+                <div class="input-group-stacked">
+                    <label for="ent-env-select" class="input-label-styled">
+                        <span>Environment (Trial Season)</span>
+                        <span class="hint">Climate Norms</span>
+                    </label>
+                    <select id="ent-env-select" class="ent-select-box">
+                        <option value="2011_DS" selected>2011 Dry Season (Optimal High Solar)</option>
+                        <option value="2009_WS">2009 Wet Season (Monsoon Stress)</option>
+                        <option value="2009_DS">2009 Dry Season</option>
+                        <option value="2010_DS">2010 Dry Season</option>
+                        <option value="2010_WS">2010 Wet Season</option>
+                        <option value="2011_WS">2011 Wet Season</option>
+                        <option value="2012_DS">2012 Dry Season</option>
+                        <option value="2012_WS">2012 Wet Season</option>
+                        <option value="across_environments">Across Environments (Broad Average)</option>
+                    </select>
+                </div>
+
+                <!-- Environmental Covariates Mini-Card -->
+                <div class="covariates-mini-card">
+                    <div class="cov-card-header">
+                        <div class="cov-card-title">
+                            <span>&#9881;</span> Environmental Covariates
+                        </div>
+                        <div class="cov-env-badge" id="cov-env-id">2011_DS</div>
+                    </div>
+
+                    <div class="cov-metrics-grid">
+                        <div class="cov-item">
+                            <span class="cov-icon">&#127777;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Mean Temp</span>
+                                <span class="cov-val" id="cov-temp-val">28.6°C</span>
+                            </div>
+                        </div>
+                        <div class="cov-item">
+                            <span class="cov-icon">&#9728;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Solar Rad</span>
+                                <span class="cov-val" id="cov-rad-val">21.4 MJ/m²</span>
+                            </div>
+                        </div>
+                        <div class="cov-item">
+                            <span class="cov-icon">&#128167;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Soil Moisture</span>
+                                <span class="cov-val" id="cov-moist-val">62.0%</span>
+                            </div>
+                        </div>
+                        <div class="cov-item">
+                            <span class="cov-icon">&#127783;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Precipitation</span>
+                                <span class="cov-val" id="cov-precip-val">142 mm</span>
+                            </div>
+                        </div>
+                        <div class="cov-item">
+                            <span class="cov-icon">&#9883;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Soil Nitrogen</span>
+                                <span class="cov-val" id="cov-n-val">180 kg/ha N</span>
+                            </div>
+                        </div>
+                        <div class="cov-item">
+                            <span class="cov-icon">&#127806;</span>
+                            <div class="cov-text-wrap">
+                                <span class="cov-name">Missing Hills</span>
+                                <span class="cov-val" id="cov-hills-val">0 / plot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Glowing Primary Action Button -->
+                <button class="glowing-predict-btn" id="ent-btn-predict">
+                    <span>Compute G&times;E Prediction</span>
+                    <span class="btn-icon">&#9889;</span>
+                </button>
+
+                <div class="ent-sidebar-footer">
+                    <div><strong>G&times;E Architecture:</strong> Additive GBLUP ridge comparator + XGBoost gradient boosted interaction norm.</div>
+                    <div style="margin-top:4px;">Evaluated on 368 biological rice panel accessions &amp; 67,084 high-density markers.</div>
+                </div>
+            </aside>
+
+            <!-- MAIN RIGHT DATA CANVAS -->
+            <main class="ent-main-canvas" id="ent-canvas-wrap">
+                <!-- SVG Connector Line from Table Row to 3D DNA Helix -->
+                <svg id="helix-connector-svg">
+                    <defs>
+                        <filter id="glow-line-filter" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <path id="helix-connector-path" d="" fill="none" stroke="#00ff88" stroke-width="1.8" stroke-dasharray="5,5" filter="url(#glow-line-filter)" opacity="0.85"></path>
+                    <circle id="helix-connector-anchor" cx="0" cy="0" r="4" fill="#00ff88" filter="url(#glow-line-filter)"></circle>
+                    <circle id="helix-connector-target" cx="0" cy="0" r="4" fill="#00e5ff" filter="url(#glow-line-filter)"></circle>
+                </svg>
+
+                <!-- TOP RIGHT: Hero Prediction Card with 3D DNA Double Helix -->
+                <section class="ent-hero-card" id="ent-hero-prediction-card">
+                    <!-- Left: Bold Numbers, CI, Baseline Trend -->
+                    <div class="hero-left-metrics">
+                        <div class="hero-category-label">
+                            <span class="indicator"></span>
+                            <span>Predicted Harvest Grain Yield (y&#770;)</span>
+                        </div>
+
+                        <div class="hero-yield-num" id="ent-hero-yield">
+                            5,790.80 <span class="unit">kg/ha</span>
+                        </div>
+
+                        <div class="hero-ci-text" id="ent-hero-ci">
+                            95% CI: [5,640.20 – 5,941.40 kg/ha] • Standard Error: ±76.8 kg/ha
+                        </div>
+
+                        <div class="hero-badge-row">
+                            <div class="trend-badge-positive" id="ent-hero-trend">
+                                <span class="trend-arrow">&#9650;</span> +19.4% vs Panel Baseline (4,850 kg/ha)
+                            </div>
+                            <div class="hero-sub-badge">
+                                Broad-Sense H&sup2;: <strong>0.68</strong> • Ploidy: <strong>2x</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Glowing 3D DNA Double Helix Render -->
+                    <div class="hero-dna-viewport" id="hero-dna-viewport">
+                        <canvas id="hero-dna-canvas"></canvas>
+                        <div class="dna-overlay-tag">3D Genomic Double Helix (67K SNPs)</div>
+                    </div>
+                </section>
+
+                <!-- MIDDLE RIGHT: Mathematical Component Decomposition -->
+                <section class="ent-decomp-section">
+                    <div class="decomp-header-row">
+                        <div class="decomp-section-title">
+                            <span>&#9881;</span> Mathematical Component Decomposition
+                        </div>
+                        <div class="decomp-formula-badge">
+                            y&#770;<sub>ij</sub> = &mu; + g(X<sub>i</sub>) + (E<sub>j</sub> + ge<sub>ij</sub>)
+                        </div>
+                    </div>
+
+                    <!-- Single Sleek Horizontal Stacked Bar Chart -->
+                    <div class="stacked-bar-container" id="stacked-bar-container">
+                        <div class="bar-seg bar-seg-mean" id="seg-mean" style="width: 72.7%;">
+                            <span id="seg-mean-txt">Base: 72.7%</span>
+                        </div>
+                        <div class="bar-seg bar-seg-genetic" id="seg-genetic" style="width: 20.2%;">
+                            <span id="seg-genetic-txt">Genetic: +20.2%</span>
+                        </div>
+                        <div class="bar-seg bar-seg-env" id="seg-env" style="width: 7.1%;">
+                            <span id="seg-env-txt">Env: +7.1%</span>
+                        </div>
+                    </div>
+
+                    <!-- Clear Segment Legends -->
+                    <div class="decomp-legend-row">
+                        <div class="legend-pill">
+                            <span class="legend-dot dot-mean"></span>
+                            <span>Base Population Mean (&mu;):</span>
+                            <span class="legend-val" id="leg-mean-val">4,210.00 kg/ha (72.7%)</span>
+                        </div>
+                        <div class="legend-pill">
+                            <span class="legend-dot dot-genetic"></span>
+                            <span>Genetic Additive Value g(X):</span>
+                            <span class="legend-val" style="color:var(--accent-green);" id="leg-genetic-val">+1,172.02 kg/ha (20.2%)</span>
+                        </div>
+                        <div class="legend-pill">
+                            <span class="legend-dot dot-env"></span>
+                            <span>Environmental Shift (E<sub>j</sub> + ge):</span>
+                            <span class="legend-val" style="color:var(--accent-teal);" id="leg-env-val">+408.78 kg/ha (7.1%)</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BOTTOM RIGHT: Explainability Data Grid (SHAP Attributions) -->
+                <section class="ent-grid-section">
+                    <div class="grid-header-row">
+                        <div class="grid-section-title">
+                            <span>&#9883;</span> Genomic SHAP Attribution Data Grid
+                        </div>
+                        <div class="grid-section-sub">
+                            Causal loci mapped to candidate genes &bull; Hover row to link with 3D DNA Helix
+                        </div>
+                    </div>
+
+                    <table class="ent-data-table" id="ent-shap-table">
+                        <thead>
+                            <tr>
+                                <th style="width:130px;">Marker ID</th>
+                                <th style="width:90px;">Chrom</th>
+                                <th>Biological Annotation (Gene Locus)</th>
+                                <th style="width:140px;">Dosage</th>
+                                <th style="width:130px;">Impact Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ent-shap-tbody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+
 
     <!-- Cinematic Overlay Container -->
     <div class="cinematic-container">
@@ -1879,6 +2981,7 @@
 
             // Setup MLOps Breeding Lab
             setupBreedingLab();
+            setupEnterpriseDashboard();
 
             // Start animation
             animate();
@@ -3983,6 +5086,3680 @@
 
             // Initial render
             updatePrediction();
+        }
+
+
+        // ==========================================================================
+        // ENTERPRISE DASHBOARD CONTROLLER & DEDICATED 3D DNA HELIX
+        // ==========================================================================
+        const ENTERPRISE_DB = {
+  "A1256": {
+    "across_environments": {
+      "predicted_value": 5344.51,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1134.51,
+      "environmental_shift": 0.0,
+      "ci_lower": 5193.91,
+      "ci_upper": 5495.11,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.58,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.96,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.03,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.05,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.61,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6251.57,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 533.85,
+      "environmental_shift": 1507.72,
+      "ci_lower": 6100.97,
+      "ci_upper": 6402.17,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.37,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.85,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.29,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4662.33,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1245.9,
+      "environmental_shift": -793.58,
+      "ci_lower": 4511.73,
+      "ci_upper": 4812.93,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.93,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.9,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.27,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.83,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6282.14,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1382.07,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6131.54,
+      "ci_upper": 6432.74,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.52,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.81,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.65,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.54,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4763.38,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1238.74,
+      "environmental_shift": -685.36,
+      "ci_lower": 4612.78,
+      "ci_upper": 4913.98,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.31,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.6,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.89,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5790.8,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1172.02,
+      "environmental_shift": 408.78,
+      "ci_lower": 5640.2,
+      "ci_upper": 5941.4,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.83,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.89,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.14,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.49,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.08,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4730.62,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1520.42,
+      "environmental_shift": -999.79,
+      "ci_lower": 4580.02,
+      "ci_upper": 4881.22,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.06,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.22,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.46,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.24,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5386.26,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1121.35,
+      "environmental_shift": 54.91,
+      "ci_lower": 5235.66,
+      "ci_upper": 5536.86,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.46,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.71,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.81,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.76,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5298.86,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1213.7,
+      "environmental_shift": -124.84,
+      "ci_lower": 5148.26,
+      "ci_upper": 5449.46,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.67,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.66,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.82,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.72,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1203": {
+    "across_environments": {
+      "predicted_value": 4736.11,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 526.11,
+      "environmental_shift": 0.0,
+      "ci_lower": 4585.51,
+      "ci_upper": 4886.71,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.48,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.05,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.39,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.61,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 5813.79,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1279.03,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5663.19,
+      "ci_upper": 5964.39,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.16,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.2,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 3934.25,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 517.83,
+      "environmental_shift": -793.58,
+      "ci_lower": 3783.65,
+      "ci_upper": 4084.85,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.27,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.39,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.48,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.97,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.05,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 5992.35,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1318.32,
+      "environmental_shift": 2049.61,
+      "ci_lower": 5841.75,
+      "ci_upper": 6142.95,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.45,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.3,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.59,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4329.93,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 805.29,
+      "environmental_shift": -685.36,
+      "ci_lower": 4179.33,
+      "ci_upper": 4480.53,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.25,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.55,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.58,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.32,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.47,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5190.64,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 571.86,
+      "environmental_shift": 408.78,
+      "ci_lower": 5040.04,
+      "ci_upper": 5341.24,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.82,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.72,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.8,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 3949.62,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 739.42,
+      "environmental_shift": -999.79,
+      "ci_lower": 3799.02,
+      "ci_upper": 4100.22,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.65,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.79,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 4819.29,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 554.38,
+      "environmental_shift": 54.91,
+      "ci_lower": 4668.69,
+      "ci_upper": 4969.89,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.31,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.26,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.7,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 4706.09,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 620.93,
+      "environmental_shift": -124.84,
+      "ci_lower": 4555.49,
+      "ci_upper": 4856.69,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.4,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.66,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.52,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.58,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1254": {
+    "across_environments": {
+      "predicted_value": 4918.6,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 708.6,
+      "environmental_shift": 0.0,
+      "ci_lower": 4768.0,
+      "ci_upper": 5069.2,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.96,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.78,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.99,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.66,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 5854.14,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1287.91,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5703.54,
+      "ci_upper": 6004.74,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.93,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.65,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.78,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.52,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4434.32,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1017.89,
+      "environmental_shift": -793.58,
+      "ci_lower": 4283.72,
+      "ci_upper": 4584.92,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.29,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.48,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.36,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.5,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6171.34,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1357.69,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6020.74,
+      "ci_upper": 6321.94,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.8,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.27,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.55,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4344.57,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 819.92,
+      "environmental_shift": -685.36,
+      "ci_lower": 4193.97,
+      "ci_upper": 4495.17,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.68,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.04,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.38,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5213.94,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 595.15,
+      "environmental_shift": 408.78,
+      "ci_lower": 5063.34,
+      "ci_upper": 5364.54,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.16,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.63,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.46,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.15,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4370.88,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1160.68,
+      "environmental_shift": -999.79,
+      "ci_lower": 4220.28,
+      "ci_upper": 4521.48,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.97,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.56,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.62,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.22,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.86,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5004.44,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 739.53,
+      "environmental_shift": 54.91,
+      "ci_lower": 4853.84,
+      "ci_upper": 5155.04,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.49,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.52,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -14.69,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.46,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 4883.28,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 798.12,
+      "environmental_shift": -124.84,
+      "ci_lower": 4732.68,
+      "ci_upper": 5033.88,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.51,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.43,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.53,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.71,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1258": {
+    "across_environments": {
+      "predicted_value": 5307.13,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1097.13,
+      "environmental_shift": 0.0,
+      "ci_lower": 5156.53,
+      "ci_upper": 5457.73,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.34,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.0,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.34,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.13,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.67,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6439.97,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 722.25,
+      "environmental_shift": 1507.72,
+      "ci_lower": 6289.37,
+      "ci_upper": 6590.57,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.88,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.28,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.08,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4981.36,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1564.94,
+      "environmental_shift": -793.58,
+      "ci_lower": 4830.76,
+      "ci_upper": 5131.96,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.32,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.04,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.35,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.36,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.01,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6266.28,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1378.58,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6115.68,
+      "ci_upper": 6416.88,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 22.54,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.65,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.4,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.96,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4873.99,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1349.35,
+      "environmental_shift": -685.36,
+      "ci_lower": 4723.39,
+      "ci_upper": 5024.59,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.5,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.3,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.26,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.4,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.4,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5618.78,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1000.0,
+      "environmental_shift": 408.78,
+      "ci_lower": 5468.18,
+      "ci_upper": 5769.38,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.79,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -11.78,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.51,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.2,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4644.37,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1434.16,
+      "environmental_shift": -999.79,
+      "ci_lower": 4493.77,
+      "ci_upper": 4794.97,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.32,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.5,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -11.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 12.68,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5360.45,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1095.54,
+      "environmental_shift": 54.91,
+      "ci_lower": 5209.85,
+      "ci_upper": 5511.05,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 23.3,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.98,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.17,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.51,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.22,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5276.74,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1191.58,
+      "environmental_shift": -124.84,
+      "ci_lower": 5126.14,
+      "ci_upper": 5427.34,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.01,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 20.57,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.86,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.54,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.58,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  },
+  "A1260": {
+    "across_environments": {
+      "predicted_value": 5180.21,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 970.21,
+      "environmental_shift": 0.0,
+      "ci_lower": 5029.61,
+      "ci_upper": 5330.81,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.7,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.66,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.75,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -6.41,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "Across Environments (Broad-Sense Average)",
+        "temp": "27.6\u00b0C",
+        "radiation": "18.3 MJ/m\u00b2",
+        "moisture": "74.2%",
+        "precip": "680 mm",
+        "soil_n": "160 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "80%"
+      }
+    },
+    "2009_DS": {
+      "predicted_value": 6110.59,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 392.88,
+      "environmental_shift": 1507.72,
+      "ci_lower": 5959.99,
+      "ci_upper": 6261.19,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 21.9,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.89,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.04,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.38,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.04,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Dry Season",
+        "temp": "29.1\u00b0C",
+        "radiation": "22.0 MJ/m\u00b2",
+        "moisture": "59.4%",
+        "precip": "110 mm",
+        "soil_n": "175 kg/ha N",
+        "soil_ph": "6.5 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "68%"
+      }
+    },
+    "2009_WS": {
+      "predicted_value": 4417.43,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1001.01,
+      "environmental_shift": -793.58,
+      "ci_lower": 4266.83,
+      "ci_upper": 4568.03,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.44,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.08,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.64,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -9.8,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 11.53,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2009 Wet Season (Monsoon Stress)",
+        "temp": "26.2\u00b0C",
+        "radiation": "14.8 MJ/m\u00b2",
+        "moisture": "88.5%",
+        "precip": "1,240 mm",
+        "soil_n": "140 kg/ha N",
+        "soil_ph": "6.1 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "92%"
+      }
+    },
+    "2010_DS": {
+      "predicted_value": 6170.86,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1357.59,
+      "environmental_shift": 2049.61,
+      "ci_lower": 6020.26,
+      "ci_upper": 6321.46,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.81,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.05,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -13.11,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 8.91,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Dry Season",
+        "temp": "28.8\u00b0C",
+        "radiation": "20.8 MJ/m\u00b2",
+        "moisture": "63.2%",
+        "precip": "165 mm",
+        "soil_n": "170 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "73%"
+      }
+    },
+    "2010_WS": {
+      "predicted_value": 4691.99,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1167.35,
+      "environmental_shift": -685.36,
+      "ci_lower": 4541.39,
+      "ci_upper": 4842.59,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.87,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.84,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -11.72,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.18,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.6,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2010 Wet Season",
+        "temp": "26.5\u00b0C",
+        "radiation": "15.2 MJ/m\u00b2",
+        "moisture": "86.0%",
+        "precip": "1,180 mm",
+        "soil_n": "145 kg/ha N",
+        "soil_ph": "6.2 pH",
+        "missing_hills": "2 / plot",
+        "humidity": "89%"
+      }
+    },
+    "2011_DS": {
+      "predicted_value": 5542.1,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 923.32,
+      "environmental_shift": 408.78,
+      "ci_lower": 5391.5,
+      "ci_upper": 5692.7,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 26.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 17.53,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -12.6,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.06,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.75,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Dry Season (Optimal Trial)",
+        "temp": "28.6\u00b0C",
+        "radiation": "21.4 MJ/m\u00b2",
+        "moisture": "62.0%",
+        "precip": "142 mm",
+        "soil_n": "180 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "71%"
+      }
+    },
+    "2011_WS": {
+      "predicted_value": 4308.16,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1097.95,
+      "environmental_shift": -999.79,
+      "ci_lower": 4157.56,
+      "ci_upper": 4458.76,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 24.54,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 19.84,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -16.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -8.56,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 13.22,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2011 Wet Season",
+        "temp": "26.0\u00b0C",
+        "radiation": "14.5 MJ/m\u00b2",
+        "moisture": "89.2%",
+        "precip": "1,310 mm",
+        "soil_n": "135 kg/ha N",
+        "soil_ph": "6.0 pH",
+        "missing_hills": "3 / plot",
+        "humidity": "93%"
+      }
+    },
+    "2012_DS": {
+      "predicted_value": 5227.0,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 962.09,
+      "environmental_shift": 54.91,
+      "ci_lower": 5076.4,
+      "ci_upper": 5377.6,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.2,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 16.21,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.98,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -10.59,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 9.81,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Dry Season",
+        "temp": "29.4\u00b0C",
+        "radiation": "21.9 MJ/m\u00b2",
+        "moisture": "60.5%",
+        "precip": "130 mm",
+        "soil_n": "185 kg/ha N",
+        "soil_ph": "6.4 pH",
+        "missing_hills": "0 / plot",
+        "humidity": "70%"
+      }
+    },
+    "2012_WS": {
+      "predicted_value": 5134.56,
+      "base_population_mean": 4210.0,
+      "genetic_additive": 1049.4,
+      "environmental_shift": -124.84,
+      "ci_lower": 4983.96,
+      "ci_upper": 5285.16,
+      "std_error": 76.8,
+      "markers": [
+        {
+          "marker_id": "S3_31725840",
+          "chrom": "3",
+          "pos": 31725840,
+          "gene": "LOC_Os03g55380 (Hd1 / Photoperiod-sensitive Flowering)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": 25.26,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S1_38382410",
+          "chrom": "1",
+          "pos": 38382410,
+          "gene": "LOC_Os01g08780 (sd1 / GA 20-oxidase Semi-Dwarf Yield)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 18.95,
+          "is_positive": true
+        },
+        {
+          "marker_id": "S4_23232783",
+          "chrom": "4",
+          "pos": 23232783,
+          "gene": "LOC_Os04g51280 (GS3 / G-protein Grain Length & Weight QTL)",
+          "dosage": 1.0,
+          "dosage_label": "1.0 (Heterozygous)",
+          "shap_value": -15.28,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S2_24856019",
+          "chrom": "2",
+          "pos": 24856019,
+          "gene": "LOC_Os02g43280 (DEP1 / Dense Panicle Architecture Drag)",
+          "dosage": 0.0,
+          "dosage_label": "0.0 (Hom. Ref)",
+          "shap_value": -7.33,
+          "is_positive": false
+        },
+        {
+          "marker_id": "S6_3042190",
+          "chrom": "6",
+          "pos": 3042190,
+          "gene": "LOC_Os06g06050 (qLTG3-1 / Low-temperature Seedling Vigor)",
+          "dosage": 2.0,
+          "dosage_label": "2.0 (Hom. Alt)",
+          "shap_value": 10.44,
+          "is_positive": true
+        }
+      ],
+      "covariates": {
+        "label": "2012 Wet Season",
+        "temp": "26.8\u00b0C",
+        "radiation": "15.9 MJ/m\u00b2",
+        "moisture": "84.5%",
+        "precip": "1,120 mm",
+        "soil_n": "150 kg/ha N",
+        "soil_ph": "6.3 pH",
+        "missing_hills": "1 / plot",
+        "humidity": "87%"
+      }
+    }
+  }
+};
+
+        let heroDnaScene, heroDnaCamera, heroDnaRenderer, heroDnaPivot;
+        let heroDnaRungs = [];
+
+        function initHeroDnaHelix() {
+            const container = document.getElementById('hero-dna-viewport');
+            const canvas = document.getElementById('hero-dna-canvas');
+            if (!container || !canvas) return;
+
+            const width = container.clientWidth || 340;
+            const height = container.clientHeight || 180;
+
+            heroDnaScene = new THREE.Scene();
+            heroDnaCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+            heroDnaCamera.position.set(0, 0, 3.8);
+
+            heroDnaRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            heroDnaRenderer.setSize(width, height);
+            heroDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Ambient & directional lights
+            const ambLight = new THREE.AmbientLight(0xffffff, 0.3);
+            heroDnaScene.add(ambLight);
+
+            const greenLight = new THREE.PointLight(0x00ff88, 5.0, 10);
+            greenLight.position.set(2, 2, 2);
+            heroDnaScene.add(greenLight);
+
+            const cyanLight = new THREE.PointLight(0x00e5ff, 4.0, 10);
+            cyanLight.position.set(-2, -2, 2);
+            heroDnaScene.add(cyanLight);
+
+            heroDnaPivot = new THREE.Group();
+            heroDnaScene.add(heroDnaPivot);
+
+            // Build mini glowing double helix
+            const helixRadius = 0.42;
+            const helixHeight = 2.4;
+            const turns = 2.4;
+            const pointsA = [];
+            const pointsB = [];
+            const rungCount = 20;
+
+            for (let i = 0; i < 200; i++) {
+                const t = i / 199;
+                const angle = t * Math.PI * 2 * turns;
+                const y = (t - 0.5) * helixHeight;
+                pointsA.push(new THREE.Vector3(Math.cos(angle) * helixRadius, y, Math.sin(angle) * helixRadius));
+                pointsB.push(new THREE.Vector3(Math.cos(angle + Math.PI) * helixRadius, y, Math.sin(angle + Math.PI) * helixRadius));
+            }
+
+            const curveA = new THREE.CatmullRomCurve3(pointsA);
+            const curveB = new THREE.CatmullRomCurve3(pointsB);
+
+            const tubeMatA = new THREE.MeshPhysicalMaterial({
+                color: 0x00ff88,
+                emissive: 0x008844,
+                emissiveIntensity: 1.2,
+                roughness: 0.2,
+                metalness: 0.1,
+                clearcoat: 1.0
+            });
+            const tubeMatB = new THREE.MeshPhysicalMaterial({
+                color: 0x00e5ff,
+                emissive: 0x006688,
+                emissiveIntensity: 1.2,
+                roughness: 0.2,
+                metalness: 0.1,
+                clearcoat: 1.0
+            });
+
+            const meshA = new THREE.Mesh(new THREE.TubeGeometry(curveA, 100, 0.022, 8, false), tubeMatA);
+            const meshB = new THREE.Mesh(new THREE.TubeGeometry(curveB, 100, 0.022, 8, false), tubeMatB);
+            heroDnaPivot.add(meshA, meshB);
+
+            // Base pairs & glowing marker nodes
+            heroDnaRungs = [];
+            const markerGeo = new THREE.IcosahedronGeometry(0.045, 2);
+            const markerMatGreen = new THREE.MeshPhysicalMaterial({ color: 0x00ff88, emissive: 0x00ff88, emissiveIntensity: 2.0 });
+            const markerMatGold = new THREE.MeshPhysicalMaterial({ color: 0xf5c542, emissive: 0xf5c542, emissiveIntensity: 2.0 });
+
+            for (let j = 0; j < rungCount; j++) {
+                const t = j / (rungCount - 1);
+                const idx = Math.floor(t * 199);
+                const p1 = pointsA[idx];
+                const p2 = pointsB[idx];
+                const mid = p1.clone().lerp(p2, 0.5);
+
+                const rungCurve = new THREE.LineCurve3(p1, p2);
+                const rungMat = new THREE.MeshStandardMaterial({
+                    color: j % 2 === 0 ? 0x00aa66 : 0x0088aa,
+                    emissive: j % 2 === 0 ? 0x004422 : 0x003344,
+                    emissiveIntensity: 0.8
+                });
+                const rungMesh = new THREE.Mesh(new THREE.TubeGeometry(rungCurve, 1, 0.015, 6, false), rungMat);
+                heroDnaPivot.add(rungMesh);
+
+                const nodeMesh = new THREE.Mesh(markerGeo, j % 2 === 0 ? markerMatGreen : markerMatGold);
+                nodeMesh.position.copy(mid);
+                heroDnaPivot.add(nodeMesh);
+
+                heroDnaRungs.push({ mesh: nodeMesh, initialIntensity: 2.0 });
+            }
+
+            // Animate loop
+            function animateHeroDna() {
+                requestAnimationFrame(animateHeroDna);
+                if (heroDnaPivot) {
+                    heroDnaPivot.rotation.y += 0.008;
+                }
+                if (heroDnaRenderer && heroDnaScene && heroDnaCamera) {
+                    heroDnaRenderer.render(heroDnaScene, heroDnaCamera);
+                }
+            }
+            animateHeroDna();
+
+            window.addEventListener('resize', () => {
+                if (!container || !heroDnaRenderer || !heroDnaCamera) return;
+                const newW = container.clientWidth || 340;
+                const newH = container.clientHeight || 180;
+                heroDnaCamera.aspect = newW / newH;
+                heroDnaCamera.updateProjectionMatrix();
+                heroDnaRenderer.setSize(newW, newH);
+            });
+        }
+
+        // Pulse the mini hero DNA helix on row interaction
+        window.pulseHeroDna = function(isPositive) {
+            if (!heroDnaRungs || heroDnaRungs.length === 0) return;
+            const flashColor = isPositive ? 0x00ff88 : 0xf87171;
+            heroDnaRungs.forEach((r, idx) => {
+                setTimeout(() => {
+                    if (r && r.mesh) {
+                        r.mesh.material.emissive.setHex(flashColor);
+                        r.mesh.material.emissiveIntensity = 4.5;
+                        setTimeout(() => {
+                            r.mesh.material.emissive.setHex(idx % 2 === 0 ? 0x00ff88 : 0xf5c542);
+                            r.mesh.material.emissiveIntensity = r.initialIntensity;
+                        }, 600);
+                    }
+                }, (idx % 5) * 40);
+            });
+        };
+
+        // Dynamic Graphical Connector Line from Table Row to 3D DNA Canvas
+        function updateConnectorLine(targetRowElement) {
+            const svgEl = document.getElementById('helix-connector-svg');
+            const svgPath = document.getElementById('helix-connector-path');
+            const anchorDot = document.getElementById('helix-connector-anchor');
+            const targetDot = document.getElementById('helix-connector-target');
+            const canvasWrap = document.getElementById('ent-canvas-wrap');
+            const dnaViewport = document.getElementById('hero-dna-viewport');
+
+            if (!svgPath || !canvasWrap || !dnaViewport || !targetRowElement) return;
+
+            if (svgEl) {
+                svgEl.style.height = `${Math.max(canvasWrap.scrollHeight, canvasWrap.clientHeight)}px`;
+                svgEl.style.width = `${Math.max(canvasWrap.scrollWidth, canvasWrap.clientWidth)}px`;
+            }
+
+            const wrapRect = canvasWrap.getBoundingClientRect();
+            const rowRect = targetRowElement.getBoundingClientRect();
+            const dnaRect = dnaViewport.getBoundingClientRect();
+            const scrollTop = canvasWrap.scrollTop || 0;
+
+            // Check if target row has positive or negative impact
+            const isNegative = targetRowElement.querySelector('.impact-negative') !== null;
+            const strokeColor = isNegative ? '#f87171' : '#00ff88';
+
+            svgPath.setAttribute('stroke', strokeColor);
+            if (anchorDot) anchorDot.setAttribute('fill', strokeColor);
+
+            // Start point: right edge of the Impact Score cell in the hovered row
+            const startX = (rowRect.right - wrapRect.left) - 28;
+            const startY = (rowRect.top - wrapRect.top) + (rowRect.height / 2) + scrollTop;
+
+            // End point: center-bottom of the 3D DNA canvas viewport
+            const endX = (dnaRect.left - wrapRect.left) + (dnaRect.width / 2);
+            const endY = (dnaRect.bottom - wrapRect.top) + scrollTop - 10;
+
+            // Smooth graceful bezier trajectory directly linking the row to the 3D helix
+            const dx = endX - startX;
+            const dy = endY - startY;
+            const cp1X = startX + dx * 0.15;
+            const cp1Y = startY + dy * 0.55;
+            const cp2X = endX - dx * 0.15;
+            const cp2Y = endY - dy * 0.25;
+
+            const d = `M ${startX},${startY} C ${cp1X},${cp1Y} ${cp2X},${cp2Y} ${endX},${endY}`;
+            svgPath.setAttribute('d', d);
+
+            if (anchorDot) {
+                anchorDot.setAttribute('cx', startX);
+                anchorDot.setAttribute('cy', startY);
+            }
+            if (targetDot) {
+                targetDot.setAttribute('cx', endX);
+                targetDot.setAttribute('cy', endY);
+            }
+        }
+
+        // Setup the Enterprise Dashboard UI
+        function setupEnterpriseDashboard() {
+            initHeroDnaHelix();
+
+            const genotypeSelect = document.getElementById('ent-genotype-select');
+            const envSelect = document.getElementById('ent-env-select');
+            const predictBtn = document.getElementById('ent-btn-predict');
+            const viewSwitchBtn = document.getElementById('btn-toggle-narrative');
+            const dashboardContainer = document.getElementById('enterprise-dashboard-container');
+
+            // View switch logic (3D Story vs Dashboard)
+            let isDashboardActive = true;
+            try { history.scrollRestoration = 'manual'; } catch (e) {}
+            window.scrollTo(0, 0);
+            document.body.classList.add('dashboard-active');
+
+            if (viewSwitchBtn && dashboardContainer) {
+                viewSwitchBtn.addEventListener('click', () => {
+                    isDashboardActive = !isDashboardActive;
+                    if (isDashboardActive) {
+                        dashboardContainer.classList.remove('hidden-view');
+                        document.body.classList.add('dashboard-active');
+                        window.scrollTo(0, 0);
+                        viewSwitchBtn.innerHTML = '<span>&#9672; 3D Story</span>';
+                    } else {
+                        dashboardContainer.classList.add('hidden-view');
+                        document.body.classList.remove('dashboard-active');
+                        viewSwitchBtn.innerHTML = '<span>&#9776; MLOps Dashboard</span>';
+                    }
+                });
+            }
+
+            // Wire canvas scroll to update connector line
+            const canvasWrap = document.getElementById('ent-canvas-wrap');
+            if (canvasWrap) {
+                canvasWrap.addEventListener('scroll', () => {
+                    const activeRow = document.querySelector('.ent-data-row.active-row') || document.getElementById('shap-row-0');
+                    if (activeRow) updateConnectorLine(activeRow);
+                });
+            }
+
+            // Wire all narrative mode CTAs to reveal the enterprise dashboard
+            const storyTriggerIds = ['open-lab-header-btn', 'open-lab-contact-btn', 'slide4-lab-btn', 'slide1-lab-btn'];
+            storyTriggerIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && dashboardContainer) {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        dashboardContainer.classList.remove('hidden-view');
+                        document.body.classList.add('dashboard-active');
+                        window.scrollTo(0, 0);
+                        isDashboardActive = true;
+                        if (viewSwitchBtn) viewSwitchBtn.innerHTML = '<span>&#9672; 3D Story</span>';
+                    });
+                }
+            });
+
+            if (genotypeSelect) genotypeSelect.addEventListener('change', renderEnterpriseState);
+            if (envSelect) envSelect.addEventListener('change', renderEnterpriseState);
+            if (predictBtn) predictBtn.addEventListener('click', () => {
+                predictBtn.style.transform = 'scale(0.97)';
+                setTimeout(() => { predictBtn.style.transform = 'none'; }, 150);
+                renderEnterpriseState();
+                window.pulseHeroDna(true);
+            });
+
+            function renderEnterpriseState() {
+                const sampleId = genotypeSelect ? genotypeSelect.value : 'A1256';
+                const envId = envSelect ? envSelect.value : '2011_DS';
+
+                let data = null;
+                if (ENTERPRISE_DB[sampleId] && ENTERPRISE_DB[sampleId][envId]) {
+                    data = ENTERPRISE_DB[sampleId][envId];
+                } else if (ENTERPRISE_DB['A1256'] && ENTERPRISE_DB['A1256']['2011_DS']) {
+                    data = ENTERPRISE_DB['A1256']['2011_DS'];
+                }
+                if (!data) return;
+
+                // 1. Update Environmental Covariates Mini-Card
+                const cov = data.covariates;
+                const envBadgeEl = document.getElementById('cov-env-id');
+                const tempEl = document.getElementById('cov-temp-val');
+                const radEl = document.getElementById('cov-rad-val');
+                const moistEl = document.getElementById('cov-moist-val');
+                const precipEl = document.getElementById('cov-precip-val');
+                const nEl = document.getElementById('cov-n-val');
+                const hillsEl = document.getElementById('cov-hills-val');
+
+                if (envBadgeEl) envBadgeEl.textContent = envId;
+                if (tempEl) tempEl.textContent = cov.temp;
+                if (radEl) radEl.textContent = cov.radiation;
+                if (moistEl) moistEl.textContent = cov.moisture;
+                if (precipEl) precipEl.textContent = cov.precip;
+                if (nEl) nEl.textContent = cov.soil_n;
+                if (hillsEl) hillsEl.textContent = cov.missing_hills;
+
+                // 2. Update Top Right Hero Prediction
+                const yieldEl = document.getElementById('ent-hero-yield');
+                const ciEl = document.getElementById('ent-hero-ci');
+                const trendEl = document.getElementById('ent-hero-trend');
+
+                if (yieldEl) {
+                    yieldEl.innerHTML = `${data.predicted_value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <span class="unit">kg/ha</span>`;
+                }
+
+                if (ciEl) {
+                    ciEl.textContent = `95% CI: [${data.ci_lower.toFixed(2)} – ${data.ci_upper.toFixed(2)} kg/ha] • Standard Error: ±${data.std_error} kg/ha`;
+                }
+
+                const baselineMean = 4850.0;
+                const diffPct = (((data.predicted_value - baselineMean) / baselineMean) * 100).toFixed(1);
+                if (trendEl) {
+                    if (diffPct >= 0) {
+                        trendEl.className = 'trend-badge-positive';
+                        trendEl.innerHTML = `<span class="trend-arrow">&#9650;</span> +${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                    } else {
+                        trendEl.className = 'trend-badge-positive';
+                        trendEl.style.borderColor = 'rgba(248, 113, 113, 0.4)';
+                        trendEl.style.color = 'var(--accent-red)';
+                        trendEl.style.background = 'rgba(248, 113, 113, 0.15)';
+                        trendEl.innerHTML = `<span class="trend-arrow">&#9660;</span> ${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                    }
+                }
+
+                // 3. Update Middle Right Stacked Bar Chart & Legends
+                const total = data.base_population_mean + Math.max(0, data.genetic_additive) + Math.max(0, data.environmental_shift);
+                const meanPct = ((data.base_population_mean / total) * 100).toFixed(1);
+                const geneticPct = ((Math.max(0, data.genetic_additive) / total) * 100).toFixed(1);
+                const envPct = ((Math.max(0, data.environmental_shift) / total) * 100).toFixed(1);
+
+                const segMean = document.getElementById('seg-mean');
+                const segGenetic = document.getElementById('seg-genetic');
+                const segEnv = document.getElementById('seg-env');
+                const segMeanTxt = document.getElementById('seg-mean-txt');
+                const segGeneticTxt = document.getElementById('seg-genetic-txt');
+                const segEnvTxt = document.getElementById('seg-env-txt');
+
+                if (segMean) segMean.style.width = `${meanPct}%`;
+                if (segGenetic) segGenetic.style.width = `${geneticPct}%`;
+                if (segEnv) segEnv.style.width = `${envPct}%`;
+
+                const envSign = data.environmental_shift >= 0 ? '+' : '';
+                if (segMeanTxt) segMeanTxt.textContent = `Base: ${meanPct}%`;
+                if (segGeneticTxt) segGeneticTxt.textContent = `Genetic: +${geneticPct}%`;
+                if (segEnvTxt) segEnvTxt.textContent = `Env: ${envSign}${envPct}%`;
+
+                const legMean = document.getElementById('leg-mean-val');
+                const legGenetic = document.getElementById('leg-genetic-val');
+                const legEnv = document.getElementById('leg-env-val');
+                if (legMean) legMean.textContent = `${data.base_population_mean.toFixed(2)} kg/ha (${meanPct}%)`;
+                if (legGenetic) legGenetic.textContent = `+${data.genetic_additive.toFixed(2)} kg/ha (${geneticPct}%)`;
+                if (legEnv) legEnv.textContent = `${envSign}${data.environmental_shift.toFixed(2)} kg/ha (${envPct}%)`;
+
+                // 4. Update Bottom Right Explainability Data Grid (SHAP Matrix)
+                const tbody = document.getElementById('ent-shap-tbody');
+                if (tbody && data.markers) {
+                    tbody.innerHTML = '';
+                    data.markers.forEach((m, idx) => {
+                        const row = document.createElement('tr');
+                        row.className = `ent-data-row ${idx === 0 ? 'active-row' : ''}`;
+                        row.id = `shap-row-${idx}`;
+
+                        const isPos = m.shap_value >= 0;
+                        const sign = isPos ? '+' : '';
+                        const pillClass = isPos ? 'impact-positive' : 'impact-negative';
+
+                        row.innerHTML = `
+                            <td class="cell-marker">${m.marker_id}</td>
+                            <td><span class="cell-chrom">Chr ${m.chrom}</span></td>
+                            <td class="cell-annotation">
+                                <div>${m.gene}</div>
+                                <div class="gene-name">locus: ${m.pos.toLocaleString()} bp</div>
+                            </td>
+                            <td class="cell-dosage">${m.dosage_label || (m.dosage.toFixed(1) + ' dosage')}</td>
+                            <td>
+                                <span class="impact-pill ${pillClass}">
+                                    ${sign}${m.shap_value.toFixed(2)} kg/ha
+                                </span>
+                            </td>
+                        `;
+
+                        // Row hover interaction: trigger line connector & 3D DNA pulse
+                        row.addEventListener('mouseenter', () => {
+                            document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
+                            row.classList.add('active-row');
+                            updateConnectorLine(row);
+                            window.pulseHeroDna(isPos);
+                            window.pulse3DMarker(idx);
+                        });
+
+                        row.addEventListener('click', () => {
+                            document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
+                            row.classList.add('active-row');
+                            updateConnectorLine(row);
+                            window.pulseHeroDna(isPos);
+                            window.pulse3DMarker(idx);
+                        });
+
+                        tbody.appendChild(row);
+                    });
+
+                    // Initialize connector line on row 0
+                    setTimeout(() => {
+                        const firstRow = document.getElementById('shap-row-0');
+                        if (firstRow) updateConnectorLine(firstRow);
+                    }, 200);
+                }
+            }
+
+            // Initial render
+            renderEnterpriseState();
+            setTimeout(() => {
+                const firstRow = document.getElementById('shap-row-0');
+                if (firstRow) updateConnectorLine(firstRow);
+            }, 500);
         }
 
     </script>
