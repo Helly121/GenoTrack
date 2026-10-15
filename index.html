@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Helix and Harvest — An immersive gene structure experience. Explore the cinematic intersection of genotype and phenotype through a bioluminescent double-helix rendered in WebGL.">
-    <title>The Seed Genome</title>
+    <meta name="description" content="GenoTrack explores rice genotype data, field phenotypes, genotype-by-environment effects, and genomic yield prediction.">
+    <title>GenoTrack | Genomic Selection & Yield Prediction</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
 
@@ -89,6 +89,8 @@
             font-weight: 500; transition: color 0.3s;
         }
         .nav-link:hover { color: #ffffff; }
+        .nav-link:focus-visible { outline: 2px solid #34d399; outline-offset: 5px; border-radius: 3px; }
+        body:not(.dashboard-active) .nav-link.active { color: #34d399; }
         .nav-dot { width: 3px; height: 3px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; }
         .contact-btn {
             display: inline-flex; align-items: center; gap: 8px;
@@ -1587,7 +1589,1065 @@
             box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
         }
 
-    </style>
+        /* ==========================================================================
+           V2 Dashboard — Structured Unified Layout
+           ========================================================================== */
+        :root {
+            --bg-deep-charcoal: #07100e;
+            --bg-panel: #0c1612;
+            --bg-card: #0f1b17;
+            --border-glow: rgba(45, 212, 191, 0.22);
+            --border-subtle: rgba(148, 163, 184, 0.14);
+            --accent-green: #2dd4bf;
+            --accent-green-glow: rgba(45, 212, 191, 0.18);
+            --accent-teal: #60a5fa;
+            --accent-teal-glow: rgba(96, 165, 250, 0.16);
+            --accent-amber: #fbbf24;
+            --accent-red: #f87171;
+            --accent-violet: #a78bfa;
+            --text-primary: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --surface-0: #060e0b;
+            --surface-1: #091210;
+            --surface-2: #0e1b17;
+            --surface-3: #13231e;
+            --radius-ui: 8px;
+            --radius-card: 10px;
+        }
+
+        /* ── Scrollbar ── */
+        .ent-main-canvas::-webkit-scrollbar { width: 5px; }
+        .ent-main-canvas::-webkit-scrollbar-track { background: transparent; }
+        .ent-main-canvas::-webkit-scrollbar-thumb { background: rgba(45,212,191,0.18); border-radius: 99px; }
+        .ent-left-sidebar::-webkit-scrollbar { width: 4px; }
+        .ent-left-sidebar::-webkit-scrollbar-track { background: transparent; }
+        .ent-left-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 99px; }
+
+        body.dashboard-active,
+        body.dashboard-active * {
+            cursor: auto !important;
+        }
+
+        body.dashboard-active .cursor-inner,
+        body.dashboard-active .cursor-outer {
+            display: none;
+        }
+
+        body.dashboard-active #webgl,
+        body.dashboard-active .cinematic-container,
+        body.dashboard-active .grid-lines,
+        body.dashboard-active .grid-horizontal-line {
+            display: none;
+        }
+
+        #enterprise-dashboard-container {
+            background: #08110f;
+            color: var(--text-primary);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .ent-top-header {
+            height: 68px;
+            padding: 0 24px;
+            background: rgba(8, 17, 15, 0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            gap: 20px;
+        }
+
+        .ent-brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-ui);
+            background: #10211d;
+            border-color: rgba(45, 212, 191, 0.42);
+            box-shadow: none;
+            color: var(--accent-green);
+        }
+
+        .ent-lab-title {
+            letter-spacing: 0.08em;
+            gap: 10px;
+        }
+
+        .ent-lab-title span {
+            color: var(--text-dim);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
+
+        .ent-telemetry-strip {
+            gap: 8px;
+            max-width: calc(100vw - 410px);
+            mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+        }
+
+        .ent-telemetry-strip .telemetry-pill:nth-child(n+6) {
+            display: none;
+        }
+
+        .telemetry-pill {
+            border-radius: 999px;
+            background: rgba(15, 28, 24, 0.86);
+            border-color: var(--border-subtle);
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        .telemetry-pill.pill-green,
+        .telemetry-pill.pill-gold,
+        .telemetry-pill.pill-cyan {
+            background: rgba(15, 28, 24, 0.92);
+        }
+
+        .telemetry-pill.pill-green {
+            color: var(--accent-green);
+            border-color: rgba(45, 212, 191, 0.26);
+        }
+
+        .telemetry-pill.pill-gold {
+            color: var(--accent-amber);
+            border-color: rgba(251, 191, 36, 0.28);
+        }
+
+        .telemetry-pill.pill-cyan {
+            color: var(--accent-teal);
+            border-color: rgba(96, 165, 250, 0.28);
+        }
+
+        .beacon-dot {
+            background: var(--accent-green);
+            box-shadow: none;
+        }
+
+        .view-switch-btn {
+            min-height: 36px;
+            border-radius: var(--radius-ui);
+            background: #101c18;
+            border-color: var(--border-subtle);
+            color: var(--text-primary);
+            letter-spacing: 0.04em;
+        }
+
+        .view-switch-btn:hover {
+            background: #162722;
+            border-color: rgba(148, 163, 184, 0.34);
+        }
+
+        .ent-main-layout {
+            grid-template-columns: minmax(300px, 332px) minmax(0, 1fr);
+            height: calc(100vh - 68px);
+            background: #08110f;
+        }
+
+        .ent-left-sidebar {
+            background: #091310;
+            border-right: 1px solid var(--border-subtle);
+            padding: 22px;
+            gap: 18px;
+        }
+
+        .sidebar-section-title,
+        .cov-card-title,
+        .decomp-section-title,
+        .grid-section-title {
+            color: var(--text-primary);
+            letter-spacing: 0.08em;
+        }
+
+        .sidebar-section-title span,
+        .cov-card-title span,
+        .decomp-section-title span,
+        .grid-section-title span {
+            color: var(--accent-green);
+        }
+
+        .input-label-styled {
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .ent-select-box {
+            min-height: 40px;
+            border-radius: var(--radius-ui);
+            background: #0f1c18;
+            border-color: var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .ent-select-box:focus {
+            border-color: rgba(45, 212, 191, 0.62);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+        }
+
+        .covariates-mini-card,
+        .ent-hero-card,
+        .ent-decomp-section,
+        .ent-grid-section {
+            background: var(--surface-2);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-ui);
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        .covariates-mini-card {
+            padding: 16px;
+        }
+
+        .cov-env-badge,
+        .decomp-formula-badge,
+        .cell-chrom,
+        .impact-pill,
+        .trend-badge-positive {
+            border-radius: 6px;
+            box-shadow: none;
+        }
+
+        .cov-metrics-grid {
+            gap: 10px;
+        }
+
+        .cov-item {
+            min-height: 56px;
+            align-items: flex-start;
+            border-radius: var(--radius-ui);
+            background: var(--surface-1);
+            border-color: var(--border-subtle);
+            padding: 10px;
+        }
+
+        .cov-icon {
+            width: 18px;
+            opacity: 0.72;
+            line-height: 1.1;
+        }
+
+        .cov-name {
+            color: var(--text-dim);
+            letter-spacing: 0.04em;
+        }
+
+        .cov-val {
+            color: var(--text-primary);
+            font-size: 11px;
+            white-space: normal;
+        }
+
+        .glowing-predict-btn {
+            min-height: 44px;
+            border-radius: var(--radius-ui);
+            background: #2dd4bf;
+            color: #04201c;
+            box-shadow: none;
+            letter-spacing: 0.06em;
+        }
+
+        .glowing-predict-btn:hover {
+            transform: translateY(-1px);
+            background: #5eead4;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+        }
+
+        .ent-sidebar-footer {
+            color: var(--text-dim);
+            border-top-color: var(--border-subtle);
+        }
+
+        .ent-main-canvas {
+            height: calc(100vh - 68px);
+            padding: 22px;
+            gap: 16px;
+            background: #08110f;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(45, 212, 191, 0.3) rgba(8, 17, 15, 0.6);
+        }
+
+        .ent-main-canvas::-webkit-scrollbar {
+            width: 6px;
+        }
+        .ent-main-canvas::-webkit-scrollbar-track {
+            background: rgba(8, 17, 15, 0.6);
+        }
+        .ent-main-canvas::-webkit-scrollbar-thumb {
+            background: rgba(45, 212, 191, 0.3);
+            border-radius: 3px;
+        }
+
+        .ent-left-sidebar {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(45, 212, 191, 0.2) rgba(8, 17, 15, 0.6);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin: 4px 0;
+        }
+
+        .sidebar-model-badge-card {
+            background: rgba(14, 25, 21, 0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-ui);
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-model-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .sidebar-model-label {
+            color: var(--text-dim);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .sidebar-model-val {
+            color: var(--text-primary);
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        .dashboard-section-switcher {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+            padding: 6px;
+            background: #091310;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-ui);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(8px);
+        }
+
+        .dashboard-section-btn {
+            min-height: 40px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 11.5px;
+            font-weight: 800;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            cursor: pointer !important;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .dashboard-section-btn:hover {
+            background: rgba(19, 35, 30, 0.82);
+            color: var(--text-primary);
+        }
+
+        .dashboard-section-btn.active {
+            background: rgba(45, 212, 191, 0.12);
+            border-color: rgba(45, 212, 191, 0.36);
+            color: var(--accent-green);
+        }
+
+        .dashboard-panel[hidden] {
+            display: none !important;
+        }
+
+        /* Reliable dashboard tab hit targets (preserves the existing GenoTrack design). */
+        #ent-canvas-wrap .dashboard-section-switcher {
+            position: sticky;
+            isolation: isolate;
+            z-index: 80;
+            pointer-events: auto !important;
+        }
+        #ent-canvas-wrap .dashboard-section-btn {
+            position: relative;
+            z-index: 81;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+        }
+        #ent-canvas-wrap #helix-connector-svg {
+            pointer-events: none !important;
+        }
+
+        .ent-hero-card {
+            grid-template-columns: minmax(0, 1fr) minmax(220px, 270px);
+            min-height: 164px;
+            padding: 22px;
+            gap: 18px;
+        }
+
+        .hero-left-metrics {
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .hero-category-label {
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+        }
+
+        .hero-yield-num {
+            font-size: clamp(34px, 3.6vw, 46px);
+            letter-spacing: 0;
+            text-shadow: none;
+            overflow-wrap: anywhere;
+        }
+
+        .hero-yield-num .unit {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        .hero-ci-text,
+        .hero-sub-badge {
+            color: var(--text-muted);
+            letter-spacing: 0;
+        }
+
+        .hero-badge-row,
+        .decomp-header-row,
+        .grid-header-row {
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trend-badge-positive {
+            background: rgba(45, 212, 191, 0.10);
+            border-color: rgba(45, 212, 191, 0.28);
+            color: var(--accent-green);
+        }
+
+        .hero-dna-viewport {
+            min-height: 132px;
+            border-radius: var(--radius-ui);
+            background: #091310;
+            border-color: var(--border-subtle);
+        }
+
+        .dna-overlay-tag {
+            right: 10px;
+            bottom: 10px;
+            border-radius: 5px;
+            background: rgba(8, 17, 15, 0.86);
+            border-color: var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        .ent-decomp-section,
+        .ent-grid-section {
+            padding: 16px 18px;
+        }
+
+        .decomp-formula-badge {
+            background: rgba(96, 165, 250, 0.09);
+            border-color: rgba(96, 165, 250, 0.24);
+            color: #bfdbfe;
+            white-space: normal;
+        }
+
+        .stacked-bar-container {
+            height: 26px;
+            border-radius: 6px;
+            background: var(--surface-1);
+            border-color: var(--border-subtle);
+            box-shadow: none;
+        }
+
+        .bar-seg {
+            font-size: 10px;
+            letter-spacing: 0;
+        }
+
+        .bar-seg-mean {
+            background: #334155;
+        }
+
+        .bar-seg-genetic {
+            background: #2dd4bf;
+            box-shadow: none;
+            color: #04201c;
+        }
+
+        .bar-seg-env {
+            background: #60a5fa;
+            box-shadow: none;
+            color: #061426;
+        }
+
+        .decomp-legend-row {
+            justify-content: flex-start;
+            gap: 10px 18px;
+        }
+
+        .legend-pill {
+            min-width: min(100%, 290px);
+            color: var(--text-muted);
+        }
+
+        .legend-dot.dot-genetic,
+        .legend-dot.dot-env {
+            box-shadow: none;
+        }
+
+        .grid-section-sub {
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .ent-data-table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            table-layout: fixed;
+            overflow: hidden;
+            border-radius: var(--radius-ui);
+        }
+
+        .ent-data-table th {
+            background: #0b1713;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 10px 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .ent-data-row {
+            background: #0f1c18;
+            border: 0;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+        }
+
+        .ent-data-row td {
+            padding: 12px;
+        }
+
+        .ent-data-row td:first-child,
+        .ent-data-row td:last-child {
+            border-radius: 0;
+        }
+
+        .ent-data-row:hover,
+        .ent-data-row.active-row {
+            background: #142620;
+            border: 0;
+            box-shadow: inset 3px 0 0 var(--accent-green);
+            transform: none;
+        }
+
+        .cell-marker,
+        .cell-dosage,
+        .cell-annotation .gene-name,
+        .impact-pill {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        .cell-marker {
+            overflow-wrap: anywhere;
+        }
+
+        .cell-annotation {
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .cell-annotation .gene-name {
+            color: var(--text-dim);
+        }
+
+        .impact-pill.impact-positive {
+            background: rgba(45, 212, 191, 0.10);
+            border-color: rgba(45, 212, 191, 0.30);
+            color: #5eead4;
+            box-shadow: none;
+        }
+
+        .impact-pill.impact-negative {
+            background: rgba(248, 113, 113, 0.10);
+            border-color: rgba(248, 113, 113, 0.30);
+            color: #fca5a5;
+            box-shadow: none;
+        }
+
+        #helix-connector-path,
+        #helix-connector-anchor,
+        #helix-connector-target {
+            display: none;
+        }
+
+        #helix-connector-svg {
+            display: none;
+        }
+
+        .ent-grid-section {
+            contain: layout paint;
+        }
+
+        .ent-data-row,
+        .covariates-mini-card,
+        .ent-hero-card,
+        .ent-decomp-section,
+        .ent-grid-section,
+        .hero-dna-viewport {
+            content-visibility: auto;
+        }
+
+        /* ==========================================================================
+           Unified story mode styling
+           Makes the 3D narrative feel connected to the operational dashboard.
+           ========================================================================== */
+        body:not(.dashboard-active) {
+            background: #08110f;
+        }
+
+        body:not(.dashboard-active) #webgl {
+            background: #08110f;
+        }
+
+        body:not(.dashboard-active) .cursor-inner {
+            border-color: var(--accent-green);
+            background: var(--accent-green);
+        }
+
+        body:not(.dashboard-active) .cursor-outer {
+            border-color: rgba(45, 212, 191, 0.42);
+        }
+
+        body:not(.dashboard-active) .cinematic-container {
+            padding: 0 48px 40px;
+            background:
+                linear-gradient(90deg, rgba(8, 17, 15, 0.86) 0%, rgba(8, 17, 15, 0.60) 32%, rgba(8, 17, 15, 0.10) 60%, rgba(8, 17, 15, 0.42) 100%);
+        }
+
+        body:not(.dashboard-active) .main-header {
+            height: 70px;
+            padding: 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        body:not(.dashboard-active) .brand {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.22em;
+            color: var(--text-primary);
+        }
+
+        body:not(.dashboard-active) .header-nav {
+            gap: 18px;
+        }
+
+        body:not(.dashboard-active) .nav-link {
+            color: var(--text-muted);
+            letter-spacing: 0.14em;
+            font-size: 11px;
+        }
+
+        body:not(.dashboard-active) .nav-link:hover,
+        body:not(.dashboard-active) .nav-link.active {
+            color: var(--accent-green);
+        }
+
+        body:not(.dashboard-active) .nav-dot {
+            background: rgba(148, 163, 184, 0.24);
+        }
+
+        body:not(.dashboard-active) .lab-trigger-btn,
+        body:not(.dashboard-active) .contact-btn,
+        body:not(.dashboard-active) .cta-lab-btn {
+            border-radius: var(--radius-ui);
+            box-shadow: none;
+            backdrop-filter: none;
+            transform: none;
+        }
+
+        body:not(.dashboard-active) .lab-trigger-btn {
+            min-height: 40px;
+            background: rgba(45, 212, 191, 0.10);
+            border-color: rgba(45, 212, 191, 0.32);
+            color: var(--text-primary);
+        }
+
+        body:not(.dashboard-active) .contact-btn {
+            min-height: 40px;
+            background: rgba(15, 28, 24, 0.86);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        body:not(.dashboard-active) .btn-circle {
+            border-color: var(--accent-green);
+        }
+
+        body:not(.dashboard-active) .pulse-beacon {
+            background: var(--accent-green);
+            box-shadow: none;
+        }
+
+        body:not(.dashboard-active) .accuracy-badge {
+            background: rgba(251, 191, 36, 0.10);
+            border-color: rgba(251, 191, 36, 0.28);
+            color: var(--accent-amber);
+        }
+
+        body:not(.dashboard-active) .slide {
+            bottom: 10%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        body:not(.dashboard-active) .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        body:not(.dashboard-active) #slide-1,
+        body:not(.dashboard-active) #slide-2,
+        body:not(.dashboard-active) #slide-4 {
+            left: 48px;
+            width: min(760px, calc(100vw - 96px));
+            max-width: 760px;
+        }
+
+        body:not(.dashboard-active) #slide-1 .slide-title,
+        body:not(.dashboard-active) #slide-2 .slide-title {
+            margin-left: 0;
+            max-width: 640px;
+        }
+
+        body:not(.dashboard-active) #slide-1 .desc-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+            gap: 28px;
+            width: min(720px, calc(100vw - 96px));
+        }
+
+        body:not(.dashboard-active) #slide-1 .col-1,
+        body:not(.dashboard-active) #slide-1 .col-2,
+        body:not(.dashboard-active) #slide-2 .slide-desc {
+            position: static;
+            margin-left: 0;
+            width: auto;
+            max-width: none;
+        }
+
+        body:not(.dashboard-active) #slide-3 {
+            left: auto;
+            right: 48px;
+            width: min(420px, calc(100vw - 96px));
+            max-width: 420px;
+        }
+
+        body:not(.dashboard-active) #slide-4 {
+            bottom: 7%;
+            max-width: 760px;
+        }
+
+        body:not(.dashboard-active) .slide-title {
+            font-size: clamp(54px, 5vw, 92px);
+            line-height: 1.02;
+            letter-spacing: 0;
+            color: #f8fafc;
+            margin-bottom: 22px;
+        }
+
+        body:not(.dashboard-active) .slide-desc {
+            font-size: 16px;
+            line-height: 1.62;
+            letter-spacing: 0;
+            color: #c8d3df;
+            font-weight: 400;
+        }
+
+        body:not(.dashboard-active) .slide-4-container {
+            gap: 14px;
+        }
+
+        body:not(.dashboard-active) .kpi-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            max-width: 760px;
+        }
+
+        body:not(.dashboard-active) .kpi-card {
+            background: rgba(15, 28, 24, 0.88);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-ui);
+            padding: 14px;
+            backdrop-filter: none;
+        }
+
+        body:not(.dashboard-active) .kpi-card:hover {
+            border-color: rgba(45, 212, 191, 0.34);
+            background: rgba(19, 35, 30, 0.92);
+            transform: none;
+        }
+
+        body:not(.dashboard-active) .kpi-label {
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+        }
+
+        body:not(.dashboard-active) .kpi-val {
+            font-size: 20px;
+            letter-spacing: 0;
+            color: var(--text-primary);
+        }
+
+        body:not(.dashboard-active) .kpi-val.highlight-green,
+        body:not(.dashboard-active) .kpi-val.highlight-cyan {
+            color: var(--accent-green);
+            text-shadow: none;
+        }
+
+        body:not(.dashboard-active) .kpi-val.highlight-gold {
+            color: var(--accent-amber);
+            text-shadow: none;
+        }
+
+        body:not(.dashboard-active) .kpi-sub {
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        body:not(.dashboard-active) .cta-lab-btn {
+            background: var(--accent-green);
+            border-color: transparent;
+            color: #04201c;
+        }
+
+        body:not(.dashboard-active) .cta-lab-btn:hover,
+        body:not(.dashboard-active) .lab-trigger-btn:hover {
+            background: #5eead4;
+            color: #04201c;
+        }
+
+        body:not(.dashboard-active) .contact-btn:hover {
+            background: rgba(19, 35, 30, 0.94);
+            border-color: rgba(45, 212, 191, 0.42);
+            color: var(--accent-green);
+        }
+
+        body:not(.dashboard-active) .grid-horizontal-line,
+        body:not(.dashboard-active) .grid-line {
+            background: rgba(148, 163, 184, 0.12);
+        }
+
+        body:not(.dashboard-active) .grid-dot {
+            background: rgba(45, 212, 191, 0.48);
+            box-shadow: none;
+        }
+
+        body:not(.dashboard-active) .story-dash {
+            background: rgba(148, 163, 184, 0.20);
+        }
+
+        body:not(.dashboard-active) .story-dash-fill {
+            background: var(--accent-green);
+        }
+
+        @media (max-width: 1180px) {
+            .ent-top-header {
+                height: auto;
+                min-height: 68px;
+                padding: 12px 18px;
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .ent-telemetry-strip {
+                order: 3;
+                flex-basis: 100%;
+                max-width: 100%;
+                padding-inline: 0;
+            }
+
+            .ent-telemetry-strip .telemetry-pill:nth-child(n+5) {
+                display: none;
+            }
+
+            .ent-main-layout,
+            .ent-main-canvas {
+                height: calc(100vh - 112px);
+            }
+        }
+
+        @media (max-width: 900px) {
+            body.dashboard-active {
+                overflow: auto !important;
+                height: auto !important;
+                max-height: none !important;
+            }
+
+            #enterprise-dashboard-container {
+                position: relative;
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
+            }
+
+            .ent-main-layout {
+                display: block;
+                height: auto;
+                overflow: visible;
+            }
+
+            .ent-left-sidebar {
+                border-right: 0;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .ent-main-canvas {
+                height: auto;
+                min-height: 0;
+                padding: 18px;
+                overflow: visible;
+            }
+
+            .dashboard-section-switcher {
+                position: static;
+                grid-template-columns: 1fr;
+            }
+
+            .ent-hero-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-dna-viewport {
+                min-height: 180px;
+            }
+
+            .ent-grid-section {
+                overflow-x: auto;
+            }
+
+            .ent-data-table {
+                min-width: 760px;
+            }
+
+            body:not(.dashboard-active) .cinematic-container {
+                padding: 0 28px 32px;
+            }
+
+            body:not(.dashboard-active) .main-header {
+                height: auto;
+                min-height: 70px;
+                gap: 14px;
+                padding: 14px 0;
+                flex-wrap: wrap;
+            }
+
+            body:not(.dashboard-active) .header-nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            body:not(.dashboard-active) .header-actions {
+                margin-left: auto;
+            }
+
+            body:not(.dashboard-active) #slide-1,
+            body:not(.dashboard-active) #slide-2,
+            body:not(.dashboard-active) #slide-3,
+            body:not(.dashboard-active) #slide-4 {
+                left: 28px;
+                right: 28px;
+                width: auto;
+                max-width: none;
+                bottom: 8%;
+            }
+
+            body:not(.dashboard-active) #slide-1 .desc-row,
+            body:not(.dashboard-active) .kpi-grid {
+                grid-template-columns: 1fr;
+                width: min(480px, calc(100vw - 56px));
+            }
+
+            body:not(.dashboard-active) .slide-title {
+                font-size: clamp(44px, 12vw, 64px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ent-top-header {
+                gap: 12px;
+            }
+
+            .ent-brand-group {
+                width: 100%;
+            }
+
+            .ent-lab-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                line-height: 1.25;
+            }
+
+            .ent-header-actions,
+            .view-switch-btn {
+                width: 100%;
+            }
+
+            .view-switch-btn {
+                justify-content: center;
+            }
+
+            .cov-metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-yield-num .unit {
+                display: block;
+                margin: 6px 0 0;
+            }
+
+            body:not(.dashboard-active) .header-actions {
+                display: none;
+            }
+
+            body:not(.dashboard-active) .nav-link {
+                font-size: 9px;
+                letter-spacing: 0.09em;
+            }
+
+            body:not(.dashboard-active) .slide-desc {
+                font-size: 14px;
+                line-height: 1.55;
+            }
+        }
+
+    
+
+/* ===== UI declutter pass ===== */
+/* Model metrics already appear in the header; the sidebar is reserved for inputs. */
+.sidebar-model-badge-card { display: none !important; }
+.ent-left-sidebar { gap: 14px; }
+.ent-main-canvas { padding: 18px 22px 28px; }
+.dashboard-section-switcher { margin-bottom: 16px; }
+.dashboard-panel[hidden] { display: none !important; }
+@media (max-width: 900px) {
+  .ent-main-canvas { padding: 12px; }
+  .dashboard-section-switcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
 
     <script type="importmap">
     {
@@ -1598,7 +2658,7 @@
     }
     </script>
 </head>
-<body>
+<body class="dashboard-active">
 
     <!-- Custom Cursor -->
     <div class="cursor-inner"></div>
@@ -1613,9 +2673,9 @@
         <header class="ent-top-header">
             <div class="ent-brand-group">
                 <div class="ent-brand-logo">&#9670;</div>
-                <div class="ent-lab-title">
-                    GenoTrack
-                    <span>// MLOps Agro-Genomic Platform</span>
+                <div>
+                    <div class="ent-lab-title">GenoTrack <span>// MLOps Agro-Genomic Platform</span></div>
+                    <div style="font-size:10px;color:var(--text-dim);letter-spacing:0.06em;margin-top:1px;">Oryza sativa &bull; 368 Accessions &bull; 67,084 SNP Markers</div>
                 </div>
             </div>
 
@@ -1626,7 +2686,7 @@
                     <span>MODEL: GxE-XGBoost-v2.1</span>
                 </div>
                 <div class="telemetry-pill pill-green">
-                    <span>STATUS: Production ●</span>
+                    <span>STATUS: Production &#9679;</span>
                 </div>
                 <div class="telemetry-pill pill-gold">
                     <span>CV ACCURACY: r = 0.8122</span>
@@ -1659,6 +2719,10 @@
         <div class="ent-main-layout">
             <!-- LEFT INPUT SIDEBAR -->
             <aside class="ent-left-sidebar">
+
+                <!-- Model metrics are already shown in the top telemetry strip; keep the sidebar focused on inputs. -->
+
+                <!-- Section 2: Input Configuration -->
                 <div class="sidebar-section-title">
                     <span>&#9638;</span> Input Configuration
                 </div>
@@ -1670,11 +2734,11 @@
                         <span class="hint">Panel Lines</span>
                     </label>
                     <select id="ent-genotype-select" class="ent-select-box">
-                        <option value="A1256">A1256 — High-Yielding Tropical Japonica</option>
-                        <option value="A1203">A1203 — Elite Lowland Inbred</option>
-                        <option value="A1254">A1254 — Standard Breeding Check</option>
-                        <option value="A1258">A1258 — Drought-Resilient Candidate</option>
-                        <option value="A1260">A1260 — Wet Season Adapted Line</option>
+                        <option value="A1256">A1256 &mdash; High-Yielding Tropical Japonica</option>
+                        <option value="A1203">A1203 &mdash; Elite Lowland Inbred</option>
+                        <option value="A1254">A1254 &mdash; Standard Breeding Check</option>
+                        <option value="A1258">A1258 &mdash; Drought-Resilient Candidate</option>
+                        <option value="A1260">A1260 &mdash; Wet Season Adapted Line</option>
                     </select>
                 </div>
 
@@ -1711,14 +2775,14 @@
                             <span class="cov-icon">&#127777;</span>
                             <div class="cov-text-wrap">
                                 <span class="cov-name">Mean Temp</span>
-                                <span class="cov-val" id="cov-temp-val">28.6°C</span>
+                                <span class="cov-val" id="cov-temp-val">28.6&deg;C</span>
                             </div>
                         </div>
                         <div class="cov-item">
                             <span class="cov-icon">&#9728;</span>
                             <div class="cov-text-wrap">
                                 <span class="cov-name">Solar Rad</span>
-                                <span class="cov-val" id="cov-rad-val">21.4 MJ/m²</span>
+                                <span class="cov-val" id="cov-rad-val">21.4 MJ/m&sup2;</span>
                             </div>
                         </div>
                         <div class="cov-item">
@@ -1782,13 +2846,29 @@
                     <circle id="helix-connector-target" cx="0" cy="0" r="4" fill="#00e5ff" filter="url(#glow-line-filter)"></circle>
                 </svg>
 
-                <!-- TOP RIGHT: Hero Prediction Card with 3D DNA Double Helix -->
-                <section class="ent-hero-card" id="ent-hero-prediction-card">
+                <!-- Clean 4-View Switcher Tab Bar -->
+                <div class="dashboard-section-switcher" role="tablist" aria-label="Dashboard section views">
+                    <button class="dashboard-section-btn active" type="button" role="tab" aria-selected="true" data-dashboard-view="all">
+                        <span>&#9638;</span> Overview
+                    </button>
+                    <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="yield">
+                        <span>&#9670;</span> Yield Prediction
+                    </button>
+                    <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="decomp">
+                        <span>&#9881;</span> Component Decomp
+                    </button>
+                    <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="shap">
+                        <span>&#9883;</span> SHAP Attribution
+                    </button>
+                </div>
+
+                <!-- SECTION 1: Hero Prediction Card with 3D DNA Double Helix -->
+                <section class="ent-hero-card dashboard-panel" id="ent-hero-prediction-card" data-dashboard-panel="yield">
                     <!-- Left: Bold Numbers, CI, Baseline Trend -->
                     <div class="hero-left-metrics">
                         <div class="hero-category-label">
                             <span class="indicator"></span>
-                            <span>Predicted Harvest Grain Yield (y&#770;)</span>
+                            <span>PREDICTED HARVEST GRAIN YIELD (y&#770;)</span>
                         </div>
 
                         <div class="hero-yield-num" id="ent-hero-yield">
@@ -1796,7 +2876,7 @@
                         </div>
 
                         <div class="hero-ci-text" id="ent-hero-ci">
-                            95% CI: [5,640.20 – 5,941.40 kg/ha] • Standard Error: ±76.8 kg/ha
+                            95% CI: [5,640.20 &ndash; 5,941.40 kg/ha] &bull; Standard Error: &plusmn;76.8 kg/ha
                         </div>
 
                         <div class="hero-badge-row">
@@ -1804,7 +2884,7 @@
                                 <span class="trend-arrow">&#9650;</span> +19.4% vs Panel Baseline (4,850 kg/ha)
                             </div>
                             <div class="hero-sub-badge">
-                                Broad-Sense H&sup2;: <strong>0.68</strong> • Ploidy: <strong>2x</strong>
+                                Broad-Sense H&sup2;: <strong>0.68</strong> &bull; Ploidy: <strong>2x</strong>
                             </div>
                         </div>
                     </div>
@@ -1816,8 +2896,8 @@
                     </div>
                 </section>
 
-                <!-- MIDDLE RIGHT: Mathematical Component Decomposition -->
-                <section class="ent-decomp-section">
+                <!-- SECTION 2: Mathematical Component Decomposition -->
+                <section class="ent-decomp-section dashboard-panel" data-dashboard-panel="decomp">
                     <div class="decomp-header-row">
                         <div class="decomp-section-title">
                             <span>&#9881;</span> Mathematical Component Decomposition
@@ -1860,14 +2940,14 @@
                     </div>
                 </section>
 
-                <!-- BOTTOM RIGHT: Explainability Data Grid (SHAP Attributions) -->
-                <section class="ent-grid-section">
+                <!-- SECTION 3: Explainability Data Grid (SHAP Attributions) -->
+                <section class="ent-grid-section dashboard-panel" data-dashboard-panel="shap">
                     <div class="grid-header-row">
                         <div class="grid-section-title">
                             <span>&#9883;</span> Genomic SHAP Attribution Data Grid
                         </div>
                         <div class="grid-section-sub">
-                            Causal loci mapped to candidate genes &bull; Hover row to link with 3D DNA Helix
+                            Causal loci mapped to candidate genes &bull; Hover or click row to pulse 3D DNA Helix
                         </div>
                     </div>
 
@@ -1895,13 +2975,13 @@
     <div class="cinematic-container">
         <!-- Header -->
         <div class="main-header">
-            <div class="brand">Genome</div>
+            <div class="brand">GenoTrack</div>
             <nav class="header-nav">
                 <a href="#slide-1" class="nav-link">Genotype</a>
                 <span class="nav-dot"></span>
                 <a href="#slide-2" class="nav-link">Phenotype</a>
                 <span class="nav-dot"></span>
-                <a href="#slide-3" class="nav-link">Expression</a>
+                <a href="#slide-3" class="nav-link">G×E Model</a>
                 <span class="nav-dot"></span>
                 <a href="#slide-4" class="nav-link">Harvest</a>
             </nav>
@@ -1911,36 +2991,35 @@
                     <span class="btn-text">Breeding Lab</span>
                     <span class="accuracy-badge">r = 0.8122</span>
                 </button>
-                <a href="#" class="contact-btn" id="open-lab-contact-btn">Live Predictions <span class="btn-circle"></span></a>
             </div>
         </div>
 
         <!-- Slide 1 -->
         <div class="slide" id="slide-1">
-            <h2 class="slide-title">Helix <br>and Harvest</h2>
+            <h2 class="slide-title">Rice <br>Genotype</h2>
             <div class="desc-row">
-                <p class="slide-desc col-1">A sequence of code holding centuries of survival and selection. Fluid in wild grasses, eternal in cultivated form. Each strand encodes a quiet, patient story.</p>
-                <p class="slide-desc col-2">Born of ancient seed and patient breeding, it stands to bridge our agricultural memory and genomic vision. A living code fixed in dormant, waiting seed.</p>
+                <p class="slide-desc col-1">Explore rice accessions represented by genomic marker profiles. Genotype data captures inherited variation that can help explain differences in grain yield and other breeding traits.</p>
+                <p class="slide-desc col-2">GenoTrack uses SNP marker information alongside trial-environment data to estimate performance. Select <strong>Breeding Lab</strong> to choose an accession and environment, run a prediction, and inspect its explanations.</p>
             </div>
         </div>
 
         <!-- Slide 2 -->
         <div class="slide" id="slide-2">
-            <h2 class="slide-title">Phenotype <br>Unfolding</h2>
-            <p class="slide-desc">A kernel formed at the meeting point of inheritance and climate — genotype and environment, bound by quiet expression.</p>
+            <h2 class="slide-title">Field <br>Phenotype</h2>
+            <p class="slide-desc">Phenotypes are the traits observed in trials, such as grain yield. Their values reflect both inherited differences and the conditions in which each accession is grown, so accession, season, and trial records must be interpreted together.</p>
         </div>
 
         <!-- Slide 3 -->
         <div class="slide" id="slide-3">
-            <h2 class="slide-title">Living Code</h2>
-            <p class="slide-desc">Biology that breathes. Mesmerizing currents of chlorophyll and signal flow through the structure, reflecting every switch and silence within the sequence.</p>
+            <h2 class="slide-title">G×E <br>Model</h2>
+            <p class="slide-desc">Genotype-by-environment (G×E) modelling estimates how genetic performance may change across growing conditions. GenoTrack combines genomic signals and environmental context; component decomposition and SHAP attribution help inspect which factors contribute to a prediction.</p>
         </div>
 
         <!-- Slide 4 -->
         <div class="slide" id="slide-4">
-            <h2 class="slide-title">Digital <br>Harvest</h2>
+            <h2 class="slide-title">Yield <br>Prediction</h2>
             <div class="slide-4-container">
-                <p class="slide-desc">Production-grade genomic selection powered by 67,084 markers and climate reaction norms across multi-year field trials.</p>
+                <p class="slide-desc">Review the model's reported validation metrics, then open the Breeding Lab to predict grain yield for a selected rice accession and target environment. Predictions are model estimates and should be interpreted alongside validation results.</p>
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-label">Production Champion</div>
@@ -2215,13 +3294,13 @@
                 positions[i * 3 + 2] = z;
 
                 if (Math.random() < 0.6) {
-                    colors[i * 3] = 1.0;
+                    colors[i * 3] = 0.16 + Math.random() * 0.10;
                     colors[i * 3 + 1] = 0.78 + Math.random() * 0.15;
-                    colors[i * 3 + 2] = 0.25 + Math.random() * 0.15;
+                    colors[i * 3 + 2] = 0.72 + Math.random() * 0.16;
                 } else {
-                    colors[i * 3] = 0.35 + Math.random() * 0.15;
-                    colors[i * 3 + 1] = 0.95 + Math.random() * 0.05;
-                    colors[i * 3 + 2] = 0.55 + Math.random() * 0.15;
+                    colors[i * 3] = 0.28 + Math.random() * 0.10;
+                    colors[i * 3 + 1] = 0.56 + Math.random() * 0.18;
+                    colors[i * 3 + 2] = 0.95 + Math.random() * 0.05;
                 }
 
                 moteData.push({
@@ -2323,15 +3402,15 @@
                     float crispSpecular = pow(max(0.0, 1.0 - abs(waveField - 0.15)), 8.0);
                     float crest = wideSheen * 0.5 + crispSpecular * 0.9;
                     
-                    vec3 c0_shadow = vec3(0.0008, 0.0005, 0.0002);
-                    vec3 c0_wave1  = vec3(0.075, 0.045, 0.012);
-                    vec3 c0_wave2  = vec3(0.045, 0.026, 0.006);
-                    vec3 c0_crest  = vec3(0.55, 0.38, 0.14);
+                    vec3 c0_shadow = vec3(0.002, 0.008, 0.007);
+                    vec3 c0_wave1  = vec3(0.010, 0.060, 0.052);
+                    vec3 c0_wave2  = vec3(0.006, 0.032, 0.038);
+                    vec3 c0_crest  = vec3(0.10, 0.58, 0.54);
                     
-                    vec3 c1_shadow = vec3(0.0003, 0.0008, 0.0004);
-                    vec3 c1_wave1  = vec3(0.012, 0.055, 0.028);
-                    vec3 c1_wave2  = vec3(0.006, 0.032, 0.016);
-                    vec3 c1_crest  = vec3(0.16, 0.55, 0.30);
+                    vec3 c1_shadow = vec3(0.003, 0.010, 0.014);
+                    vec3 c1_wave1  = vec3(0.012, 0.050, 0.070);
+                    vec3 c1_wave2  = vec3(0.006, 0.026, 0.042);
+                    vec3 c1_crest  = vec3(0.12, 0.50, 0.72);
                     
                     float t = smoothstep(0.0, 1.0, scroll);
                     vec3 colShadow = mix(c0_shadow, c1_shadow, t);
@@ -2420,7 +3499,7 @@
             const group = new THREE.Group();
             const kernelGeo = new THREE.CapsuleGeometry(0.028, 0.065, 4, 8);
             const kernelMat = new THREE.MeshPhysicalMaterial({
-                color: '#daa520', emissive: '#9b7414', emissiveIntensity: 0.8,
+                color: '#2dd4bf', emissive: '#115e59', emissiveIntensity: 0.65,
                 roughness: 0.25, metalness: 0.05, clearcoat: 0.9
             });
             const kernelCount = 14;
@@ -2439,7 +3518,7 @@
                 group.add(kernel);
             }
             // Awns — thin bristles at top
-            const awnMat = new THREE.MeshBasicMaterial({ color: '#c4a84d', transparent: true, opacity: 0.7 });
+            const awnMat = new THREE.MeshBasicMaterial({ color: '#5eead4', transparent: true, opacity: 0.65 });
             for (let i = 0; i < 6; i++) {
                 const awnGeo = new THREE.CylinderGeometry(0.0015, 0.001, 0.2 + Math.random() * 0.15, 3);
                 const awn = new THREE.Mesh(awnGeo, awnMat);
@@ -2482,14 +3561,14 @@
             }
 
             // ──────────────────────────────────────────────────────────────
-            // 2. Segmented gradient backbone strands (gold/cyan → green)
+            // 2. Segmented gradient backbone strands (teal/cyan → green)
             // ──────────────────────────────────────────────────────────────
-            const colBottomA = new THREE.Color('#ffd98e');
-            const colBottomB = new THREE.Color('#60d4ff');
-            const colTopPlant = new THREE.Color('#3deb82');
-            const emBottomA   = new THREE.Color('#7a4b00');
-            const emBottomB   = new THREE.Color('#004466');
-            const emTopPlant  = new THREE.Color('#0a6b33');
+            const colBottomA = new THREE.Color('#2dd4bf');
+            const colBottomB = new THREE.Color('#60a5fa');
+            const colTopPlant = new THREE.Color('#5eead4');
+            const emBottomA   = new THREE.Color('#0f766e');
+            const emBottomB   = new THREE.Color('#1d4ed8');
+            const emTopPlant  = new THREE.Color('#115e59');
 
             function makeStrandMat(t, isA) {
                 const baseCol = (isA ? colBottomA : colBottomB).clone().lerp(colTopPlant, t);
@@ -2537,7 +3616,7 @@
             // ──────────────────────────────────────────────────────────────
             // 3. Base-pair rungs + glowing SNP marker nodes (lower 65%)
             // ──────────────────────────────────────────────────────────────
-            const markerPalette = ['#ffd166', '#06d6a0', '#4cc9f0'];
+            const markerPalette = ['#2dd4bf', '#5eead4', '#60a5fa'];
             const markerGeometry = new THREE.IcosahedronGeometry(MARKER_RADIUS, 2);
 
             for (let i = 0; i < RUNG_COUNT; i++) {
@@ -2551,15 +3630,15 @@
                 const midpoint = pA.clone().lerp(pB, 0.5);
                 const rungColorIdx = i % 3;
                 const rungHalfMatA = new THREE.MeshStandardMaterial({
-                    color: rungColorIdx === 0 ? '#a8783a' : rungColorIdx === 1 ? '#2a8a6a' : '#3a7a9a',
+                    color: rungColorIdx === 0 ? '#2dd4bf' : rungColorIdx === 1 ? '#14b8a6' : '#60a5fa',
                     roughness: 0.5, metalness: 0.15,
-                    emissive: rungColorIdx === 0 ? '#5a3a10' : rungColorIdx === 1 ? '#0a4a3a' : '#1a3a5a',
+                    emissive: rungColorIdx === 0 ? '#0f766e' : rungColorIdx === 1 ? '#115e59' : '#1d4ed8',
                     emissiveIntensity: 0.4
                 });
                 const rungHalfMatB = new THREE.MeshStandardMaterial({
-                    color: rungColorIdx === 0 ? '#c4943e' : rungColorIdx === 1 ? '#3aaa7a' : '#4a9aba',
+                    color: rungColorIdx === 0 ? '#5eead4' : rungColorIdx === 1 ? '#2dd4bf' : '#93c5fd',
                     roughness: 0.5, metalness: 0.15,
-                    emissive: rungColorIdx === 0 ? '#6a4a18' : rungColorIdx === 1 ? '#1a5a4a' : '#2a4a6a',
+                    emissive: rungColorIdx === 0 ? '#115e59' : rungColorIdx === 1 ? '#0f766e' : '#2563eb',
                     emissiveIntensity: 0.4
                 });
 
@@ -2664,9 +3743,9 @@
             haloGroup = new THREE.Group();
             helixPivot.add(haloGroup);
             const haloDefs = [
-                { radius: 0.95, tube: 0.004, color: '#ffd166', tilt: 0.35, speed: 0.06 },
-                { radius: 1.25, tube: 0.003, color: '#06d6a0', tilt: -0.50, speed: -0.04 },
-                { radius: 1.55, tube: 0.003, color: '#4cc9f0', tilt: 0.15, speed: 0.03 }
+                { radius: 0.95, tube: 0.004, color: '#2dd4bf', tilt: 0.35, speed: 0.06 },
+                { radius: 1.25, tube: 0.003, color: '#5eead4', tilt: -0.50, speed: -0.04 },
+                { radius: 1.55, tube: 0.003, color: '#60a5fa', tilt: 0.15, speed: 0.03 }
             ];
             haloDefs.forEach((def) => {
                 const torus = new THREE.Mesh(
@@ -2704,12 +3783,13 @@
             camera.aspect = sizes.width / sizes.height;
             camera.updateProjectionMatrix();
             renderer.setSize(sizes.width, sizes.height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
             if (shaderUniforms) shaderUniforms.uResolution.value.set(sizes.width, sizes.height);
         }
 
         // ─── Pointer Handling ───────────────────────────────────────────
         window.addEventListener('mousemove', (event) => {
+            if (document.body.classList.contains('dashboard-active')) return;
             cursorX = event.clientX;
             cursorY = event.clientY;
             const cursorInner = document.querySelector('.cursor-inner');
@@ -2786,22 +3866,50 @@
 
         // ─── Navigation ─────────────────────────────────────────────────
         function setupNavigation() {
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = Array.from(document.querySelectorAll('.nav-link'));
             const targetScrolls = [0.0, 0.34, 0.62, 0.94];
+
+            function setActiveLink(index) {
+                navLinks.forEach((link, i) => {
+                    const active = i === index;
+                    link.classList.toggle('active', active);
+                    if (active) link.setAttribute('aria-current', 'page');
+                    else link.removeAttribute('aria-current');
+                });
+            }
+
             navLinks.forEach((link, index) => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    if (document.body.classList.contains('dashboard-active')) return;
+                    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
                     const targetY = maxScroll * targetScrolls[index];
+                    setActiveLink(index);
                     window.scrollTo({ top: targetY, behavior: 'smooth' });
                 });
             });
+
+            function syncActiveLink() {
+                if (document.body.classList.contains('dashboard-active')) return;
+                const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const progress = window.scrollY / maxScroll;
+                let index = 0;
+                if (progress >= 0.80) index = 3;
+                else if (progress >= 0.48) index = 2;
+                else if (progress >= 0.18) index = 1;
+                setActiveLink(index);
+            }
+            window.addEventListener('scroll', syncActiveLink, { passive: true });
+            syncActiveLink();
         }
 
         // ─── Animation Loop ─────────────────────────────────────────────
         function animate() {
             requestAnimationFrame(animate);
             const deltaTime = clock.getDelta();
+            if (document.body.classList.contains('dashboard-active') || document.hidden) {
+                return;
+            }
 
             // 1. target scroll [0..1], cross-browser
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -2916,7 +4024,7 @@
         }
 
         // ─── Bootstrap ──────────────────────────────────────────────────
-        window.addEventListener('DOMContentLoaded', () => {
+        function bootstrapApp() {
             splitTitlesIntoChars();
 
             // Scene
@@ -2940,9 +4048,8 @@
                 powerPreference: "high-performance"
             });
             renderer.setSize(sizes.width, sizes.height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+            renderer.shadowMap.enabled = false;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.9;
 
@@ -2988,7 +4095,7 @@
 
             // Navigation
             setupNavigation();
-        });
+        }
 
         // ─── MLOps Breeding Lab & Prediction Controller ─────────────────
         const PRECOMPUTED_DB = {
@@ -4910,7 +6017,6 @@
         function setupBreedingLab() {
             const modal = document.getElementById('breeding-lab-modal');
             const openBtnHeader = document.getElementById('open-lab-header-btn');
-            const openBtnContact = document.getElementById('open-lab-contact-btn');
             const openBtnSlide4 = document.getElementById('slide4-lab-btn');
             const closeBtn = document.getElementById('close-lab-btn');
 
@@ -4922,7 +6028,6 @@
             }
 
             if (openBtnHeader) openBtnHeader.addEventListener('click', (e) => { e.preventDefault(); openLab(); });
-            if (openBtnContact) openBtnContact.addEventListener('click', (e) => { e.preventDefault(); openLab(); });
             if (openBtnSlide4) openBtnSlide4.addEventListener('click', (e) => { e.preventDefault(); openLab(); });
             if (closeBtn) closeBtn.addEventListener('click', closeLab);
 
@@ -8360,9 +9465,14 @@
             heroDnaCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
             heroDnaCamera.position.set(0, 0, 3.8);
 
-            heroDnaRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            heroDnaRenderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: false,
+                powerPreference: "low-power"
+            });
             heroDnaRenderer.setSize(width, height);
-            heroDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            heroDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
             // Ambient & directional lights
             const ambLight = new THREE.AmbientLight(0xffffff, 0.3);
@@ -8385,10 +9495,11 @@
             const turns = 2.4;
             const pointsA = [];
             const pointsB = [];
-            const rungCount = 20;
+            const rungCount = 14;
 
-            for (let i = 0; i < 200; i++) {
-                const t = i / 199;
+            const helixPointCount = 96;
+            for (let i = 0; i < helixPointCount; i++) {
+                const t = i / (helixPointCount - 1);
                 const angle = t * Math.PI * 2 * turns;
                 const y = (t - 0.5) * helixHeight;
                 pointsA.push(new THREE.Vector3(Math.cos(angle) * helixRadius, y, Math.sin(angle) * helixRadius));
@@ -8415,19 +9526,19 @@
                 clearcoat: 1.0
             });
 
-            const meshA = new THREE.Mesh(new THREE.TubeGeometry(curveA, 100, 0.022, 8, false), tubeMatA);
-            const meshB = new THREE.Mesh(new THREE.TubeGeometry(curveB, 100, 0.022, 8, false), tubeMatB);
+            const meshA = new THREE.Mesh(new THREE.TubeGeometry(curveA, 64, 0.022, 6, false), tubeMatA);
+            const meshB = new THREE.Mesh(new THREE.TubeGeometry(curveB, 64, 0.022, 6, false), tubeMatB);
             heroDnaPivot.add(meshA, meshB);
 
             // Base pairs & glowing marker nodes
             heroDnaRungs = [];
-            const markerGeo = new THREE.IcosahedronGeometry(0.045, 2);
+            const markerGeo = new THREE.IcosahedronGeometry(0.045, 1);
             const markerMatGreen = new THREE.MeshPhysicalMaterial({ color: 0x00ff88, emissive: 0x00ff88, emissiveIntensity: 2.0 });
             const markerMatGold = new THREE.MeshPhysicalMaterial({ color: 0xf5c542, emissive: 0xf5c542, emissiveIntensity: 2.0 });
 
             for (let j = 0; j < rungCount; j++) {
                 const t = j / (rungCount - 1);
-                const idx = Math.floor(t * 199);
+                const idx = Math.floor(t * (helixPointCount - 1));
                 const p1 = pointsA[idx];
                 const p2 = pointsB[idx];
                 const mid = p1.clone().lerp(p2, 0.5);
@@ -8449,10 +9560,16 @@
             }
 
             // Animate loop
+            let lastHeroFrame = 0;
             function animateHeroDna() {
+                const now = performance.now();
                 requestAnimationFrame(animateHeroDna);
+                if (document.hidden || !document.body.classList.contains('dashboard-active') || now - lastHeroFrame < 40) {
+                    return;
+                }
+                lastHeroFrame = now;
                 if (heroDnaPivot) {
-                    heroDnaPivot.rotation.y += 0.008;
+                    heroDnaPivot.rotation.y += 0.014;
                 }
                 if (heroDnaRenderer && heroDnaScene && heroDnaCamera) {
                     heroDnaRenderer.render(heroDnaScene, heroDnaCamera);
@@ -8467,11 +9584,16 @@
                 heroDnaCamera.aspect = newW / newH;
                 heroDnaCamera.updateProjectionMatrix();
                 heroDnaRenderer.setSize(newW, newH);
+                heroDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
             });
         }
 
         // Pulse the mini hero DNA helix on row interaction
+        let lastHeroPulseAt = 0;
         window.pulseHeroDna = function(isPositive) {
+            const now = performance.now();
+            if (now - lastHeroPulseAt < 500) return;
+            lastHeroPulseAt = now;
             if (!heroDnaRungs || heroDnaRungs.length === 0) return;
             const flashColor = isPositive ? 0x00ff88 : 0xf87171;
             heroDnaRungs.forEach((r, idx) => {
@@ -8490,6 +9612,7 @@
 
         // Dynamic Graphical Connector Line from Table Row to 3D DNA Canvas
         function updateConnectorLine(targetRowElement) {
+            return;
             const svgEl = document.getElementById('helix-connector-svg');
             const svgPath = document.getElementById('helix-connector-path');
             const anchorDot = document.getElementById('helix-connector-anchor');
@@ -8554,6 +9677,43 @@
             const predictBtn = document.getElementById('ent-btn-predict');
             const viewSwitchBtn = document.getElementById('btn-toggle-narrative');
             const dashboardContainer = document.getElementById('enterprise-dashboard-container');
+            const sectionButtons = document.querySelectorAll('.dashboard-section-btn');
+            const dashboardPanels = document.querySelectorAll('.dashboard-panel');
+
+            function setDashboardView(viewName) {
+                sectionButtons.forEach(btn => {
+                    const isActive = btn.dataset.dashboardView === viewName;
+                    btn.classList.toggle('active', isActive);
+                    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                });
+
+                dashboardPanels.forEach(panel => {
+                    const panelName = panel.dataset.dashboardPanel;
+                    // Overview is a quick summary: show yield and decomposition,
+                    // but keep the detailed SHAP table in its own tab.
+                    const shouldShow = viewName === 'all'
+                        ? (panelName === 'yield' || panelName === 'decomp')
+                        : panelName === viewName;
+                    panel.hidden = !shouldShow;
+                    panel.style.display = shouldShow ? '' : 'none';
+                    panel.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+                });
+
+                const canvasWrap = document.getElementById('ent-canvas-wrap');
+                if (canvasWrap) canvasWrap.scrollTop = 0;
+
+                // Trigger window resize to ensure 3D DNA viewport dimensions stay accurate
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('resize'));
+                }, 50);
+            }
+
+            window.setDashboardView = setDashboardView;
+
+            // Tab click handling is delegated by the final dashboard-tabs controller.
+
+            // Set default view to the compact Overview
+            setDashboardView('all');
 
             // View switch logic (3D Story vs Dashboard)
             let isDashboardActive = true;
@@ -8587,7 +9747,7 @@
             }
 
             // Wire all narrative mode CTAs to reveal the enterprise dashboard
-            const storyTriggerIds = ['open-lab-header-btn', 'open-lab-contact-btn', 'slide4-lab-btn', 'slide1-lab-btn'];
+            const storyTriggerIds = ['open-lab-header-btn', 'slide4-lab-btn', 'slide1-lab-btn'];
             storyTriggerIds.forEach(id => {
                 const el = document.getElementById(id);
                 if (el && dashboardContainer) {
@@ -8730,17 +9890,12 @@
                         row.addEventListener('mouseenter', () => {
                             document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
                             row.classList.add('active-row');
-                            updateConnectorLine(row);
-                            window.pulseHeroDna(isPos);
-                            window.pulse3DMarker(idx);
                         });
 
                         row.addEventListener('click', () => {
                             document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
                             row.classList.add('active-row');
-                            updateConnectorLine(row);
                             window.pulseHeroDna(isPos);
-                            window.pulse3DMarker(idx);
                         });
 
                         tbody.appendChild(row);
@@ -8762,6 +9917,88 @@
             }, 500);
         }
 
+        // ─── Initialize Application on Load ─────────────────────────
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', bootstrapApp);
+        } else {
+            bootstrapApp();
+        }
+
     </script>
+<script>
+/* GenoTrack dashboard tabs: independent delegated handler, separate from the 3D module. */
+(function () {
+    const validViews = ['all', 'yield', 'decomp', 'shap'];
+
+    function applyDashboardView(viewName) {
+        if (!validViews.includes(viewName)) return;
+
+        document.querySelectorAll('#ent-canvas-wrap .dashboard-section-btn[data-dashboard-view]').forEach(function (button) {
+            const active = button.dataset.dashboardView === viewName;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-selected', active ? 'true' : 'false');
+            button.setAttribute('tabindex', active ? '0' : '-1');
+        });
+
+        document.querySelectorAll('#ent-canvas-wrap .dashboard-panel[data-dashboard-panel]').forEach(function (panel) {
+            const panelName = panel.dataset.dashboardPanel;
+            const visible = viewName === 'all'
+                ? (panelName === 'yield' || panelName === 'decomp')
+                : panelName === viewName;
+            panel.hidden = !visible;
+            // Set inline display as well as the hidden attribute so view switching
+            // remains reliable even when other dashboard styles define display rules.
+            panel.style.display = visible ? '' : 'none';
+            panel.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        });
+
+        const canvas = document.getElementById('ent-canvas-wrap');
+        if (canvas) canvas.scrollTop = 0;
+        document.dispatchEvent(new CustomEvent('genotrack:dashboard-view-change', { detail: { view: viewName } }));
+    }
+
+    // Expose a stable global function for existing UI code.
+    window.setDashboardView = applyDashboardView;
+
+    // Delegated capture handler still works if module initialization changes or fails.
+    document.addEventListener('click', function (event) {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const button = target.closest('#ent-canvas-wrap .dashboard-section-btn[data-dashboard-view]');
+        if (!button) return;
+        event.preventDefault();
+        applyDashboardView(button.dataset.dashboardView);
+    }, true);
+
+    // Accessible keyboard navigation for the tab strip.
+    document.addEventListener('keydown', function (event) {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const button = target.closest('#ent-canvas-wrap .dashboard-section-btn[data-dashboard-view]');
+        if (!button) return;
+        const buttons = Array.from(document.querySelectorAll('#ent-canvas-wrap .dashboard-section-btn[data-dashboard-view]'));
+        const currentIndex = buttons.indexOf(button);
+        let nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = buttons.length - 1;
+        else return;
+        event.preventDefault();
+        buttons[nextIndex].focus();
+        applyDashboardView(buttons[nextIndex].dataset.dashboardView);
+    });
+
+    function initializeTabs() {
+        const activeButton = document.querySelector('#ent-canvas-wrap .dashboard-section-btn.active[data-dashboard-view]');
+        applyDashboardView(activeButton ? activeButton.dataset.dashboardView : 'all');
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeTabs, { once: true });
+    } else {
+        initializeTabs();
+    }
+})();
+</script>
 </body>
 </html>
