@@ -1271,10 +1271,24 @@
             align-items: center;
             gap: 6px;
             padding: 4px 12px;
-            border-radius: 14px;
-            background: rgba(0, 255, 136, 0.15);
-            border: 1px solid rgba(0, 255, 136, 0.4);
-            color: var(--accent-green);
+            border-radius: 6px;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.38);
+            color: #00ff88;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .trend-badge-negative {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(248, 113, 113, 0.12);
+            border: 1px solid rgba(248, 113, 113, 0.38);
+            color: #f87171;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -2028,9 +2042,15 @@
         }
 
         .trend-badge-positive {
-            background: rgba(45, 212, 191, 0.10);
-            border-color: rgba(45, 212, 191, 0.28);
-            color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.35);
+            color: #00ff88;
+        }
+
+        .trend-badge-negative {
+            background: rgba(248, 113, 113, 0.12);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            color: #f87171;
         }
 
         .hero-dna-viewport {
@@ -2177,11 +2197,328 @@
             box-shadow: none;
         }
 
-        .impact-pill.impact-negative {
+                .impact-pill.impact-negative {
             background: rgba(248, 113, 113, 0.10);
             border-color: rgba(248, 113, 113, 0.30);
             color: #fca5a5;
             box-shadow: none;
+        }
+
+        /* --- Upgraded SHAP Explainability Grid & Executive Summary --- */
+        .shap-summary-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 12px 0 14px 0;
+        }
+
+        .shap-summary-card {
+            background: #0b1713;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-ui);
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .shap-summary-card:hover {
+            transform: translateY(-1px);
+        }
+
+        .shap-summary-card.card-positive {
+            border-color: rgba(0, 255, 136, 0.28);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.06) 0%, #0b1713 100%);
+        }
+
+        .shap-summary-card.card-negative {
+            border-color: rgba(248, 113, 113, 0.28);
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.06) 0%, #0b1713 100%);
+        }
+
+        .shap-summary-card.card-net {
+            border-color: rgba(0, 229, 255, 0.28);
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.06) 0%, #0b1713 100%);
+        }
+
+        .summary-card-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .summary-badge-icon {
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .card-positive .summary-badge-icon { color: #00ff88; }
+        .card-negative .summary-badge-icon { color: #f87171; }
+        .card-net .summary-badge-icon { color: #00e5ff; }
+
+        .summary-card-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .summary-gene-name {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .summary-gene-val {
+            font-size: 17px;
+            font-weight: 800;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            letter-spacing: -0.02em;
+        }
+
+        .card-positive .summary-gene-val { color: #00ff88; }
+        .card-negative .summary-gene-val { color: #f87171; }
+        .card-net .summary-gene-val { color: #00e5ff; }
+
+        .summary-gene-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .shap-guide-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 9px 12px;
+            background: rgba(11, 23, 19, 0.85);
+            border: 1px solid rgba(45, 212, 191, 0.16);
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.45;
+        }
+
+        .shap-guide-banner .guide-icon {
+            color: #00e5ff;
+            font-size: 13px;
+            line-height: 1;
+            margin-top: 1px;
+        }
+
+        /* Gene & Trait Cell */
+        .gene-title-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .gene-symbol-bold {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #f8fafc;
+            letter-spacing: 0.02em;
+        }
+
+        .trait-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .tag-flowering { background: rgba(0, 255, 136, 0.12); border: 1px solid rgba(0, 255, 136, 0.28); color: #5eead4; }
+        .tag-height    { background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.28); color: #34d399; }
+        .tag-yield     { background: rgba(245, 197, 66, 0.12); border: 1px solid rgba(245, 197, 66, 0.28); color: #fcd34d; }
+        .tag-panicle   { background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.28); color: #c084fc; }
+        .tag-vigor     { background: rgba(0, 229, 255, 0.12); border: 1px solid rgba(0, 229, 255, 0.28); color: #38bdf8; }
+        .tag-generic   { background: rgba(148, 163, 184, 0.12); border: 1px solid rgba(148, 163, 184, 0.28); color: #cbd5e1; }
+
+        .gene-trait-desc {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.35;
+        }
+
+        /* Locus & Chromosome Cell */
+        .locus-chrom-pill {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: rgba(148, 163, 184, 0.10);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 700;
+            font-family: monospace;
+            margin-bottom: 3px;
+        }
+
+        .locus-coord {
+            font-size: 10px;
+            color: var(--text-dim);
+            font-family: monospace;
+        }
+
+        .locus-snp-id {
+            font-size: 9.5px;
+            color: rgba(148, 163, 184, 0.5);
+            font-family: monospace;
+        }
+
+        /* Genotype & Allele Dosage Cell */
+        .allele-badge-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .allele-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10.5px;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .allele-chip.dosage-alt {
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.32);
+            color: #00ff88;
+        }
+
+        .allele-chip.dosage-ref {
+            background: rgba(148, 163, 184, 0.10);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            color: #94a3b8;
+        }
+
+        .allele-chip.dosage-het {
+            background: rgba(245, 197, 66, 0.12);
+            border: 1px solid rgba(245, 197, 66, 0.32);
+            color: #f5c542;
+        }
+
+        .allele-plain-label {
+            font-size: 10px;
+            color: var(--text-dim);
+            line-height: 1.3;
+        }
+
+        /* Divergent Impact Bar Cell */
+        .divergent-cell-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .impact-metric-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .impact-num {
+            font-size: 13.5px;
+            font-weight: 800;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            letter-spacing: -0.01em;
+        }
+
+        .impact-num-pos { color: #00ff88; }
+        .impact-num-neg { color: #f87171; }
+
+        .impact-badge-tag {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-boost {
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.30);
+            color: #00ff88;
+        }
+
+        .badge-drag {
+            background: rgba(248, 113, 113, 0.12);
+            border: 1px solid rgba(248, 113, 113, 0.30);
+            color: #f87171;
+        }
+
+        .divergent-track-container {
+            width: 100%;
+        }
+
+        .divergent-track {
+            position: relative;
+            height: 7px;
+            background: #060e0b;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 4px;
+            overflow: visible;
+        }
+
+        .divergent-zero-line {
+            position: absolute;
+            left: 50%;
+            top: -2px;
+            bottom: -2px;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.45);
+            z-index: 2;
+            transform: translateX(-50%);
+        }
+
+        .divergent-bar-fill {
+            position: absolute;
+            top: 1px;
+            bottom: 1px;
+            border-radius: 3px;
+            transition: width 0.35s ease;
+        }
+
+        .bar-fill-boost {
+            background: linear-gradient(90deg, #059669 0%, #00ff88 100%);
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
+        }
+
+        .bar-fill-drag {
+            background: linear-gradient(270deg, #b91c1c 0%, #f87171 100%);
+            box-shadow: 0 0 8px rgba(248, 113, 113, 0.35);
+        }
+
+        .divergent-axis-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            font-family: monospace;
+            color: rgba(148, 163, 184, 0.45);
+            margin-top: 2px;
+        }
+
+        .divergent-axis-labels .zero-label {
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 700;
         }
 
         #helix-connector-path,
@@ -2816,11 +3153,6 @@
                     </div>
                 </div>
 
-                <!-- Glowing Primary Action Button -->
-                <button class="glowing-predict-btn" id="ent-btn-predict">
-                    <span>Compute G&times;E Prediction</span>
-                    <span class="btn-icon">&#9889;</span>
-                </button>
 
                 <div class="ent-sidebar-footer">
                     <div><strong>G&times;E Architecture:</strong> Additive GBLUP ridge comparator + XGBoost gradient boosted interaction norm.</div>
@@ -2951,14 +3283,49 @@
                         </div>
                     </div>
 
+                    <!-- Executive Summary Strip -->
+                    <div class="shap-summary-strip" id="shap-summary-strip">
+                        <div class="shap-summary-card card-positive">
+                            <div class="summary-card-header">
+                                <span class="summary-badge-icon">&#9650;</span>
+                                <span class="summary-card-tag">TOP YIELD ENHANCER</span>
+                            </div>
+                            <div class="summary-gene-name" id="shap-top-booster-gene">Hd1 (Heading date 1)</div>
+                            <div class="summary-gene-val" id="shap-top-booster-val">+22.25 kg/ha</div>
+                            <div class="summary-gene-sub" id="shap-top-booster-sub">&#127793; Flowering Time &amp; Photoperiod Sync</div>
+                        </div>
+                        <div class="shap-summary-card card-negative">
+                            <div class="summary-card-header">
+                                <span class="summary-badge-icon">&#9660;</span>
+                                <span class="summary-card-tag">PRIMARY YIELD DRAG</span>
+                            </div>
+                            <div class="summary-gene-name" id="shap-top-drag-gene">GS3 (Grain Size 3)</div>
+                            <div class="summary-gene-val" id="shap-top-drag-val">-15.58 kg/ha</div>
+                            <div class="summary-gene-sub" id="shap-top-drag-sub">&#9878; Grain Weight &amp; Size QTL</div>
+                        </div>
+                        <div class="shap-summary-card card-net">
+                            <div class="summary-card-header">
+                                <span class="summary-badge-icon">&#9889;</span>
+                                <span class="summary-card-tag">NET GENOMIC ATTRIBUTION</span>
+                            </div>
+                            <div class="summary-gene-name">Sum of 5 Causal Loci</div>
+                            <div class="summary-gene-val" id="shap-net-val">+27.17 kg/ha</div>
+                            <div class="summary-gene-sub">Combined marginal effect over baseline</div>
+                        </div>
+                    </div>
+
+                    <div class="shap-guide-banner">
+                        <span class="guide-icon">&#9432;</span>
+                        <span><strong>Understanding SHAP Values:</strong> Bars extending <strong>Right (Green)</strong> show yield boost from elite alleles. Bars extending <strong>Left (Red)</strong> show yield drag under this environment compared to average trial lines.</span>
+                    </div>
+
                     <table class="ent-data-table" id="ent-shap-table">
                         <thead>
                             <tr>
-                                <th style="width:130px;">Marker ID</th>
-                                <th style="width:90px;">Chrom</th>
-                                <th>Biological Annotation (Gene Locus)</th>
-                                <th style="width:140px;">Dosage</th>
-                                <th style="width:130px;">Impact Score</th>
+                                <th style="width:280px;">Candidate Gene &amp; Agronomic Trait</th>
+                                <th style="width:115px;">Locus / Chr</th>
+                                <th style="width:185px;">Genotype &amp; Allele Dosage</th>
+                                <th>SHAP Yield Contribution (kg/ha)</th>
                             </tr>
                         </thead>
                         <tbody id="ent-shap-tbody">
@@ -7438,13 +7805,111 @@
             }
         }
 
+        // Knowledge base mapping candidate gene identifiers to agronomic traits
+        const GENE_KNOWLEDGE_BASE = {
+            'LOC_Os03g55380': {
+                symbol: 'Hd1',
+                name: 'Heading date 1',
+                tag: '&#127793; Flowering Time',
+                tagClass: 'tag-flowering',
+                traitDesc: 'Photoperiod-sensitive flowering time regulator; synchronizes grain filling.',
+                chrom: 'Chr 3',
+                pos: '31,725,840 bp',
+                locusId: 'LOC_Os03g55380'
+            },
+            'LOC_Os01g08780': {
+                symbol: 'sd1',
+                name: 'Semi-Dwarf 1',
+                tag: '&#128207; Plant Height',
+                tagClass: 'tag-height',
+                traitDesc: 'GA 20-oxidase Green Revolution stature allele; prevents lodging.',
+                chrom: 'Chr 1',
+                pos: '38,382,410 bp',
+                locusId: 'LOC_Os01g08780'
+            },
+            'LOC_Os04g51280': {
+                symbol: 'GS3',
+                name: 'Grain Size 3',
+                tag: '&#9878; Grain Weight',
+                tagClass: 'tag-yield',
+                traitDesc: 'G-protein gamma subunit QTL governing spikelet length & 1000-grain weight.',
+                chrom: 'Chr 4',
+                pos: '23,232,783 bp',
+                locusId: 'LOC_Os04g51280'
+            },
+            'LOC_Os02g43280': {
+                symbol: 'DEP1',
+                name: 'Dense Panicle 1',
+                tag: '&#127806; Panicle Architecture',
+                tagClass: 'tag-panicle',
+                traitDesc: 'Dense and erect panicle regulator; can cause shading drag under wet conditions.',
+                chrom: 'Chr 2',
+                pos: '24,856,019 bp',
+                locusId: 'LOC_Os02g43280'
+            },
+            'LOC_Os06g06050': {
+                symbol: 'qLTG3-1',
+                name: 'Seedling Vigor',
+                tag: '&#10052; Cold Resilience',
+                tagClass: 'tag-vigor',
+                traitDesc: 'Low-temperature germination protein enhancing early seedling establishment.',
+                chrom: 'Chr 6',
+                pos: '3,042,190 bp',
+                locusId: 'LOC_Os06g06050'
+            }
+        };
+
+        function getGeneMeta(m) {
+            for (const [id, meta] of Object.entries(GENE_KNOWLEDGE_BASE)) {
+                if ((m.gene && m.gene.includes(id)) || (m.marker_id && m.marker_id.includes(id))) {
+                    return meta;
+                }
+            }
+            const matchSymbol = m.gene ? m.gene.match(/\(([^/)]+)/) : null;
+            const symbol = matchSymbol ? matchSymbol[1].trim() : (m.marker_id || 'Locus');
+            return {
+                symbol: symbol,
+                name: m.gene || m.marker_id,
+                tag: '&#129516; Genomic Locus',
+                tagClass: 'tag-generic',
+                traitDesc: m.gene || 'Causal genetic variant',
+                chrom: `Chr ${m.chrom}`,
+                pos: `${m.pos ? m.pos.toLocaleString() : ''} bp`,
+                locusId: m.marker_id
+            };
+        }
+
+        function formatDosageInfo(dosage) {
+            if (dosage >= 1.8) {
+                return {
+                    badge: 'Alt / Alt',
+                    badgeClass: 'dosage-alt',
+                    copies: '2x Elite Alt',
+                    desc: 'Homozygous Alternate Variant'
+                };
+            } else if (dosage <= 0.2) {
+                return {
+                    badge: 'Ref / Ref',
+                    badgeClass: 'dosage-ref',
+                    copies: '0x Reference',
+                    desc: 'Homozygous Reference Check'
+                };
+            } else {
+                return {
+                    badge: 'Ref / Alt',
+                    badgeClass: 'dosage-het',
+                    copies: '1x Heterozygous',
+                    desc: 'Single Copy Heterozygote'
+                };
+            }
+        }
+
         // Setup the Enterprise Dashboard UI
         function setupEnterpriseDashboard() {
             initHeroDnaHelix();
 
             const genotypeSelect = document.getElementById('ent-genotype-select');
             const envSelect = document.getElementById('ent-env-select');
-            const predictBtn = document.getElementById('ent-btn-predict');
             const viewSwitchBtn = document.getElementById('btn-toggle-narrative');
             const dashboardContainer = document.getElementById('enterprise-dashboard-container');
             const sectionButtons = document.querySelectorAll('.dashboard-section-btn');
@@ -7540,11 +8005,11 @@
                 }
             });
 
-            if (genotypeSelect) genotypeSelect.addEventListener('change', renderEnterpriseState);
-            if (envSelect) envSelect.addEventListener('change', renderEnterpriseState);
-            if (predictBtn) predictBtn.addEventListener('click', () => {
-                predictBtn.style.transform = 'scale(0.97)';
-                setTimeout(() => { predictBtn.style.transform = 'none'; }, 150);
+            if (genotypeSelect) genotypeSelect.addEventListener('change', () => {
+                renderEnterpriseState();
+                window.pulseHeroDna(true);
+            });
+            if (envSelect) envSelect.addEventListener('change', () => {
                 renderEnterpriseState();
                 window.pulseHeroDna(true);
             });
@@ -7595,15 +8060,13 @@
                 const baselineMean = 4850.0;
                 const diffPct = (((data.predicted_value - baselineMean) / baselineMean) * 100).toFixed(1);
                 if (trendEl) {
+                    trendEl.removeAttribute('style');
                     if (diffPct >= 0) {
                         trendEl.className = 'trend-badge-positive';
-                        trendEl.innerHTML = `<span class="trend-arrow">&#9650;</span> +${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                        trendEl.innerHTML = `<span class="trend-arrow" style="color:#00ff88;">&#9650;</span> +${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
                     } else {
-                        trendEl.className = 'trend-badge-positive';
-                        trendEl.style.borderColor = 'rgba(248, 113, 113, 0.4)';
-                        trendEl.style.color = 'var(--accent-red)';
-                        trendEl.style.background = 'rgba(248, 113, 113, 0.15)';
-                        trendEl.innerHTML = `<span class="trend-arrow">&#9660;</span> ${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                        trendEl.className = 'trend-badge-negative';
+                        trendEl.innerHTML = `<span class="trend-arrow" style="color:#f87171;">&#9660;</span> ${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
                     }
                 }
 
@@ -7636,54 +8099,119 @@
                 if (legGenetic) legGenetic.textContent = `+${data.genetic_additive.toFixed(2)} kg/ha (${geneticPct}%)`;
                 if (legEnv) legEnv.textContent = `${envSign}${data.environmental_shift.toFixed(2)} kg/ha (${envPct}%)`;
 
-                // 4. Update Bottom Right Explainability Data Grid (SHAP Matrix)
-                const tbody = document.getElementById('ent-shap-tbody');
-                if (tbody && data.markers) {
-                    tbody.innerHTML = '';
-                    data.markers.forEach((m, idx) => {
-                        const row = document.createElement('tr');
-                        row.className = `ent-data-row ${idx === 0 ? 'active-row' : ''}`;
-                        row.id = `shap-row-${idx}`;
+                // 4. Update Executive Summary Cards & SHAP Matrix Data Grid
+                if (data.markers && data.markers.length > 0) {
+                    const markers = data.markers;
+                    const booster = markers.reduce((prev, curr) => (curr.shap_value > prev.shap_value ? curr : prev), markers[0]);
+                    const drag = markers.reduce((prev, curr) => (curr.shap_value < prev.shap_value ? curr : prev), markers[0]);
+                    const netShap = markers.reduce((sum, curr) => sum + curr.shap_value, 0);
 
-                        const isPos = m.shap_value >= 0;
-                        const sign = isPos ? '+' : '';
-                        const pillClass = isPos ? 'impact-positive' : 'impact-negative';
+                    const boosterMeta = getGeneMeta(booster);
+                    const dragMeta = getGeneMeta(drag);
 
-                        row.innerHTML = `
-                            <td class="cell-marker">${m.marker_id}</td>
-                            <td><span class="cell-chrom">Chr ${m.chrom}</span></td>
-                            <td class="cell-annotation">
-                                <div>${m.gene}</div>
-                                <div class="gene-name">locus: ${m.pos.toLocaleString()} bp</div>
-                            </td>
-                            <td class="cell-dosage">${m.dosage_label || (m.dosage.toFixed(1) + ' dosage')}</td>
-                            <td>
-                                <span class="impact-pill ${pillClass}">
-                                    ${sign}${m.shap_value.toFixed(2)} kg/ha
-                                </span>
-                            </td>
-                        `;
+                    const boosterGeneEl = document.getElementById('shap-top-booster-gene');
+                    const boosterValEl = document.getElementById('shap-top-booster-val');
+                    const boosterSubEl = document.getElementById('shap-top-booster-sub');
+                    const dragGeneEl = document.getElementById('shap-top-drag-gene');
+                    const dragValEl = document.getElementById('shap-top-drag-val');
+                    const dragSubEl = document.getElementById('shap-top-drag-sub');
+                    const netValEl = document.getElementById('shap-net-val');
 
-                        // Row hover interaction: trigger line connector & 3D DNA pulse
-                        row.addEventListener('mouseenter', () => {
-                            document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
-                            row.classList.add('active-row');
+                    if (boosterGeneEl) boosterGeneEl.textContent = `${boosterMeta.symbol} (${boosterMeta.name})`;
+                    if (boosterValEl) boosterValEl.textContent = `+${booster.shap_value.toFixed(2)} kg/ha`;
+                    if (boosterSubEl) boosterSubEl.innerHTML = `${boosterMeta.tag} &bull; ${boosterMeta.chrom}`;
+
+                    if (dragGeneEl) dragGeneEl.textContent = `${dragMeta.symbol} (${dragMeta.name})`;
+                    if (dragValEl) dragValEl.textContent = `${drag.shap_value.toFixed(2)} kg/ha`;
+                    if (dragSubEl) dragSubEl.innerHTML = `${dragMeta.tag} &bull; ${dragMeta.chrom}`;
+
+                    const netSign = netShap >= 0 ? '+' : '';
+                    if (netValEl) {
+                        netValEl.textContent = `${netSign}${netShap.toFixed(2)} kg/ha`;
+                        netValEl.style.color = netShap >= 0 ? 'var(--accent-teal)' : 'var(--accent-red)';
+                    }
+
+                    // Populate Table Body with Divergent Visual Bars & Structured Annotations
+                    const tbody = document.getElementById('ent-shap-tbody');
+                    if (tbody) {
+                        tbody.innerHTML = '';
+                        const maxAbsVal = Math.max(30, ...markers.map(m => Math.abs(m.shap_value)));
+
+                        markers.forEach((m, idx) => {
+                            const row = document.createElement('tr');
+                            row.className = `ent-data-row ${idx === 0 ? 'active-row' : ''}`;
+                            row.id = `shap-row-${idx}`;
+
+                            const isPos = m.shap_value >= 0;
+                            const sign = isPos ? '+' : '';
+                            const meta = getGeneMeta(m);
+                            const dosageInfo = formatDosageInfo(m.dosage);
+
+                            // Calculate divergent percentage from center (0)
+                            const barPct = Math.min(48, (Math.abs(m.shap_value) / maxAbsVal) * 48);
+                            const barStyle = isPos
+                                ? `left: 50%; width: ${barPct.toFixed(1)}%;`
+                                : `right: 50%; width: ${barPct.toFixed(1)}%;`;
+
+                            row.innerHTML = `
+                                <td>
+                                    <div class="gene-title-line">
+                                        <span class="gene-symbol-bold">${meta.symbol}</span>
+                                        <span class="trait-tag ${meta.tagClass}">${meta.tag}</span>
+                                    </div>
+                                    <div class="gene-trait-desc">${meta.traitDesc}</div>
+                                </td>
+                                <td>
+                                    <div class="locus-chrom-pill">${meta.chrom}</div>
+                                    <div class="locus-coord">${meta.pos}</div>
+                                    <div class="locus-snp-id">${m.marker_id}</div>
+                                </td>
+                                <td>
+                                    <div class="allele-badge-wrap">
+                                        <div class="allele-chip ${dosageInfo.badgeClass}">
+                                            <span>${dosageInfo.badge}</span>
+                                            <span style="font-weight:400;opacity:0.85;">(${dosageInfo.copies})</span>
+                                        </div>
+                                        <div class="allele-plain-label">${dosageInfo.desc}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="divergent-cell-wrap">
+                                        <div class="impact-metric-line">
+                                            <span class="impact-num ${isPos ? 'impact-num-pos' : 'impact-num-neg'}">${sign}${m.shap_value.toFixed(2)} kg/ha</span>
+                                            <span class="impact-badge-tag ${isPos ? 'badge-boost' : 'badge-drag'}">${isPos ? 'Yield Boost &#9650;' : 'Yield Drag &#9660;'}</span>
+                                        </div>
+                                        <div class="divergent-track-container">
+                                            <div class="divergent-track">
+                                                <div class="divergent-zero-line" title="0 kg/ha baseline"></div>
+                                                <div class="divergent-bar-fill ${isPos ? 'bar-fill-boost' : 'bar-fill-drag'}" style="${barStyle}"></div>
+                                            </div>
+                                            <div class="divergent-axis-labels">
+                                                <span>-30 kg/ha</span>
+                                                <span class="zero-label">0</span>
+                                                <span>+30 kg/ha</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+
+                            // Row interaction: update active state and trigger 3D DNA pulse
+                            row.addEventListener('mouseenter', () => {
+                                document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
+                                row.classList.add('active-row');
+                            });
+
+                            row.addEventListener('click', () => {
+                                document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
+                                row.classList.add('active-row');
+                                window.pulseHeroDna(isPos);
+                                window.pulse3DMarker(idx);
+                            });
+
+                            tbody.appendChild(row);
                         });
-
-                        row.addEventListener('click', () => {
-                            document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
-                            row.classList.add('active-row');
-                            window.pulseHeroDna(isPos);
-                        });
-
-                        tbody.appendChild(row);
-                    });
-
-                    // Initialize connector line on row 0
-                    setTimeout(() => {
-                        const firstRow = document.getElementById('shap-row-0');
-                        if (firstRow) updateConnectorLine(firstRow);
-                    }, 200);
+                    }
                 }
             }
 
