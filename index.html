@@ -1414,11 +1414,12 @@
             color: var(--ink-secondary);
         }
 
-        /* Stat Cards: Quiet cards, single line border, only kg/ha is colored */
+        /* Stat Cards: 3 cards across with generous breathing room */
         .shap-summary-strip {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .shap-summary-card {
@@ -1430,6 +1431,209 @@
             flex-direction: column;
             gap: 6px;
             box-shadow: none;
+        }
+
+        /* ── Dedicated 3D Genomic Locus Inspector Card ── */
+        .shap-inspector-card {
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: none;
+        }
+
+        .inspector-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 10px;
+        }
+
+        .inspector-status-caption {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            letter-spacing: normal;
+        }
+
+        .inspector-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .inspector-viewport-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .inspector-3d-viewport {
+            position: relative;
+            width: 100%;
+            height: 210px;
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #shap-dna-canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+
+        .inspector-caption {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--ink-secondary);
+            line-height: 1.4;
+            opacity: 0.85;
+        }
+
+        .inspector-details-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        /* Chromosome Ideogram Strip */
+        .ideogram-container {
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 11px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .ideogram-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .ideogram-title {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-primary);
+        }
+
+        .ideogram-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-secondary);
+        }
+
+        .ideogram-track-wrap {
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .ideogram-track {
+            position: relative;
+            width: 100%;
+            height: 12px;
+            background: #0E1214;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            overflow: visible;
+        }
+
+        .ideogram-centromere {
+            position: absolute;
+            top: -2px;
+            bottom: -2px;
+            width: 6px;
+            background: #192022;
+            border-left: 1px solid var(--line);
+            border-right: 1px solid var(--line);
+            transform: translateX(-50%);
+            opacity: 0.75;
+        }
+
+        .ideogram-tick {
+            position: absolute;
+            top: -5px;
+            width: 3px;
+            height: 22px;
+            border-radius: 2px;
+            transform: translateX(-50%);
+            transition: left 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+            z-index: 5;
+        }
+
+        .tick-moss {
+            background: var(--accent-moss);
+            box-shadow: 0 0 6px rgba(122, 155, 110, 0.6);
+        }
+
+        .tick-clay {
+            background: var(--accent-clay);
+            box-shadow: 0 0 6px rgba(181, 105, 63, 0.6);
+        }
+
+        .ideogram-axis-labels {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-secondary);
+            opacity: 0.7;
+        }
+
+        /* Precision Readout Table */
+        .inspector-readout-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 12px 14px;
+        }
+
+        .readout-row {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            font-size: 13px;
+        }
+
+        .readout-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            min-width: 65px;
+            font-weight: 400;
+        }
+
+        .readout-val {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink-primary);
+            font-weight: 500;
+        }
+
+        .readout-subval {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            font-weight: 400;
+            margin-left: 4px;
         }
 
         .summary-card-tag {
@@ -1472,7 +1676,7 @@
         }
 
         .shap-guide-banner {
-            padding: 10px 14px;
+            padding: 10px 16px;
             background: var(--bg-raised);
             border: 1px solid var(--line);
             border-radius: 4px;
@@ -1480,6 +1684,7 @@
             font-size: 12px;
             color: var(--ink-secondary);
             line-height: 1.5;
+            margin-bottom: 20px;
         }
 
         /* ── SHAP Data Table ── */
@@ -1496,26 +1701,47 @@
             font-weight: 500;
             color: var(--ink-secondary);
             text-align: left;
-            padding: 10px 14px;
+            padding: 12px 16px;
+            background: var(--bg-raised);
+            border-top: 1px solid var(--line);
             border-bottom: 1px solid var(--line);
             text-transform: none;
             letter-spacing: normal;
         }
 
         .ent-data-table td {
-            padding: 14px 14px;
+            padding: 13px 16px;
             border-bottom: 1px solid var(--line);
             vertical-align: middle;
         }
 
         .ent-data-row {
-            transition: background-color 0.15s ease;
+            transition: background-color 0.15s ease, border-left-color 0.15s ease;
             cursor: pointer;
+            border-left: 2px solid transparent;
         }
 
         .ent-data-row:hover,
         .ent-data-row.active-row {
             background-color: var(--bg-raised);
+        }
+
+        .ent-data-row.row-positive:hover,
+        .ent-data-row.row-positive.active-row {
+            border-left: 2px solid var(--accent-moss);
+        }
+
+        .ent-data-row.row-negative:hover,
+        .ent-data-row.row-negative.active-row {
+            border-left: 2px solid var(--accent-clay);
+        }
+
+        /* Explicit cursor pointer affordances */
+        .ent-select,
+        .ent-select-field,
+        #ent-genotype-select,
+        #ent-env-select {
+            cursor: pointer;
         }
 
         /* Cell 1: Gene & Trait */
@@ -1696,6 +1922,27 @@
             .meta-item {
                 gap: 6px;
                 font-size: 12px;
+            }
+            .shap-summary-strip {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .inspector-grid {
+                grid-template-columns: 280px 1fr;
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .shap-summary-strip {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .inspector-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .inspector-3d-viewport {
+                height: 190px;
             }
         }
 
@@ -2305,7 +2552,7 @@
                             Genomic SHAP attribution data grid
                         </div>
                         <div class="grid-section-sub">
-                            Causal loci mapped to candidate genes &bull; Hover or click row to pulse 3D DNA helix
+                            Causal loci mapped to candidate genes &mdash; click or hover row to inspect locus
                         </div>
                     </div>
 
@@ -2348,6 +2595,68 @@
                             <!-- Populated dynamically via JS -->
                         </tbody>
                     </table>
+
+                    <!-- Dedicated 3D Genomic Locus Inspector: Full-width panel beneath data table -->
+                    <div class="shap-inspector-card" id="shap-inspector-card">
+                        <div class="inspector-card-header">
+                            <div class="summary-card-tag">3D Genomic Locus Inspector &bull; Local Chromosome Neighborhood</div>
+                            <div class="inspector-status-caption" id="inspector-status-caption">Showing: Hd1 &mdash; click another row to inspect its locus</div>
+                        </div>
+                        
+                        <div class="inspector-grid">
+                            <!-- 3D Helix Viewport Column -->
+                            <div class="inspector-viewport-col">
+                                <div class="inspector-3d-viewport" id="shap-dna-viewport">
+                                    <canvas id="shap-dna-canvas"></canvas>
+                                </div>
+                                <div class="inspector-caption">
+                                    Schematic local chromosome window &bull; queried locus neighborhood (not a literal sequence render)
+                                </div>
+                            </div>
+
+                            <!-- Genomic Context & Readout Column -->
+                            <div class="inspector-details-col">
+                                <!-- Chromosome Ideogram Strip -->
+                                <div class="ideogram-container">
+                                    <div class="ideogram-header">
+                                        <span class="ideogram-title" id="ideogram-title">Chromosome 3 Ideogram</span>
+                                        <span class="ideogram-meta" id="ideogram-meta">31,725,840 bp / 36.41 Mb &bull; 87.1% position</span>
+                                    </div>
+                                    <div class="ideogram-track-wrap">
+                                        <div class="ideogram-track">
+                                            <div class="ideogram-centromere" id="ideogram-centromere" style="left: 43.4%;" title="Centromere region"></div>
+                                            <div class="ideogram-tick tick-moss" id="ideogram-tick" style="left: 87.1%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ideogram-axis-labels">
+                                        <span>0 bp (p-tel)</span>
+                                        <span id="ideogram-centromere-label">Cen (~15.8 Mb)</span>
+                                        <span id="ideogram-qtel-label">36.41 Mb (q-tel)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Precision Readout Table -->
+                                <div class="inspector-readout-grid">
+                                    <div class="readout-row">
+                                        <span class="readout-label">Locus</span>
+                                        <span class="readout-val" id="readout-locus">Chr 3 &bull; 31,725,840 bp <span class="readout-subval">(S3_31725840)</span></span>
+                                    </div>
+                                    <div class="readout-row">
+                                        <span class="readout-label">Gene</span>
+                                        <span class="readout-val" id="readout-gene">Hd1 &mdash; Flowering Time</span>
+                                    </div>
+                                    <div class="readout-row">
+                                        <span class="readout-label">Genotype</span>
+                                        <span class="readout-val" id="readout-genotype">Ref/Ref <span class="readout-subval">(Homozygous Reference)</span></span>
+                                    </div>
+                                    <div class="readout-row">
+                                        <span class="readout-label">SHAP</span>
+                                        <span class="readout-val val-moss data-mono" id="readout-shap">+21.83 kg/ha</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
@@ -6605,6 +6914,337 @@
         let heroDnaScene, heroDnaCamera, heroDnaRenderer, heroDnaPivot;
         let heroDnaRungs = [];
 
+        // ─── 3D DNA Helix for SHAP Locus Inspector ──────────────────
+        let shapDnaScene, shapDnaCamera, shapDnaRenderer, shapDnaPivot;
+        let shapDnaRungs = [];
+        let targetShapRotationY = 0;
+        let targetShapPivotY = 0;
+        let isShapInteracting = false;
+        let shapPulseRing = null;
+        let shapPulseProgress = 1.0;
+
+        // Rice reference genome chromosome lengths (IRGSP-1.0 Nipponbare) & approximate centromeres
+        const RICE_CHR_META = {
+            1: { len: 43270923, cen: 16700000 },
+            2: { len: 35937250, cen: 13600000 },
+            3: { len: 36414677, cen: 15800000 },
+            4: { len: 35502694, cen: 9700000 },
+            5: { len: 29958434, cen: 12400000 },
+            6: { len: 31248787, cen: 15300000 },
+            7: { len: 29697621, cen: 12100000 },
+            8: { len: 28443016, cen: 12900000 },
+            9: { len: 23012720, cen: 2900000 },
+            10: { len: 23207287, cen: 8200000 },
+            11: { len: 29007771, cen: 12000000 },
+            12: { len: 27531856, cen: 11900000 }
+        };
+
+        function initShapDnaHelix() {
+            const container = document.getElementById('shap-dna-viewport');
+            const canvas = document.getElementById('shap-dna-canvas');
+            if (!container || !canvas) return;
+
+            const width = container.clientWidth || 320;
+            const height = container.clientHeight || 210;
+
+            shapDnaScene = new THREE.Scene();
+            shapDnaCamera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+            shapDnaCamera.position.set(0, 0, 3.8);
+
+            shapDnaRenderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: true,
+                powerPreference: "low-power"
+            });
+            shapDnaRenderer.setSize(width, height);
+            shapDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+            // Lighting using design brief palette
+            const ambLight = new THREE.AmbientLight(0xedefee, 0.5);
+            shapDnaScene.add(ambLight);
+
+            const keyLight = new THREE.DirectionalLight(0x7A9B6E, 2.4);
+            keyLight.position.set(2, 3, 3);
+            shapDnaScene.add(keyLight);
+
+            const fillLight = new THREE.DirectionalLight(0x8E9795, 1.2);
+            fillLight.position.set(-2, -2, 2);
+            shapDnaScene.add(fillLight);
+
+            shapDnaPivot = new THREE.Group();
+            shapDnaScene.add(shapDnaPivot);
+
+            const helixRadius = 0.44;
+            const helixHeight = 2.7;
+            const turns = 2.4;
+            const pointsA = [];
+            const pointsB = [];
+            const rungCount = 17;
+            const helixPointCount = 108;
+
+            for (let i = 0; i < helixPointCount; i++) {
+                const t = i / (helixPointCount - 1);
+                const angle = t * Math.PI * 2 * turns;
+                const y = (t - 0.5) * helixHeight;
+                pointsA.push(new THREE.Vector3(Math.cos(angle) * helixRadius, y, Math.sin(angle) * helixRadius));
+                pointsB.push(new THREE.Vector3(Math.cos(angle + Math.PI) * helixRadius, y, Math.sin(angle + Math.PI) * helixRadius));
+            }
+
+            const curveA = new THREE.CatmullRomCurve3(pointsA);
+            const curveB = new THREE.CatmullRomCurve3(pointsB);
+
+            const strandMatA = new THREE.MeshStandardMaterial({
+                color: 0x7A9B6E,
+                roughness: 0.35,
+                metalness: 0.12
+            });
+            const strandMatB = new THREE.MeshStandardMaterial({
+                color: 0x8E9795,
+                roughness: 0.45,
+                metalness: 0.12
+            });
+
+            const meshA = new THREE.Mesh(new THREE.TubeGeometry(curveA, 72, 0.022, 6, false), strandMatA);
+            const meshB = new THREE.Mesh(new THREE.TubeGeometry(curveB, 72, 0.022, 6, false), strandMatB);
+            shapDnaPivot.add(meshA, meshB);
+
+            // Single radial pulse ring mesh
+            const pulseGeo = new THREE.TorusGeometry(0.06, 0.012, 16, 32);
+            const pulseMat = new THREE.MeshBasicMaterial({ color: 0x7A9B6E, transparent: true, opacity: 0 });
+            shapPulseRing = new THREE.Mesh(pulseGeo, pulseMat);
+            shapPulseRing.visible = false;
+            shapDnaPivot.add(shapPulseRing);
+
+            shapDnaRungs = [];
+            const markerGeo = new THREE.SphereGeometry(0.046, 14, 14);
+            const candidateRungIndices = [3, 6, 8, 11, 14];
+
+            for (let j = 0; j < rungCount; j++) {
+                const t = j / (rungCount - 1);
+                const idx = Math.floor(t * (helixPointCount - 1));
+                const p1 = pointsA[idx];
+                const p2 = pointsB[idx];
+                const mid = p1.clone().lerp(p2, 0.5);
+                const angle = (j / (rungCount - 1)) * Math.PI * 2 * turns;
+
+                const rungCurve = new THREE.LineCurve3(p1, p2);
+                const rungMat = new THREE.MeshStandardMaterial({
+                    color: 0x22292C,
+                    roughness: 0.5,
+                    metalness: 0.1
+                });
+                const rungMesh = new THREE.Mesh(new THREE.TubeGeometry(rungCurve, 1, 0.013, 5, false), rungMat);
+                shapDnaPivot.add(rungMesh);
+
+                const isCandidateLocus = candidateRungIndices.includes(j);
+                const nodeMat = new THREE.MeshStandardMaterial({
+                    color: isCandidateLocus ? 0x7A9B6E : 0x22292C,
+                    emissive: isCandidateLocus ? 0x3E5635 : 0x000000,
+                    emissiveIntensity: isCandidateLocus ? 1.4 : 0,
+                    roughness: 0.3
+                });
+                const nodeMesh = new THREE.Mesh(markerGeo, nodeMat);
+                nodeMesh.position.copy(mid);
+                shapDnaPivot.add(nodeMesh);
+
+                shapDnaRungs.push({
+                    mesh: nodeMesh,
+                    rungMesh: rungMesh,
+                    midPoint: mid,
+                    yPos: mid.y,
+                    angle: angle,
+                    baseColor: isCandidateLocus ? 0x7A9B6E : 0x22292C,
+                    targetScale: 1.0
+                });
+            }
+
+            let lastShapFrame = 0;
+            function animateShapDna() {
+                requestAnimationFrame(animateShapDna);
+                const now = performance.now();
+                if (document.hidden || !document.body.classList.contains('dashboard-active') || now - lastShapFrame < 25) {
+                    return;
+                }
+                lastShapFrame = now;
+
+                if (shapDnaPivot) {
+                    // Gentle auto-rotation at idle, virtually paused when user is inspecting a locus
+                    const rotSpeed = isShapInteracting ? 0.0006 : 0.0055;
+                    shapDnaPivot.rotation.y += rotSpeed;
+
+                    if (targetShapRotationY !== null) {
+                        shapDnaPivot.rotation.y += (targetShapRotationY - shapDnaPivot.rotation.y) * 0.08;
+                    }
+                    if (targetShapPivotY !== null) {
+                        shapDnaPivot.position.y += (targetShapPivotY - shapDnaPivot.position.y) * 0.08;
+                    }
+                }
+
+                // Handle single radial pulse
+                if (shapPulseRing && shapPulseProgress < 1.0) {
+                    shapPulseProgress += 0.04;
+                    shapPulseRing.visible = true;
+                    const scaleFactor = 1.0 + shapPulseProgress * 4.2;
+                    shapPulseRing.scale.set(scaleFactor, scaleFactor, scaleFactor);
+                    shapPulseRing.material.opacity = Math.max(0, 0.9 * (1.0 - shapPulseProgress));
+                    if (shapPulseProgress >= 1.0) {
+                        shapPulseRing.visible = false;
+                    }
+                }
+
+                shapDnaRungs.forEach(r => {
+                    if (r.targetScale && r.mesh) {
+                        const curScale = r.mesh.scale.x;
+                        const nextScale = curScale + (r.targetScale - curScale) * 0.14;
+                        r.mesh.scale.setScalar(nextScale);
+                    }
+                });
+
+                if (shapDnaRenderer && shapDnaScene && shapDnaCamera) {
+                    shapDnaRenderer.render(shapDnaScene, shapDnaCamera);
+                }
+            }
+            animateShapDna();
+
+            window.addEventListener('resize', () => {
+                if (!container || !shapDnaRenderer || !shapDnaCamera) return;
+                const newW = container.clientWidth || 320;
+                const newH = container.clientHeight || 210;
+                shapDnaCamera.aspect = newW / newH;
+                shapDnaCamera.updateProjectionMatrix();
+                shapDnaRenderer.setSize(newW, newH);
+                shapDnaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+            });
+        }
+
+        window.setShapInteracting = function(val) {
+            isShapInteracting = val;
+        };
+
+        window.pulseShapLocus = function(idx, isPos, meta, shapVal, isClick, dosageInfo, allMarkers) {
+            if (!shapDnaRungs || shapDnaRungs.length === 0) return;
+            const candidateRungIndices = [3, 6, 8, 11, 14];
+            const targetRungIdx = candidateRungIndices[idx % candidateRungIndices.length];
+            const targetRung = shapDnaRungs[targetRungIdx];
+            const pulseHex = isPos ? 0x7A9B6E : 0xB5693F;
+
+            // Calculate magnitude relative to maximum absolute SHAP value across the loci
+            let maxAbs = 25.0;
+            if (allMarkers && allMarkers.length > 0) {
+                maxAbs = Math.max(...allMarkers.map(x => Math.abs(x.shap_value))) || 25.0;
+            }
+            const normMag = Math.min(1.0, Math.max(0.2, Math.abs(shapVal) / maxAbs));
+
+            // Reset other rungs to quiet structural states
+            shapDnaRungs.forEach((r, i) => {
+                if (r !== targetRung) {
+                    if (r.mesh) {
+                        r.mesh.material.color.setHex(0x22292C);
+                        r.mesh.material.emissive.setHex(0x000000);
+                        r.mesh.material.emissiveIntensity = 0;
+                        r.targetScale = 0.75;
+                    }
+                    if (r.rungMesh) {
+                        r.rungMesh.material.color.setHex(0x1B2124);
+                    }
+                }
+            });
+
+            // Highlight and visually center the target rung
+            if (targetRung && targetRung.mesh) {
+                targetRung.mesh.material.color.setHex(pulseHex);
+                targetRung.mesh.material.emissive.setHex(pulseHex);
+                targetRung.mesh.material.emissiveIntensity = 1.8 + normMag * 2.8;
+
+                // Scale node according to |SHAP| magnitude
+                const dynamicScale = 1.3 + normMag * 1.5;
+                targetRung.targetScale = dynamicScale;
+                targetRung.mesh.scale.setScalar(dynamicScale * (isClick ? 1.4 : 1.0));
+
+                if (targetRung.rungMesh) {
+                    targetRung.rungMesh.material.color.setHex(pulseHex);
+                }
+
+                // Dolly/rotate camera and pivot so the highlighted rung centers in the viewport
+                if (shapDnaPivot) {
+                    targetShapRotationY = -targetRung.angle;
+                    targetShapPivotY = -targetRung.yPos;
+                }
+
+                // Trigger single radial pulse on selection (click)
+                if (isClick && shapPulseRing) {
+                    shapPulseRing.position.copy(targetRung.midPoint);
+                    shapPulseRing.rotation.y = targetRung.angle;
+                    shapPulseRing.material.color.setHex(pulseHex);
+                    shapPulseProgress = 0.0;
+                }
+            }
+
+            // 1. Update Chromosome Ideogram Strip
+            const chromNum = meta.chrom ? parseInt(meta.chrom.replace(/\D/g, '')) || 3 : 3;
+            const chrData = RICE_CHR_META[chromNum] || RICE_CHR_META[3];
+            const rawPos = parseInt(String(meta.pos).replace(/,/g, '').replace(/\D/g, '')) || 31725840;
+            const relPct = Math.min(99.0, Math.max(1.0, (rawPos / chrData.len) * 100));
+            const totalMb = (chrData.len / 1000000).toFixed(2);
+            const cenMb = (chrData.cen / 1000000).toFixed(1);
+            const cenPct = ((chrData.cen / chrData.len) * 100).toFixed(1);
+
+            const ideoTitle = document.getElementById('ideogram-title');
+            if (ideoTitle) ideoTitle.textContent = `Chromosome ${chromNum} Ideogram`;
+
+            const ideoMeta = document.getElementById('ideogram-meta');
+            if (ideoMeta) ideoMeta.innerHTML = `${rawPos.toLocaleString()} bp / ${totalMb} Mb &bull; ${relPct.toFixed(1)}% position`;
+
+            const ideoTick = document.getElementById('ideogram-tick');
+            if (ideoTick) {
+                ideoTick.style.left = `${relPct.toFixed(1)}%`;
+                ideoTick.className = `ideogram-tick ${isPos ? 'tick-moss' : 'tick-clay'}`;
+            }
+
+            const ideoCen = document.getElementById('ideogram-centromere');
+            if (ideoCen) ideoCen.style.left = `${cenPct}%`;
+
+            const ideoCenLabel = document.getElementById('ideogram-centromere-label');
+            if (ideoCenLabel) ideoCenLabel.textContent = `Cen (~${cenMb} Mb)`;
+
+            const ideoQtelLabel = document.getElementById('ideogram-qtel-label');
+            if (ideoQtelLabel) ideoQtelLabel.textContent = `${totalMb} Mb (q-tel)`;
+
+            // 2. Update 4-row Precision Readout Block
+            const readoutLocus = document.getElementById('readout-locus');
+            if (readoutLocus) {
+                readoutLocus.innerHTML = `${meta.chrom} &bull; ${rawPos.toLocaleString()} bp <span class="readout-subval">(${meta.locusId || ''})</span>`;
+            }
+
+            const readoutGene = document.getElementById('readout-gene');
+            if (readoutGene) {
+                readoutGene.innerHTML = `${meta.name || meta.symbol} &mdash; <span class="readout-subval">${meta.traitCategory || meta.traitDesc || ''}</span>`;
+            }
+
+            const readoutGenotype = document.getElementById('readout-genotype');
+            if (readoutGenotype && dosageInfo) {
+                readoutGenotype.innerHTML = `${dosageInfo.notation} <span class="readout-subval">(${dosageInfo.desc})</span>`;
+            }
+
+            const readoutShap = document.getElementById('readout-shap');
+            if (readoutShap) {
+                const sign = shapVal >= 0 ? '+' : '';
+                readoutShap.className = `readout-val ${isPos ? 'val-moss' : 'val-clay'} data-mono`;
+                readoutShap.textContent = `${sign}${shapVal.toFixed(2)} kg/ha`;
+            }
+
+            // 3. Update Status Caption
+            const statusCap = document.getElementById('inspector-status-caption');
+            if (statusCap) {
+                statusCap.textContent = `Showing: ${meta.symbol} — click another row to inspect its locus`;
+            }
+
+            if (window.pulseHeroDna) {
+                window.pulseHeroDna(isPos);
+            }
+        };
+
         function initHeroDnaHelix() {
             const container = document.getElementById('hero-dna-viewport');
             const canvas = document.getElementById('hero-dna-canvas');
@@ -6913,6 +7553,7 @@
         // Setup the Enterprise Dashboard UI
         function setupEnterpriseDashboard() {
             initHeroDnaHelix();
+            initShapDnaHelix();
 
             const genotypeSelect = document.getElementById('ent-genotype-select');
             const envSelect = document.getElementById('ent-env-select');
@@ -7197,21 +7838,44 @@
                                 </td>
                             `;
 
+                            // Add semantic class for left-edge accent bar
+                            row.classList.add(isPos ? 'row-positive' : 'row-negative');
+
                             // Row interaction: update active state and trigger 3D DNA pulse
                             row.addEventListener('mouseenter', () => {
+                                if (window.setShapInteracting) window.setShapInteracting(true);
                                 document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
                                 row.classList.add('active-row');
+                                if (window.pulseShapLocus) {
+                                    window.pulseShapLocus(idx, isPos, meta, m.shap_value, false, dosageInfo, markers);
+                                }
                             });
 
                             row.addEventListener('click', () => {
+                                if (window.setShapInteracting) window.setShapInteracting(true);
                                 document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
                                 row.classList.add('active-row');
-                                if (window.pulseHeroDna) window.pulseHeroDna(isPos);
-                                if (window.pulse3DMarker) window.pulse3DMarker(idx);
+                                if (window.pulseShapLocus) {
+                                    window.pulseShapLocus(idx, isPos, meta, m.shap_value, true, dosageInfo, markers);
+                                }
                             });
 
                             tbody.appendChild(row);
                         });
+
+                        const tableEl = document.getElementById('ent-shap-table');
+                        if (tableEl) {
+                            tableEl.addEventListener('mouseleave', () => {
+                                if (window.setShapInteracting) window.setShapInteracting(false);
+                            });
+                        }
+
+                        // Automatically activate locus 0 on the 3D DNA Helix
+                        if (markers.length > 0 && window.pulseShapLocus) {
+                            const firstM = markers[0];
+                            const firstDosage = formatDosageInfo(firstM.dosage);
+                            window.pulseShapLocus(0, firstM.shap_value >= 0, getGeneMeta(firstM), firstM.shap_value, false, firstDosage, markers);
+                        }
                     }
                 }
             }
