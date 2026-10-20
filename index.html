@@ -6,7 +6,7 @@
     <meta name="description" content="GenoTrack explores rice genotype data, field phenotypes, genotype-by-environment effects, and genomic yield prediction.">
     <title>GenoTrack | Genomic Selection & Yield Prediction</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Italiana&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
 
@@ -783,24 +783,41 @@
         }
 
         /* ==========================================================================
-           ENTERPRISE MLOps AGRONOMIC DASHBOARD (High-Tech Dark Mode)
+           PRECISION SCIENTIFIC INSTRUMENT DASHBOARD
+           Strict adherence to design brief:
+           - 4 structural values, 3 functional accents (--accent-moss, --accent-clay, --accent-amber)
+           - IBM Plex Sans for prose/labels (sentence case), IBM Plex Mono strictly for data
+           - Sole uppercase tracked element: GENOTRACK wordmark
+           - 1px --line hairlines only, no glowing borders
            ========================================================================== */
         :root {
-            --bg-deep-charcoal: #080c0a;
-            --bg-panel: rgba(13, 20, 16, 0.88);
-            --bg-card: rgba(18, 28, 22, 0.75);
-            --border-glow: rgba(52, 211, 153, 0.28);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --accent-green: #00ff88;
-            --accent-green-glow: rgba(0, 255, 136, 0.35);
-            --accent-teal: #00e5ff;
-            --accent-teal-glow: rgba(0, 229, 255, 0.35);
-            --accent-amber: #f5c542;
-            --accent-red: #f87171;
-            --slate-mean: #334155;
-            --text-primary: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
+            --bg-base: #14181A;
+            --bg-raised: #1C2124;
+            --ink-primary: #EDEFEE;
+            --ink-secondary: #8E9795;
+            --line: #2A3033;
+            --accent-moss: #7A9B6E;
+            --accent-clay: #B5693F;
+            --accent-amber: #C9A24B;
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'IBM Plex Mono', Menlo, Monaco, Consolas, monospace;
+        }
+
+        body.dashboard-active,
+        body.dashboard-active * {
+            cursor: auto !important;
+        }
+
+        body.dashboard-active .cursor-inner,
+        body.dashboard-active .cursor-outer {
+            display: none !important;
+        }
+
+        body.dashboard-active #webgl,
+        body.dashboard-active .cinematic-container,
+        body.dashboard-active .grid-lines,
+        body.dashboard-active .grid-horizontal-line {
+            display: none !important;
         }
 
         #enterprise-dashboard-container {
@@ -809,17 +826,19 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 20% 80%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
-                        #050807;
+            background: var(--bg-base);
             z-index: 100;
             display: flex;
             flex-direction: column;
-            color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.5;
             overflow: hidden;
             box-sizing: border-box;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         #enterprise-dashboard-container.hidden-view {
@@ -828,187 +847,152 @@
             pointer-events: none;
         }
 
-        /* --- Top Header & Telemetry Strip --- */
+        /* ── Top Header & Quiet Metadata Strip ── */
         .ent-top-header {
             width: 100%;
-            height: 64px;
-            background: rgba(9, 14, 11, 0.94);
-            border-bottom: 1px solid var(--border-glow);
-            backdrop-filter: blur(20px);
+            height: 60px;
+            background: var(--bg-base);
+            border-bottom: 1px solid var(--line);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 28px;
+            padding: 0 24px;
             z-index: 120;
             flex-shrink: 0;
+            box-sizing: border-box;
+            gap: 20px;
         }
 
         .ent-brand-group {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 14px;
         }
 
-        .ent-brand-logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 229, 255, 0.2));
-            border: 1px solid var(--accent-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-green);
-            font-weight: 800;
-            font-size: 14px;
-            box-shadow: 0 0 15px var(--accent-green-glow);
-        }
-
-        .ent-lab-title {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 2px;
+        /* Wordmark is the SINGLE all-caps tracked element in the whole app */
+        .ent-wordmark {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--ink-primary);
         }
-        .ent-lab-title span {
-            color: var(--accent-green);
+
+        .ent-subtitle {
+            font-family: var(--font-sans);
+            font-size: 12px;
             font-weight: 400;
-            font-size: 11px;
-            letter-spacing: 1px;
+            color: var(--ink-secondary);
+            letter-spacing: normal;
+            text-transform: none;
         }
 
-        /* Horizontal Telemetry Strip */
-        .ent-telemetry-strip {
+        /* Single quiet metadata line with generous (24-32px) gaps */
+        .ent-meta-line {
             display: flex;
             align-items: center;
-            gap: 6px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            padding: 4px 6px;
-            max-width: calc(100vw - 370px);
-            flex-shrink: 1;
+            gap: 28px;
         }
-        .ent-telemetry-strip .telemetry-pill {
-            font-size: 9.5px;
-            padding: 3px 8px;
-        }
-        .ent-telemetry-strip::-webkit-scrollbar { display: none; }
 
-        .telemetry-pill {
+        .meta-item {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-family: monospace;
-            letter-spacing: 0.5px;
-            font-weight: 600;
+            gap: 8px;
+            font-size: 13px;
+            line-height: 1;
             white-space: nowrap;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-muted);
+            flex-shrink: 0;
         }
 
-        .telemetry-pill.pill-green {
-            background: rgba(0, 255, 136, 0.12);
-            border-color: rgba(0, 255, 136, 0.35);
-            color: var(--accent-green);
-        }
-        .telemetry-pill.pill-gold {
-            background: rgba(245, 197, 66, 0.12);
-            border-color: rgba(245, 197, 66, 0.35);
-            color: var(--accent-amber);
-        }
-        .telemetry-pill.pill-cyan {
-            background: rgba(0, 229, 255, 0.12);
-            border-color: rgba(0, 229, 255, 0.35);
-            color: var(--accent-teal);
+        .meta-label {
+            font-family: var(--font-sans);
+            color: var(--ink-secondary);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
-        .beacon-dot {
+        .meta-val {
+            font-family: var(--font-mono);
+            color: var(--ink-primary);
+            font-weight: 500;
+        }
+
+        .status-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent-green);
-            box-shadow: 0 0 6px var(--accent-green);
-            animation: pulse-beacon-anim 1.8s infinite;
-        }
-
-        .ent-header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            background-color: var(--accent-moss);
+            display: inline-block;
+            flex-shrink: 0;
         }
 
         .view-switch-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
+            appearance: none;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 15px;
             cursor: pointer !important;
-            transition: all 0.25s ease;
+            transition: background 0.15s ease, border-color 0.15s ease;
+            text-transform: none;
+            letter-spacing: normal;
+            outline: none;
         }
+
         .view-switch-btn:hover {
-            background: rgba(255, 255, 255, 0.14);
-            border-color: #ffffff;
+            background: #232a2d;
+            border-color: #384247;
         }
 
-        /* --- Main Layout Grid --- */
+        .view-switch-btn:focus-visible {
+            outline: 2px solid var(--accent-moss);
+            outline-offset: 2px;
+        }
+
+        /* ── Main Layout: Sidebar & Canvas ── */
         .ent-main-layout {
-            flex: 1;
             display: grid;
-            grid-template-columns: 360px 1fr;
-            height: calc(100vh - 64px);
+            grid-template-columns: 310px 1fr;
+            height: calc(100vh - 60px);
+            width: 100%;
+            background: var(--bg-base);
             overflow: hidden;
-            position: relative;
         }
 
-        @media (max-width: 1100px) {
-            .ent-main-layout {
-                grid-template-columns: 310px 1fr;
-            }
-        }
-
-        /* ==========================================================================
-           LEFT INPUT SIDEBAR
-           ========================================================================== */
         .ent-left-sidebar {
-            background: rgba(9, 14, 11, 0.85);
-            border-right: 1px solid var(--border-glow);
-            backdrop-filter: blur(20px);
-            padding: 22px 20px;
+            background: var(--bg-base);
+            border-right: 1px solid var(--line);
+            padding: 22px;
             display: flex;
             flex-direction: column;
             gap: 18px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
-            z-index: 10;
+            scrollbar-color: var(--line) transparent;
+        }
+
+        .ent-left-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .ent-left-sidebar::-webkit-scrollbar-thumb {
+            background: var(--line);
+            border-radius: 2px;
         }
 
         .sidebar-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent-green);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 2px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-secondary);
+            text-transform: none;
+            letter-spacing: normal;
+            margin-bottom: -4px;
         }
 
         .input-group-stacked {
@@ -1018,297 +1002,262 @@
         }
 
         .input-label-styled {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #cbd5e1;
             display: flex;
             justify-content: space-between;
-        }
-        .input-label-styled .hint {
-            font-size: 10px;
-            color: var(--text-dim);
+            align-items: baseline;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
             text-transform: none;
-            font-weight: 400;
+            letter-spacing: normal;
+        }
+
+        .input-label-styled .hint {
+            font-size: 11px;
+            color: var(--ink-secondary);
+            opacity: 0.8;
         }
 
         .ent-select-box {
             width: 100%;
-            background: rgba(16, 25, 20, 0.95);
-            border: 1px solid rgba(52, 211, 153, 0.35);
-            color: #ffffff;
-            font-family: 'Outfit', sans-serif;
-            font-size: 12.5px;
-            padding: 10px 14px;
-            border-radius: 10px;
+            min-height: 38px;
+            padding: 8px 12px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+            font-size: 13px;
             outline: none;
-            cursor: pointer !important;
-            transition: all 0.3s ease;
-        }
-        .ent-select-box:focus {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 14px rgba(0, 255, 136, 0.3);
+            transition: border-color 0.15s ease;
+            cursor: pointer;
         }
 
-        /* Environmental Covariates Mini-Card */
-        .covariates-mini-card {
-            background: rgba(14, 22, 17, 0.9);
-            border: 1px solid rgba(0, 229, 255, 0.25);
-            border-radius: 14px;
-            padding: 14px 16px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .ent-select-box:focus-visible {
+            outline: 2px solid var(--accent-moss);
+            outline-offset: 1px;
         }
 
-        .cov-card-header {
+        /* ── Environmental Covariates Panel: Plain label:value list with single rule beneath ── */
+        .covariates-panel {
+            margin-top: 4px;
+            padding-top: 14px;
+            padding-bottom: 16px;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .cov-panel-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-        .cov-card-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent-teal);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .cov-env-badge {
-            background: rgba(0, 229, 255, 0.12);
-            color: var(--accent-teal);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            font-size: 9px;
-            font-family: monospace;
-            padding: 2px 7px;
-            border-radius: 8px;
-            font-weight: 700;
+            align-items: baseline;
+            margin-bottom: 12px;
         }
 
-        .cov-metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+        .cov-panel-title {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            margin: 0;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
-        .cov-item {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            padding: 6px 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .cov-env-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-secondary);
         }
-        .cov-icon {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        .cov-text-wrap {
+
+        .cov-data-list {
             display: flex;
             flex-direction: column;
-        }
-        .cov-name {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-dim);
-        }
-        .cov-val {
-            font-size: 12px;
-            font-weight: 600;
-            color: #f1f5f9;
-            font-family: monospace;
+            gap: 8px;
+            margin: 0;
         }
 
-        /* Glowing Primary Action Button */
-        .glowing-predict-btn {
-            width: 100%;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #00ff88 0%, #059669 100%);
-            border: none;
-            border-radius: 12px;
-            color: #03150b;
-            font-family: 'Outfit', sans-serif;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer !important;
+        .cov-data-row {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.45), 0 8px 20px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 4px;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 13px;
         }
-        .glowing-predict-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(0, 255, 136, 0.7), 0 12px 25px rgba(0, 0, 0, 0.8);
-            background: linear-gradient(135deg, #26ff98 0%, #10b981 100%);
+
+        .cov-data-label {
+            font-family: var(--font-sans);
+            color: var(--ink-secondary);
+            font-weight: 400;
+            margin: 0;
         }
-        .glowing-predict-btn .btn-icon {
-            font-size: 15px;
+
+        .cov-data-val {
+            font-family: var(--font-mono);
+            color: var(--ink-primary);
+            font-weight: 500;
+            margin: 0;
         }
 
         .ent-sidebar-footer {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            line-height: 1.45;
             margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid var(--border-subtle);
-            font-size: 10px;
-            color: var(--text-dim);
-            line-height: 1.5;
         }
 
-        /* ==========================================================================
-           MAIN RIGHT DATA CANVAS
-           ========================================================================== */
+        /* ── Main Canvas & Flat Tabs ── */
         .ent-main-canvas {
-            background: transparent;
-            padding: 20px 26px;
+            height: calc(100vh - 60px);
+            padding: 22px 26px 36px;
+            background: var(--bg-base);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line) transparent;
             display: flex;
             flex-direction: column;
             gap: 18px;
-            overflow-y: auto;
-            height: calc(100vh - 64px);
             position: relative;
         }
 
-        /* SVG Connection Line Layer */
-        #helix-connector-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 25;
+        .ent-main-canvas::-webkit-scrollbar {
+            width: 6px;
+        }
+        .ent-main-canvas::-webkit-scrollbar-thumb {
+            background: var(--line);
+            border-radius: 3px;
         }
 
-        /* --- Top Right: Hero Prediction Card with 3D DNA Helix --- */
+        /* Flat text tabs in --ink-secondary, active in --ink-primary with 2px --accent-moss underline */
+        .dashboard-section-switcher {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            border-bottom: 1px solid var(--line);
+            background: var(--bg-base);
+            padding: 0 0 1px 0;
+            margin-bottom: 6px;
+            position: sticky;
+            top: -22px;
+            z-index: 40;
+        }
+
+        .dashboard-section-btn {
+            appearance: none;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 10px 4px 12px 4px;
+            margin-bottom: -1px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-secondary);
+            cursor: pointer !important;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            text-transform: none;
+            letter-spacing: normal;
+            outline: none;
+        }
+
+        .dashboard-section-btn:hover {
+            color: var(--ink-primary);
+        }
+
+        .dashboard-section-btn.active {
+            color: var(--ink-primary);
+            border-bottom-color: var(--accent-moss);
+            font-weight: 600;
+        }
+
+        .dashboard-section-btn:focus-visible {
+            outline: 2px solid var(--accent-moss);
+            outline-offset: 4px;
+            border-radius: 2px;
+        }
+
+        .dashboard-panel[hidden] {
+            display: none !important;
+        }
+
+        /* ── Overview / Hero Card ── */
         .ent-hero-card {
-            background: linear-gradient(135deg, rgba(16, 26, 20, 0.92) 0%, rgba(9, 16, 12, 0.92) 100%);
-            border: 1px solid var(--border-glow);
-            border-radius: 18px;
-            padding: 22px 28px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px 24px;
             display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 20px;
-            position: relative;
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 255, 136, 0.08);
-            backdrop-filter: blur(20px);
-            min-height: 190px;
-        }
-
-        @media (max-width: 1280px) {
-            .ent-hero-card {
-                grid-template-columns: 1fr 280px;
-            }
+            grid-template-columns: 1fr 260px;
+            gap: 22px;
+            box-shadow: none;
         }
 
         .hero-left-metrics {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             gap: 8px;
-            z-index: 2;
         }
 
         .hero-category-label {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .hero-category-label .indicator {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent-green);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         .hero-yield-num {
-            font-size: 52px;
-            font-weight: 800;
-            color: #ffffff;
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: -1px;
-            line-height: 1;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            font-family: var(--font-mono);
+            font-size: 38px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
+
         .hero-yield-num .unit {
-            font-size: 20px;
+            font-family: var(--font-sans);
+            font-size: 15px;
             font-weight: 400;
-            color: var(--text-muted);
-            margin-left: 8px;
+            color: var(--ink-secondary);
+            margin-left: 4px;
         }
 
         .hero-ci-text {
+            font-family: var(--font-mono);
             font-size: 12px;
-            color: #94a3b8;
-            font-family: monospace;
-            letter-spacing: 0.5px;
+            color: var(--ink-secondary);
         }
 
         .hero-badge-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             margin-top: 4px;
+            flex-wrap: wrap;
         }
 
-        .trend-badge-positive {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 6px;
-            background: rgba(0, 255, 136, 0.12);
-            border: 1px solid rgba(0, 255, 136, 0.38);
-            color: #00ff88;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .trend-badge-negative {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 6px;
-            background: rgba(248, 113, 113, 0.12);
-            border: 1px solid rgba(248, 113, 113, 0.38);
-            color: #f87171;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        .trend-indicator {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--ink-secondary);
         }
 
         .hero-sub-badge {
-            font-size: 11px;
-            color: var(--text-dim);
-            font-family: monospace;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
         }
 
-        /* 3D DNA Canvas Viewport inside Hero Card */
         .hero-dna-viewport {
             position: relative;
-            width: 100%;
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
             height: 100%;
-            min-height: 160px;
-            border-radius: 14px;
-            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, rgba(0, 0, 0, 0.4) 80%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            min-height: 150px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -1316,37 +1265,29 @@
         }
 
         #hero-dna-canvas {
-            width: 100%;
-            height: 100%;
-            outline: none;
-            display: block;
+            width: 100% !important;
+            height: 100% !important;
         }
 
         .dna-overlay-tag {
             position: absolute;
             bottom: 8px;
-            right: 12px;
-            font-size: 9px;
-            font-family: monospace;
-            color: var(--accent-green);
-            background: rgba(0, 0, 0, 0.6);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            right: 10px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--ink-secondary);
             pointer-events: none;
-            z-index: 5;
         }
 
-        /* --- Middle Right: Mathematical Component Decomposition --- */
+        /* ── Mathematical Component Decomposition ── */
         .ent-decomp-section {
-            background: rgba(14, 22, 17, 0.88);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 18px 24px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 22px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            gap: 14px;
         }
 
         .decomp-header-row {
@@ -1354,37 +1295,34 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .decomp-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .decomp-formula-badge {
-            font-family: monospace;
-            font-size: 11px;
-            color: var(--accent-teal);
-            background: rgba(0, 229, 255, 0.08);
-            border: 1px solid rgba(0, 229, 255, 0.25);
-            padding: 2px 8px;
-            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            text-transform: none;
+            letter-spacing: normal;
         }
 
-        /* Single Sleek Horizontal Stacked Bar Chart */
+        .decomp-formula-badge {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            padding: 3px 8px;
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+        }
+
         .stacked-bar-container {
-            width: 100%;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
+            width: 100%;
+            height: 22px;
+            border-radius: 4px;
             overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--line);
+            background: var(--bg-base);
         }
 
         .bar-seg {
@@ -1392,1158 +1330,472 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            font-weight: 700;
-            font-family: monospace;
-            color: #ffffff;
-            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .bar-seg-mean {
-            background: #334155;
-            color: #cbd5e1;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .bar-seg-genetic {
-            background: linear-gradient(90deg, #10b981, #00ff88);
-            color: #03150b;
-            box-shadow: 0 0 16px rgba(0, 255, 136, 0.4);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .bar-seg-env {
-            background: linear-gradient(90deg, #0284c7, #00e5ff);
-            color: #041926;
-            box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+            background: #2A3033;
+            color: var(--ink-secondary);
         }
 
-        /* Segment Legends */
+        .bar-seg-genetic {
+            background: var(--accent-moss);
+            color: #14181A;
+        }
+
+        .bar-seg-env {
+            background: var(--accent-amber);
+            color: #14181A;
+        }
+
         .decomp-legend-row {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 24px;
             flex-wrap: wrap;
-            gap: 12px;
-            padding-top: 4px;
         }
 
         .legend-pill {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 11px;
-            color: #cbd5e1;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
         }
+
         .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 3px;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
         }
-        .legend-dot.dot-mean { background: #475569; }
-        .legend-dot.dot-genetic { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green-glow); }
-        .legend-dot.dot-env { background: var(--accent-teal); box-shadow: 0 0 8px var(--accent-teal-glow); }
+
+        .dot-mean { background: #2A3033; }
+        .dot-genetic { background: var(--accent-moss); }
+        .dot-env { background: var(--accent-amber); }
 
         .legend-val {
-            font-family: monospace;
-            font-weight: 700;
-            color: #ffffff;
+            font-family: var(--font-mono);
+            color: var(--ink-primary);
+            font-weight: 500;
         }
 
-        /* --- Bottom Right: Explainability Data Grid --- */
+        /* ── SHAP Attribution Section ── */
         .ent-grid-section {
-            background: rgba(14, 22, 17, 0.88);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 18px 24px 22px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            position: relative;
-        }
-
-        .grid-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .grid-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .grid-section-sub {
-            font-size: 10px;
-            color: var(--text-dim);
-            letter-spacing: 0.5px;
-        }
-
-        .ent-data-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 6px;
-            font-size: 12px;
-        }
-
-        .ent-data-table th {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            padding: 8px 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .ent-data-table th:last-child {
-            text-align: right;
-        }
-
-        .ent-data-row {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer !important;
-            border-radius: 8px;
-        }
-
-        .ent-data-row td {
-            padding: 10px 12px;
-            vertical-align: middle;
-        }
-
-        .ent-data-row td:first-child {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
-        .ent-data-row td:last-child {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            text-align: right;
-        }
-
-        /* Subtle glowing hover state */
-        .ent-data-row:hover,
-        .ent-data-row.active-row {
-            background: rgba(0, 255, 136, 0.08);
-            border: 1px solid rgba(0, 255, 136, 0.45);
-            box-shadow: 0 0 18px rgba(0, 255, 136, 0.18), inset 0 0 10px rgba(0, 255, 136, 0.05);
-            transform: scale(1.006) translateX(4px);
-        }
-
-        .cell-marker {
-            font-family: monospace;
-            font-weight: 700;
-            color: #f8fafc;
-        }
-
-        .cell-chrom {
-            display: inline-block;
-            background: rgba(0, 229, 255, 0.14);
-            border: 1px solid rgba(0, 229, 255, 0.35);
-            color: var(--accent-teal);
-            font-size: 10px;
-            font-family: monospace;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
-        }
-
-        .cell-annotation {
-            color: #cbd5e1;
-            font-size: 11.5px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        .cell-annotation .gene-name {
-            color: var(--accent-green);
-            font-family: monospace;
-            font-size: 10px;
-        }
-
-        .cell-dosage {
-            font-family: monospace;
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        /* Crucial: Impact Score with mix of positive (green) and negative (amber/red) badges */
-        .impact-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-weight: 800;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-
-        .impact-pill.impact-positive {
-            background: rgba(0, 255, 136, 0.16);
-            border: 1px solid rgba(0, 255, 136, 0.45);
-            color: var(--accent-green);
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
-        }
-
-        .impact-pill.impact-negative {
-            background: rgba(248, 113, 113, 0.16);
-            border: 1px solid rgba(248, 113, 113, 0.45);
-            color: var(--accent-red);
-            box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
-        }
-
-        /* ==========================================================================
-           V2 Dashboard — Structured Unified Layout
-           ========================================================================== */
-        :root {
-            --bg-deep-charcoal: #07100e;
-            --bg-panel: #0c1612;
-            --bg-card: #0f1b17;
-            --border-glow: rgba(45, 212, 191, 0.22);
-            --border-subtle: rgba(148, 163, 184, 0.14);
-            --accent-green: #2dd4bf;
-            --accent-green-glow: rgba(45, 212, 191, 0.18);
-            --accent-teal: #60a5fa;
-            --accent-teal-glow: rgba(96, 165, 250, 0.16);
-            --accent-amber: #fbbf24;
-            --accent-red: #f87171;
-            --accent-violet: #a78bfa;
-            --text-primary: #f1f5f9;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
-            --surface-0: #060e0b;
-            --surface-1: #091210;
-            --surface-2: #0e1b17;
-            --surface-3: #13231e;
-            --radius-ui: 8px;
-            --radius-card: 10px;
-        }
-
-        /* ── Scrollbar ── */
-        .ent-main-canvas::-webkit-scrollbar { width: 5px; }
-        .ent-main-canvas::-webkit-scrollbar-track { background: transparent; }
-        .ent-main-canvas::-webkit-scrollbar-thumb { background: rgba(45,212,191,0.18); border-radius: 99px; }
-        .ent-left-sidebar::-webkit-scrollbar { width: 4px; }
-        .ent-left-sidebar::-webkit-scrollbar-track { background: transparent; }
-        .ent-left-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 99px; }
-
-        body.dashboard-active,
-        body.dashboard-active * {
-            cursor: auto !important;
-        }
-
-        body.dashboard-active .cursor-inner,
-        body.dashboard-active .cursor-outer {
-            display: none;
-        }
-
-        body.dashboard-active #webgl,
-        body.dashboard-active .cinematic-container,
-        body.dashboard-active .grid-lines,
-        body.dashboard-active .grid-horizontal-line {
-            display: none;
-        }
-
-        #enterprise-dashboard-container {
-            background: #08110f;
-            color: var(--text-primary);
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-
-        .ent-top-header {
-            height: 68px;
-            padding: 0 24px;
-            background: rgba(8, 17, 15, 0.96);
-            border-bottom: 1px solid var(--border-subtle);
-            gap: 20px;
-        }
-
-        .ent-brand-logo {
-            width: 34px;
-            height: 34px;
-            border-radius: var(--radius-ui);
-            background: #10211d;
-            border-color: rgba(45, 212, 191, 0.42);
-            box-shadow: none;
-            color: var(--accent-green);
-        }
-
-        .ent-lab-title {
-            letter-spacing: 0.08em;
-            gap: 10px;
-        }
-
-        .ent-lab-title span {
-            color: var(--text-dim);
-            font-weight: 600;
-            letter-spacing: 0.06em;
-        }
-
-        .ent-telemetry-strip {
-            gap: 8px;
-            max-width: calc(100vw - 410px);
-            mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
-        }
-
-        .ent-telemetry-strip .telemetry-pill:nth-child(n+6) {
-            display: none;
-        }
-
-        .telemetry-pill {
-            border-radius: 999px;
-            background: rgba(15, 28, 24, 0.86);
-            border-color: var(--border-subtle);
-            color: var(--text-muted);
-            letter-spacing: 0.02em;
-        }
-
-        .telemetry-pill.pill-green,
-        .telemetry-pill.pill-gold,
-        .telemetry-pill.pill-cyan {
-            background: rgba(15, 28, 24, 0.92);
-        }
-
-        .telemetry-pill.pill-green {
-            color: var(--accent-green);
-            border-color: rgba(45, 212, 191, 0.26);
-        }
-
-        .telemetry-pill.pill-gold {
-            color: var(--accent-amber);
-            border-color: rgba(251, 191, 36, 0.28);
-        }
-
-        .telemetry-pill.pill-cyan {
-            color: var(--accent-teal);
-            border-color: rgba(96, 165, 250, 0.28);
-        }
-
-        .beacon-dot {
-            background: var(--accent-green);
-            box-shadow: none;
-        }
-
-        .view-switch-btn {
-            min-height: 36px;
-            border-radius: var(--radius-ui);
-            background: #101c18;
-            border-color: var(--border-subtle);
-            color: var(--text-primary);
-            letter-spacing: 0.04em;
-        }
-
-        .view-switch-btn:hover {
-            background: #162722;
-            border-color: rgba(148, 163, 184, 0.34);
-        }
-
-        .ent-main-layout {
-            grid-template-columns: minmax(300px, 332px) minmax(0, 1fr);
-            height: calc(100vh - 68px);
-            background: #08110f;
-        }
-
-        .ent-left-sidebar {
-            background: #091310;
-            border-right: 1px solid var(--border-subtle);
-            padding: 22px;
-            gap: 18px;
-        }
-
-        .sidebar-section-title,
-        .cov-card-title,
-        .decomp-section-title,
-        .grid-section-title {
-            color: var(--text-primary);
-            letter-spacing: 0.08em;
-        }
-
-        .sidebar-section-title span,
-        .cov-card-title span,
-        .decomp-section-title span,
-        .grid-section-title span {
-            color: var(--accent-green);
-        }
-
-        .input-label-styled {
-            color: var(--text-muted);
-            letter-spacing: 0.04em;
-        }
-
-        .ent-select-box {
-            min-height: 40px;
-            border-radius: var(--radius-ui);
-            background: #0f1c18;
-            border-color: var(--border-subtle);
-            color: var(--text-primary);
-        }
-
-        .ent-select-box:focus {
-            border-color: rgba(45, 212, 191, 0.62);
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
-        }
-
-        .covariates-mini-card,
-        .ent-hero-card,
-        .ent-decomp-section,
-        .ent-grid-section {
-            background: var(--surface-2);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-ui);
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-
-        .covariates-mini-card {
-            padding: 16px;
-        }
-
-        .cov-env-badge,
-        .decomp-formula-badge,
-        .cell-chrom,
-        .impact-pill,
-        .trend-badge-positive {
-            border-radius: 6px;
-            box-shadow: none;
-        }
-
-        .cov-metrics-grid {
-            gap: 10px;
-        }
-
-        .cov-item {
-            min-height: 56px;
-            align-items: flex-start;
-            border-radius: var(--radius-ui);
-            background: var(--surface-1);
-            border-color: var(--border-subtle);
-            padding: 10px;
-        }
-
-        .cov-icon {
-            width: 18px;
-            opacity: 0.72;
-            line-height: 1.1;
-        }
-
-        .cov-name {
-            color: var(--text-dim);
-            letter-spacing: 0.04em;
-        }
-
-        .cov-val {
-            color: var(--text-primary);
-            font-size: 11px;
-            white-space: normal;
-        }
-
-        .glowing-predict-btn {
-            min-height: 44px;
-            border-radius: var(--radius-ui);
-            background: #2dd4bf;
-            color: #04201c;
-            box-shadow: none;
-            letter-spacing: 0.06em;
-        }
-
-        .glowing-predict-btn:hover {
-            transform: translateY(-1px);
-            background: #5eead4;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
-        }
-
-        .ent-sidebar-footer {
-            color: var(--text-dim);
-            border-top-color: var(--border-subtle);
-        }
-
-        .ent-main-canvas {
-            height: calc(100vh - 68px);
-            padding: 22px;
-            gap: 16px;
-            background: #08110f;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(45, 212, 191, 0.3) rgba(8, 17, 15, 0.6);
-        }
-
-        .ent-main-canvas::-webkit-scrollbar {
-            width: 6px;
-        }
-        .ent-main-canvas::-webkit-scrollbar-track {
-            background: rgba(8, 17, 15, 0.6);
-        }
-        .ent-main-canvas::-webkit-scrollbar-thumb {
-            background: rgba(45, 212, 191, 0.3);
-            border-radius: 3px;
-        }
-
-        .ent-left-sidebar {
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(45, 212, 191, 0.2) rgba(8, 17, 15, 0.6);
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: var(--border-subtle);
-            margin: 4px 0;
-        }
-
-        .sidebar-model-badge-card {
-            background: rgba(14, 25, 21, 0.85);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-ui);
-            padding: 12px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .sidebar-model-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-        }
-
-        .sidebar-model-label {
-            color: var(--text-dim);
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        .sidebar-model-val {
-            color: var(--text-primary);
-            font-family: monospace;
-            font-weight: 600;
-        }
-
-        .dashboard-section-switcher {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 8px;
-            padding: 6px;
-            background: #091310;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-ui);
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(8px);
-        }
-
-        .dashboard-section-btn {
-            min-height: 40px;
-            border: 1px solid transparent;
-            border-radius: 6px;
             background: transparent;
-            color: var(--text-muted);
-            font-family: inherit;
-            font-size: 11.5px;
-            font-weight: 800;
-            letter-spacing: 0.07em;
-            text-transform: uppercase;
-            cursor: pointer !important;
-            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .dashboard-section-btn:hover {
-            background: rgba(19, 35, 30, 0.82);
-            color: var(--text-primary);
-        }
-
-        .dashboard-section-btn.active {
-            background: rgba(45, 212, 191, 0.12);
-            border-color: rgba(45, 212, 191, 0.36);
-            color: var(--accent-green);
-        }
-
-        .dashboard-panel[hidden] {
-            display: none !important;
-        }
-
-        /* Reliable dashboard tab hit targets (preserves the existing GenoTrack design). */
-        #ent-canvas-wrap .dashboard-section-switcher {
-            position: sticky;
-            isolation: isolate;
-            z-index: 80;
-            pointer-events: auto !important;
-        }
-        #ent-canvas-wrap .dashboard-section-btn {
-            position: relative;
-            z-index: 81;
-            pointer-events: auto !important;
-            touch-action: manipulation;
-        }
-        #ent-canvas-wrap #helix-connector-svg {
-            pointer-events: none !important;
-        }
-
-        .ent-hero-card {
-            grid-template-columns: minmax(0, 1fr) minmax(220px, 270px);
-            min-height: 164px;
-            padding: 22px;
-            gap: 18px;
-        }
-
-        .hero-left-metrics {
-            gap: 10px;
-            min-width: 0;
-        }
-
-        .hero-category-label {
-            color: var(--text-muted);
-            letter-spacing: 0.08em;
-        }
-
-        .hero-yield-num {
-            font-size: clamp(34px, 3.6vw, 46px);
-            letter-spacing: 0;
-            text-shadow: none;
-            overflow-wrap: anywhere;
-        }
-
-        .hero-yield-num .unit {
-            font-size: 16px;
-            color: var(--text-muted);
-        }
-
-        .hero-ci-text,
-        .hero-sub-badge {
-            color: var(--text-muted);
-            letter-spacing: 0;
-        }
-
-        .hero-badge-row,
-        .decomp-header-row,
         .grid-header-row {
-            align-items: flex-start;
-            gap: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
             flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .trend-badge-positive {
-            background: rgba(0, 255, 136, 0.12);
-            border: 1px solid rgba(0, 255, 136, 0.35);
-            color: #00ff88;
-        }
-
-        .trend-badge-negative {
-            background: rgba(248, 113, 113, 0.12);
-            border: 1px solid rgba(248, 113, 113, 0.35);
-            color: #f87171;
-        }
-
-        .hero-dna-viewport {
-            min-height: 132px;
-            border-radius: var(--radius-ui);
-            background: #091310;
-            border-color: var(--border-subtle);
-        }
-
-        .dna-overlay-tag {
-            right: 10px;
-            bottom: 10px;
-            border-radius: 5px;
-            background: rgba(8, 17, 15, 0.86);
-            border-color: var(--border-subtle);
-            color: var(--text-muted);
-        }
-
-        .ent-decomp-section,
-        .ent-grid-section {
-            padding: 16px 18px;
-        }
-
-        .decomp-formula-badge {
-            background: rgba(96, 165, 250, 0.09);
-            border-color: rgba(96, 165, 250, 0.24);
-            color: #bfdbfe;
-            white-space: normal;
-        }
-
-        .stacked-bar-container {
-            height: 26px;
-            border-radius: 6px;
-            background: var(--surface-1);
-            border-color: var(--border-subtle);
-            box-shadow: none;
-        }
-
-        .bar-seg {
-            font-size: 10px;
-            letter-spacing: 0;
-        }
-
-        .bar-seg-mean {
-            background: #334155;
-        }
-
-        .bar-seg-genetic {
-            background: #2dd4bf;
-            box-shadow: none;
-            color: #04201c;
-        }
-
-        .bar-seg-env {
-            background: #60a5fa;
-            box-shadow: none;
-            color: #061426;
-        }
-
-        .decomp-legend-row {
-            justify-content: flex-start;
-            gap: 10px 18px;
-        }
-
-        .legend-pill {
-            min-width: min(100%, 290px);
-            color: var(--text-muted);
-        }
-
-        .legend-dot.dot-genetic,
-        .legend-dot.dot-env {
-            box-shadow: none;
+        .grid-section-title {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         .grid-section-sub {
-            color: var(--text-dim);
-            line-height: 1.4;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
         }
 
-        .ent-data-table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            table-layout: fixed;
-            overflow: hidden;
-            border-radius: var(--radius-ui);
-        }
-
-        .ent-data-table th {
-            background: #0b1713;
-            border-bottom: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            padding: 10px 12px;
-            letter-spacing: 0.05em;
-        }
-
-        .ent-data-row {
-            background: #0f1c18;
-            border: 0;
-            border-radius: 0;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.10);
-        }
-
-        .ent-data-row td {
-            padding: 12px;
-        }
-
-        .ent-data-row td:first-child,
-        .ent-data-row td:last-child {
-            border-radius: 0;
-        }
-
-        .ent-data-row:hover,
-        .ent-data-row.active-row {
-            background: #142620;
-            border: 0;
-            box-shadow: inset 3px 0 0 var(--accent-green);
-            transform: none;
-        }
-
-        .cell-marker,
-        .cell-dosage,
-        .cell-annotation .gene-name,
-        .impact-pill {
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-        }
-
-        .cell-marker {
-            overflow-wrap: anywhere;
-        }
-
-        .cell-annotation {
-            color: var(--text-muted);
-            line-height: 1.35;
-        }
-
-        .cell-annotation .gene-name {
-            color: var(--text-dim);
-        }
-
-        .impact-pill.impact-positive {
-            background: rgba(45, 212, 191, 0.10);
-            border-color: rgba(45, 212, 191, 0.30);
-            color: #5eead4;
-            box-shadow: none;
-        }
-
-                .impact-pill.impact-negative {
-            background: rgba(248, 113, 113, 0.10);
-            border-color: rgba(248, 113, 113, 0.30);
-            color: #fca5a5;
-            box-shadow: none;
-        }
-
-        /* --- Upgraded SHAP Explainability Grid & Executive Summary --- */
+        /* Stat Cards: Quiet cards, single line border, only kg/ha is colored */
         .shap-summary-strip {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 12px 0 14px 0;
+            gap: 14px;
         }
 
         .shap-summary-card {
-            background: #0b1713;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-ui);
-            padding: 12px 14px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px 18px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .shap-summary-card:hover {
-            transform: translateY(-1px);
-        }
-
-        .shap-summary-card.card-positive {
-            border-color: rgba(0, 255, 136, 0.28);
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.06) 0%, #0b1713 100%);
-        }
-
-        .shap-summary-card.card-negative {
-            border-color: rgba(248, 113, 113, 0.28);
-            background: linear-gradient(135deg, rgba(248, 113, 113, 0.06) 0%, #0b1713 100%);
-        }
-
-        .shap-summary-card.card-net {
-            border-color: rgba(0, 229, 255, 0.28);
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.06) 0%, #0b1713 100%);
-        }
-
-        .summary-card-header {
-            display: flex;
-            align-items: center;
             gap: 6px;
+            box-shadow: none;
         }
-
-        .summary-badge-icon {
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .card-positive .summary-badge-icon { color: #00ff88; }
-        .card-negative .summary-badge-icon { color: #f87171; }
-        .card-net .summary-badge-icon { color: #00e5ff; }
 
         .summary-card-tag {
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            color: var(--text-dim);
-            text-transform: uppercase;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         .summary-gene-name {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--ink-primary);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .summary-gene-val {
-            font-size: 17px;
-            font-weight: 800;
-            font-family: "SFMono-Regular", Consolas, monospace;
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.2;
             letter-spacing: -0.02em;
         }
 
-        .card-positive .summary-gene-val { color: #00ff88; }
-        .card-negative .summary-gene-val { color: #f87171; }
-        .card-net .summary-gene-val { color: #00e5ff; }
+        .val-moss { color: var(--accent-moss) !important; }
+        .val-clay { color: var(--accent-clay) !important; }
+        .val-amber { color: var(--accent-amber) !important; }
+        .data-mono { font-family: var(--font-mono); }
 
         .summary-gene-sub {
-            font-size: 10px;
-            color: var(--text-muted);
-            line-height: 1.3;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            margin-top: 2px;
         }
 
         .shap-guide-banner {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 9px 12px;
-            background: rgba(11, 23, 19, 0.85);
-            border: 1px solid rgba(45, 212, 191, 0.16);
-            border-radius: 6px;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            line-height: 1.45;
+            padding: 10px 14px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            line-height: 1.5;
         }
 
-        .shap-guide-banner .guide-icon {
-            color: #00e5ff;
-            font-size: 13px;
-            line-height: 1;
-            margin-top: 1px;
+        /* ── SHAP Data Table ── */
+        .ent-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: transparent;
         }
 
-        /* Gene & Trait Cell */
+        .ent-data-table th {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-secondary);
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--line);
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .ent-data-table td {
+            padding: 14px 14px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: middle;
+        }
+
+        .ent-data-row {
+            transition: background-color 0.15s ease;
+            cursor: pointer;
+        }
+
+        .ent-data-row:hover,
+        .ent-data-row.active-row {
+            background-color: var(--bg-raised);
+        }
+
+        /* Cell 1: Gene & Trait */
         .gene-title-line {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 8px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .gene-symbol-bold {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #f8fafc;
-            letter-spacing: 0.02em;
-        }
-
-        .trait-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 2px 7px;
-            border-radius: 4px;
-            font-size: 10px;
+            font-family: var(--font-sans);
+            font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.03em;
+            color: var(--ink-primary);
         }
 
-        .tag-flowering { background: rgba(0, 255, 136, 0.12); border: 1px solid rgba(0, 255, 136, 0.28); color: #5eead4; }
-        .tag-height    { background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.28); color: #34d399; }
-        .tag-yield     { background: rgba(245, 197, 66, 0.12); border: 1px solid rgba(245, 197, 66, 0.28); color: #fcd34d; }
-        .tag-panicle   { background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.28); color: #c084fc; }
-        .tag-vigor     { background: rgba(0, 229, 255, 0.12); border: 1px solid rgba(0, 229, 255, 0.28); color: #38bdf8; }
-        .tag-generic   { background: rgba(148, 163, 184, 0.12); border: 1px solid rgba(148, 163, 184, 0.28); color: #cbd5e1; }
+        .trait-category-plain {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--ink-secondary);
+            font-weight: 400;
+        }
 
         .gene-trait-desc {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            line-height: 1.4;
+        }
+
+        /* Cell 2: Locus / Chr */
+        .locus-chrom-data {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink-secondary);
+            margin-bottom: 2px;
+        }
+
+        .locus-coord-data {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            opacity: 0.85;
+        }
+
+        .locus-snp-data {
+            font-family: var(--font-mono);
             font-size: 11px;
-            color: var(--text-dim);
-            line-height: 1.35;
+            color: var(--ink-secondary);
+            opacity: 0.65;
         }
 
-        /* Locus & Chromosome Cell */
-        .locus-chrom-pill {
-            display: inline-block;
-            padding: 2px 7px;
-            border-radius: 4px;
-            background: rgba(148, 163, 184, 0.10);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            color: #94a3b8;
-            font-size: 10px;
-            font-weight: 700;
-            font-family: monospace;
-            margin-bottom: 3px;
-        }
-
-        .locus-coord {
-            font-size: 10px;
-            color: var(--text-dim);
-            font-family: monospace;
-        }
-
-        .locus-snp-id {
-            font-size: 9.5px;
-            color: rgba(148, 163, 184, 0.5);
-            font-family: monospace;
-        }
-
-        /* Genotype & Allele Dosage Cell */
-        .allele-badge-wrap {
+        /* Cell 3: Genotype & Allele Dosage */
+        .dosage-cell {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }
 
-        .allele-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            width: fit-content;
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 10.5px;
-            font-weight: 700;
-            font-family: monospace;
+        .dosage-notation {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
         }
 
-        .allele-chip.dosage-alt {
-            background: rgba(0, 255, 136, 0.12);
-            border: 1px solid rgba(0, 255, 136, 0.32);
-            color: #00ff88;
+        .dosage-alt { color: var(--accent-moss); }
+        .dosage-ref { color: var(--ink-secondary); }
+        .dosage-het { color: var(--accent-amber); }
+
+        .dosage-desc {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
         }
 
-        .allele-chip.dosage-ref {
-            background: rgba(148, 163, 184, 0.10);
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            color: #94a3b8;
-        }
-
-        .allele-chip.dosage-het {
-            background: rgba(245, 197, 66, 0.12);
-            border: 1px solid rgba(245, 197, 66, 0.32);
-            color: #f5c542;
-        }
-
-        .allele-plain-label {
-            font-size: 10px;
-            color: var(--text-dim);
-            line-height: 1.3;
-        }
-
-        /* Divergent Impact Bar Cell */
-        .divergent-cell-wrap {
+        /* Cell 4: Diverging SHAP Bar */
+        .divergent-cell-layout {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-        }
-
-        .impact-metric-line {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .impact-num {
-            font-size: 13.5px;
-            font-weight: 800;
-            font-family: "SFMono-Regular", Consolas, monospace;
-            letter-spacing: -0.01em;
-        }
-
-        .impact-num-pos { color: #00ff88; }
-        .impact-num-neg { color: #f87171; }
-
-        .impact-badge-tag {
-            font-size: 9.5px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            padding: 2px 7px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .badge-boost {
-            background: rgba(0, 255, 136, 0.12);
-            border: 1px solid rgba(0, 255, 136, 0.30);
-            color: #00ff88;
-        }
-
-        .badge-drag {
-            background: rgba(248, 113, 113, 0.12);
-            border: 1px solid rgba(248, 113, 113, 0.30);
-            color: #f87171;
-        }
-
-        .divergent-track-container {
+            gap: 4px;
             width: 100%;
         }
 
-        .divergent-track {
+        .divergent-bar-strip {
+            display: grid;
+            grid-template-columns: 110px 1fr 110px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .divergent-num-left {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            text-align: right;
+            color: var(--accent-clay);
+            white-space: nowrap;
+        }
+
+        .divergent-num-right {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            text-align: left;
+            color: var(--accent-moss);
+            white-space: nowrap;
+        }
+
+        .divergent-num-empty {
+            visibility: hidden;
+        }
+
+        .divergent-track-wrap {
             position: relative;
-            height: 7px;
-            background: #060e0b;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-            border-radius: 4px;
+            width: 100%;
+            height: 8px;
+            background: #14181A;
+            border: 1px solid var(--line);
+            border-radius: 2px;
             overflow: visible;
         }
 
         .divergent-zero-line {
             position: absolute;
             left: 50%;
-            top: -2px;
-            bottom: -2px;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.45);
+            top: -3px;
+            bottom: -3px;
+            width: 1px;
+            background: var(--ink-secondary);
+            opacity: 0.5;
             z-index: 2;
             transform: translateX(-50%);
         }
 
         .divergent-bar-fill {
             position: absolute;
-            top: 1px;
-            bottom: 1px;
-            border-radius: 3px;
-            transition: width 0.35s ease;
+            top: 0;
+            bottom: 0;
+            transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), left 0.45s cubic-bezier(0.16, 1, 0.3, 1), right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .bar-fill-boost {
-            background: linear-gradient(90deg, #059669 0%, #00ff88 100%);
-            box-shadow: 0 0 8px rgba(0, 255, 136, 0.35);
-        }
+        .bar-fill-moss { background-color: var(--accent-moss); }
+        .bar-fill-clay { background-color: var(--accent-clay); }
 
-        .bar-fill-drag {
-            background: linear-gradient(270deg, #b91c1c 0%, #f87171 100%);
-            box-shadow: 0 0 8px rgba(248, 113, 113, 0.35);
+        .divergent-axis-row {
+            display: grid;
+            grid-template-columns: 110px 1fr 110px;
+            gap: 12px;
         }
 
         .divergent-axis-labels {
             display: flex;
             justify-content: space-between;
-            font-size: 8px;
-            font-family: monospace;
-            color: rgba(148, 163, 184, 0.45);
-            margin-top: 2px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-secondary);
+            opacity: 0.7;
+            margin-top: 1px;
         }
 
-        .divergent-axis-labels .zero-label {
-            color: rgba(255, 255, 255, 0.65);
-            font-weight: 700;
-        }
-
-        #helix-connector-path,
-        #helix-connector-anchor,
-        #helix-connector-target {
-            display: none;
-        }
-
+        /* Subtle Connector SVG */
         #helix-connector-svg {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .ent-grid-section {
-            contain: layout paint;
+        /* ── Responsive Adaptations ── */
+        @media (max-width: 1280px) {
+            .ent-meta-line {
+                gap: 18px;
+            }
+            .meta-item {
+                gap: 6px;
+                font-size: 12px;
+            }
         }
 
-        .ent-data-row,
-        .covariates-mini-card,
-        .ent-hero-card,
-        .ent-decomp-section,
-        .ent-grid-section,
-        .hero-dna-viewport {
-            content-visibility: auto;
+        @media (max-width: 1100px) {
+            .ent-main-layout {
+                grid-template-columns: 290px 1fr;
+            }
+            .ent-left-sidebar {
+                padding: 18px 16px;
+            }
+            .ent-meta-line {
+                gap: 14px;
+            }
+            .meta-item {
+                font-size: 11.5px;
+            }
+            .shap-summary-strip {
+                gap: 10px;
+            }
+            .summary-gene-name {
+                font-size: 16px;
+            }
+            .summary-gene-val {
+                font-size: 21px;
+            }
         }
 
+        @media (max-width: 860px) {
+            .shap-summary-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            body.dashboard-active {
+                overflow: auto !important;
+                height: auto !important;
+                max-height: none !important;
+            }
+
+            #enterprise-dashboard-container {
+                position: relative;
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
+            }
+
+            .ent-top-header {
+                height: auto;
+                padding: 14px 18px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .ent-meta-line {
+                order: 3;
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 10px 20px;
+                padding-top: 8px;
+                border-top: 1px solid var(--line);
+            }
+
+            .ent-main-layout {
+                display: block;
+                height: auto;
+                overflow: visible;
+            }
+
+            .ent-left-sidebar {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .ent-main-canvas {
+                height: auto;
+                min-height: 0;
+                padding: 16px;
+                overflow: visible;
+            }
+
+            .dashboard-section-switcher {
+                position: static;
+                gap: 16px;
+                overflow-x: auto;
+            }
+
+            .ent-hero-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-dna-viewport {
+                min-height: 180px;
+            }
+
+            .ent-grid-section {
+                overflow-x: auto;
+            }
+        }
+        
         /* ==========================================================================
            Unified story mode styling
            Makes the 3D narrative feel connected to the operational dashboard.
@@ -2798,193 +2050,7 @@
             background: var(--accent-green);
         }
 
-        @media (max-width: 1180px) {
-            .ent-top-header {
-                height: auto;
-                min-height: 68px;
-                padding: 12px 18px;
-                align-items: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .ent-telemetry-strip {
-                order: 3;
-                flex-basis: 100%;
-                max-width: 100%;
-                padding-inline: 0;
-            }
-
-            .ent-telemetry-strip .telemetry-pill:nth-child(n+5) {
-                display: none;
-            }
-
-            .ent-main-layout,
-            .ent-main-canvas {
-                height: calc(100vh - 112px);
-            }
-        }
-
-        @media (max-width: 900px) {
-            body.dashboard-active {
-                overflow: auto !important;
-                height: auto !important;
-                max-height: none !important;
-            }
-
-            #enterprise-dashboard-container {
-                position: relative;
-                min-height: 100vh;
-                height: auto;
-                overflow: visible;
-            }
-
-            .ent-main-layout {
-                display: block;
-                height: auto;
-                overflow: visible;
-            }
-
-            .ent-left-sidebar {
-                border-right: 0;
-                border-bottom: 1px solid var(--border-subtle);
-            }
-
-            .ent-main-canvas {
-                height: auto;
-                min-height: 0;
-                padding: 18px;
-                overflow: visible;
-            }
-
-            .dashboard-section-switcher {
-                position: static;
-                grid-template-columns: 1fr;
-            }
-
-            .ent-hero-card {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-dna-viewport {
-                min-height: 180px;
-            }
-
-            .ent-grid-section {
-                overflow-x: auto;
-            }
-
-            .ent-data-table {
-                min-width: 760px;
-            }
-
-            body:not(.dashboard-active) .cinematic-container {
-                padding: 0 28px 32px;
-            }
-
-            body:not(.dashboard-active) .main-header {
-                height: auto;
-                min-height: 70px;
-                gap: 14px;
-                padding: 14px 0;
-                flex-wrap: wrap;
-            }
-
-            body:not(.dashboard-active) .header-nav {
-                order: 3;
-                width: 100%;
-                justify-content: space-between;
-                gap: 10px;
-            }
-
-            body:not(.dashboard-active) .header-actions {
-                margin-left: auto;
-            }
-
-            body:not(.dashboard-active) #slide-1,
-            body:not(.dashboard-active) #slide-2,
-            body:not(.dashboard-active) #slide-3,
-            body:not(.dashboard-active) #slide-4 {
-                left: 28px;
-                right: 28px;
-                width: auto;
-                max-width: none;
-                bottom: 8%;
-            }
-
-            body:not(.dashboard-active) #slide-1 .desc-row,
-            body:not(.dashboard-active) .kpi-grid {
-                grid-template-columns: 1fr;
-                width: min(480px, calc(100vw - 56px));
-            }
-
-            body:not(.dashboard-active) .slide-title {
-                font-size: clamp(44px, 12vw, 64px);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .ent-top-header {
-                gap: 12px;
-            }
-
-            .ent-brand-group {
-                width: 100%;
-            }
-
-            .ent-lab-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2px;
-                line-height: 1.25;
-            }
-
-            .ent-header-actions,
-            .view-switch-btn {
-                width: 100%;
-            }
-
-            .view-switch-btn {
-                justify-content: center;
-            }
-
-            .cov-metrics-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-yield-num .unit {
-                display: block;
-                margin: 6px 0 0;
-            }
-
-            body:not(.dashboard-active) .header-actions {
-                display: none;
-            }
-
-            body:not(.dashboard-active) .nav-link {
-                font-size: 9px;
-                letter-spacing: 0.09em;
-            }
-
-            body:not(.dashboard-active) .slide-desc {
-                font-size: 14px;
-                line-height: 1.55;
-            }
-        }
-
-    
-
-/* ===== UI declutter pass ===== */
-/* Model metrics already appear in the header; the sidebar is reserved for inputs. */
-.sidebar-model-badge-card { display: none !important; }
-.ent-left-sidebar { gap: 14px; }
-.ent-main-canvas { padding: 18px 22px 28px; }
-.dashboard-section-switcher { margin-bottom: 16px; }
-.dashboard-panel[hidden] { display: none !important; }
-@media (max-width: 900px) {
-  .ent-main-canvas { padding: 12px; }
-  .dashboard-section-switcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-</style>
+        </style>
 
     <script type="importmap">
     {
@@ -3006,48 +2072,41 @@
          ENTERPRISE-GRADE MLOps BIOINFORMATICS DASHBOARD
          ========================================================================== -->
     <div id="enterprise-dashboard-container">
-        <!-- Top Header Navigation & Telemetry Strip -->
+        <!-- Top Header Navigation & Quiet Metadata Strip -->
         <header class="ent-top-header">
             <div class="ent-brand-group">
-                <div class="ent-brand-logo">&#9670;</div>
-                <div>
-                    <div class="ent-lab-title">GenoTrack <span>// MLOps Agro-Genomic Platform</span></div>
-                    <div style="font-size:10px;color:var(--text-dim);letter-spacing:0.06em;margin-top:1px;">Oryza sativa &bull; 368 Accessions &bull; 67,084 SNP Markers</div>
-                </div>
+                <span class="ent-wordmark">GENOTRACK</span>
+                <span class="ent-subtitle">MLOps agro-genomic platform</span>
             </div>
 
-            <!-- Horizontal Telemetry Strip (Pill Badges) -->
-            <div class="ent-telemetry-strip">
-                <div class="telemetry-pill pill-green">
-                    <span class="beacon-dot"></span>
-                    <span>MODEL: GxE-XGBoost-v2.1</span>
+            <!-- Single Quiet Metadata Line: 28px gaps, label/value pairs, no middle dots -->
+            <div class="ent-meta-line">
+                <div class="meta-item">
+                    <span class="meta-label">Model</span>
+                    <span class="meta-val">GxE-XGBoost-v2.1</span>
                 </div>
-                <div class="telemetry-pill pill-green">
-                    <span>STATUS: Production &#9679;</span>
+                <div class="meta-item">
+                    <span class="status-dot"></span>
+                    <span class="meta-label">Status</span>
+                    <span class="meta-val">Production</span>
                 </div>
-                <div class="telemetry-pill pill-gold">
-                    <span>CV ACCURACY: r = 0.8122</span>
+                <div class="meta-item">
+                    <span class="meta-label">CV accuracy</span>
+                    <span class="meta-val">r = 0.8122</span>
                 </div>
-                <div class="telemetry-pill">
-                    <span>RMSE: 768.76 kg/ha</span>
+                <div class="meta-item">
+                    <span class="meta-label">RMSE</span>
+                    <span class="meta-val">768.76 kg/ha</span>
                 </div>
-                <div class="telemetry-pill pill-cyan">
-                    <span>GATE: PASSED</span>
-                </div>
-                <div class="telemetry-pill">
-                    <span>DATA HASH: 7f17c1f2</span>
-                </div>
-                <div class="telemetry-pill">
-                    <span>RUN ID: 3d30f134</span>
-                </div>
-                <div class="telemetry-pill">
-                    <span>LATENCY: 8.4ms</span>
+                <div class="meta-item">
+                    <span class="meta-label">Gate</span>
+                    <span class="meta-val">Passed</span>
                 </div>
             </div>
 
             <div class="ent-header-actions">
-                <button class="view-switch-btn" id="btn-toggle-narrative" title="Switch to 3D Story Mode">
-                    <span>&#9672; 3D Story</span>
+                <button class="view-switch-btn" id="btn-toggle-narrative" type="button" title="Switch to 3D Story Mode">
+                    3D Story
                 </button>
             </div>
         </header>
@@ -3057,33 +2116,31 @@
             <!-- LEFT INPUT SIDEBAR -->
             <aside class="ent-left-sidebar">
 
-                <!-- Model metrics are already shown in the top telemetry strip; keep the sidebar focused on inputs. -->
-
-                <!-- Section 2: Input Configuration -->
+                <!-- Section: Input Configuration -->
                 <div class="sidebar-section-title">
-                    <span>&#9638;</span> Input Configuration
+                    Input configuration
                 </div>
 
                 <!-- Genotype Dropdown -->
                 <div class="input-group-stacked">
                     <label for="ent-genotype-select" class="input-label-styled">
-                        <span>Genotype (Accession)</span>
-                        <span class="hint">Panel Lines</span>
+                        <span>Genotype (accession)</span>
+                        <span class="hint">Panel lines</span>
                     </label>
                     <select id="ent-genotype-select" class="ent-select-box">
-                        <option value="A1256">A1256 &mdash; High-Yielding Tropical Japonica</option>
-                        <option value="A1203">A1203 &mdash; Elite Lowland Inbred</option>
-                        <option value="A1254">A1254 &mdash; Standard Breeding Check</option>
-                        <option value="A1258">A1258 &mdash; Drought-Resilient Candidate</option>
-                        <option value="A1260">A1260 &mdash; Wet Season Adapted Line</option>
+                        <option value="A1256">A1256 — High-Yielding Tropical Japonica</option>
+                        <option value="A1203">A1203 — Elite Lowland Inbred</option>
+                        <option value="A1254">A1254 — Standard Breeding Check</option>
+                        <option value="A1258">A1258 — Drought-Resilient Candidate</option>
+                        <option value="A1260">A1260 — Wet Season Adapted Line</option>
                     </select>
                 </div>
 
                 <!-- Environment Dropdown -->
                 <div class="input-group-stacked">
                     <label for="ent-env-select" class="input-label-styled">
-                        <span>Environment (Trial Season)</span>
-                        <span class="hint">Climate Norms</span>
+                        <span>Environment (trial season)</span>
+                        <span class="hint">Climate norms</span>
                     </label>
                     <select id="ent-env-select" class="ent-select-box">
                         <option value="2011_DS" selected>2011 Dry Season (Optimal High Solar)</option>
@@ -3098,109 +2155,78 @@
                     </select>
                 </div>
 
-                <!-- Environmental Covariates Mini-Card -->
-                <div class="covariates-mini-card">
-                    <div class="cov-card-header">
-                        <div class="cov-card-title">
-                            <span>&#9881;</span> Environmental Covariates
-                        </div>
-                        <div class="cov-env-badge" id="cov-env-id">2011_DS</div>
+                <!-- Environmental Covariates Panel: Clean 2-column list with single hairline rule beneath -->
+                <div class="covariates-panel">
+                    <div class="cov-panel-header">
+                        <h3 class="cov-panel-title">Environmental covariates</h3>
+                        <span class="cov-env-tag" id="cov-env-id">2011_DS</span>
                     </div>
 
-                    <div class="cov-metrics-grid">
-                        <div class="cov-item">
-                            <span class="cov-icon">&#127777;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Mean Temp</span>
-                                <span class="cov-val" id="cov-temp-val">28.6&deg;C</span>
-                            </div>
+                    <dl class="cov-data-list">
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Mean temperature</dt>
+                            <dd class="cov-data-val" id="cov-temp-val">28.6°C</dd>
                         </div>
-                        <div class="cov-item">
-                            <span class="cov-icon">&#9728;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Solar Rad</span>
-                                <span class="cov-val" id="cov-rad-val">21.4 MJ/m&sup2;</span>
-                            </div>
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Solar radiation</dt>
+                            <dd class="cov-data-val" id="cov-rad-val">21.4 MJ/m²</dd>
                         </div>
-                        <div class="cov-item">
-                            <span class="cov-icon">&#128167;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Soil Moisture</span>
-                                <span class="cov-val" id="cov-moist-val">62.0%</span>
-                            </div>
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Soil moisture</dt>
+                            <dd class="cov-data-val" id="cov-moist-val">62.0%</dd>
                         </div>
-                        <div class="cov-item">
-                            <span class="cov-icon">&#127783;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Precipitation</span>
-                                <span class="cov-val" id="cov-precip-val">142 mm</span>
-                            </div>
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Precipitation</dt>
+                            <dd class="cov-data-val" id="cov-precip-val">142 mm</dd>
                         </div>
-                        <div class="cov-item">
-                            <span class="cov-icon">&#9883;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Soil Nitrogen</span>
-                                <span class="cov-val" id="cov-n-val">180 kg/ha N</span>
-                            </div>
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Soil nitrogen</dt>
+                            <dd class="cov-data-val" id="cov-n-val">180 kg/ha N</dd>
                         </div>
-                        <div class="cov-item">
-                            <span class="cov-icon">&#127806;</span>
-                            <div class="cov-text-wrap">
-                                <span class="cov-name">Missing Hills</span>
-                                <span class="cov-val" id="cov-hills-val">0 / plot</span>
-                            </div>
+                        <div class="cov-data-row">
+                            <dt class="cov-data-label">Missing hills</dt>
+                            <dd class="cov-data-val" id="cov-hills-val">0 / plot</dd>
                         </div>
-                    </div>
+                    </dl>
                 </div>
 
-
                 <div class="ent-sidebar-footer">
-                    <div><strong>G&times;E Architecture:</strong> Additive GBLUP ridge comparator + XGBoost gradient boosted interaction norm.</div>
+                    <div><strong>G&times;E architecture:</strong> Additive GBLUP ridge comparator + XGBoost gradient boosted interaction norm.</div>
                     <div style="margin-top:4px;">Evaluated on 368 biological rice panel accessions &amp; 67,084 high-density markers.</div>
                 </div>
             </aside>
 
             <!-- MAIN RIGHT DATA CANVAS -->
             <main class="ent-main-canvas" id="ent-canvas-wrap">
-                <!-- SVG Connector Line from Table Row to 3D DNA Helix -->
+                <!-- SVG Connector Line from Table Row to 3D DNA Helix (Subtle hairline) -->
                 <svg id="helix-connector-svg">
-                    <defs>
-                        <filter id="glow-line-filter" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur stdDeviation="3" result="blur" />
-                            <feMerge>
-                                <feMergeNode in="blur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <path id="helix-connector-path" d="" fill="none" stroke="#00ff88" stroke-width="1.8" stroke-dasharray="5,5" filter="url(#glow-line-filter)" opacity="0.85"></path>
-                    <circle id="helix-connector-anchor" cx="0" cy="0" r="4" fill="#00ff88" filter="url(#glow-line-filter)"></circle>
-                    <circle id="helix-connector-target" cx="0" cy="0" r="4" fill="#00e5ff" filter="url(#glow-line-filter)"></circle>
+                    <path id="helix-connector-path" d="" fill="none" stroke="rgba(122, 155, 110, 0.45)" stroke-width="1.2" stroke-dasharray="4,4"></path>
+                    <circle id="helix-connector-anchor" cx="0" cy="0" r="3" fill="#7A9B6E"></circle>
+                    <circle id="helix-connector-target" cx="0" cy="0" r="3" fill="#7A9B6E"></circle>
                 </svg>
 
-                <!-- Clean 4-View Switcher Tab Bar -->
+                <!-- Flat Text Tabs with 2px accent-moss underline on active -->
                 <div class="dashboard-section-switcher" role="tablist" aria-label="Dashboard section views">
                     <button class="dashboard-section-btn active" type="button" role="tab" aria-selected="true" data-dashboard-view="all">
-                        <span>&#9638;</span> Overview
+                        Overview
                     </button>
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="yield">
-                        <span>&#9670;</span> Yield Prediction
+                        Yield Prediction
                     </button>
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="decomp">
-                        <span>&#9881;</span> Component Decomp
+                        Component Decomp
                     </button>
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="shap">
-                        <span>&#9883;</span> SHAP Attribution
+                        SHAP Attribution
                     </button>
                 </div>
 
                 <!-- SECTION 1: Hero Prediction Card with 3D DNA Double Helix -->
                 <section class="ent-hero-card dashboard-panel" id="ent-hero-prediction-card" data-dashboard-panel="yield">
-                    <!-- Left: Bold Numbers, CI, Baseline Trend -->
+                    <!-- Left: Figures, CI, Baseline Trend -->
                     <div class="hero-left-metrics">
                         <div class="hero-category-label">
-                            <span class="indicator"></span>
-                            <span>PREDICTED HARVEST GRAIN YIELD (y&#770;)</span>
+                            <span>Predicted harvest grain yield (y&#770;)</span>
                         </div>
 
                         <div class="hero-yield-num" id="ent-hero-yield">
@@ -3212,19 +2238,19 @@
                         </div>
 
                         <div class="hero-badge-row">
-                            <div class="trend-badge-positive" id="ent-hero-trend">
-                                <span class="trend-arrow">&#9650;</span> +19.4% vs Panel Baseline (4,850 kg/ha)
+                            <div class="trend-indicator" id="ent-hero-trend">
+                                <span class="val-moss data-mono">+19.4%</span> <span class="trend-baseline">vs panel baseline (4,850 kg/ha)</span>
                             </div>
                             <div class="hero-sub-badge">
-                                Broad-Sense H&sup2;: <strong>0.68</strong> &bull; Ploidy: <strong>2x</strong>
+                                Broad-sense H&sup2;: <span class="data-mono">0.68</span> &bull; Ploidy: <span class="data-mono">2x</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right: Glowing 3D DNA Double Helix Render -->
+                    <!-- Right: 3D DNA Double Helix Render -->
                     <div class="hero-dna-viewport" id="hero-dna-viewport">
                         <canvas id="hero-dna-canvas"></canvas>
-                        <div class="dna-overlay-tag">3D Genomic Double Helix (67K SNPs)</div>
+                        <div class="dna-overlay-tag">3D genomic double helix (67K SNPs)</div>
                     </div>
                 </section>
 
@@ -3232,14 +2258,14 @@
                 <section class="ent-decomp-section dashboard-panel" data-dashboard-panel="decomp">
                     <div class="decomp-header-row">
                         <div class="decomp-section-title">
-                            <span>&#9881;</span> Mathematical Component Decomposition
+                            Mathematical component decomposition
                         </div>
                         <div class="decomp-formula-badge">
                             y&#770;<sub>ij</sub> = &mu; + g(X<sub>i</sub>) + (E<sub>j</sub> + ge<sub>ij</sub>)
                         </div>
                     </div>
 
-                    <!-- Single Sleek Horizontal Stacked Bar Chart -->
+                    <!-- Horizontal Stacked Bar Chart -->
                     <div class="stacked-bar-container" id="stacked-bar-container">
                         <div class="bar-seg bar-seg-mean" id="seg-mean" style="width: 72.7%;">
                             <span id="seg-mean-txt">Base: 72.7%</span>
@@ -3256,18 +2282,18 @@
                     <div class="decomp-legend-row">
                         <div class="legend-pill">
                             <span class="legend-dot dot-mean"></span>
-                            <span>Base Population Mean (&mu;):</span>
+                            <span>Base population mean (&mu;):</span>
                             <span class="legend-val" id="leg-mean-val">4,210.00 kg/ha (72.7%)</span>
                         </div>
                         <div class="legend-pill">
                             <span class="legend-dot dot-genetic"></span>
-                            <span>Genetic Additive Value g(X):</span>
-                            <span class="legend-val" style="color:var(--accent-green);" id="leg-genetic-val">+1,172.02 kg/ha (20.2%)</span>
+                            <span>Genetic additive value g(X):</span>
+                            <span class="legend-val val-moss" id="leg-genetic-val">+1,172.02 kg/ha (20.2%)</span>
                         </div>
                         <div class="legend-pill">
                             <span class="legend-dot dot-env"></span>
-                            <span>Environmental Shift (E<sub>j</sub> + ge):</span>
-                            <span class="legend-val" style="color:var(--accent-teal);" id="leg-env-val">+408.78 kg/ha (7.1%)</span>
+                            <span>Environmental shift (E<sub>j</sub> + ge):</span>
+                            <span class="legend-val val-amber" id="leg-env-val">+408.78 kg/ha (7.1%)</span>
                         </div>
                     </div>
                 </section>
@@ -3276,56 +2302,46 @@
                 <section class="ent-grid-section dashboard-panel" data-dashboard-panel="shap">
                     <div class="grid-header-row">
                         <div class="grid-section-title">
-                            <span>&#9883;</span> Genomic SHAP Attribution Data Grid
+                            Genomic SHAP attribution data grid
                         </div>
                         <div class="grid-section-sub">
-                            Causal loci mapped to candidate genes &bull; Hover or click row to pulse 3D DNA Helix
+                            Causal loci mapped to candidate genes &bull; Hover or click row to pulse 3D DNA helix
                         </div>
                     </div>
 
-                    <!-- Executive Summary Strip -->
+                    <!-- Executive Summary Strip: Quiet cards, single line border, only kg/ha is colored -->
                     <div class="shap-summary-strip" id="shap-summary-strip">
                         <div class="shap-summary-card card-positive">
-                            <div class="summary-card-header">
-                                <span class="summary-badge-icon">&#9650;</span>
-                                <span class="summary-card-tag">TOP YIELD ENHANCER</span>
-                            </div>
+                            <div class="summary-card-tag">Top yield enhancer</div>
                             <div class="summary-gene-name" id="shap-top-booster-gene">Hd1 (Heading date 1)</div>
-                            <div class="summary-gene-val" id="shap-top-booster-val">+22.25 kg/ha</div>
-                            <div class="summary-gene-sub" id="shap-top-booster-sub">&#127793; Flowering Time &amp; Photoperiod Sync</div>
+                            <div class="summary-gene-val val-moss" id="shap-top-booster-val">+22.25 kg/ha</div>
+                            <div class="summary-gene-sub" id="shap-top-booster-sub">Flowering Time &bull; Chr 3</div>
                         </div>
                         <div class="shap-summary-card card-negative">
-                            <div class="summary-card-header">
-                                <span class="summary-badge-icon">&#9660;</span>
-                                <span class="summary-card-tag">PRIMARY YIELD DRAG</span>
-                            </div>
+                            <div class="summary-card-tag">Primary yield drag</div>
                             <div class="summary-gene-name" id="shap-top-drag-gene">GS3 (Grain Size 3)</div>
-                            <div class="summary-gene-val" id="shap-top-drag-val">-15.58 kg/ha</div>
-                            <div class="summary-gene-sub" id="shap-top-drag-sub">&#9878; Grain Weight &amp; Size QTL</div>
+                            <div class="summary-gene-val val-clay" id="shap-top-drag-val">-15.58 kg/ha</div>
+                            <div class="summary-gene-sub" id="shap-top-drag-sub">Grain Weight &bull; Chr 4</div>
                         </div>
                         <div class="shap-summary-card card-net">
-                            <div class="summary-card-header">
-                                <span class="summary-badge-icon">&#9889;</span>
-                                <span class="summary-card-tag">NET GENOMIC ATTRIBUTION</span>
-                            </div>
-                            <div class="summary-gene-name">Sum of 5 Causal Loci</div>
-                            <div class="summary-gene-val" id="shap-net-val">+27.17 kg/ha</div>
+                            <div class="summary-card-tag">Net genomic attribution</div>
+                            <div class="summary-gene-name">Sum of 5 causal loci</div>
+                            <div class="summary-gene-val val-moss" id="shap-net-val">+27.17 kg/ha</div>
                             <div class="summary-gene-sub">Combined marginal effect over baseline</div>
                         </div>
                     </div>
 
                     <div class="shap-guide-banner">
-                        <span class="guide-icon">&#9432;</span>
-                        <span><strong>Understanding SHAP Values:</strong> Bars extending <strong>Right (Green)</strong> show yield boost from elite alleles. Bars extending <strong>Left (Red)</strong> show yield drag under this environment compared to average trial lines.</span>
+                        <span><strong>Understanding SHAP values:</strong> Bars extending right show positive yield contribution from candidate alleles; bars extending left indicate yield drag under this environment relative to trial average.</span>
                     </div>
 
                     <table class="ent-data-table" id="ent-shap-table">
                         <thead>
                             <tr>
-                                <th style="width:280px;">Candidate Gene &amp; Agronomic Trait</th>
-                                <th style="width:115px;">Locus / Chr</th>
-                                <th style="width:185px;">Genotype &amp; Allele Dosage</th>
-                                <th>SHAP Yield Contribution (kg/ha)</th>
+                                <th style="width:280px;">Candidate gene &amp; agronomic trait</th>
+                                <th style="width:130px;">Locus / Chr</th>
+                                <th style="width:190px;">Genotype &amp; allele dosage</th>
+                                <th>SHAP yield contribution (kg/ha)</th>
                             </tr>
                         </thead>
                         <tbody id="ent-shap-tbody">
@@ -3336,7 +2352,6 @@
             </main>
         </div>
     </div>
-
 
     <!-- Cinematic Overlay Container -->
     <div class="cinematic-container">
@@ -7810,8 +6825,7 @@
             'LOC_Os03g55380': {
                 symbol: 'Hd1',
                 name: 'Heading date 1',
-                tag: '&#127793; Flowering Time',
-                tagClass: 'tag-flowering',
+                traitCategory: 'Flowering Time',
                 traitDesc: 'Photoperiod-sensitive flowering time regulator; synchronizes grain filling.',
                 chrom: 'Chr 3',
                 pos: '31,725,840 bp',
@@ -7820,8 +6834,7 @@
             'LOC_Os01g08780': {
                 symbol: 'sd1',
                 name: 'Semi-Dwarf 1',
-                tag: '&#128207; Plant Height',
-                tagClass: 'tag-height',
+                traitCategory: 'Plant Height',
                 traitDesc: 'GA 20-oxidase Green Revolution stature allele; prevents lodging.',
                 chrom: 'Chr 1',
                 pos: '38,382,410 bp',
@@ -7830,8 +6843,7 @@
             'LOC_Os04g51280': {
                 symbol: 'GS3',
                 name: 'Grain Size 3',
-                tag: '&#9878; Grain Weight',
-                tagClass: 'tag-yield',
+                traitCategory: 'Grain Weight',
                 traitDesc: 'G-protein gamma subunit QTL governing spikelet length & 1000-grain weight.',
                 chrom: 'Chr 4',
                 pos: '23,232,783 bp',
@@ -7840,8 +6852,7 @@
             'LOC_Os02g43280': {
                 symbol: 'DEP1',
                 name: 'Dense Panicle 1',
-                tag: '&#127806; Panicle Architecture',
-                tagClass: 'tag-panicle',
+                traitCategory: 'Panicle Architecture',
                 traitDesc: 'Dense and erect panicle regulator; can cause shading drag under wet conditions.',
                 chrom: 'Chr 2',
                 pos: '24,856,019 bp',
@@ -7850,8 +6861,7 @@
             'LOC_Os06g06050': {
                 symbol: 'qLTG3-1',
                 name: 'Seedling Vigor',
-                tag: '&#10052; Cold Resilience',
-                tagClass: 'tag-vigor',
+                traitCategory: 'Cold Resilience',
                 traitDesc: 'Low-temperature germination protein enhancing early seedling establishment.',
                 chrom: 'Chr 6',
                 pos: '3,042,190 bp',
@@ -7870,8 +6880,7 @@
             return {
                 symbol: symbol,
                 name: m.gene || m.marker_id,
-                tag: '&#129516; Genomic Locus',
-                tagClass: 'tag-generic',
+                traitCategory: 'Genomic Locus',
                 traitDesc: m.gene || 'Causal genetic variant',
                 chrom: `Chr ${m.chrom}`,
                 pos: `${m.pos ? m.pos.toLocaleString() : ''} bp`,
@@ -7882,24 +6891,21 @@
         function formatDosageInfo(dosage) {
             if (dosage >= 1.8) {
                 return {
-                    badge: 'Alt / Alt',
-                    badgeClass: 'dosage-alt',
-                    copies: '2x Elite Alt',
-                    desc: 'Homozygous Alternate Variant'
+                    notation: 'Alt/Alt',
+                    type: 'alt',
+                    desc: 'Homozygous Alternate'
                 };
             } else if (dosage <= 0.2) {
                 return {
-                    badge: 'Ref / Ref',
-                    badgeClass: 'dosage-ref',
-                    copies: '0x Reference',
-                    desc: 'Homozygous Reference Check'
+                    notation: 'Ref/Ref',
+                    type: 'ref',
+                    desc: 'Homozygous Reference'
                 };
             } else {
                 return {
-                    badge: 'Ref / Alt',
-                    badgeClass: 'dosage-het',
-                    copies: '1x Heterozygous',
-                    desc: 'Single Copy Heterozygote'
+                    notation: 'Ref/Alt',
+                    type: 'het',
+                    desc: 'Heterozygous'
                 };
             }
         }
@@ -7924,8 +6930,6 @@
 
                 dashboardPanels.forEach(panel => {
                     const panelName = panel.dataset.dashboardPanel;
-                    // Overview is a quick summary: show yield and decomposition,
-                    // but keep the detailed SHAP table in its own tab.
                     const shouldShow = viewName === 'all'
                         ? (panelName === 'yield' || panelName === 'decomp')
                         : panelName === viewName;
@@ -7937,20 +6941,14 @@
                 const canvasWrap = document.getElementById('ent-canvas-wrap');
                 if (canvasWrap) canvasWrap.scrollTop = 0;
 
-                // Trigger window resize to ensure 3D DNA viewport dimensions stay accurate
                 setTimeout(() => {
                     window.dispatchEvent(new Event('resize'));
                 }, 50);
             }
 
             window.setDashboardView = setDashboardView;
-
-            // Tab click handling is delegated by the final dashboard-tabs controller.
-
-            // Set default view to the compact Overview
             setDashboardView('all');
 
-            // View switch logic (3D Story vs Dashboard)
             let isDashboardActive = true;
             try { history.scrollRestoration = 'manual'; } catch (e) {}
             window.scrollTo(0, 0);
@@ -7963,16 +6961,15 @@
                         dashboardContainer.classList.remove('hidden-view');
                         document.body.classList.add('dashboard-active');
                         window.scrollTo(0, 0);
-                        viewSwitchBtn.innerHTML = '<span>&#9672; 3D Story</span>';
+                        viewSwitchBtn.textContent = '3D Story';
                     } else {
                         dashboardContainer.classList.add('hidden-view');
                         document.body.classList.remove('dashboard-active');
-                        viewSwitchBtn.innerHTML = '<span>&#9776; MLOps Dashboard</span>';
+                        viewSwitchBtn.textContent = 'MLOps Dashboard';
                     }
                 });
             }
 
-            // Wire canvas scroll to update connector line
             const canvasWrap = document.getElementById('ent-canvas-wrap');
             if (canvasWrap) {
                 canvasWrap.addEventListener('scroll', () => {
@@ -7981,14 +6978,13 @@
                 });
             }
 
-            // Wire all narrative mode CTAs directly into the Enterprise Dashboard
             function openEnterpriseDashboard() {
                 if (!dashboardContainer) return;
                 dashboardContainer.classList.remove('hidden-view');
                 document.body.classList.add('dashboard-active');
                 window.scrollTo(0, 0);
                 isDashboardActive = true;
-                if (viewSwitchBtn) viewSwitchBtn.innerHTML = '<span>&#9672; 3D Story</span>';
+                if (viewSwitchBtn) viewSwitchBtn.textContent = '3D Story';
                 setTimeout(() => {
                     window.dispatchEvent(new Event('resize'));
                 }, 50);
@@ -8007,11 +7003,11 @@
 
             if (genotypeSelect) genotypeSelect.addEventListener('change', () => {
                 renderEnterpriseState();
-                window.pulseHeroDna(true);
+                if (window.pulseHeroDna) window.pulseHeroDna(true);
             });
             if (envSelect) envSelect.addEventListener('change', () => {
                 renderEnterpriseState();
-                window.pulseHeroDna(true);
+                if (window.pulseHeroDna) window.pulseHeroDna(true);
             });
 
             function renderEnterpriseState() {
@@ -8026,7 +7022,7 @@
                 }
                 if (!data) return;
 
-                // 1. Update Environmental Covariates Mini-Card
+                // 1. Update Environmental Covariates Panel
                 const cov = data.covariates;
                 const envBadgeEl = document.getElementById('cov-env-id');
                 const tempEl = document.getElementById('cov-temp-val');
@@ -8062,11 +7058,11 @@
                 if (trendEl) {
                     trendEl.removeAttribute('style');
                     if (diffPct >= 0) {
-                        trendEl.className = 'trend-badge-positive';
-                        trendEl.innerHTML = `<span class="trend-arrow" style="color:#00ff88;">&#9650;</span> +${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                        trendEl.className = 'trend-indicator';
+                        trendEl.innerHTML = `<span class="val-moss data-mono">+${diffPct}%</span> <span class="trend-baseline">vs panel baseline (4,850 kg/ha)</span>`;
                     } else {
-                        trendEl.className = 'trend-badge-negative';
-                        trendEl.innerHTML = `<span class="trend-arrow" style="color:#f87171;">&#9660;</span> ${diffPct}% vs Panel Baseline (4,850 kg/ha)`;
+                        trendEl.className = 'trend-indicator';
+                        trendEl.innerHTML = `<span class="val-clay data-mono">${diffPct}%</span> <span class="trend-baseline">vs panel baseline (4,850 kg/ha)</span>`;
                     }
                 }
 
@@ -8118,17 +7114,23 @@
                     const netValEl = document.getElementById('shap-net-val');
 
                     if (boosterGeneEl) boosterGeneEl.textContent = `${boosterMeta.symbol} (${boosterMeta.name})`;
-                    if (boosterValEl) boosterValEl.textContent = `+${booster.shap_value.toFixed(2)} kg/ha`;
-                    if (boosterSubEl) boosterSubEl.innerHTML = `${boosterMeta.tag} &bull; ${boosterMeta.chrom}`;
+                    if (boosterValEl) {
+                        boosterValEl.textContent = `+${booster.shap_value.toFixed(2)} kg/ha`;
+                        boosterValEl.className = 'summary-gene-val val-moss';
+                    }
+                    if (boosterSubEl) boosterSubEl.textContent = `${boosterMeta.traitCategory} · ${boosterMeta.chrom}`;
 
                     if (dragGeneEl) dragGeneEl.textContent = `${dragMeta.symbol} (${dragMeta.name})`;
-                    if (dragValEl) dragValEl.textContent = `${drag.shap_value.toFixed(2)} kg/ha`;
-                    if (dragSubEl) dragSubEl.innerHTML = `${dragMeta.tag} &bull; ${dragMeta.chrom}`;
+                    if (dragValEl) {
+                        dragValEl.textContent = `${drag.shap_value.toFixed(2)} kg/ha`;
+                        dragValEl.className = 'summary-gene-val val-clay';
+                    }
+                    if (dragSubEl) dragSubEl.textContent = `${dragMeta.traitCategory} · ${dragMeta.chrom}`;
 
                     const netSign = netShap >= 0 ? '+' : '';
                     if (netValEl) {
                         netValEl.textContent = `${netSign}${netShap.toFixed(2)} kg/ha`;
-                        netValEl.style.color = netShap >= 0 ? 'var(--accent-teal)' : 'var(--accent-red)';
+                        netValEl.className = `summary-gene-val ${netShap >= 0 ? 'val-moss' : 'val-clay'}`;
                     }
 
                     // Populate Table Body with Divergent Visual Bars & Structured Annotations
@@ -8157,40 +7159,39 @@
                                 <td>
                                     <div class="gene-title-line">
                                         <span class="gene-symbol-bold">${meta.symbol}</span>
-                                        <span class="trait-tag ${meta.tagClass}">${meta.tag}</span>
+                                        <span class="trait-category-plain">${meta.traitCategory}</span>
                                     </div>
                                     <div class="gene-trait-desc">${meta.traitDesc}</div>
                                 </td>
                                 <td>
-                                    <div class="locus-chrom-pill">${meta.chrom}</div>
-                                    <div class="locus-coord">${meta.pos}</div>
-                                    <div class="locus-snp-id">${m.marker_id}</div>
+                                    <div class="locus-chrom-data">${meta.chrom}</div>
+                                    <div class="locus-coord-data">${meta.pos}</div>
+                                    <div class="locus-snp-data">${m.marker_id}</div>
                                 </td>
                                 <td>
-                                    <div class="allele-badge-wrap">
-                                        <div class="allele-chip ${dosageInfo.badgeClass}">
-                                            <span>${dosageInfo.badge}</span>
-                                            <span style="font-weight:400;opacity:0.85;">(${dosageInfo.copies})</span>
-                                        </div>
-                                        <div class="allele-plain-label">${dosageInfo.desc}</div>
+                                    <div class="dosage-cell">
+                                        <span class="dosage-notation dosage-${dosageInfo.type}">${dosageInfo.notation}</span>
+                                        <span class="dosage-desc">${dosageInfo.desc}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="divergent-cell-wrap">
-                                        <div class="impact-metric-line">
-                                            <span class="impact-num ${isPos ? 'impact-num-pos' : 'impact-num-neg'}">${sign}${m.shap_value.toFixed(2)} kg/ha</span>
-                                            <span class="impact-badge-tag ${isPos ? 'badge-boost' : 'badge-drag'}">${isPos ? 'Yield Boost &#9650;' : 'Yield Drag &#9660;'}</span>
-                                        </div>
-                                        <div class="divergent-track-container">
-                                            <div class="divergent-track">
+                                    <div class="divergent-cell-layout">
+                                        <div class="divergent-bar-strip">
+                                            <div class="divergent-num-left ${isPos ? 'divergent-num-empty' : ''}">${!isPos ? `${m.shap_value.toFixed(2)} kg/ha` : ''}</div>
+                                            <div class="divergent-track-wrap">
                                                 <div class="divergent-zero-line" title="0 kg/ha baseline"></div>
-                                                <div class="divergent-bar-fill ${isPos ? 'bar-fill-boost' : 'bar-fill-drag'}" style="${barStyle}"></div>
+                                                <div class="divergent-bar-fill ${isPos ? 'bar-fill-moss' : 'bar-fill-clay'}" style="${barStyle}"></div>
                                             </div>
+                                            <div class="divergent-num-right ${!isPos ? 'divergent-num-empty' : ''}">${isPos ? `+${m.shap_value.toFixed(2)} kg/ha` : ''}</div>
+                                        </div>
+                                        <div class="divergent-axis-row">
+                                            <div></div>
                                             <div class="divergent-axis-labels">
                                                 <span>-30 kg/ha</span>
-                                                <span class="zero-label">0</span>
+                                                <span style="color:var(--ink-primary);font-weight:500;">0</span>
                                                 <span>+30 kg/ha</span>
                                             </div>
+                                            <div></div>
                                         </div>
                                     </div>
                                 </td>
@@ -8205,8 +7206,8 @@
                             row.addEventListener('click', () => {
                                 document.querySelectorAll('.ent-data-row').forEach(r => r.classList.remove('active-row'));
                                 row.classList.add('active-row');
-                                window.pulseHeroDna(isPos);
-                                window.pulse3DMarker(idx);
+                                if (window.pulseHeroDna) window.pulseHeroDna(isPos);
+                                if (window.pulse3DMarker) window.pulse3DMarker(idx);
                             });
 
                             tbody.appendChild(row);
