@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  genotrack-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: genotrack-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MLFLOW_TRACKING_URI=sqlite:///mlflow.db
+    volumes:
+      - ./data:/app/data
+      - ./mlruns:/app/mlruns
+    restart: unless-stopped
+    networks:
+      - genotrack-net
+
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    container_name: genotrack-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    restart: unless-stopped
+    networks:
+      - genotrack-net
+
+  grafana:
+    image: grafana/grafana:10.3.3
+    container_name: genotrack-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards/dashboards:ro
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - genotrack-net
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.10.2
+    container_name: genotrack-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root /app/mlruns --host 0.0.0.0 --port 5000
+    restart: unless-stopped
+    networks:
+      - genotrack-net
+
+networks:
+  genotrack-net:
+    driver: bridge

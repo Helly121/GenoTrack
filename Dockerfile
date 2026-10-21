@@ -13,11 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source and crop configurations
+# Copy source, crop configurations, pipeline orchestration, and web dashboard
 COPY src/ ./src/
 COPY crops/ ./crops/
+COPY pipelines/ ./pipelines/
+COPY monitoring/ ./monitoring/
 COPY data/models/ ./data/models/
 COPY data/processed/ ./data/processed/
+COPY index.html ./index.html
 
 EXPOSE 8000
 

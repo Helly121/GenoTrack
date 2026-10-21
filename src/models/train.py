@@ -88,7 +88,9 @@ def train_and_track(
 
     n_folds = int(config["cv"].get("n_folds", 5))
 
-    # Set up MLflow
+    # Set up MLflow with SQLite backend
+    db_path = project_root / "mlflow.db"
+    mlflow.set_tracking_uri(f"sqlite:///{db_path.as_posix()}")
     experiment_name = f"genotrack_{crop_name}_{target_trait}"
     mlflow.set_experiment(experiment_name)
 

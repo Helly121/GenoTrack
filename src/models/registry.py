@@ -62,6 +62,34 @@ def promote_and_generate_model_card(
     with open(metadata_path, "w") as f:
         json.dump(metadata, f, indent=2)
 
+    # MLflow Model Registry synchronization
+    if metadata.get("run_id"):
+        try:
+            import mlflow
+            from mlflow.tracking import MlflowClient
+            db_path = project_root / "mlflow.db"
+            mlflow.set_tracking_uri(f"sqlite:///{db_path.as_posix()}")
+            client = MlflowClient()
+            model_name = "GenoTrack-GxE-Yield"
+            try:
+                client.create_registered_model(model_name)
+            except Exception:
+                pass
+            v = client.create_model_version(
+                name=model_name,
+                source=f"runs:/{metadata['run_id']}/models",
+                run_id=metadata["run_id"],
+                description=f"Auto-promoted {crop_name} {trait} model ({stage}).",
+            )
+            client.transition_model_version_stage(
+                name=model_name,
+                version=v.version,
+                stage=stage,
+            )
+            print(f"[{crop_name}] Synchronized with MLflow Model Registry ({model_name} v{v.version} -> {stage})")
+        except Exception as e:
+            print(f"[{crop_name}] MLflow registry sync notice: {e}")
+
     # Generate Markdown Model Card
     model_card_content = f"""# GenoTrack Model Card: {crop_name.capitalize()} — {trait.replace('_', ' ').title()}
 

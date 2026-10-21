@@ -1,0 +1,44 @@
+name: "Continuous Training - Metaflow Pipeline"
+
+on:
+  workflow_dispatch:
+    inputs:
+      crop_name:
+        description: "Crop identifier"
+        required: true
+        default: "rice"
+      target_trait:
+        description: "Target phenotypic trait"
+        required: true
+        default: "grain_yield"
+  schedule:
+    # Run weekly on Sundays at midnight UTC
+    - cron: "0 0 * * 0"
+
+jobs:
+  train-pipeline:
+    name: "Orchestrate Metaflow Training Pipeline"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Set up Python 3.11"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: "Install dependencies"
+        run: |
+          pip install -r requirements.txt
+
+      - name: "Run Metaflow Orchestrated Pipeline"
+        run: |
+          python pipelines/flow.py run --crop_name ${{ github.event.inputs.crop_name || 'rice' }} --target_trait ${{ github.event.inputs.target_trait || 'grain_yield' }}
+
+      - name: "Verify Model Card Artifact"
+        run: |
+          ls -la data/models/
+          test -f data/models/MODEL_CARD_${{ github.event.inputs.crop_name || 'rice' }}_${{ github.event.inputs.target_trait || 'grain_yield' }}.md

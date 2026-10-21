@@ -101,3 +101,23 @@ def test_predict_dosage_endpoint(mock_serving_assets):
     data = response.json()
     assert data["environment"] == "across_environments"
     assert "predicted_value" in data
+
+
+def test_metrics_endpoint(mock_serving_assets):
+    """Verify Prometheus exposition /metrics endpoint returns telemetry counters."""
+    client = TestClient(app)
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "genotrack_predictions_total" in response.text
+    assert "genotrack_inference_latency_seconds" in response.text
+
+
+def test_explain_locus_endpoint(mock_serving_assets):
+    """Verify /explain/locus/{marker_id} returns biological coordinates."""
+    client = TestClient(app)
+    response = client.get("/explain/locus/S1_1000")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["marker_id"] == "S1_1000"
+    assert data["chromosome"] == "1"
+    assert data["physical_position"] == 1000
