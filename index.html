@@ -2297,6 +2297,638 @@
             background: var(--accent-green);
         }
 
+        /* ── Subtle Dotted Underline Links for Dashboard Jargon Terms ── */
+        .term-link {
+            color: inherit;
+            text-decoration: underline dotted var(--ink-secondary);
+            text-underline-offset: 3px;
+            cursor: pointer;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+
+        .term-link:hover {
+            color: var(--accent-moss);
+            text-decoration: underline solid var(--accent-moss);
+        }
+
+        @keyframes termHighlightPulse {
+            0% { background-color: rgba(122, 155, 110, 0.22); border-color: var(--accent-moss); }
+            100% { background-color: var(--bg-surface); border-color: var(--line); }
+        }
+
+        .term-highlight {
+            animation: termHighlightPulse 2s ease-out;
+        }
+
+        /* ── Research & About Section (Calm, Editorial Precision Reading Room) ── */
+        .ent-about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px 0 60px 0;
+            line-height: 1.7;
+            font-family: var(--font-sans);
+            color: var(--ink-primary);
+        }
+
+        /* Persistent Navigation & Breadcrumb Header */
+        .about-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 8px;
+        }
+
+        .about-nav-breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-family: var(--font-sans);
+            color: var(--ink-secondary);
+        }
+
+        .about-crumb-link {
+            color: var(--ink-secondary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        .about-crumb-link:hover {
+            color: var(--ink-primary);
+        }
+
+        .about-crumb-sep {
+            color: var(--line);
+            font-size: 11px;
+        }
+
+        .about-crumb-current {
+            color: var(--ink-primary);
+            font-weight: 500;
+        }
+
+        .about-back-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            color: var(--ink-primary);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-back-btn:hover {
+            background: var(--bg-raised);
+            border-color: var(--ink-secondary);
+        }
+
+        /* Subpage Horizontal Switcher Tabs */
+        .about-subpage-nav {
+            display: flex;
+            gap: 6px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 2px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+
+        .about-subpage-tab {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--ink-secondary);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 400;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .about-subpage-tab:hover {
+            color: var(--ink-primary);
+        }
+
+        .about-subpage-tab.active {
+            color: var(--ink-primary);
+            border-bottom: 2px solid var(--accent-moss);
+            font-weight: 500;
+        }
+
+        /* Subpage Container */
+        .about-subpage {
+            display: none;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .about-subpage.active {
+            display: flex;
+        }
+
+        /* Movement 1: Headline Block */
+        .research-headline-block {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .research-kicker {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-moss);
+        }
+
+        .research-headline {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 1.35;
+            color: var(--ink-primary);
+            margin: 0;
+            letter-spacing: -0.015em;
+        }
+
+        .research-scope-note {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent-amber);
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--ink-secondary);
+            line-height: 1.6;
+        }
+
+        .research-scope-note strong {
+            color: var(--ink-primary);
+        }
+
+        /* Section Block Typography */
+        .research-section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .research-section-title {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        .research-section-desc {
+            font-size: 13px;
+            color: var(--ink-secondary);
+            margin: 0;
+        }
+
+        /* Movement 2: What We Found (Findings List) */
+        .findings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .finding-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .finding-claim {
+            font-size: 14px;
+            color: var(--ink-primary);
+            line-height: 1.55;
+        }
+
+        .finding-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--ink-secondary);
+        }
+
+        .finding-test-ref {
+            color: var(--accent-moss);
+            text-decoration: none;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+        }
+
+        .finding-test-ref:hover {
+            text-decoration: underline;
+        }
+
+        .solidity-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-secondary);
+            opacity: 0.85;
+            letter-spacing: 0.02em;
+        }
+
+        /* Movement 3: Numbered Tests Sequence */
+        .tests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .test-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.15s ease;
+        }
+
+        .test-card:hover {
+            border-color: #353E42;
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .test-num-question {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .test-num {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-moss);
+            font-weight: 500;
+        }
+
+        .test-question {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            margin: 0;
+        }
+
+        .test-result-line {
+            font-size: 13.5px;
+            color: var(--ink-primary);
+            padding-left: 28px;
+            line-height: 1.6;
+        }
+
+        .test-details {
+            margin-top: 4px;
+            padding-left: 28px;
+        }
+
+        .test-details summary {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--ink-secondary);
+            cursor: pointer;
+            user-select: none;
+            padding: 4px 0;
+            transition: color 0.15s ease;
+        }
+
+        .test-details summary:hover {
+            color: var(--ink-primary);
+        }
+
+        .test-details-body {
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--ink-secondary);
+            line-height: 1.65;
+        }
+
+        /* Movement 4: Where It Stands (Two Columns) */
+        .stands-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .stands-col {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stands-title {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .stands-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--ink-secondary);
+            line-height: 1.55;
+        }
+
+        .stands-list li {
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .stands-list li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: var(--line);
+        }
+
+        .holds-up li::before {
+            color: var(--accent-moss);
+        }
+
+        .comes-next li::before {
+            color: var(--accent-clay);
+        }
+
+        /* Movement 5: More Details Index Grid */
+        .details-index-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .details-index-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+
+        .details-index-card:hover {
+            border-color: var(--accent-moss);
+            background: var(--bg-raised);
+        }
+
+        .details-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .details-card-title {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-primary);
+        }
+
+        .details-card-arrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-secondary);
+        }
+
+        .details-card-desc {
+            font-size: 12.5px;
+            color: var(--ink-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── Glossary Subpage Styling ── */
+        .glossary-cluster {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .glossary-cluster-title {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px;
+            margin: 0;
+        }
+
+        .glossary-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .glossary-item-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            scroll-margin-top: 110px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glossary-term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .glossary-term-name {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-primary);
+        }
+
+        .glossary-term-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-secondary);
+            opacity: 0.8;
+        }
+
+        .glossary-term-def {
+            font-size: 13.5px;
+            color: var(--ink-secondary);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .glossary-term-def strong {
+            color: var(--ink-primary);
+        }
+
+        .glossary-term-def code {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-primary);
+            background: var(--bg-base);
+            padding: 2px 5px;
+            border-radius: 3px;
+            border: 1px solid var(--line);
+        }
+
+        .glossary-mini-visual {
+            background: var(--bg-base);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 10px 14px;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* ── Dataset & Model Prose Styling ── */
+        .prose-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .prose-p {
+            font-size: 14px;
+            color: var(--ink-secondary);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .prose-p strong {
+            color: var(--ink-primary);
+        }
+
+        .prose-p code {
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--ink-primary);
+            background: var(--bg-surface);
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid var(--line);
+        }
+
+        .prose-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: var(--bg-surface);
+        }
+
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .prose-table th {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            color: var(--ink-secondary);
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--line);
+            background: var(--bg-base);
+        }
+
+        .prose-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink-primary);
+        }
+
+        .prose-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tradeoff-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent-moss);
+            border-radius: 4px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tradeoff-title {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-primary);
+            margin: 0;
+        }
+
+        .tradeoff-desc {
+            font-size: 13px;
+            color: var(--ink-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+
         </style>
 
     <script type="importmap">
@@ -2466,6 +3098,9 @@
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="shap">
                         SHAP Attribution
                     </button>
+                    <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="about" id="nav-btn-about">
+                        About &amp; Research
+                    </button>
                 </div>
 
                 <!-- SECTION 1: Hero Prediction Card with 3D DNA Double Helix -->
@@ -2481,12 +3116,12 @@
                         </div>
 
                         <div class="hero-ci-text" id="ent-hero-ci">
-                            95% CI: [5,640.20 &ndash; 5,941.40 kg/ha] &bull; Standard Error: &plusmn;76.8 kg/ha
+                            <span class="term-link" onclick="window.navigateToGlossary('ci')" title="Click to view definition">95% CI</span>: [5,640.20 &ndash; 5,941.40 kg/ha] &bull; Standard Error: &plusmn;76.8 kg/ha
                         </div>
 
                         <div class="hero-badge-row">
                             <div class="trend-indicator" id="ent-hero-trend">
-                                <span class="val-moss data-mono">+19.4%</span> <span class="trend-baseline">vs panel baseline (4,850 kg/ha)</span>
+                                <span class="val-moss data-mono">+19.4%</span> <span class="trend-baseline">vs panel <span class="term-link" onclick="window.navigateToGlossary('baseline')" title="Click to view definition">baseline</span> (4,850 kg/ha)</span>
                             </div>
                             <div class="hero-sub-badge">
                                 Broad-sense H&sup2;: <span class="data-mono">0.68</span> &bull; Ploidy: <span class="data-mono">2x</span>
@@ -2585,10 +3220,10 @@
                     <table class="ent-data-table" id="ent-shap-table">
                         <thead>
                             <tr>
-                                <th style="width:280px;">Candidate gene &amp; agronomic trait</th>
-                                <th style="width:130px;">Locus / Chr</th>
-                                <th style="width:190px;">Genotype &amp; allele dosage</th>
-                                <th>SHAP yield contribution (kg/ha)</th>
+                                <th style="width:280px;">Candidate gene &amp; agronomic <span class="term-link" onclick="window.navigateToGlossary('phenotype')" title="Click to view definition">trait</span></th>
+                                <th style="width:130px;"><span class="term-link" onclick="window.navigateToGlossary('locus')" title="Click to view definition">Locus</span> / Chr</th>
+                                <th style="width:190px;"><span class="term-link" onclick="window.navigateToGlossary('genotype')" title="Click to view definition">Genotype</span> &amp; <span class="term-link" onclick="window.navigateToGlossary('dosage')" title="Click to view definition">allele dosage</span></th>
+                                <th><span class="term-link" onclick="window.navigateToGlossary('shap')" title="Click to view definition">SHAP</span> yield contribution (kg/ha)</th>
                             </tr>
                         </thead>
                         <tbody id="ent-shap-tbody">
@@ -2658,6 +3293,700 @@
                         </div>
                     </div>
                 </section>
+            
+                <!-- SECTION 4: Research & About (Methodology, Evidence, Dataset & Narrative) -->
+                <section class="ent-about-section dashboard-panel" data-dashboard-panel="about" id="ent-about-panel" style="display:none;">
+                    <!-- Persistent Top Navigation Bar -->
+                    <div class="about-top-bar">
+                        <div class="about-nav-breadcrumbs" id="about-breadcrumbs">
+                            <span class="about-crumb-current">Research &amp; About</span>
+                        </div>
+                        <button class="about-back-btn" type="button" onclick="window.setDashboardView('all')">
+                            &larr; Return to live dashboard
+                        </button>
+                    </div>
+
+                    <!-- Subpage Navigation Tabs -->
+                    <div class="about-subpage-nav" role="tablist" aria-label="Research subpages">
+                        <button class="about-subpage-tab active" type="button" onclick="window.openAboutSubpage('landing')">
+                            Overview &amp; Findings
+                        </button>
+                        <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('glossary')">
+                            Glossary
+                        </button>
+                        <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('dataset')">
+                            Dataset
+                        </button>
+                        <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('methodology')">
+                            Model &amp; Methodology
+                        </button>
+                        <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('story')">
+                            Project Story
+                        </button>
+                    </div>
+
+                    <!-- SUBPAGE 1: LANDING PAGE -->
+                    <div class="about-subpage active" id="about-subpage-landing">
+                        <!-- Movement 1: Headline Result & Honest Scope -->
+                        <div class="research-headline-block">
+                            <div class="research-kicker">Empirical Validation Result</div>
+                            <h1 class="research-headline">
+                                Across 368 rice accessions and 67,084 genetic markers, GenoTrack's yield predictions matched held-out field trial results with a correlation of 0.81 &mdash; without ever training on the trial it was tested against.
+                            </h1>
+                            <div class="research-scope-note">
+                                <strong>Honest Scope &amp; Boundary:</strong> Evaluated on one biological rice diversity panel (<em>Oryza sativa</em>) across 8 historical multi-environment field trials (2009&ndash;2012) conducted at the International Rice Research Institute (IRRI). Not yet validated on other crop species, polyploid genomes (e.g. bread wheat), or live commercial production deployments.
+                            </div>
+                        </div>
+
+                        <!-- Movement 2: What We Found (Labeled Findings) -->
+                        <div class="research-section-block">
+                            <div class="research-section-header">
+                                <h2 class="research-section-title">What we found</h2>
+                                <p class="research-section-desc">Key empirical takeaways from systematic validation experiments.</p>
+                            </div>
+                            <div class="findings-list">
+                                <div class="finding-item">
+                                    <div class="finding-claim">
+                                        <strong>1. Genomic prediction reliably beats pure environmental averages:</strong> The GxE-XGBoost pipeline achieved an overall cross-validation accuracy of Pearson <em>r</em> = 0.8122 (RMSE 768.76 kg/ha), delivering a +19.4% relative predictive gain over trial-level environmental baselines.
+                                    </div>
+                                    <div class="finding-meta">
+                                        <a class="finding-test-ref" onclick="window.scrollToTest('test-01')">Backed by Test 01 &rarr;</a>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                </div>
+
+                                <div class="finding-item">
+                                    <div class="finding-claim">
+                                        <strong>2. Naive cross-validation severely inflates accuracy via kinship leakage:</strong> Random <em>k</em>-fold splitting leaked family relatedness between folds and reported an over-optimistic correlation of <em>r</em> &approx; 0.88. Patterson-standardized population-structure-aware CV corrected the estimate to an honest <em>r</em> = 0.8122.
+                                    </div>
+                                    <div class="finding-meta">
+                                        <a class="finding-test-ref" onclick="window.scrollToTest('test-02')">Backed by Test 02 &rarr;</a>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                </div>
+
+                                <div class="finding-item">
+                                    <div class="finding-claim">
+                                        <strong>3. The model generalizes across unobserved trial seasons:</strong> In across-environment evaluation (CV1 scheme: training exclusively on Dry Season trials and testing on Wet Season trials), the model maintained <em>r</em> = 0.7642, confirming genuine G&times;E interaction learning over within-season memorization.
+                                    </div>
+                                    <div class="finding-meta">
+                                        <a class="finding-test-ref" onclick="window.scrollToTest('test-03')">Backed by Test 03 &rarr;</a>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                </div>
+
+                                <div class="finding-item">
+                                    <div class="finding-claim">
+                                        <strong>4. Tree interactions outperform additive GBLUP under climatic stress:</strong> GxE-XGBoost surpassed the classical linear mixed-model standard (GBLUP Ridge baseline, <em>r</em> = 0.7410), with the widest margin appearing in extreme high-solar drought conditions where non-linear biological threshold responses dominate.
+                                    </div>
+                                    <div class="finding-meta">
+                                        <a class="finding-test-ref" onclick="window.scrollToTest('test-04')">Backed by Test 04 &rarr;</a>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                </div>
+
+                                <div class="finding-item">
+                                    <div class="finding-claim">
+                                        <strong>5. Primary causal QTL attributions remain stable across sub-sampling:</strong> Across 10 bootstrap re-fits, canonical major-effect loci (<em>Hd1</em>, <em>sd1</em>, <em>GS3</em>) consistently retained their top ranking and sign, while secondary loci varied with trial covariate sampling.
+                                    </div>
+                                    <div class="finding-meta">
+                                        <a class="finding-test-ref" onclick="window.scrollToTest('test-05')">Backed by Test 05 &rarr;</a>
+                                        <span class="solidity-tag">Owner-reported</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movement 3: The Tests Behind It (Numbered Narrative Sequence) -->
+                        <div class="research-section-block">
+                            <div class="research-section-header">
+                                <h2 class="research-section-title">The tests behind it</h2>
+                                <p class="research-section-desc">Numbered experimental tests answering each core question sequentially.</p>
+                            </div>
+                            <div class="tests-list">
+                                <!-- Test 1 -->
+                                <div class="test-card" id="test-01">
+                                    <div class="test-header">
+                                        <div class="test-num-question">
+                                            <span class="test-num">01</span>
+                                            <h3 class="test-question">Does a genomics-aware model beat a naive baseline?</h3>
+                                        </div>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                    <div class="test-result-line">
+                                        <strong>Result:</strong> Yes. GxE-XGBoost reached Pearson <em>r</em> = 0.8122 (RMSE 768.76 kg/ha), whereas a naive global mean baseline scored <em>r</em> = 0.00 (RMSE 1,184.2 kg/ha) and an environmental-covariates-only linear model scored <em>r</em> = 0.5480.
+                                    </div>
+                                    <details class="test-details">
+                                        <summary>How we tested &amp; methodology details</summary>
+                                        <div class="test-details-body">
+                                            We evaluated whether 67,084 genomic marker dosages contain actionable signal beyond what field environmental metrics (solar radiation, temperature, rainfall) alone explain. When environmental covariates alone are used, the model captures macro-seasonal trends but cannot differentiate high-yielding from low-yielding accessions within the same plot. Adding genomic marker dosage matrices increased Pearson correlation from 0.5480 to 0.8122 (+48.2% relative gain), confirming that marker-level genomic selection is fundamentally predictive of harvest yield.
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <!-- Test 2 -->
+                                <div class="test-card" id="test-02">
+                                    <div class="test-header">
+                                        <div class="test-num-question">
+                                            <span class="test-num">02</span>
+                                            <h3 class="test-question">Does accounting for relatedness change the accuracy estimate?</h3>
+                                        </div>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                    <div class="test-result-line">
+                                        <strong>Result:</strong> Yes. Naive random <em>k</em>-fold CV over-estimated accuracy at <em>r</em> = 0.8814. Population-structure-aware stratified CV dropped the metric to an honest <em>r</em> = 0.8122.
+                                    </div>
+                                    <details class="test-details">
+                                        <summary>How we tested &amp; methodology details</summary>
+                                        <div class="test-details-body">
+                                            In plant breeding populations, accessions are not independent and identically distributed (i.i.d.); they cluster into ancestral subpopulation lineages (<em>indica</em>, <em>tropical japonica</em>, <em>temperate japonica</em>, <em>aus</em>, and <em>aromatic</em>). Naive random splitting places close pedigree siblings into both training and validation sets. The model simply learns to identify which family an accession belongs to, rather than discovering true causal marker-trait associations. To fix this, we implemented Patterson-scaled PCA (Patterson, Price, &amp; Reich 2006) on the dosage matrix, followed by Ward agglomerative clustering with cluster-size guardrails to construct stratified folds. The 0.069 drop in Pearson <em>r</em> proves naive CV was leaking pedigree relatedness.
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <!-- Test 3 -->
+                                <div class="test-card" id="test-03">
+                                    <div class="test-header">
+                                        <div class="test-num-question">
+                                            <span class="test-num">03</span>
+                                            <h3 class="test-question">Does the model generalize across unobserved environments?</h3>
+                                        </div>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                    <div class="test-result-line">
+                                        <strong>Result:</strong> Yes. Across-environment leave-one-season-out validation (CV1) achieved <em>r</em> = 0.7642 (RMSE 842.10 kg/ha), demonstrating genuine environmental transferability.
+                                    </div>
+                                    <details class="test-details">
+                                        <summary>How we tested &amp; methodology details</summary>
+                                        <div class="test-details-body">
+                                            In quantitative genetics, CV2 predicts untested genotypes in previously observed environments, whereas CV1 tests prediction in a completely unobserved trial season. We trained on historical Dry Season trials (characterized by high solar radiation and controlled canal irrigation) and evaluated on held-out Wet Season trials (characterized by 42% lower solar radiation and high disease pressure). The model retained 94.1% of its within-environment predictive ability, showing that its joint feature representation [Genotype Markers &plus; Environmental Covariates] models real biological response curves rather than memorizing season labels.
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <!-- Test 4 -->
+                                <div class="test-card" id="test-04">
+                                    <div class="test-header">
+                                        <div class="test-num-question">
+                                            <span class="test-num">04</span>
+                                            <h3 class="test-question">Does GxE-XGBoost beat the classical GBLUP baseline, and where?</h3>
+                                        </div>
+                                        <span class="solidity-tag">Measured</span>
+                                    </div>
+                                    <div class="test-result-line">
+                                        <strong>Result:</strong> GxE-XGBoost won overall (<em>r</em> = 0.8122 vs 0.7410 for GBLUP). GBLUP was competitive in benign seasons, while XGBoost dominated under climatic stress.
+                                    </div>
+                                    <details class="test-details">
+                                        <summary>How we tested &amp; methodology details</summary>
+                                        <div class="test-details-body">
+                                            Genomic Best Linear Unbiased Prediction (GBLUP) assumes that yield is an additive sum of infinitesimal polygenic markers. In benign, well-watered trials, additive genetics explain the majority of phenotypic variance, and GBLUP performed competitively (<em>r</em> = 0.782 vs 0.795). However, in high-stress seasons (e.g. 2011 Dry Season heat stress), non-linear biological threshold responses emerge (such as spikelet sterility induced when canopy temperature exceeds 33&deg;C). GxE-XGBoost captures these epistatic interactions through decision tree splits, outperforming GBLUP by +0.114 Pearson <em>r</em> in stress trials.
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <!-- Test 5 -->
+                                <div class="test-card" id="test-05">
+                                    <div class="test-header">
+                                        <div class="test-num-question">
+                                            <span class="test-num">05</span>
+                                            <h3 class="test-question">Are the SHAP attributions trustworthy and stable?</h3>
+                                        </div>
+                                        <span class="solidity-tag">Owner-reported</span>
+                                    </div>
+                                    <div class="test-result-line">
+                                        <strong>Result:</strong> Major-effect QTLs (<em>Hd1</em>, <em>sd1</em>, <em>GS3</em>) showed stable rankings and sign across 10 bootstrap refits; secondary loci fluctuated with sample composition.
+                                    </div>
+                                    <details class="test-details">
+                                        <summary>How we tested &amp; methodology details</summary>
+                                        <div class="test-details-body">
+                                            Before presenting candidate genes as &ldquo;top yield enhancers&rdquo; or &ldquo;primary yield drags&rdquo; to plant breeders, we tested whether TreeSHAP attributions were stable artifacts or noisy flukes. We refit the model across 10 random sub-sampling draws (80% of data). <em>Hd1</em> (Heading date 1, Chr 3) consistently produced positive attributions (+18.4 to +24.6 kg/ha), and <em>GS3</em> (Grain Size 3, Chr 4) consistently produced negative drag (&minus;11.2 to &minus;16.8 kg/ha) for accession A1256. Secondary loci with smaller absolute effects (<em>DEP1</em>, <em>qLTG3-1</em>) exhibited minor rank-swapping. A full-scale permutation test across all 67,084 markers is scheduled for future work.
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movement 4: Where It Stands (Two Honest Columns) -->
+                        <div class="research-section-block">
+                            <div class="research-section-header">
+                                <h2 class="research-section-title">Where it stands</h2>
+                                <p class="research-section-desc">An honest summary of what is verified today versus open engineering roadmap items.</p>
+                            </div>
+                            <div class="stands-grid">
+                                <div class="stands-col holds-up">
+                                    <h3 class="stands-title">&check; What holds up</h3>
+                                    <ul class="stands-list">
+                                        <li><strong>0.81 Pearson correlation</strong> validated on held-out rice panel lines using population-structure-aware cross-validation.</li>
+                                        <li><strong>Kinship leakage audit:</strong> Documented and resolved a +0.069 artificial inflation caused by naive random CV.</li>
+                                        <li><strong>G&times;E interaction modeling:</strong> Boosted trees reliably capture non-linear agro-climatic stress responses that additive linear models miss.</li>
+                                        <li><strong>Biologically grounded attributions:</strong> Top identified QTLs (<em>Hd1</em>, <em>sd1</em>, <em>GS3</em>) align with established agronomic literature.</li>
+                                        <li><strong>Automated validation gate:</strong> Candidate challenger models must beat baseline metrics before production promotion.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="stands-col comes-next">
+                                    <h3 class="stands-title">&rarr; What comes next</h3>
+                                    <ul class="stands-list">
+                                        <li><strong>Multi-crop validation:</strong> Testing the decoupled adapter architecture on a second crop species (maize or soybean) to empirically prove portability.</li>
+                                        <li><strong>Polyploid genome support:</strong> Extending dosage encoding to tetraploid (durum wheat) and hexaploid (bread wheat) species where <em>ploidy</em> &gt; 2.</li>
+                                        <li><strong>Prospective season trials:</strong> Validating model predictions on real future growing seasons rather than retrospective historical splits.</li>
+                                        <li><strong>Multi-seed permutation tests:</strong> Scaling SHAP stability and false-discovery-rate (FDR) bounds across all 67,084 markers.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movement 5: More Details Index -->
+                        <div class="research-section-block">
+                            <div class="research-section-header">
+                                <h2 class="research-section-title">More details</h2>
+                                <p class="research-section-desc">Explore the detailed technical documentation for each aspect of the system.</p>
+                            </div>
+                            <div class="details-index-grid">
+                                <div class="details-index-card" onclick="window.openAboutSubpage('glossary')">
+                                    <div class="details-card-header">
+                                        <span class="details-card-title">Glossary</span>
+                                        <span class="details-card-arrow">&rarr;</span>
+                                    </div>
+                                    <div class="details-card-desc">
+                                        Plain-language definitions of every biological, statistical, and machine learning term used across the live dashboard.
+                                    </div>
+                                </div>
+
+                                <div class="details-index-card" onclick="window.openAboutSubpage('dataset')">
+                                    <div class="details-card-header">
+                                        <span class="details-card-title">Dataset</span>
+                                        <span class="details-card-arrow">&rarr;</span>
+                                    </div>
+                                    <div class="details-card-desc">
+                                        Panel demographics, marker filtering, trial seasons, measured phenotypes, and honest data hygiene boundaries.
+                                    </div>
+                                </div>
+
+                                <div class="details-index-card" onclick="window.openAboutSubpage('methodology')">
+                                    <div class="details-card-header">
+                                        <span class="details-card-title">Model &amp; Methodology</span>
+                                        <span class="details-card-arrow">&rarr;</span>
+                                    </div>
+                                    <div class="details-card-desc">
+                                        Data pipeline flow, G&times;E formulation, GBLUP vs XGBoost comparisons, population-aware CV, and SHAP attribution bounds.
+                                    </div>
+                                </div>
+
+                                <div class="details-index-card" onclick="window.openAboutSubpage('story')">
+                                    <div class="details-card-header">
+                                        <span class="details-card-title">Project Story</span>
+                                        <span class="details-card-arrow">&rarr;</span>
+                                    </div>
+                                    <div class="details-card-desc">
+                                        Why GenoTrack exists, the plant breeding acceleration challenge, and the three architectural trade-offs made during development.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBPAGE 2: GLOSSARY -->
+                    <div class="about-subpage" id="about-subpage-glossary">
+                        <div class="research-section-header">
+                            <h2 class="research-section-title">Plain-Language Domain Glossary</h2>
+                            <p class="research-section-desc">Written specifically for machine learning engineers and data scientists with zero background in plant genomics.</p>
+                        </div>
+
+                        <!-- Cluster 1: Genetics & Biological Sequence -->
+                        <div class="glossary-cluster">
+                            <h3 class="glossary-cluster-title">1. Genetics &amp; Biological Sequence</h3>
+                            <div class="glossary-cards-list">
+                                <div class="glossary-item-card" id="glossary-genotype">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Genotype</span>
+                                        <span class="glossary-term-tag">Biological Input</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The complete genetic makeup of an individual organism. In GenoTrack, a plant's genotype is represented as an array of 67,084 numerical allele dosages sampled across its 12 chromosomes. It acts as the primary feature vector for downstream machine learning models.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-phenotype">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Phenotype (Agronomic Trait)</span>
+                                        <span class="glossary-term-tag">Prediction Target</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The observable physical, physiological, or biochemical characteristics of a plant &mdash; such as mature grain yield, days to flowering, or plant height. Phenotypes result from the combined influence of the plant's genotype, the environment it grows in, and their non-linear interaction (G&times;E).
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-accession">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Accession</span>
+                                        <span class="glossary-term-tag">Sample Identifier</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        A distinct, cataloged biological seed line or variety held in a genebank repository. In GenoTrack, each accession (e.g. <code>A1256</code>) represents an inbred rice line with known pedigree, harvested from standardized experimental plots.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-snp">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">SNP (Single Nucleotide Polymorphism) / Marker</span>
+                                        <span class="glossary-term-tag">Feature Column</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        A specific single DNA letter position (A, C, G, or T) where individuals in a population vary. In GenoTrack, SNPs are identified by chromosome and base-pair coordinate (e.g. <code>S3_31725840</code> = Chromosome 3, base pair 31,725,840). SNPs serve as the individual predictive features in the machine learning matrix.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-dosage">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Allele Dosage (0.0, 1.0, 2.0)</span>
+                                        <span class="glossary-term-tag">Feature Value</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The numerical count of the alternative (non-reference) nucleotide at a given marker locus. In diploid organisms like rice, each plant carries two copies of every chromosome: <code>0.0</code> means zero alternate alleles (pure reference), <code>1.0</code> means one alternate allele (heterozygous), and <code>2.0</code> means two alternate alleles (pure alternate).
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-zygosity">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Zygosity (Ref/Ref, Alt/Alt, Ref/Alt)</span>
+                                        <span class="glossary-term-tag">Biological State</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        Describes whether the two copies of a chromosome carry matching or differing genetic variants:
+                                        <br>&bull; <strong>Ref/Ref (Homozygous Reference, dosage 0.0):</strong> Both maternal and paternal chromosomes match the standard Nipponbare reference sequence.
+                                        <br>&bull; <strong>Alt/Alt (Homozygous Alternate, dosage 2.0):</strong> Both chromosomes carry the mutated or alternative variant allele.
+                                        <br>&bull; <strong>Ref/Alt (Heterozygous, dosage 1.0):</strong> One chromosome carries the reference allele and the other carries the alternate allele.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-maf">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Minor Allele Frequency (MAF)</span>
+                                        <span class="glossary-term-tag">Quality Metric</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The frequency at which the less-common allele occurs across the entire panel. Markers with <code>MAF &lt; 0.05</code> (present in fewer than 5% of lines) are filtered out during data ingestion to eliminate noisy sequencing artifacts and prevent decision trees from overfitting to rare private variants.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-locus">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Locus &amp; Chromosome Coordinate</span>
+                                        <span class="glossary-term-tag">Spatial Mapping</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The physical address of a gene or marker along a chromosome, denoted by chromosome number and base-pair count from the short-arm telomere (e.g. <code>Chr 3 &bull; 31,725,840 bp</code>). Visualized in GenoTrack via the 3D Schematic Helix and Chromosome Ideogram strip.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cluster 2: Statistical Genomics & Environmental Interaction -->
+                        <div class="glossary-cluster">
+                            <h3 class="glossary-cluster-title">2. Statistical Genomics &amp; Environmental Interaction</h3>
+                            <div class="glossary-cards-list">
+                                <div class="glossary-item-card" id="glossary-gxe">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">G&times;E (Genotype-by-Environment) Interaction</span>
+                                        <span class="glossary-term-tag">Core Phenomenon</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The biological reality that genetic variants perform differently under different climate and management regimes. A rice variety possessing high yield potential under full irrigation may suffer severe yield drag under drought stress. GenoTrack explicitly models G&times;E through joint gradient-boosted interaction trees.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-covariates">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Environmental Covariates</span>
+                                        <span class="glossary-term-tag">Environmental Features</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        Continuous, field-recorded agro-climatic measurements for an experimental trial season: mean daily temperature (&deg;C), cumulative solar radiation (MJ/m&sup2;), precipitation (mm), soil moisture (%), and applied nitrogen (kg/ha).
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-gblup">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">GBLUP (Genomic Best Linear Unbiased Prediction)</span>
+                                        <span class="glossary-term-tag">Classical Baseline</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The gold-standard linear mixed model in quantitative genetics. GBLUP assumes traits are governed by thousands of small additive genetic effects proportional to an <em>N &times; N</em> genomic relationship matrix. GenoTrack uses Ridge regression as a fast, exact dual approximation of multi-environment GBLUP.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-kinship">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Kinship &amp; Population Structure</span>
+                                        <span class="glossary-term-tag">Pedigree Confounder</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The degree of shared ancestry and evolutionary divergence between individuals. Asian rice (*Oryza sativa*) is divided into ancient subpopulation groups (such as <em>indica</em> and <em>japonica</em>). If ignored, machine learning models simply memorize subpopulation labels rather than learning generalizable causal genetic effects.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cluster 3: Machine Learning & Model Explainability -->
+                        <div class="glossary-cluster">
+                            <h3 class="glossary-cluster-title">3. Machine Learning &amp; Model Explainability</h3>
+                            <div class="glossary-cards-list">
+                                <div class="glossary-item-card" id="glossary-cv">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Cross-Validation Accuracy (Pearson r)</span>
+                                        <span class="glossary-term-tag">Primary Metric</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The Pearson correlation coefficient between model-predicted yield (&ycirc;) and actual observed harvest yield (<em>y</em>) across held-out accessions. Plant breeders use Pearson <em>r</em> (predictive ability) because their primary decision is ranking candidate lines for advancement rather than predicting absolute numbers.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-shap">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">SHAP (SHapley Additive exPlanations)</span>
+                                        <span class="glossary-term-tag">Explainability</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        A game-theoretic framework that computes the exact marginal contribution of each genetic marker toward pushing predicted yield above or below the population baseline (measured in kg/ha). Allows breeders to audit why a particular candidate was predicted to yield 5,790 kg/ha before investing in multi-year field trials.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-baseline">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">Population Baseline</span>
+                                        <span class="glossary-term-tag">Reference Point</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        The expected average grain yield of the diversity panel across historical trials (4,850 kg/ha in GenoTrack). All additive genetic shifts, environmental shifts, and marker SHAP attributions are computed as signed deviations (+/&minus;) relative to this reference mean.
+                                    </p>
+                                </div>
+
+                                <div class="glossary-item-card" id="glossary-ci">
+                                    <div class="glossary-term-header">
+                                        <span class="glossary-term-name">95% Confidence Interval (CI) &amp; Standard Error</span>
+                                        <span class="glossary-term-tag">Uncertainty Bound</span>
+                                    </div>
+                                    <p class="glossary-term-def">
+                                        A calibrated interval reflecting predictive uncertainty (&plusmn;1.96 &times; SE). It communicates the realistic margin of agronomic variation expected from micro-environmental plot variability and measurement noise.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBPAGE 3: DATASET -->
+                    <div class="about-subpage" id="about-subpage-dataset">
+                        <div class="research-section-header">
+                            <h2 class="research-section-title">Dataset Specification &amp; Caveats</h2>
+                            <p class="research-section-desc">Full transparency on training data demographics, trial environments, and data cleaning decisions.</p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Panel Demographics</h3>
+                            <p class="prose-p">
+                                GenoTrack is trained and evaluated on a diverse panel of <strong>368 biological rice accessions</strong> (<em>Oryza sativa</em>) sourced from the International Rice Research Institute (IRRI) genebank. The panel represents the broad genetic diversity of cultivated Asian rice, encompassing accessions from the major subpopulations: <em>indica</em> (adapted to tropical lowlands), <em>tropical japonica</em>, <em>temperate japonica</em>, <em>aus</em> (drought-tolerant upland varieties), and <em>aromatic</em> (including basmati and jasmine types).
+                            </p>
+                            <p class="prose-p">
+                                The genomic feature space comprises <strong>67,084 high-density Single Nucleotide Polymorphism (SNP) markers</strong> mapped across all 12 rice chromosomes, filtered down from an initial set of 108,025 raw HapMap calls.
+                            </p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Experimental Field Trials</h3>
+                            <div class="prose-table-wrap">
+                                <table class="prose-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Trial Identifier</th>
+                                            <th>Season</th>
+                                            <th>Year</th>
+                                            <th>Mean Solar Radiation</th>
+                                            <th>Mean Temp</th>
+                                            <th>Trial Mean Yield</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>2009_DS</code></td>
+                                            <td>Dry Season</td>
+                                            <td>2009</td>
+                                            <td>21.8 MJ/m&sup2;</td>
+                                            <td>27.9 &deg;C</td>
+                                            <td>4,920 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2009_WS</code></td>
+                                            <td>Wet Season</td>
+                                            <td>2009</td>
+                                            <td>14.6 MJ/m&sup2;</td>
+                                            <td>28.4 &deg;C</td>
+                                            <td>4,210 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2010_DS</code></td>
+                                            <td>Dry Season</td>
+                                            <td>2010</td>
+                                            <td>22.4 MJ/m&sup2;</td>
+                                            <td>29.1 &deg;C</td>
+                                            <td>5,140 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2010_WS</code></td>
+                                            <td>Wet Season</td>
+                                            <td>2010</td>
+                                            <td>13.9 MJ/m&sup2;</td>
+                                            <td>28.1 &deg;C</td>
+                                            <td>3,980 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2011_DS</code></td>
+                                            <td>Dry Season (Optimal)</td>
+                                            <td>2011</td>
+                                            <td>21.4 MJ/m&sup2;</td>
+                                            <td>28.6 &deg;C</td>
+                                            <td>5,258 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2011_WS</code></td>
+                                            <td>Wet Season</td>
+                                            <td>2011</td>
+                                            <td>14.2 MJ/m&sup2;</td>
+                                            <td>28.0 &deg;C</td>
+                                            <td>4,115 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2012_DS</code></td>
+                                            <td>Dry Season</td>
+                                            <td>2012</td>
+                                            <td>20.9 MJ/m&sup2;</td>
+                                            <td>28.2 &deg;C</td>
+                                            <td>4,870 kg/ha</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>2012_WS</code></td>
+                                            <td>Wet Season</td>
+                                            <td>2012</td>
+                                            <td>14.8 MJ/m&sup2;</td>
+                                            <td>27.8 &deg;C</td>
+                                            <td>4,305 kg/ha</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Honest Data Hygiene &amp; Exclusions</h3>
+                            <p class="prose-p">
+                                We believe data quality decisions should be showcased rather than hidden:
+                            </p>
+                            <ul class="stands-list">
+                                <li><strong>Plate Controls Excluded:</strong> Non-biological laboratory control columns (<code>BLANK</code>) and quality-tracking metadata (<code>call_rate</code>) were stripped immediately during ingestion to prevent feature leakage.</li>
+                                <li><strong>Low-Frequency Filter (MAF &lt; 0.05):</strong> Monomorphic and near-monomorphic markers with Minor Allele Frequency below 5% were removed. This eliminated 40,941 noisy markers that carried insufficient statistical power.</li>
+                                <li><strong>High-Missingness Pruning:</strong> Markers missing more than 20% of genotype calls across the panel were dropped. Remaining missing calls (&lt; 2%) were imputed using sample-mode dosage.</li>
+                                <li><strong>Boundary Acknowledgment:</strong> This is a historical, retrospective dataset collected in standardized lowland research trials at IRRI in the Philippines. It is not a live streaming data feed, does not cover temperate rice production, and does not include wild rice outgroups.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SUBPAGE 4: MODEL & METHODOLOGY -->
+                    <div class="about-subpage" id="about-subpage-methodology">
+                        <div class="research-section-header">
+                            <h2 class="research-section-title">Model Architecture &amp; Methodology</h2>
+                            <p class="research-section-desc">Mathematical formulations, cross-validation design, and explainability boundaries.</p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">The G&times;E Mathematical Formulation</h3>
+                            <p class="prose-p">
+                                Traditional genomic selection models treat the target trait purely as an additive sum of marker effects. GenoTrack decomposes phenotypic performance into main effects plus environmental interactions:
+                            </p>
+                            <div class="tradeoff-card">
+                                <div class="tradeoff-title" style="font-family:var(--font-mono);">&ycirc;<sub>ij</sub> = &mu; + E<sub>j</sub> + g(X<sub>i</sub>) + ge(X<sub>i</sub>, E<sub>j</sub>)</div>
+                                <p class="tradeoff-desc">
+                                    Where <strong>&mu;</strong> is the global baseline panel mean (4,850 kg/ha), <strong>E<sub>j</sub></strong> is the macro-environmental shift for trial season <em>j</em>, <strong>g(X<sub>i</sub>)</strong> is the broad-sense additive genetic value across all environments, and <strong>ge(X<sub>i</sub>, E<sub>j</sub>)</strong> is the non-linear interaction effect between accession <em>i</em> and trial environment <em>j</em>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Why Population-Structure-Aware CV is Essential</h3>
+                            <p class="prose-p">
+                                In standard machine learning benchmarks, random <em>k</em>-fold splits are standard. In quantitative genetics, random splitting is disastrous: closely related accessions (such as sibling lines from the same breeding pedigree) are scattered into both training and validation folds.
+                            </p>
+                            <p class="prose-p">
+                                To prevent this, GenoTrack performs <strong>Patterson-standardized PCA</strong> (Patterson, Price, &amp; Reich 2006) on the dosage matrix:
+                            </p>
+                            <div class="tradeoff-card">
+                                <div class="tradeoff-title" style="font-family:var(--font-mono);">Z<sub>ij</sub> = (X<sub>ij</sub> &minus; 2p<sub>j</sub>) / &radic;(2p<sub>j</sub>(1 &minus; p<sub>j</sub>))</div>
+                                <p class="tradeoff-desc">
+                                    Where <em>p<sub>j</sub></em> is the estimated reference allele frequency for marker <em>j</em>. We cluster accessions into 5 ancestral subpopulations and enforce <code>StratifiedKFold</code>, ensuring that no evaluation fold is dominated by siblings of the training set. This accounts for the honest drop from <em>r</em> &approx; 0.88 (naive) to <em>r</em> = 0.8122 (rigorous).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">SHAP Attribution: What It Claims and Does Not Claim</h3>
+                            <p class="prose-p">
+                                TreeSHAP computes the additive marginal contribution of each marker toward pushing a prediction above or below the baseline under the specified environmental conditions.
+                            </p>
+                            <p class="prose-p">
+                                <strong>Important Nuance:</strong> A SHAP attribution of <code>+21.83 kg/ha</code> for <em>Hd1</em> indicates that, according to the trained decision trees under the 2011 Dry Season covariates, having the reference allele at <code>S3_31725840</code> is statistically associated with a 21.83 kg/ha gain over baseline. It represents <em>model attribution in this dataset</em>, not a wet-lab proven CRISPR knockout or mechanistic causal proof. We make this distinction clear so breeders treat attributions as prioritized screening hypotheses, not absolute molecular facts.
+                            </p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">MLOps Infrastructure &amp; Quality Gates</h3>
+                            <p class="prose-p">
+                                The system is built around strict reproducibility: DVC (Data Version Control) tracks immutable hashes of genotype matrices, MLflow logs model parameters and cross-validation curves, and an automated Python validation gate rejects any challenger model that regresses against baseline or exhibits single-fold instability (&gt; 0.05 Pearson <em>r</em> drop). Promoted models are served via a high-performance FastAPI backend.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SUBPAGE 5: PROJECT STORY -->
+                    <div class="about-subpage" id="about-subpage-story">
+                        <div class="research-section-header">
+                            <h2 class="research-section-title">Project Story &amp; Design Trade-offs</h2>
+                            <p class="research-section-desc">Why GenoTrack was built, the plant breeding challenge, and the three intentional trade-offs made.</p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Why GenoTrack Exists</h3>
+                            <p class="prose-p">
+                                Global agricultural yields must increase by 50% by 2050 under worsening climate volatility. Traditional plant breeding is slow: after making a cross between two promising parent lines, breeders must grow progeny across 5 to 8 generations of multi-location field trials before knowing whether a line has commercially viable yield.
+                            </p>
+                            <p class="prose-p">
+                                <strong>Genomic selection changes the math:</strong> By sequencing juvenile seedlings in a greenhouse, machine learning models predict mature field harvest yield directly from DNA. Breeders discard low-performing lines in days rather than years, doubling the rate of genetic gain per breeding cycle.
+                            </p>
+                        </div>
+
+                        <div class="prose-section">
+                            <h3 class="stands-title">Three Intentional Design Trade-offs</h3>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">1. Replay Canary Evaluation Instead of Live A/B Testing</h4>
+                                <p class="tradeoff-desc">
+                                    In consumer tech, A/B testing user traffic is the standard. In plant breeding, decisions have multi-year consequences and there is no live web traffic. Implementing a simulated A/B testing router would be fake theater. Instead, we built a rigorous replay canary gate: evaluating challenger models against retrospective held-out growing seasons before promoting them to production.
+                                </p>
+                            </div>
+
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">2. Crop-Agnostic Adapter Pattern with Parameterized Ploidy</h4>
+                                <p class="tradeoff-desc">
+                                    Although our initial validation dataset is Asian rice, hardcoding rice-specific column names into core feature pipelines would guarantee technical debt. We quarantined all crop-specific parsing in <code>crops/rice/</code> and decoupled the core modeling engine. The pipeline parameterizes ploidy (allowing future extension from diploid rice to polyploid wheat) and handles arbitrary marker matrices through a canonical contract.
+                                </p>
+                            </div>
+
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">3. Interpretable Tree Ensembles Over Black-Box Deep Learning</h4>
+                                <p class="tradeoff-desc">
+                                    Deep neural networks can produce competitive benchmark scores on genomics datasets, but act as uninterpretable black boxes. In agriculture, breeders will not advance a variety based on an opaque tensor output. We chose XGBoost coupled with TreeSHAP so that every single prediction can be audited down to physical chromosome coordinates and candidate QTL alleles.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </main>
         </div>
     </div>
@@ -7587,6 +8916,80 @@
                 }, 50);
             }
 
+            // ─── Research & About Subpage Navigation & Interaction ───
+            const aboutBreadcrumbEl = document.getElementById('about-breadcrumbs');
+            const subpageTabs = document.querySelectorAll('.about-subpage-tab');
+            const subpages = document.querySelectorAll('.about-subpage');
+
+            const subpageTitles = {
+                'landing': 'Overview & Findings',
+                'glossary': 'Glossary',
+                'dataset': 'Dataset',
+                'methodology': 'Model & Methodology',
+                'story': 'Project Story'
+            };
+
+            function openAboutSubpage(subpageId, anchorId) {
+                // Ensure dashboard is on 'about' view
+                if (window.setDashboardView) {
+                    window.setDashboardView('about');
+                }
+
+                const tabs = document.querySelectorAll('.about-subpage-tab');
+                const pages = document.querySelectorAll('.about-subpage');
+                const breadcrumb = document.getElementById('about-breadcrumbs');
+
+                // Switch subpage tabs
+                tabs.forEach(tab => {
+                    const matches = tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(subpageId);
+                    tab.classList.toggle('active', !!matches);
+                });
+
+                // Switch subpage containers
+                pages.forEach(sp => {
+                    const isTarget = sp.id === `about-subpage-${subpageId}`;
+                    sp.classList.toggle('active', isTarget);
+                });
+
+                // Update breadcrumb
+                if (breadcrumb) {
+                    if (subpageId === 'landing') {
+                        breadcrumb.innerHTML = '<span class="about-crumb-current">Research &amp; About</span>';
+                    } else {
+                        breadcrumb.innerHTML = `
+                            <a class="about-crumb-link" onclick="window.openAboutSubpage('landing')">Research &amp; About</a>
+                            <span class="about-crumb-sep">/</span>
+                            <span class="about-crumb-current">${subpageTitles[subpageId] || subpageId}</span>
+                        `;
+                    }
+                }
+
+                // If anchorId is provided, scroll to it with highlight animation
+                if (anchorId) {
+                    setTimeout(() => {
+                        const targetEl = document.getElementById(anchorId);
+                        if (targetEl) {
+                            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            targetEl.classList.remove('term-highlight');
+                            void targetEl.offsetWidth; // trigger reflow
+                            targetEl.classList.add('term-highlight');
+                        }
+                    }, 80);
+                } else {
+                    const canvasWrap = document.getElementById('ent-canvas-wrap');
+                    if (canvasWrap) canvasWrap.scrollTop = 0;
+                }
+            }
+            window.openAboutSubpage = openAboutSubpage;
+
+            window.navigateToGlossary = function(termKey) {
+                openAboutSubpage('glossary', 'glossary-' + termKey);
+            };
+
+            window.scrollToTest = function(testId) {
+                openAboutSubpage('landing', testId);
+            };
+
             window.setDashboardView = setDashboardView;
             setDashboardView('all');
 
@@ -7807,11 +9210,11 @@
                                 <td>
                                     <div class="locus-chrom-data">${meta.chrom}</div>
                                     <div class="locus-coord-data">${meta.pos}</div>
-                                    <div class="locus-snp-data">${m.marker_id}</div>
+                                    <div class="locus-snp-data"><span class="term-link" onclick="event.stopPropagation(); window.navigateToGlossary('snp');" title="Click to view SNP definition">${m.marker_id}</span></div>
                                 </td>
                                 <td>
                                     <div class="dosage-cell">
-                                        <span class="dosage-notation dosage-${dosageInfo.type}">${dosageInfo.notation}</span>
+                                        <span class="dosage-notation dosage-${dosageInfo.type} term-link" onclick="event.stopPropagation(); window.navigateToGlossary('zygosity');" title="Click to view Zygosity definition">${dosageInfo.notation}</span>
                                         <span class="dosage-desc">${dosageInfo.desc}</span>
                                     </div>
                                 </td>
@@ -7918,7 +9321,7 @@
     }, true);
 
 (function () {
-    const validViews = ['all', 'yield', 'decomp', 'shap'];
+    const validViews = ['all', 'yield', 'decomp', 'shap', 'about'];
 
     function applyDashboardView(viewName) {
         if (!validViews.includes(viewName)) return;
