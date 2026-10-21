@@ -58,6 +58,16 @@ htmlcov/
 mlruns/
 .mlflow/
 mlartifacts/
+*.db-journal
+*.sqlite-journal
+
+# Metaflow artifacts & cards
+.metaflow/
+.metaflow_cards/
+
+# Observability data
+prometheus_data/
+grafana_data/
 
 # DVC local storage & cache
 .dvc/cache

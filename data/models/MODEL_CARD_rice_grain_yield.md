@@ -1,16 +1,16 @@
-# GenoTrack Model Card: Rice — Grain Yield
+# GenoTrack Model Card: Rice â€” Grain Yield
 
 ## Model Summary
 - **Crop:** rice
 - **Target Trait:** grain_yield
 - **Model Architecture:** GxE XGBoost Regressor (Additive Genetic + Environmental Interaction)
-- **Deployment Stage:** `Production`
-- **Promotion Timestamp:** `2026-10-10T11:07:28.582135Z`
+- **Deployment Stage:** `Staging`
+- **Promotion Timestamp:** `2026-10-21T18:28:51.755236Z`
 
 ## Lineage & Governance
-- **Data Hash (SHA256):** `7f17c1f2a3fb4796b817c50f040350b092f1f86204b5b288197c2cd244020954`
+- **Data Hash (SHA256):** `3a99d12961a269ee498c85435ebfecdb007f0ff9abf2f01f95716de04c6866e9`
 - **Config Hash (SHA256):** `22d3ec0c3f95c6d6d45fac63fa24bcca13c475a3728f92d8d9da37a2975013f5`
-- **MLflow Run ID:** `3d30f134a2784f4baa0320acaf0ce857`
+- **MLflow Run ID:** `0abeca497d1542ee849b7f754ea80233`
 - **Validation Gate Decision:** `PASSED`
 
 ## Cross-Validation Performance

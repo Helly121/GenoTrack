@@ -74,15 +74,20 @@ def train_and_track(
     print(f"[{crop_name}] Loading model dataset for '{target_trait}'...")
     df_data = pd.read_parquet(dataset_path)
 
+    dosage_path = processed_dir / "dosage_matrix.parquet"
+    if not dosage_path.exists():
+        raise FileNotFoundError(f"Dosage matrix not found at {dosage_path}. Run features first.")
+    print(f"[{crop_name}] Loading dosage matrix from {dosage_path.name}...")
+    df_dosage = pd.read_parquet(dosage_path)
+
     # Extract target y, environments E, and marker matrix X
-    marker_cols = metadata["marker_ids"]
-    X_geno = df_data[marker_cols].values.astype(np.float32)
+    sample_ids = df_data["sample_id"].values
+    X_geno = df_dosage.loc[sample_ids].values.astype(np.float32)
     envs = df_data["environment"].values
     y = df_data["value"].values.astype(np.float32)
-    sample_ids = df_data["sample_id"].values
     clusters = df_data["subpopulation_cluster"]
     n_obs = len(df_data)
-    del df_data
+    del df_data, df_dosage
     import gc
     gc.collect()
 
