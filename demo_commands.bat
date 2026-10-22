@@ -12,10 +12,11 @@ echo  LIVE SERVICE URLS:
 echo    [1] Scientific Dashboard:  http://localhost:8008/
 echo    [2] FastAPI Swagger Docs:  http://localhost:8008/docs
 echo    [3] Prometheus Metrics:    http://localhost:8008/metrics
-echo    [4] Prometheus UI:         http://localhost:9090
-echo    [5] Grafana Dashboard:     http://localhost:3001  (admin / admin)
-echo    [6] MLflow UI:             http://localhost:5000
-echo    [7] Metaflow Card Server:  http://localhost:8324
+echo    [4] Prometheus Alerts:     http://localhost:9090/alerts
+echo    [5] Prometheus Targets:    http://localhost:9090/targets
+echo    [6] Grafana Dashboard:     http://localhost:3001  (admin / admin)
+echo    [7] MLflow UI:             http://localhost:5000
+echo    [8] Metaflow Card Server:  http://localhost:8324
 echo.
 echo -------------------------------------------------------------------------------
 echo  ACTIONS:
@@ -103,7 +104,7 @@ start http://localhost:8008/
 start http://localhost:8008/docs
 start http://localhost:5000
 start http://localhost:3001
-start http://localhost:9090
+start http://localhost:9090/alerts
 goto MENU
 
 :EXIT

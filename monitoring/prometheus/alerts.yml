@@ -1,0 +1,43 @@
+groups:
+  - name: genotrack_mlops_alerts
+    interval: 5s
+    rules:
+      - alert: HighInferenceLatency
+        expr: (histogram_quantile(0.95, sum(rate(genotrack_inference_latency_seconds_bucket[5m])) by (le)) or histogram_quantile(0.95, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000 > 300
+        for: 15s
+        labels:
+          severity: warning
+          component: serving
+        annotations:
+          summary: "Model inference p95 latency exceeds 300ms SLA"
+          description: "Current p95 latency is {{ $value | printf \"%.1f\" }}ms across serving endpoints."
+
+      - alert: SevereCovariateDrift
+        expr: max(genotrack_covariate_missing_hill_ratio) > 0.20
+        for: 10s
+        labels:
+          severity: warning
+          component: data_quality
+        annotations:
+          summary: "Observed missing hill covariate ratio exceeds 20%"
+          description: "Agronomic field data quality drift detected in incoming plot trials."
+
+      - alert: GenoTrackAPIOffline
+        expr: up{job="genotrack-api", instance="host.docker.internal:8008"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          component: infrastructure
+        annotations:
+          summary: "GenoTrack serving instance is unreachable"
+          description: "Prometheus scraper cannot reach host.docker.internal:8008/metrics."
+
+      - alert: ElevatedPredictionErrors
+        expr: sum(rate(genotrack_predictions_total{status="error"}[2m])) > 0
+        for: 10s
+        labels:
+          severity: critical
+          component: model
+        annotations:
+          summary: "Active prediction failures detected on serving layer"
+          description: "Model serving errors detected in last 2 minutes."

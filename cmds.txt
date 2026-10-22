@@ -28,10 +28,13 @@ All core services are actively running and pre-seeded with real data:
   Notes:       Plaintext Prometheus format
   Purpose:     Live telemetry exporter (throughput, latency, drift, active version)
 
-* Prometheus Monitoring Dashboard:
+* Prometheus Monitoring & Telemetry:
   URL:         http://localhost:9090
+  Targets:     http://localhost:9090/targets (100% UP Scraper Health)
+  Alerts:      http://localhost:9090/alerts (MLOps SLA & Covariate Drift Rules)
+  Live Graph:  http://localhost:9090/graph?g0.expr=sum(rate(genotrack_predictions_total[1m]))%20by%20(environment)&g0.tab=0&g0.range_input=15m
   Notes:       No auth required
-  Purpose:     Time-series scraper, expression browser, and active target health
+  Purpose:     Time-series scraper, MLOps alerting rules, and PromQL expression browser
 
 * Grafana Monitoring Dashboard:
   URL:         http://localhost:3001
@@ -167,9 +170,25 @@ PART 4: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
   curl http://localhost:8008/metrics
 
 * What to Show in Browser:
-  1. Prometheus Targets (http://localhost:9090/targets): Show genotrack-api reporting
-     healthy UP status.
-  2. Grafana Dashboard (http://localhost:3001):
+  1. Prometheus Targets (http://localhost:9090/targets):
+     - Show genotrack-api reporting 1/1 UP (100% green health).
+     - Confirms Prometheus is actively scraping FastAPI /metrics endpoint every 5s.
+
+  2. Prometheus Alerting Rules (http://localhost:9090/alerts):
+     - Demonstrates enterprise MLOps alerting with 4 active rules:
+       * HighInferenceLatency (p95 > 300ms SLA warning)
+       * SevereCovariateDrift (missing hill ratio > 20% data drift warning)
+       * GenoTrackAPIOffline (instance down critical alert)
+       * ElevatedPredictionErrors (5xx error rate critical alert)
+     - Explain how rule states transition from Inactive -> Pending -> Firing.
+
+  3. Prometheus PromQL Live Graph:
+     - URL: http://localhost:9090/graph?g0.expr=sum(rate(genotrack_predictions_total[1m]))%20by%20(environment)&g0.tab=0&g0.range_input=15m
+     - Renders real-time multi-line throughput curves broken down across all 7 trial environments.
+     - Note: Default http://localhost:9090 opens with an empty query box ("No data queried yet");
+       always open the pre-executed URL above or click Execute to render graphs instantly.
+
+  4. Grafana Dashboard (http://localhost:3001):
      - Log in with admin / admin.
      - Open Dashboards -> MLOps -> GenoTrack MLOps Telemetry & Model Monitoring.
      - Show the panels updating in real time: Prediction Throughput, Latency Percentiles
