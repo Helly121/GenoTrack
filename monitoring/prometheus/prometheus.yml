@@ -6,4 +6,4 @@ scrape_configs:
   - job_name: "genotrack-api"
     metrics_path: "/metrics"
     static_configs:
-      - targets: ["genotrack-api:8000", "host.docker.internal:8000", "localhost:8000"]
+      - targets: ["host.docker.internal:8008", "genotrack-api:8000"]
