@@ -158,8 +158,10 @@ PART 4: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
   # 1. Start Prometheus and Grafana containers:
   docker compose up -d prometheus grafana
 
-  # 2. Inject realistic synthetic telemetry (50 requests across multi-season trials):
-  python monitoring/seed_telemetry.py --endpoint http://localhost:8008 --requests 50
+  # 2. Start continuous live traffic stream (keeps Grafana actively updating):
+  python monitoring/traffic_generator.py --url http://localhost:8008 --interval 2.5
+  # (Or send a single 50-request burst):
+  # python monitoring/seed_telemetry.py --endpoint http://localhost:8008 --requests 50
 
   # 3. Check live scraped metrics:
   curl http://localhost:8008/metrics

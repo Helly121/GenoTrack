@@ -1,29 +1,42 @@
 {
-  "annotations": { "list": [] },
+  "annotations": {
+    "list": []
+  },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 1,
+  "graphTooltip": 2,
   "id": null,
   "links": [],
-  "liveNow": false,
+  "liveNow": true,
   "panels": [
     {
       "collapsed": false,
       "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
       "id": 1,
       "title": "Active Production Model",
+      "description": "GenoTrack Kinship-Aware XGBoost GxE Architecture",
       "type": "stat",
       "targets": [
         {
           "expr": "genotrack_active_model_version",
-          "legendFormat": "{{crop}} - {{trait}} (v{{version}})",
+          "legendFormat": "v2 · Production",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "thresholds" },
-          "mappings": [],
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "1": {
+                  "text": "v2 · Production",
+                  "color": "green"
+                }
+              }
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -31,6 +44,18 @@
             ]
           }
         }
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center"
       }
     },
     {
@@ -42,83 +67,113 @@
       "targets": [
         {
           "expr": "sum(genotrack_predictions_total)",
-          "legendFormat": "Predictions",
+          "legendFormat": "Inferences",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
-          "unit": "short"
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "#73BF69", "value": null }
+            ]
+          }
         }
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"]
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
       }
     },
     {
       "collapsed": false,
       "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
       "id": 3,
-      "title": "95th Percentile Latency",
+      "title": "p95 Latency SLA",
       "type": "stat",
       "targets": [
         {
-          "expr": "histogram_quantile(0.95, sum(rate(genotrack_inference_latency_seconds_bucket[1m])) by (le))",
+          "expr": "(histogram_quantile(0.95, sum(rate(genotrack_inference_latency_seconds_bucket[5m])) by (le)) or histogram_quantile(0.95, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000",
           "legendFormat": "p95",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
-          "unit": "s",
+          "unit": "ms",
+          "decimals": 1,
           "color": { "mode": "thresholds" },
           "thresholds": {
             "mode": "absolute",
             "steps": [
               { "color": "green", "value": null },
-              { "color": "yellow", "value": 0.2 },
-              { "color": "red", "value": 0.5 }
+              { "color": "yellow", "value": 150 },
+              { "color": "red", "value": 300 }
             ]
           }
         }
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"]
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
       }
     },
     {
       "collapsed": false,
       "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
       "id": 4,
-      "title": "Max Covariate Drift Ratio",
+      "title": "Max Missing-Hill Drift",
       "type": "gauge",
       "targets": [
         {
           "expr": "max(genotrack_covariate_missing_hill_ratio)",
-          "legendFormat": "Missing Hill",
+          "legendFormat": "Max Drift",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
           "min": 0,
-          "max": 1,
+          "max": 0.3,
           "unit": "percentunit",
+          "decimals": 1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               { "color": "green", "value": null },
               { "color": "orange", "value": 0.15 },
-              { "color": "red", "value": 0.25 }
+              { "color": "red", "value": 0.22 }
             ]
           }
         }
+      },
+      "options": {
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       }
     },
     {
       "collapsed": false,
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
       "id": 5,
-      "title": "Inference Throughput (RPS by Environment)",
+      "title": "Inference Throughput by Trial Environment (RPS)",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "sum(rate(genotrack_predictions_total[1m])) by (environment)",
+          "expr": "sum by (environment) (rate(genotrack_predictions_total[1m])) or (sum by (environment) (increase(genotrack_predictions_total[5m])) / 300)",
           "legendFormat": "{{environment}}",
           "refId": "A"
         }
@@ -128,9 +183,22 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 15
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "gradientMode": "opacity"
           },
           "unit": "reqps"
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["lastNotNull", "max", "mean"]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
       }
     },
@@ -142,18 +210,18 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "histogram_quantile(0.50, sum(rate(genotrack_inference_latency_seconds_bucket[1m])) by (le))",
-          "legendFormat": "p50",
+          "expr": "(histogram_quantile(0.50, sum(rate(genotrack_inference_latency_seconds_bucket[2m])) by (le)) or histogram_quantile(0.50, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000",
+          "legendFormat": "p50 Median",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.90, sum(rate(genotrack_inference_latency_seconds_bucket[1m])) by (le))",
-          "legendFormat": "p90",
+          "expr": "(histogram_quantile(0.90, sum(rate(genotrack_inference_latency_seconds_bucket[2m])) by (le)) or histogram_quantile(0.90, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000",
+          "legendFormat": "p90 Warning",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(genotrack_inference_latency_seconds_bucket[1m])) by (le))",
-          "legendFormat": "p99",
+          "expr": "(histogram_quantile(0.99, sum(rate(genotrack_inference_latency_seconds_bucket[2m])) by (le)) or histogram_quantile(0.99, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000",
+          "legendFormat": "p99 Tail SLA",
           "refId": "C"
         }
       ],
@@ -161,22 +229,87 @@
         "defaults": {
           "custom": {
             "drawStyle": "line",
-            "lineInterpolation": "linear"
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "spanNulls": true
           },
-          "unit": "s"
+          "unit": "ms",
+          "decimals": 1
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "p50 Median" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "#73BF69", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "p90 Warning" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "#FADE2A", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "p99 Tail SLA" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "#F2495C", "mode": "fixed" } }]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["lastNotNull", "max", "mean"]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
       }
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 12 },
       "id": 7,
-      "title": "Predicted Yield Distribution (kg/ha by Environment)",
+      "title": "Mean Predicted Grain Yield (kg/ha)",
       "type": "bargauge",
       "targets": [
         {
-          "expr": "sum(rate(genotrack_predicted_yield_kg_ha_bucket[5m])) by (le, environment)",
-          "legendFormat": "{{environment}} <= {{le}} kg/ha",
+          "expr": "sum by (environment) (genotrack_predicted_yield_kg_ha_sum) / sum by (environment) (genotrack_predicted_yield_kg_ha_count)",
+          "legendFormat": "{{environment}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "custom": {
+            "suffix": " kg/ha"
+          },
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "orange", "value": null },
+              { "color": "blue", "value": 4500 },
+              { "color": "green", "value": 5200 }
+            ]
+          }
+        }
+      },
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 12 },
+      "id": 8,
+      "title": "Traffic Volume by Trial Environment",
+      "type": "piechart",
+      "targets": [
+        {
+          "expr": "sum by (environment) (genotrack_predictions_total)",
+          "legendFormat": "{{environment}}",
           "refId": "A"
         }
       ],
@@ -185,44 +318,157 @@
           "color": { "mode": "palette-classic" },
           "unit": "short"
         }
+      },
+      "options": {
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "values": false
+        },
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       }
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
-      "id": 8,
-      "title": "Prediction Success vs Error Count",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 12 },
+      "id": 9,
+      "title": "Field Quality: Missing Hill Drift Ratio",
+      "type": "bargauge",
+      "targets": [
+        {
+          "expr": "genotrack_covariate_missing_hill_ratio",
+          "legendFormat": "{{environment}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "max": 0.3,
+          "unit": "percentunit",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 0.15 },
+              { "color": "red", "value": 0.22 }
+            ]
+          }
+        }
+      },
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "basic",
+        "showUnfilled": true
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 5, "w": 16, "x": 0, "y": 20 },
+      "id": 10,
+      "title": "Prediction Status: Success vs. Errors (req/s)",
       "type": "timeseries",
       "targets": [
         {
-          "expr": "sum(rate(genotrack_predictions_total{status='success'}[1m]))",
-          "legendFormat": "Success",
+          "expr": "sum(rate(genotrack_predictions_total{status='success'}[1m])) or (sum(increase(genotrack_predictions_total{status='success'}[5m])) / 300)",
+          "legendFormat": "Success Rate",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(genotrack_predictions_total{status='error'}[1m]))",
-          "legendFormat": "Errors",
+          "expr": "sum(rate(genotrack_predictions_total{status='error'}[1m])) or (sum(increase(genotrack_predictions_total{status='error'}[5m])) / 300)",
+          "legendFormat": "Error Rate",
           "refId": "B"
         }
       ],
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "drawStyle": "line"
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 15
           },
-          "color": { "mode": "palette-classic" }
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Success Rate" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "#73BF69", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Error Rate" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "#F2495C", "mode": "fixed" } }]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
         }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 5, "w": 8, "x": 16, "y": 20 },
+      "id": 11,
+      "title": "Prometheus Scraper Target Health",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "up{job='genotrack-api', instance='host.docker.internal:8008'}",
+          "legendFormat": "GenoTrack API",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "1": { "text": "ONLINE (Healthy)", "color": "green" },
+                "0": { "text": "OFFLINE (Degraded)", "color": "red" }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center"
       }
     }
   ],
   "refresh": "5s",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": ["mlops", "genotrack", "genomics"],
-  "time": { "from": "now-15m", "to": "now" },
-  "timepicker": { "refresh_intervals": ["5s", "10s", "30s", "1m"] },
+  "tags": ["mlops", "genotrack", "genomics", "monitoring"],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": ["5s", "10s", "30s", "1m", "5m"]
+  },
   "timezone": "browser",
   "title": "GenoTrack MLOps Telemetry & Model Monitoring",
   "uid": "genotrack-telemetry-ops",
-  "version": 1
+  "version": 2
 }

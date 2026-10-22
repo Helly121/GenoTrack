@@ -67,8 +67,9 @@ pause
 goto MENU
 
 :SEED_TELEMETRY
-echo Injecting 50 simulated inference requests into Prometheus/Grafana...
-python monitoring/seed_telemetry.py --endpoint http://localhost:8008 --requests 50
+echo Launching continuous telemetry generator in new window (keeps Grafana alive)...
+start "GenoTrack Telemetry Stream" python monitoring/traffic_generator.py --url http://localhost:8008 --interval 2.5
+echo Traffic generator running! Open Grafana at http://localhost:3001 to view live updates.
 pause
 goto MENU
 
