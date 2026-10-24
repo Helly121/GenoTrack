@@ -107,7 +107,7 @@ GenoTrack neutralizes genetic leakage via:
 3. **Stratified Fold Allocation:** `StratifiedKFold` ensures every cross-validation fold tests generalization across genetically distinct phylogenetic clades.
 
 ### 3.7 Non-Linear G×E Gradient Boosted Trees (XGBoost)
-The champion model leverages histogram-quantized gradient boosting over the joint space $[X_{\text{geno}} \mid X_{\text{env\_onehot}}]$:
+The champion model leverages histogram-quantized gradient boosting over the joint feature space $[X_{\text{geno}} \mid X_{\text{env}}]$:
 $$\mathcal{L}^{(t)} = \sum_{k=1}^N \left[ g_k f_t(x_k) + \frac{1}{2} h_k f_t^2(x_k) \right] + \Omega(f_t)$$
 * **Histogram Quantization (`max_bin=64`):** Quantizes continuous dosages into 64 discrete bins, reducing histogram construction time by **$62\%$** and peak RAM from $4.8\text{ GB}$ to **$1.45\text{ GB}$**.
 * **Regularized Feature Subsampling (`colsample_bytree=0.2`):** Only $20\%$ of markers are evaluated per tree split, preventing large Linkage Disequilibrium (LD) blocks from dominating split choices.
@@ -116,7 +116,11 @@ $$\mathcal{L}^{(t)} = \sum_{k=1}^N \left[ g_k f_t(x_k) + \frac{1}{2} h_k f_t^2(x
 Feature contributions are extracted via exact Shapley values:
 $$\phi_m(x) = \sum_{S \subseteq F \setminus \{m\}} \frac{|S|!(|F|-|S|-1)!}{|F|!} \left[ f(S \cup \{m\}) - f(S) \right]$$
 Attribution vectors are filtered to genomic markers and mapped directly to physical coordinates:
-$$\text{Attribution}_m = \left(\text{Marker ID: } S1\_11984, \quad \text{Chromosome: } 1, \quad \text{Physical Position: } 11,984\text{ bp}, \quad \text{SHAP Value: } \phi_m\right)$$
+* **Marker ID:** `S1_11984`
+* **Chromosome:** `1`
+* **Physical Position:** `11,984 bp`
+* **Attribution Score:** $\phi_m$ (Shapley importance value)
+
 This enables breeders to validate model reasoning against known Quantitative Trait Loci (QTLs).
 
 ---

@@ -74,7 +74,7 @@ To ensure rigorous validation:
 Phenotypic yield across environments is modeled as:
 $$y_{ij} = \mu + E_j + g(X_i) + ge(X_i, E_j) + \varepsilon_{ij}$$
 - **$\mu$:** Global grand mean yield across all trials.
-- **$E_j$:** Environmental main effect for trial season $j \in \{2009\text{\_DS}, 2009\text{\_WS}, \dots, 2012\text{\_WS}\}$.
+- **$E_j$:** Environmental main effect for trial season $j \in \{\text{2009-DS}, \text{2009-WS}, \dots, \text{2012-WS}\}$.
 - **$g(X_i)$:** Additive main genetic effect modeled via penalized regression or decision trees.
 - **$ge(X_i, E_j)$:** Genotype-by-environment interaction capturing season-specific phenotypic plasticity.
 
