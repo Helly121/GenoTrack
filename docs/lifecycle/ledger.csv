@@ -1,0 +1,17 @@
+tick,scenario_event,n_lines,covariate_drift_score,genotype_drift_score,prediction_drift_score,labels_arrived_for_tick,realized_rmse,realized_r,trigger_fired,trigger_reason,retrain_run_id,champion_version,challenger_version,gate_result,promoted,frozen_baseline_rmse
+0,,300,0.0741,0.1717,0.7631,,,,False,,,1,,,False,
+1,,300,0.0741,0.2123,0.7064,0.0,1304.99,0.0543,False,,,1,,,False,1304.99
+2,,300,0.1111,0.2425,0.7488,1.0,1054.42,0.0509,False,,,1,,,False,1054.42
+3,,300,0.037,0.3168,0.7694,2.0,1485.99,0.0661,False,,,1,,,False,1485.99
+4,,300,0.0741,0.3982,0.6948,3.0,1030.9,0.088,False,,,1,,,False,1030.9
+5,,300,0.1852,0.416,0.7943,4.0,1425.01,0.0776,False,,,1,,,False,1425.01
+6,,300,0.1111,0.5856,0.6266,5.0,988.63,-0.0442,False,,,1,,,False,988.63
+7,,300,0.4074,0.6641,0.8171,6.0,1485.93,0.1203,True,Persistent covariate drift for K=2 consecutive seasons,run_7_stable_control,2,2,PASSED,True,1485.93
+8,,300,0.0741,0.2608,0.1133,7.0,990.5,0.0256,False,,,2,,,False,990.5
+9,,300,0.0741,0.4728,0.75,8.0,921.49,0.5096,False,,,2,,,False,1870.98
+10,,300,0.1111,0.4877,0.1767,9.0,1034.0,0.3296,False,,,2,,,False,1284.4
+11,,300,0.037,0.6605,0.7467,10.0,1039.12,0.4188,False,,,2,,,False,1393.7
+12,,300,0.1852,0.7044,0.2633,11.0,1029.29,0.2218,False,,,2,,,False,1377.05
+13,,300,0.1852,0.7945,0.7433,12.0,1238.82,0.179,True,Persistent covariate drift for K=2 consecutive seasons,run_13_stable_control,3,3,PASSED,True,2282.95
+14,,300,0.1111,0.4326,0.2633,13.0,1015.99,0.3229,False,,,3,,,False,1538.59
+15,,300,0.037,0.6724,0.8233,14.0,1033.22,0.5187,False,,,3,,,False,2265.91

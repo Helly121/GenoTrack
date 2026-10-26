@@ -1,0 +1,20 @@
+drift:
+  covariate_drift_p_value: 0.005
+  covariate_drift_ks_stat_threshold: 0.26
+  covariate_drift_share_threshold: 0.35
+  climate_z_score_threshold: 1.25
+  genotype_domain_classifier_auc_threshold: 0.75
+  allele_frequency_maf_delta_threshold: 0.075
+  prediction_drift_p_value: 0.005
+  prediction_drift_ks_threshold: 0.25
+
+performance:
+  initial_baseline_rmse: 1350.0
+  rmse_degradation_pct_threshold: 25.0
+  min_labeled_samples: 250
+
+policy:
+  consecutive_drift_ticks_k: 2
+  cooldown_ticks: 2
+  training_window: expanding
+  tau: 0.35

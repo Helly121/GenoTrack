@@ -1,0 +1,6 @@
+seed: 42
+ticks: 16
+label_lag: 1
+cohort_size: 300
+parent_policy: top_predicted
+events: []

@@ -1,0 +1,25 @@
+seed: 99
+ticks: 16
+label_lag: 1
+cohort_size: 300
+parent_policy: top_predicted
+events:
+  - tick: 4
+    type: covariate_shift
+    params:
+      mean_temp_delta_c: 1.5
+      rainfall_scale: 0.8
+  - tick: 7
+    type: genotype_shift
+    params:
+      immigrant_fraction: 0.20
+  - tick: 10
+    type: concept_drift
+    params:
+      qtl: DEP1
+      effect_multiplier: -0.6
+  - tick: 14
+    type: data_quality
+    params:
+      missing_hill_spike: 0.35
+      corrupted_calls_fraction: 0.015

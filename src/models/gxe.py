@@ -77,16 +77,19 @@ class GxERidgeModel(BaseEstimator, RegressorMixin):
 
         preds = np.zeros(X_geno.shape[0], dtype=float)
         for i, env in enumerate(envs):
-            if env == "across_environments" or env not in self.env_effects_:
-                # Broad-sense genetic prediction
-                preds[i] = self.global_mean_ + g_pred[i]
-            else:
-                env_eff = self.env_effects_.get(env, 0.0)
-                # Interaction adjustment if model exists
+            if env in self.env_effects_:
+                env_eff = self.env_effects_[env]
                 ge_eff = 0.0
                 if env in self.env_interaction_models_:
                     ge_eff = float(self.env_interaction_models_[env].predict(X_geno[i : i + 1])[0])
                 preds[i] = self.global_mean_ + env_eff + g_pred[i] + ge_eff
+            else:
+                matching_effs = [
+                    eff for e_name, eff in self.env_effects_.items()
+                    if ("_DS" in str(env) and "_DS" in str(e_name)) or ("_WS" in str(env) and "_WS" in str(e_name))
+                ]
+                env_eff = float(np.mean(matching_effs)) if matching_effs else 0.0
+                preds[i] = self.global_mean_ + env_eff + g_pred[i]
 
         return preds
 
@@ -146,20 +149,27 @@ class GxEXGBoostModel(BaseEstimator, RegressorMixin):
         X_geno = np.asarray(X_geno, dtype=np.float32)
         single_env = isinstance(envs, str)
         if single_env:
-            envs = np.full(X_geno.shape[0], envs)
+            env_name = envs
+            if env_name in self.environments_:
+                env_one_hot = np.zeros((X_geno.shape[0], len(self.environments_)), dtype=np.float32)
+                j = self.environments_.index(env_name)
+                env_one_hot[:, j] = 1.0
+                return self.model_.predict(np.hstack([X_geno, env_one_hot]))
+            else:
+                matching_envs = [
+                    e for e in self.environments_
+                    if ("_DS" in str(env_name) and "_DS" in str(e)) or ("_WS" in str(env_name) and "_WS" in str(e))
+                ]
+                if matching_envs:
+                    preds_list = [self.predict(X_geno, e) for e in matching_envs]
+                    return np.mean(preds_list, axis=0)
+                else:
+                    env_one_hot = np.full((X_geno.shape[0], len(self.environments_)), 1.0 / len(self.environments_), dtype=np.float32)
+                    return self.model_.predict(np.hstack([X_geno, env_one_hot]))
         else:
             envs = np.asarray(envs, dtype=str)
+            preds = np.zeros(X_geno.shape[0], dtype=np.float32)
+            for i, env_name in enumerate(envs):
+                preds[i : i + 1] = self.predict(X_geno[i : i + 1], str(env_name))
+            return preds
 
-        env_one_hot = np.zeros((len(envs), len(self.environments_)), dtype=np.float32)
-        for i, env_name in enumerate(envs):
-            if env_name == "across_environments":
-                # Average across all environments
-                env_one_hot[i, :] = 1.0 / len(self.environments_)
-            elif env_name in self.environments_:
-                j = self.environments_.index(env_name)
-                env_one_hot[i, j] = 1.0
-            else:
-                env_one_hot[i, :] = 1.0 / len(self.environments_)
-
-        X_joint = np.hstack([X_geno, env_one_hot])
-        return self.model_.predict(X_joint)

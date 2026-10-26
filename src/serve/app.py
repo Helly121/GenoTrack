@@ -301,6 +301,91 @@ def predict_dosage(req: DosagePredictionRequest):
     return resp
 
 
+class CohortItem(BaseModel):
+    sample_id: str
+    dosage_vector: Optional[list[float]] = None
+    environment: str = "across_environments"
+    covariates: Optional[dict] = None
+
+
+class UniversalPredictRequest(BaseModel):
+    sample_id: Optional[str] = None
+    dosage_vector: Optional[list[float]] = None
+    environment: str = "across_environments"
+    covariates: Optional[dict] = None
+    batch: Optional[list[CohortItem]] = None
+
+
+@app.post("/predict")
+def predict(req: UniversalPredictRequest):
+
+    """
+    Universal prediction endpoint for GenoTrack.
+    Supports single sample_id, single dosage_vector, or batch cohort predictions.
+    Instruments Prometheus counter, latency histogram, and yield distribution metrics.
+    """
+    start_time = time.perf_counter()
+    if CACHE["model"] is None:
+        load_model_assets()
+    if CACHE["model"] is None:
+        PREDICTIONS_COUNTER.labels(environment=req.environment, target_trait="grain_yield", status="error").inc()
+        raise HTTPException(status_code=503, detail="No production model loaded.")
+
+    # 1. Batch mode
+    if req.batch is not None and len(req.batch) > 0:
+        predictions = []
+        for item in req.batch:
+            env = item.environment or req.environment
+            if item.covariates and "missing_hill" in item.covariates:
+                COVARIATE_DRIFT.labels(environment=env).set(float(item.covariates["missing_hill"]))
+
+            if item.sample_id and CACHE["dosage_matrix"] is not None and item.sample_id in CACHE["dosage_matrix"].index:
+                dosage = CACHE["dosage_matrix"].loc[item.sample_id].values
+            elif item.dosage_vector is not None:
+                dosage = np.array(item.dosage_vector, dtype=float)
+            else:
+                dosage = np.zeros(len(CACHE["feature_meta"]["marker_ids"]), dtype=float)
+
+            pred_val = float(CACHE["model"].predict(dosage.reshape(1, -1), env)[0])
+            PREDICTIONS_COUNTER.labels(environment=env, target_trait="grain_yield", status="success").inc()
+            PREDICTED_YIELD_HIST.labels(environment=env).observe(pred_val)
+            predictions.append({
+                "sample_id": item.sample_id,
+                "environment": env,
+                "predicted_value": round(pred_val, 2),
+            })
+
+        duration = time.perf_counter() - start_time
+        INFERENCE_LATENCY.labels(endpoint="/predict").observe(duration)
+        return {
+            "batch_size": len(predictions),
+            "environment": req.environment,
+            "target_trait": "grain_yield",
+            "predictions": predictions,
+        }
+
+    # 2. Single sample ID mode
+    if req.sample_id is not None:
+        sample_req = SamplePredictionRequest(
+            sample_id=req.sample_id,
+            environment=req.environment,
+            covariates=req.covariates,
+        )
+        return predict_sample(sample_req)
+
+    # 3. Single dosage vector mode
+    if req.dosage_vector is not None:
+        dosage_req = DosagePredictionRequest(
+            dosage_vector=req.dosage_vector,
+            environment=req.environment,
+            covariates=req.covariates,
+        )
+        return predict_dosage(dosage_req)
+
+    raise HTTPException(status_code=400, detail="Must provide sample_id, dosage_vector, or batch.")
+
+
+
 def _generate_prediction(X_sample: np.ndarray, environment: str, sample_id: Optional[str] = None) -> PredictionResponse:
     model = CACHE["model"]
     feat_meta = CACHE["feature_meta"]
