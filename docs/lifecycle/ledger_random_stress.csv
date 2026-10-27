@@ -1,0 +1,17 @@
+tick,scenario_event,n_lines,covariate_drift_score,genotype_drift_score,prediction_drift_score,labels_arrived_for_tick,realized_rmse,realized_r,trigger_fired,trigger_reason,retrain_run_id,champion_version,challenger_version,gate_result,promoted,frozen_baseline_rmse
+0,,300,0.0,0.2241,0.7164,,,,False,,,1,,,False,
+1,,300,0.037,0.2061,0.7398,0.0,1240.38,-0.2214,False,,,1,,,False,1240.38
+2,,300,0.037,0.2888,0.6829,1.0,975.59,-0.1443,False,,,1,,,False,975.59
+3,,300,0.0741,0.2885,0.7813,2.0,1023.87,-0.01,False,,,1,,,False,1023.87
+4,covariate_shift,300,0.037,0.4876,0.6215,3.0,1106.37,0.025,False,,,1,,,False,1106.37
+5,,300,0.0741,0.415,0.789,4.0,1518.19,-0.0362,False,,,1,,,False,1518.19
+6,,300,0.1111,0.5653,0.6231,5.0,1295.31,-0.0029,False,,,1,,,False,1295.31
+7,genotype_shift,300,0.1852,0.7306,0.8205,6.0,1678.86,0.026,False,,,1,,,False,1678.86
+8,,300,0.1852,0.6917,0.5666,7.0,2243.35,-0.7139,True,Realized performance decay: RMSE degraded by 66.2% (2243.3 vs baseline 1350.0 kg/ha),run_8_random_stress,2,2,PASSED,True,2243.35
+9,,300,0.0,0.2612,0.1833,8.0,1676.23,-0.1963,False,,,2,,,False,1676.23
+10,concept_drift,300,0.037,0.2239,0.5533,9.0,899.77,0.609,False,,,2,,,False,1271.81
+11,,300,0.037,0.3041,0.32,10.0,994.5,0.6322,False,,,2,,,False,2267.36
+12,,300,0.037,0.2641,0.6533,11.0,1062.1,0.4475,False,,,2,,,False,1742.07
+13,,300,0.037,0.3076,0.4,12.0,1172.93,0.3611,False,,,2,,,False,2432.18
+14,data_quality,300,0.037,0.3227,0.74,13.0,1079.91,0.4137,False,Data quality incident isolated to quarantine — retrain blocked,,2,,,False,2150.46
+15,,300,0.1111,0.3408,0.49,14.0,1100.47,0.3653,False,,,2,,,False,2792.05

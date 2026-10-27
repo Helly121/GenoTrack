@@ -482,15 +482,117 @@ class LifecycleOrchestrator:
                 time.sleep(2)  # 2s pacing for live demo
 
         # Export completed ledger
+        scenario_slug = Path(self.scenario_name).stem
+        sim_data_dir = PROJECT_ROOT / "data" / "simulation"
+        sim_data_dir.mkdir(parents=True, exist_ok=True)
+
         self.ledger.export_all(
-            sqlite_path=PROJECT_ROOT / "data" / "simulation" / "ledger.db",
-            parquet_path=PROJECT_ROOT / "data" / "simulation" / "ledger.parquet",
+            sqlite_path=sim_data_dir / f"ledger_{scenario_slug}.db",
+            parquet_path=sim_data_dir / f"ledger_{scenario_slug}.parquet",
+            csv_path=self.lifecycle_docs_dir / f"ledger_{scenario_slug}.csv",
+        )
+        # Also maintain default ledger files
+        self.ledger.export_all(
+            sqlite_path=sim_data_dir / "ledger.db",
+            parquet_path=sim_data_dir / "ledger.parquet",
             csv_path=self.lifecycle_docs_dir / "ledger.csv",
         )
+
+        # Generate publication-quality Lifecycle Timeline Chart
+        try:
+            self._generate_timeline_chart(
+                df=self.ledger.to_dataframe(),
+                scenario_name=self.scenario_name,
+                output_path=self.lifecycle_docs_dir / f"lifecycle_timeline_{scenario_slug}.png",
+            )
+            # Default chart copy
+            import shutil
+            shutil.copy2(
+                self.lifecycle_docs_dir / f"lifecycle_timeline_{scenario_slug}.png",
+                self.lifecycle_docs_dir / "lifecycle_timeline.png",
+            )
+        except Exception as e:
+            logger.warning(f"Could not generate lifecycle timeline chart: {e}")
 
         content_hash = self.ledger.compute_content_hash()
         logger.info(f"\nSimulation Complete! Final Ledger Content Hash (SHA-256): {content_hash}")
         return self.ledger
+
+    def _generate_timeline_chart(self, df: pd.DataFrame, scenario_name: str, output_path: Path):
+        """Generate lifecycle timeline chart comparing adaptive vs frozen performance over ticks."""
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+
+        fig, (ax1, ax2, ax3) = plt.subplots(
+            3, 1, figsize=(13, 10), sharex=True, gridspec_kw={"height_ratios": [2.4, 1.1, 1.5]}
+        )
+        fig.patch.set_facecolor("#14181A")
+
+        for ax in [ax1, ax2, ax3]:
+            ax.set_facecolor("#1C2124")
+            ax.tick_params(colors="#8E9795", labelsize=9)
+            for spine in ax.spines.values():
+                spine.set_color("#2A3033")
+            ax.grid(True, linestyle="--", color="#2A3033", alpha=0.7)
+
+        ticks = df["tick"].values
+        adaptive_rmse = df["realized_rmse"].values
+        frozen_rmse = df["frozen_baseline_rmse"].values
+        realized_r = df["realized_r"].values
+
+        # Top: Harvest Realized RMSE
+        ax1.plot(ticks, adaptive_rmse, color="#7A9B6E", marker="o", linewidth=2.4, label="Adaptive Model (Closed-Loop Retraining)")
+        ax1.plot(ticks, frozen_rmse, color="#B5693F", marker="s", linewidth=2.0, linestyle="--", label="Frozen Baseline (No Retraining)")
+        ax1.set_ylabel("Realized RMSE (kg/ha)", color="#EDEFEE", fontsize=10, fontweight="bold")
+        ax1.set_title(
+            f"GenoTrack Virtual Breeding Lifecycle: {scenario_name} (SIMULATED DATA — Principle 1)",
+            color="#EDEFEE",
+            fontsize=12,
+            pad=10,
+        )
+        ax1.legend(facecolor="#14181A", edgecolor="#2A3033", labelcolor="#EDEFEE", loc="upper left", fontsize=9)
+
+        # Annotate simulated events & retrain triggers
+        y_max = np.nanmax(np.concatenate([adaptive_rmse[~np.isnan(adaptive_rmse)], frozen_rmse[~np.isnan(frozen_rmse)], [2000.0]]))
+        for _, row in df.iterrows():
+            t = int(row["tick"])
+            ev = row["scenario_event"]
+            if ev and str(ev).lower() != "none" and str(ev) != "nan":
+                ax1.axvline(x=t, color="#C9A24B", linestyle=":", alpha=0.85, linewidth=1.8)
+                ax1.text(t + 0.1, y_max * 0.92, f"Simulated Event:\n{ev}", color="#C9A24B", fontsize=8, rotation=90, va="top")
+            if row["trigger_fired"]:
+                ax1.scatter([t], [row["realized_rmse"]], color="#C9A24B", s=120, zorder=6, marker="D", edgecolors="#EDEFEE", linewidth=1.5)
+                ax1.annotate(
+                    f"Retrain -> v{row['champion_version']}",
+                    (t, row["realized_rmse"]),
+                    textcoords="offset points",
+                    xytext=(0, 10),
+                    ha="center",
+                    color="#EDEFEE",
+                    fontsize=8,
+                    fontweight="bold",
+                )
+
+        # Middle: Pearson r accuracy
+        ax2.plot(ticks, realized_r, color="#7A9B6E", marker="^", linewidth=1.8, label="Realized Correlation (r)")
+        ax2.axhline(0.0, color="#8E9795", linestyle=":", alpha=0.5)
+        ax2.set_ylabel("Accuracy (r)", color="#EDEFEE", fontsize=10, fontweight="bold")
+        ax2.set_ylim(-0.5, 0.85)
+
+        # Bottom: Drift Score Strip
+        ax3.plot(ticks, df["covariate_drift_score"], color="#C9A24B", linewidth=1.8, label="Covariate Drift Share")
+        ax3.plot(ticks, df["genotype_drift_score"], color="#8E9795", linewidth=1.8, linestyle="-.", label="Genotype Subpop Drift (AUC-scaled)")
+        ax3.plot(ticks, df["prediction_drift_score"], color="#B5693F", linewidth=1.8, linestyle=":", label="Prediction Drift (KS stat)")
+        ax3.axhline(0.35, color="#B5693F", linestyle="--", linewidth=1.2, alpha=0.7, label="Policy Threshold (tau=0.35)")
+        ax3.set_ylabel("Drift Score", color="#EDEFEE", fontsize=10, fontweight="bold")
+        ax3.set_xlabel("Virtual Season Tick (1 tick = 1 growing season)", color="#EDEFEE", fontsize=10, fontweight="bold")
+        ax3.legend(facecolor="#14181A", edgecolor="#2A3033", labelcolor="#EDEFEE", loc="upper right", ncol=2, fontsize=8)
+
+        plt.tight_layout()
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, dpi=200, facecolor=fig.get_facecolor(), edgecolor="none")
+        plt.close()
 
 
 def main():

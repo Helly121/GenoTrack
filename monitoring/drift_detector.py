@@ -144,9 +144,9 @@ class CohortDriftDetector:
 
         # AUC = 0.5 indicates identical distributions; AUC >= 0.75 + delta_af > 0.05 indicates immigrant germplasm shift
         genotype_drift_score = max(0.0, float(auc_score - 0.5) * 2.0)
-        auc_thresh = float(drift_cfg.get("genotype_domain_classifier_auc_threshold", 0.75))
-        maf_delta_thresh = float(drift_cfg.get("allele_frequency_maf_delta_threshold", 0.075))
-        is_genotype_drift = (auc_score >= auc_thresh and delta_af > 0.05) or (delta_af > 0.08)
+        auc_thresh = float(drift_cfg.get("genotype_domain_classifier_auc_threshold", 0.80))
+        maf_delta_thresh = float(drift_cfg.get("allele_frequency_maf_delta_threshold", 0.085))
+        is_genotype_drift = (auc_score >= auc_thresh and delta_af > (maf_delta_thresh * 0.75)) or (delta_af > maf_delta_thresh)
 
         if is_genotype_drift:
             alerts.append(f"Genotype subpopulation drift detected (Domain AUC={auc_score:.3f}, delta_af={delta_af:.3f})")

@@ -4,5 +4,23 @@
     "qtl": "Hd1",
     "multiplier": -0.5,
     "new_gamma": -140.0
+  },
+  {
+    "tick": 11,
+    "qtl": "Hd1",
+    "multiplier": -0.5,
+    "new_gamma": -140.0
+  },
+  {
+    "tick": 10,
+    "qtl": "DEP1",
+    "multiplier": -0.6,
+    "new_gamma": -132.0
+  },
+  {
+    "tick": 11,
+    "qtl": "Hd1",
+    "multiplier": -0.5,
+    "new_gamma": -140.0
   }
 ]

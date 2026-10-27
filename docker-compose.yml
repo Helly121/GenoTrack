@@ -64,6 +64,22 @@ services:
     networks:
       - genotrack-net
 
+  simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: genotrack-simulator
+    command: python simulation/run_lifecycle.py --scenario storyline_demo --mode live --ticks 16
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GENOTRACK_API_URL=http://genotrack-api:8000
+    depends_on:
+      - genotrack-api
+    networks:
+      - genotrack-net
+    profiles:
+      - simulator
+
 networks:
   genotrack-net:
     driver: bridge

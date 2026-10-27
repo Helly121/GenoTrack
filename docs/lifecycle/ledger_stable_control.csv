@@ -1,0 +1,17 @@
+tick,scenario_event,n_lines,covariate_drift_score,genotype_drift_score,prediction_drift_score,labels_arrived_for_tick,realized_rmse,realized_r,trigger_fired,trigger_reason,retrain_run_id,champion_version,challenger_version,gate_result,promoted,frozen_baseline_rmse
+0,,300,0.0,0.1717,0.7631,,,,False,,,1,,,False,
+1,,300,0.0741,0.2123,0.7064,0.0,1304.99,0.0543,False,,,1,,,False,1304.99
+2,,300,0.037,0.2425,0.7488,1.0,1054.42,0.0509,False,,,1,,,False,1054.42
+3,,300,0.037,0.3168,0.7694,2.0,1485.99,0.0661,False,,,1,,,False,1485.99
+4,,300,0.037,0.3982,0.6948,3.0,1030.9,0.088,False,,,1,,,False,1030.9
+5,,300,0.037,0.416,0.7943,4.0,1425.01,0.0776,False,,,1,,,False,1425.01
+6,,300,0.037,0.5856,0.6266,5.0,988.63,-0.0442,False,,,1,,,False,988.63
+7,,300,0.1111,0.6641,0.8171,6.0,1485.93,0.1203,False,,,1,,,False,1485.93
+8,,300,0.1111,0.7171,0.5848,7.0,990.5,0.0256,True,Persistent genotype subpopulation drift for K=2 consecutive seasons,run_8_stable_control,2,2,PASSED,True,990.5
+9,,300,0.037,0.378,0.1267,8.0,1870.98,0.1039,False,"Performance decay (38.6%), but cooldown active (1/2 ticks)",,2,,,False,1870.98
+10,,300,0.0741,0.4235,0.8067,9.0,988.4,0.4527,False,,,2,,,False,1201.01
+11,,300,0.037,0.6378,0.2967,10.0,951.7,0.5545,False,,,2,,,False,1316.17
+12,,300,0.0741,0.6692,0.82,11.0,989.2,0.307,False,,,2,,,False,1349.48
+13,,300,0.037,0.8014,0.3467,12.0,1234.52,0.3095,False,,,2,,,False,2197.13
+14,,300,0.037,0.8392,0.87,13.0,1109.88,0.2608,False,,,2,,,False,1486.53
+15,,300,0.037,0.9049,0.3733,14.0,1057.1,0.3334,False,,,2,,,False,2108.52

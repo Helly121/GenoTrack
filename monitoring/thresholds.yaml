@@ -1,10 +1,10 @@
 drift:
   covariate_drift_p_value: 0.005
-  covariate_drift_ks_stat_threshold: 0.26
+  covariate_drift_ks_stat_threshold: 0.30
   covariate_drift_share_threshold: 0.35
-  climate_z_score_threshold: 1.25
-  genotype_domain_classifier_auc_threshold: 0.75
-  allele_frequency_maf_delta_threshold: 0.075
+  climate_z_score_threshold: 1.8
+  genotype_domain_classifier_auc_threshold: 0.80
+  allele_frequency_maf_delta_threshold: 0.085
   prediction_drift_p_value: 0.005
   prediction_drift_ks_threshold: 0.25
 

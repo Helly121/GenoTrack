@@ -1,0 +1,53 @@
+name: "Simulate Breeding Lifecycle & Retraining"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"  # Weekly Sunday midnight run
+
+jobs:
+  simulate-lifecycle:
+    name: "Continuous Virtual Breeding Simulation & Verification"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Set up Python 3.11"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: "Verify Simulation Contracts & Engine Tests"
+        run: |
+          pytest tests/test_simulation_contracts.py tests/test_simulation_engine.py tests/test_simulation_policy.py -v
+
+      - name: "Run Fast-Mode Stable Control Simulation (16 Ticks)"
+        run: |
+          python simulation/run_lifecycle.py --scenario stable_control --ticks 16 --mode fast
+
+      - name: "Run Fast-Mode Storyline Demo Simulation (16 Ticks)"
+        run: |
+          python simulation/run_lifecycle.py --scenario storyline_demo --ticks 16 --mode fast
+
+      - name: "Verify Acceptance Criteria & Regression Gate"
+        run: |
+          python simulation/verify_lifecycle_acceptance.py
+
+      - name: "Upload Simulation Artifacts & Audits"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lifecycle-simulation-artifacts
+          path: |
+            docs/lifecycle/ledger*.csv
+            docs/lifecycle/lifecycle_timeline*.png
+            docs/lifecycle/fidelity_report.*
+            data/simulation/ledger*.parquet

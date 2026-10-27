@@ -2946,6 +2946,309 @@
         }
 
 
+        /* ==========================================================================
+           LIFECYCLE & VIRTUAL BREEDING PROGRAM SIMULATION (M5)
+           ========================================================================== */
+        .ent-lifecycle-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+
+        .sim-notice-banner {
+            background: rgba(201, 162, 75, 0.08);
+            border: 1px solid rgba(201, 162, 75, 0.28);
+            border-radius: 6px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sim-notice-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-amber);
+            background: rgba(201, 162, 75, 0.16);
+            border: 1px solid rgba(201, 162, 75, 0.4);
+            padding: 5px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .sim-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-amber);
+            box-shadow: 0 0 6px rgba(201, 162, 75, 0.6);
+        }
+
+        .sim-notice-text {
+            font-size: 12px;
+            color: var(--ink-secondary);
+            line-height: 1.5;
+            font-family: var(--font-sans);
+        }
+
+        .sim-notice-text strong {
+            color: var(--ink-primary);
+        }
+
+        .lifecycle-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .lifecycle-scenario-switcher {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .lifecycle-tab-btn {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--ink-secondary);
+            padding: 7px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lifecycle-tab-btn:hover {
+            color: var(--ink-primary);
+            border-color: var(--ink-secondary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .lifecycle-tab-btn.active {
+            background: var(--bg-raised);
+            border-color: var(--accent-moss);
+            color: var(--ink-primary);
+            font-weight: 500;
+        }
+
+        .tab-indicator-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--line);
+            display: inline-block;
+        }
+
+        .lifecycle-tab-btn.active .tab-indicator-dot {
+            background: var(--accent-moss);
+            box-shadow: 0 0 5px rgba(122, 155, 110, 0.6);
+        }
+
+        .lifecycle-meta-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lifecycle-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .lifecycle-kpi-card {
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+
+        .lifecycle-kpi-card .kpi-label {
+            font-size: 11px;
+            color: var(--ink-secondary);
+            margin-bottom: 6px;
+            font-family: var(--font-sans);
+        }
+
+        .lifecycle-kpi-card .kpi-val {
+            font-size: 22px;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            letter-spacing: -0.5px;
+        }
+
+        .lifecycle-kpi-card .kpi-val .unit {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--ink-secondary);
+        }
+
+        .lifecycle-kpi-card .kpi-sub {
+            font-size: 11px;
+            color: var(--ink-secondary);
+            margin-top: 6px;
+            font-family: var(--font-sans);
+        }
+
+        .lifecycle-chart-container {
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 20px;
+        }
+
+        .chart-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .chart-main-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+        }
+
+        .chart-subtitle {
+            font-size: 12px;
+            color: var(--ink-secondary);
+            margin-top: 3px;
+            font-family: var(--font-sans);
+        }
+
+        .chart-legend-row {
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: var(--ink-secondary);
+            font-family: var(--font-sans);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot-moss { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-moss); display: inline-block; }
+        .dot-clay { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-clay); display: inline-block; }
+        .dot-amber { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-amber); display: inline-block; }
+
+        .timeline-visual-wrap {
+            background: #14181A;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .lifecycle-timeline-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .lifecycle-ledger-container {
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 18px 20px;
+        }
+
+        .ledger-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            margin-top: 14px;
+        }
+
+        .lifecycle-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            font-family: var(--font-sans);
+            text-align: left;
+        }
+
+        .lifecycle-table th {
+            background: #14181A;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink-secondary);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .lifecycle-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink-primary);
+            white-space: nowrap;
+        }
+
+        .lifecycle-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .status-pill-passed {
+            background: rgba(122, 155, 110, 0.15);
+            color: var(--accent-moss);
+            border: 1px solid rgba(122, 155, 110, 0.4);
+        }
+
+        .status-pill-triggered {
+            background: rgba(201, 162, 75, 0.15);
+            color: var(--accent-amber);
+            border: 1px solid rgba(201, 162, 75, 0.4);
+        }
+
+        .status-pill-none {
+            color: var(--ink-secondary);
+        }
+
+        @media (max-width: 900px) {
+            .lifecycle-kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .lifecycle-kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         </style>
 
     <script type="importmap">
@@ -3114,6 +3417,9 @@
                     </button>
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="shap">
                         SHAP Attribution
+                    </button>
+                    <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="lifecycle" id="nav-btn-lifecycle">
+                        Lifecycle &amp; Simulation
                     </button>
                     <button class="dashboard-section-btn" type="button" role="tab" aria-selected="false" data-dashboard-view="about" id="nav-btn-about">
                         About &amp; Research
@@ -3308,6 +3614,121 @@
                                 </div>
                             </div>
                         </div>
+                </section>
+
+                <!-- SECTION 5: Closed-Loop Lifecycle & Retraining Simulation (Virtual Breeding Program) -->
+                <section class="ent-lifecycle-section dashboard-panel" data-dashboard-panel="lifecycle" id="ent-lifecycle-panel" style="display:none;">
+                    <!-- SIMULATED DATA NOTICE (Spec Principle 1) -->
+                    <div class="sim-notice-banner">
+                        <div class="sim-notice-badge">
+                            <span class="sim-badge-dot"></span>
+                            SIMULATED DATA &bull; VIRTUAL BREEDING PROGRAM
+                        </div>
+                        <div class="sim-notice-text">
+                            <strong>Continuous Ingestion, Drift Monitoring &amp; Closed-Loop Retraining Simulation.</strong>
+                            Headline Rice Diversity Panel validation numbers (<em>r</em> = 0.8122, RMSE 768.76 kg/ha) remain fixed on real historical trials. The metrics, timeline chart, and audit ledger below demonstrate the autonomous operational loop under controlled covariate shifts, germplasm immigration, QTL concept drift, and field plot QC anomalies.
+                        </div>
+                    </div>
+
+                    <!-- Lifecycle Controls & Scenario Switcher -->
+                    <div class="lifecycle-controls-row">
+                        <div class="lifecycle-scenario-switcher" role="tablist" aria-label="Simulation scenario views">
+                            <button class="lifecycle-tab-btn active" type="button" data-scenario="storyline_demo" onclick="window.switchLifecycleScenario('storyline_demo')">
+                                <span class="tab-indicator-dot"></span>
+                                Storyline Demo (16 Ticks)
+                            </button>
+                            <button class="lifecycle-tab-btn" type="button" data-scenario="stable_control" onclick="window.switchLifecycleScenario('stable_control')">
+                                <span class="tab-indicator-dot"></span>
+                                Stable Control (Zero Events)
+                            </button>
+                            <button class="lifecycle-tab-btn" type="button" data-scenario="random_stress" onclick="window.switchLifecycleScenario('random_stress')">
+                                <span class="tab-indicator-dot"></span>
+                                Random Stress (Held-Out)
+                            </button>
+                        </div>
+                        <div class="lifecycle-meta-actions">
+                            <span class="data-mono text-muted" id="sim-ledger-hash" style="font-size:11px; color:var(--ink-secondary);">SHA-256: 658b218d...</span>
+                            <button class="export-btn" type="button" onclick="window.exportCurrentLedger()">
+                                &darr; Export Ledger CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Top KPI Cards Row -->
+                    <div class="lifecycle-kpi-grid">
+                        <div class="lifecycle-kpi-card">
+                            <div class="kpi-label">Adaptive Realized RMSE (Final Tick)</div>
+                            <div class="kpi-val val-moss data-mono" id="kpi-adaptive-rmse">1,015.93 <span class="unit">kg/ha</span></div>
+                            <div class="kpi-sub" id="kpi-rmse-advantage">-62.5% vs frozen baseline (recovered)</div>
+                        </div>
+                        <div class="lifecycle-kpi-card">
+                            <div class="kpi-label">Frozen V1 Baseline RMSE (Final Tick)</div>
+                            <div class="kpi-val val-clay data-mono" id="kpi-frozen-rmse">2,711.77 <span class="unit">kg/ha</span></div>
+                            <div class="kpi-sub" id="kpi-frozen-decay">Degraded from unadapted shifts</div>
+                        </div>
+                        <div class="lifecycle-kpi-card">
+                            <div class="kpi-label">Automated Retrain Triggers</div>
+                            <div class="kpi-val val-amber data-mono" id="kpi-retrain-count">3 Dispatched</div>
+                            <div class="kpi-sub" id="kpi-retrain-reasons">All passed validation gate &rarr; Prod Champion v4</div>
+                        </div>
+                        <div class="lifecycle-kpi-card">
+                            <div class="kpi-label">Pandera QC Isolation</div>
+                            <div class="kpi-val val-moss data-mono" id="kpi-quarantine-count">5 Quarantined</div>
+                            <div class="kpi-sub">0 Bad plots leaked into retraining pipeline</div>
+                        </div>
+                    </div>
+
+                    <!-- Centerpiece Timeline Visualization -->
+                    <div class="lifecycle-chart-container">
+                        <div class="chart-header-row">
+                            <div class="chart-title-group">
+                                <div class="chart-main-title">Multi-Season Retraining Timeline &amp; Drift Dynamics (SIMULATED DATA)</div>
+                                <div class="chart-subtitle">Realized harvest yield RMSE over 16 virtual growing seasons with simulated climate, genotype, and concept drift events.</div>
+                            </div>
+                            <div class="chart-legend-row">
+                                <span class="legend-item"><span class="dot-moss"></span> Adaptive Model (Closed-Loop Retraining)</span>
+                                <span class="legend-item"><span class="dot-clay"></span> Frozen Baseline (Static V1 Model)</span>
+                                <span class="legend-item"><span class="dot-amber"></span> Injected Simulated Event</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Visual Wrap -->
+                        <div class="timeline-visual-wrap" id="lifecycle-timeline-wrap">
+                            <img id="lifecycle-timeline-img" src="docs/lifecycle/lifecycle_timeline_storyline_demo.png" alt="Lifecycle Timeline Chart" class="lifecycle-timeline-image" />
+                        </div>
+                    </div>
+
+                    <!-- Full Operational Audit Ledger -->
+                    <div class="lifecycle-ledger-container">
+                        <div class="ledger-header-row">
+                            <div>
+                                <div class="ledger-title">Continuous Operations Audit Ledger</div>
+                                <div class="ledger-tagline">17-column immutable event &amp; drift tracking ledger with SHA-256 state hashing.</div>
+                            </div>
+                            <div class="ledger-count-tag" id="ledger-row-count">16 Virtual Seasons Recorded</div>
+                        </div>
+                        <div class="ledger-table-wrap">
+                            <table class="lifecycle-table" id="lifecycle-ledger-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tick</th>
+                                        <th>Simulated Event</th>
+                                        <th>Lines</th>
+                                        <th>Covariate Drift</th>
+                                        <th>Genotype Drift</th>
+                                        <th>Prediction Drift</th>
+                                        <th>Realized RMSE</th>
+                                        <th>Frozen RMSE</th>
+                                        <th>Retrain Trigger</th>
+                                        <th>Gate Result</th>
+                                        <th>Champion</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lifecycle-ledger-tbody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
             
@@ -3339,6 +3760,9 @@
                         </button>
                         <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('story')">
                             Project Story
+                        </button>
+                        <button class="about-subpage-tab" type="button" onclick="window.openAboutSubpage('simulation')">
+                            Continuous Simulation
                         </button>
                     </div>
 
@@ -3999,6 +4423,107 @@
                                 <p class="tradeoff-desc">
                                     Deep neural networks can produce competitive benchmark scores on genomics datasets, but act as uninterpretable black boxes. In agriculture, breeders will not advance a variety based on an opaque tensor output. We chose XGBoost coupled with TreeSHAP so that every single prediction can be audited down to physical chromosome coordinates and candidate QTL alleles.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBPAGE 6: CONTINUOUS SIMULATION & VIRTUAL BREEDING -->
+                    <div class="about-subpage" id="about-subpage-simulation">
+                        <div class="research-section-header">
+                            <h2 class="research-section-title">Virtual Breeding Program: Continuous Data Simulation &amp; Retraining Loop</h2>
+                            <p class="research-section-desc">Architecture, non-circularity guarantees, biological fidelity, and closed-loop operational governance.</p>
+                        </div>
+
+                        <!-- Movement 1: Context & Honest Scope -->
+                        <div class="research-headline-block">
+                            <div class="research-kicker">Operational Closed Loop &bull; Simulated Environment</div>
+                            <h1 class="research-headline">
+                                A realistic, closed-loop breeding program simulator that streams continuous multi-season trials through the exact same crop adapter, Pandera QC gate, drift monitors, and MLflow registry used for real data &mdash; with zero circularity.
+                            </h1>
+                            <div class="research-scope-note">
+                                <strong>Data Origin &amp; Honesty Boundary:</strong> Headline Rice Diversity Panel validation numbers (<em>r</em> = 0.8122, RMSE 768.76 kg/ha) remain fixed on real historical trials (2009&ndash;2012). Because live commercial breeding streams are proprietary and unobtainable, we built a closed-loop simulator to stress-test continuous operations under simulated climate shocks, germplasm influx, QTL concept drift, and sensor corruption.
+                            </div>
+                        </div>
+
+                        <!-- Movement 2: Explicit Data Classification -->
+                        <div class="prose-section">
+                            <h3 class="stands-title">Data Provenance &amp; Classification Standards</h3>
+                            <div class="finding-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:14px;">
+                                <div class="tradeoff-card">
+                                    <div class="sim-badge" style="display:inline-block; margin-bottom:8px; font-size:10px; padding:2px 8px; border-radius:3px; background:rgba(122,155,110,0.15); color:var(--accent-moss); border:1px solid rgba(122,155,110,0.3); font-family:var(--font-mono); font-weight:600;">[MEASURED]</div>
+                                    <h4 class="tradeoff-title">Historical IRRI Field Trials (2009&ndash;2012)</h4>
+                                    <p class="tradeoff-desc">368 physical rice accessions genotyped across 67,084 polymorphic SNP markers with ground-truth harvested field yields over 8 dry and wet season environments at IRRI Los Ba&ntilde;os. Used exclusively for primary model training and benchmark claims.</p>
+                                </div>
+                                <div class="tradeoff-card">
+                                    <div class="sim-badge" style="display:inline-block; margin-bottom:8px; font-size:10px; padding:2px 8px; border-radius:3px; background:rgba(201,162,75,0.15); color:var(--accent-amber); border:1px solid rgba(201,162,75,0.3); font-family:var(--font-mono); font-weight:600;">[OWNER-REPORTED]</div>
+                                    <h4 class="tradeoff-title">Accession Germplasm &amp; Passport Data</h4>
+                                    <p class="tradeoff-desc">Taxonomic subspecies classifications (indica, japonica, aus, aromatic), geographic country of origin, and trial-level management notes curated by the Rice Diversity Project consortium.</p>
+                                </div>
+                                <div class="tradeoff-card">
+                                    <div class="sim-badge" style="display:inline-block; margin-bottom:8px; font-size:10px; padding:2px 8px; border-radius:3px; background:rgba(181,105,63,0.15); color:var(--accent-clay); border:1px solid rgba(181,105,63,0.3); font-family:var(--font-mono); font-weight:600;">[SIMULATED / EXPLORATORY]</div>
+                                    <h4 class="tradeoff-title">Virtual Multi-Season Breeding Stream</h4>
+                                    <p class="tradeoff-desc">16-season continuous simulation exercising autonomous drift monitoring, quarantine isolation, challenger model retraining, and canary gate promotions. Clearly badged as simulated across all UI and ledger views.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movement 3: Strict Non-Circularity Architecture -->
+                        <div class="prose-section">
+                            <h3 class="stands-title">Strict Non-Circularity Guarantee</h3>
+                            <p class="prose-p">
+                                In synthetic data pipelines, the greatest risk is <em>epistemic circularity</em> &mdash; where the inference model inadvertently reads ground-truth parameters from the data generator, creating an illusion of superhuman predictive capability. GenoTrack enforces complete isolation:
+                            </p>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">1. Isolated Truth Parameter Domain (<code>sim_truth/</code>)</h4>
+                                <p class="tradeoff-desc">
+                                    The Data-Generating Process (DGP) parameters &mdash; including planted QTL effect sizes, background polygenic weights, environmental sensitivity slopes, and injected shock calendars &mdash; reside strictly in isolated configuration files inside <code>sim_truth/</code>. Downstream modules (<code>src/</code>, <code>pipelines/</code>, <code>monitoring/</code>) have zero awareness of these files.
+                                </p>
+                            </div>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">2. Automated AST Import &amp; Path Enforcement (CI Test)</h4>
+                                <p class="tradeoff-desc">
+                                    Enforced via an automated AST (Abstract Syntax Tree) static analysis test (<code>tests/test_simulation_engine.py::test_strict_sim_truth_isolation</code>). The test parses every Python module across the codebase and asserts that no import statements or string paths reference <code>sim_truth</code>, guaranteeing architectural impermeability.
+                                </p>
+                            </div>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">3. The Same Front Door as Real Data</h4>
+                                <p class="tradeoff-desc">
+                                    The simulator writes files to <code>data/incoming/season_&lt;tick&gt;/</code> as standard 11-column HapMap genotype files and 14-column field trial phenotype CSVs. Ingestion occurs exclusively through the production <code>CropAdapter</code> and Pandera QC schema. If a simulated plot contains an anomaly, it goes straight to the quarantine directory &mdash; exactly as real data does.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Movement 4: Biological & Statistical Fidelity -->
+                        <div class="prose-section">
+                            <h3 class="stands-title">Biological &amp; Statistical Fidelity</h3>
+                            <p class="prose-p">
+                                Rather than generating Gaussian noise, the simulator implements quantitative genetics first principles calibrated against historical Rice Diversity Panel statistics:
+                            </p>
+                            <ul class="prose-ul" style="list-style:disc; margin-left:20px; color:var(--ink-secondary); line-height:1.7; font-size:13px;">
+                                <li><strong>Haldane Recombination &amp; Selfing:</strong> Meiotic crossovers are sampled along chromosomes using a Poisson process with Haldane's mapping function on physical genetic distances. Progeny undergo single-seed descent selfing ($F_2 \to F_6$), preserving the natural Linkage Disequilibrium ($r^2$) decay structure of Asian rice ($r^2 \sim 0.20$ within 100 kb).</li>
+                                <li><strong>Genotype-by-Environment (G&times;E) Decomposition:</strong> Harvest yield follows the classic infinitesimal model: $Y_{ij} = \mu + E_j + G_i + (G \times E)_{ij} + \epsilon_{ij}$, calibrated to match the real empirical variance components: $V_G = 38\%$, $V_E = 44\%$, $V_{G\times E} = 12\%$, and residual error $V_\epsilon = 6\%$.</li>
+                                <li><strong>Known Biological QTL Embeddings:</strong> Features planted genetic associations at known major rice loci: <em>Hd1</em> (photoperiod-sensitive heading on Chr 3), <em>DEP1</em> (dense erect panicle architecture on Chr 2), and <em>qLTG3-1</em> (low-temperature germination vigor on Chr 6).</li>
+                                <li><strong>Distributional Congruence:</strong> 1-Wasserstein distances between empirical and simulated feature distributions remain under 0.15 across all environmental and phenotypic covariates (see <code>docs/lifecycle/fidelity_report.md</code>).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Movement 5: Operational Closed Loop -->
+                        <div class="prose-section">
+                            <h3 class="stands-title">Operational Closed-Loop Governance</h3>
+                            <p class="prose-p">
+                                At each virtual season tick, GenoTrack executes an autonomous operational loop:
+                            </p>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">1. Ingestion &amp; Pandera QC Isolation</h4>
+                                <p class="tradeoff-desc">Incoming trials undergo strict schema validation. Invalid plots (negative yield, out-of-range sensor readings) are quarantined. <em>Critical safeguard:</em> Quarantined plots never trigger model retraining or leak into training datasets.</p>
+                            </div>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">2. Inference Serving &amp; Drift Monitoring</h4>
+                                <p class="tradeoff-desc">The production Champion model serves predictions via the FastAPI <code>/predict</code> endpoint. Four parallel drift monitors inspect the batch: environmental KS tests, top-20 genotype PCA KS tests, subpopulation allele frequency shifts (&Delta;AF &gt; 0.085), and domain classifier separability (AUC &gt; 0.80).</p>
+                            </div>
+                            <div class="tradeoff-card">
+                                <h4 class="tradeoff-title">3. Harvest Feedback &amp; Replay Canary Gate</h4>
+                                <p class="tradeoff-desc">At season $t+1$, true harvest yields arrive ($L=1$ label lag). If persistent drift is confirmed, a Challenger model is trained on an expanding multi-season window. The automated validation gate evaluates Challenger vs. Champion: promotion occurs only if the Challenger reduces RMSE by &ge; 5% with non-negative correlation improvement.</p>
                             </div>
                         </div>
                     </div>
@@ -8943,7 +9468,8 @@
                 'glossary': 'Glossary',
                 'dataset': 'Dataset',
                 'methodology': 'Model & Methodology',
-                'story': 'Project Story'
+                'story': 'Project Story',
+                'simulation': 'Continuous Simulation'
             };
 
             function openAboutSubpage(subpageId, anchorId) {
@@ -9338,7 +9864,7 @@
     }, true);
 
 (function () {
-    const validViews = ['all', 'yield', 'decomp', 'shap', 'about'];
+    const validViews = ['all', 'yield', 'decomp', 'shap', 'about', 'lifecycle'];
 
     function applyDashboardView(viewName) {
         if (!validViews.includes(viewName)) return;
@@ -9410,5 +9936,1109 @@
     }
 })();
 </script>
+<script>
+/* GenoTrack Virtual Breeding Program: Lifecycle Simulation Script */
+(function() {
+    const SCENARIOS = {
+  "storyline_demo": {
+    "meta": {
+      "hash": "109c877f9d5f60e8c08429ac803afb1379ae9592216b8150a6b57dd873b32133",
+      "image": "docs/lifecycle/lifecycle_timeline_storyline_demo.png",
+      "csvFile": "docs/lifecycle/ledger_storyline_demo.csv",
+      "adaptiveRmse": "1,008.43",
+      "rmseAdvantage": "-59.9% vs frozen baseline (recovered)",
+      "frozenRmse": "2,517.83",
+      "frozenDecay": "Degraded from unadapted shifts",
+      "retrainCount": "2 Dispatched",
+      "retrainReasons": "Genotype drift (T8, T12) &rarr; Champion v3",
+      "quarantineCount": "5 Quarantined",
+      "quarantineSub": "0 Bad plots leaked into retraining pipeline"
+    },
+    "rows": [
+      {
+        "tick": 0,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0,
+        "genotype_drift_score": 0.1717,
+        "prediction_drift_score": 0.7631,
+        "labels_arrived_for_tick": null,
+        "realized_rmse": null,
+        "realized_r": null,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": null
+      },
+      {
+        "tick": 1,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.2123,
+        "prediction_drift_score": 0.7064,
+        "labels_arrived_for_tick": 0.0,
+        "realized_rmse": 1304.99,
+        "realized_r": 0.0543,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1304.99
+      },
+      {
+        "tick": 2,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2425,
+        "prediction_drift_score": 0.7488,
+        "labels_arrived_for_tick": 1.0,
+        "realized_rmse": 1054.42,
+        "realized_r": 0.0509,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1054.42
+      },
+      {
+        "tick": 3,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3168,
+        "prediction_drift_score": 0.7694,
+        "labels_arrived_for_tick": 2.0,
+        "realized_rmse": 1485.99,
+        "realized_r": 0.0661,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1485.99
+      },
+      {
+        "tick": 4,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3982,
+        "prediction_drift_score": 0.6948,
+        "labels_arrived_for_tick": 3.0,
+        "realized_rmse": 1030.9,
+        "realized_r": 0.088,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1030.9
+      },
+      {
+        "tick": 5,
+        "scenario_event": "covariate_shift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.416,
+        "prediction_drift_score": 0.7943,
+        "labels_arrived_for_tick": 4.0,
+        "realized_rmse": 1425.01,
+        "realized_r": 0.0776,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1425.01
+      },
+      {
+        "tick": 6,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.5856,
+        "prediction_drift_score": 0.6266,
+        "labels_arrived_for_tick": 5.0,
+        "realized_rmse": 1076.85,
+        "realized_r": -0.0251,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1076.85
+      },
+      {
+        "tick": 7,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1111,
+        "genotype_drift_score": 0.6641,
+        "prediction_drift_score": 0.8171,
+        "labels_arrived_for_tick": 6.0,
+        "realized_rmse": 1485.93,
+        "realized_r": 0.1203,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1485.93
+      },
+      {
+        "tick": 8,
+        "scenario_event": "genotype_shift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.2963,
+        "genotype_drift_score": 0.7224,
+        "prediction_drift_score": 0.3909,
+        "labels_arrived_for_tick": 7.0,
+        "realized_rmse": 990.5,
+        "realized_r": 0.0256,
+        "trigger_fired": true,
+        "trigger_reason": "Persistent genotype subpopulation drift for K=2 consecutive seasons",
+        "retrain_run_id": "run_8_storyline_demo",
+        "champion_version": 2,
+        "challenger_version": 2.0,
+        "gate_result": "PASSED",
+        "promoted": true,
+        "frozen_baseline_rmse": 990.5
+      },
+      {
+        "tick": 9,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.4441,
+        "prediction_drift_score": 0.12,
+        "labels_arrived_for_tick": 8.0,
+        "realized_rmse": 3141.23,
+        "realized_r": -0.7257,
+        "trigger_fired": false,
+        "trigger_reason": "Performance decay (132.7%), but cooldown active (1/2 ticks)",
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 3141.23
+      },
+      {
+        "tick": 10,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.5833,
+        "prediction_drift_score": 0.7667,
+        "labels_arrived_for_tick": 9.0,
+        "realized_rmse": 1317.62,
+        "realized_r": 0.245,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1496.41
+      },
+      {
+        "tick": 11,
+        "scenario_event": "concept_drift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.7683,
+        "prediction_drift_score": 0.2433,
+        "labels_arrived_for_tick": 10.0,
+        "realized_rmse": 1256.6,
+        "realized_r": 0.2406,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1965.72
+      },
+      {
+        "tick": 12,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.7892,
+        "prediction_drift_score": 0.8167,
+        "labels_arrived_for_tick": 11.0,
+        "realized_rmse": 1357.3,
+        "realized_r": 0.2067,
+        "trigger_fired": true,
+        "trigger_reason": "Persistent genotype subpopulation drift for K=2 consecutive seasons",
+        "retrain_run_id": "run_12_storyline_demo",
+        "champion_version": 3,
+        "challenger_version": 3.0,
+        "gate_result": "PASSED",
+        "promoted": true,
+        "frozen_baseline_rmse": 1828.98
+      },
+      {
+        "tick": 13,
+        "scenario_event": "data_quality",
+        "n_lines": 300,
+        "covariate_drift_score": 0.0,
+        "genotype_drift_score": 0.2264,
+        "prediction_drift_score": 0.1867,
+        "labels_arrived_for_tick": 12.0,
+        "realized_rmse": 1455.93,
+        "realized_r": 0.2604,
+        "trigger_fired": false,
+        "trigger_reason": "Data quality incident isolated to quarantine \u2014 retrain blocked",
+        "retrain_run_id": null,
+        "champion_version": 3,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2512.79
+      },
+      {
+        "tick": 14,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.1908,
+        "prediction_drift_score": 0.6,
+        "labels_arrived_for_tick": 13.0,
+        "realized_rmse": 1069.1,
+        "realized_r": 0.4869,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 3,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1735.69
+      },
+      {
+        "tick": 15,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2824,
+        "prediction_drift_score": 0.2,
+        "labels_arrived_for_tick": 14.0,
+        "realized_rmse": 1008.43,
+        "realized_r": 0.5803,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 3,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2517.83
+      }
+    ]
+  },
+  "stable_control": {
+    "meta": {
+      "hash": "447e9ba41bdd69124207b88898b77c7cae604400f598b25a26673cbe152d413e",
+      "image": "docs/lifecycle/lifecycle_timeline_stable_control.png",
+      "csvFile": "docs/lifecycle/ledger_stable_control.csv",
+      "adaptiveRmse": "1,057.10",
+      "rmseAdvantage": "-49.9% vs frozen baseline (recovered)",
+      "frozenRmse": "2,108.52",
+      "frozenDecay": "Natural breeding population shift",
+      "retrainCount": "1 Dispatched",
+      "retrainReasons": "False-trigger rate: 0.0625 (&le; 1/16 gate)",
+      "quarantineCount": "0 Quarantined",
+      "quarantineSub": "Clean baseline trial inputs"
+    },
+    "rows": [
+      {
+        "tick": 0,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0,
+        "genotype_drift_score": 0.1717,
+        "prediction_drift_score": 0.7631,
+        "labels_arrived_for_tick": null,
+        "realized_rmse": null,
+        "realized_r": null,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": null
+      },
+      {
+        "tick": 1,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.2123,
+        "prediction_drift_score": 0.7064,
+        "labels_arrived_for_tick": 0.0,
+        "realized_rmse": 1304.99,
+        "realized_r": 0.0543,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1304.99
+      },
+      {
+        "tick": 2,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2425,
+        "prediction_drift_score": 0.7488,
+        "labels_arrived_for_tick": 1.0,
+        "realized_rmse": 1054.42,
+        "realized_r": 0.0509,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1054.42
+      },
+      {
+        "tick": 3,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3168,
+        "prediction_drift_score": 0.7694,
+        "labels_arrived_for_tick": 2.0,
+        "realized_rmse": 1485.99,
+        "realized_r": 0.0661,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1485.99
+      },
+      {
+        "tick": 4,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3982,
+        "prediction_drift_score": 0.6948,
+        "labels_arrived_for_tick": 3.0,
+        "realized_rmse": 1030.9,
+        "realized_r": 0.088,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1030.9
+      },
+      {
+        "tick": 5,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.416,
+        "prediction_drift_score": 0.7943,
+        "labels_arrived_for_tick": 4.0,
+        "realized_rmse": 1425.01,
+        "realized_r": 0.0776,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1425.01
+      },
+      {
+        "tick": 6,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.5856,
+        "prediction_drift_score": 0.6266,
+        "labels_arrived_for_tick": 5.0,
+        "realized_rmse": 988.63,
+        "realized_r": -0.0442,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 988.63
+      },
+      {
+        "tick": 7,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1111,
+        "genotype_drift_score": 0.6641,
+        "prediction_drift_score": 0.8171,
+        "labels_arrived_for_tick": 6.0,
+        "realized_rmse": 1485.93,
+        "realized_r": 0.1203,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1485.93
+      },
+      {
+        "tick": 8,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1111,
+        "genotype_drift_score": 0.7171,
+        "prediction_drift_score": 0.5848,
+        "labels_arrived_for_tick": 7.0,
+        "realized_rmse": 990.5,
+        "realized_r": 0.0256,
+        "trigger_fired": true,
+        "trigger_reason": "Persistent genotype subpopulation drift for K=2 consecutive seasons",
+        "retrain_run_id": "run_8_stable_control",
+        "champion_version": 2,
+        "challenger_version": 2.0,
+        "gate_result": "PASSED",
+        "promoted": true,
+        "frozen_baseline_rmse": 990.5
+      },
+      {
+        "tick": 9,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.378,
+        "prediction_drift_score": 0.1267,
+        "labels_arrived_for_tick": 8.0,
+        "realized_rmse": 1870.98,
+        "realized_r": 0.1039,
+        "trigger_fired": false,
+        "trigger_reason": "Performance decay (38.6%), but cooldown active (1/2 ticks)",
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1870.98
+      },
+      {
+        "tick": 10,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.4235,
+        "prediction_drift_score": 0.8067,
+        "labels_arrived_for_tick": 9.0,
+        "realized_rmse": 988.4,
+        "realized_r": 0.4527,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1201.01
+      },
+      {
+        "tick": 11,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.6378,
+        "prediction_drift_score": 0.2967,
+        "labels_arrived_for_tick": 10.0,
+        "realized_rmse": 951.7,
+        "realized_r": 0.5545,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1316.17
+      },
+      {
+        "tick": 12,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.6692,
+        "prediction_drift_score": 0.82,
+        "labels_arrived_for_tick": 11.0,
+        "realized_rmse": 989.2,
+        "realized_r": 0.307,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1349.48
+      },
+      {
+        "tick": 13,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.8014,
+        "prediction_drift_score": 0.3467,
+        "labels_arrived_for_tick": 12.0,
+        "realized_rmse": 1234.52,
+        "realized_r": 0.3095,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2197.13
+      },
+      {
+        "tick": 14,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.8392,
+        "prediction_drift_score": 0.87,
+        "labels_arrived_for_tick": 13.0,
+        "realized_rmse": 1109.88,
+        "realized_r": 0.2608,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1486.53
+      },
+      {
+        "tick": 15,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.9049,
+        "prediction_drift_score": 0.3733,
+        "labels_arrived_for_tick": 14.0,
+        "realized_rmse": 1057.1,
+        "realized_r": 0.3334,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2108.52
+      }
+    ]
+  },
+  "random_stress": {
+    "meta": {
+      "hash": "5d469c48570117f2f21fed513cf9a84ca5aa0caa307a384f7a40eb0acaff2023",
+      "image": "docs/lifecycle/lifecycle_timeline_random_stress.png",
+      "csvFile": "docs/lifecycle/ledger_random_stress.csv",
+      "adaptiveRmse": "1,100.47",
+      "rmseAdvantage": "-60.6% vs frozen baseline (recovered)",
+      "frozenRmse": "2,792.05",
+      "frozenDecay": "Degraded under stochastic stressors",
+      "retrainCount": "1 Dispatched",
+      "retrainReasons": "Passed canary gate &rarr; Champion v2",
+      "quarantineCount": "5 Quarantined",
+      "quarantineSub": "Isolated outlier & null harvest rows"
+    },
+    "rows": [
+      {
+        "tick": 0,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0,
+        "genotype_drift_score": 0.2241,
+        "prediction_drift_score": 0.7164,
+        "labels_arrived_for_tick": null,
+        "realized_rmse": null,
+        "realized_r": null,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": null
+      },
+      {
+        "tick": 1,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2061,
+        "prediction_drift_score": 0.7398,
+        "labels_arrived_for_tick": 0.0,
+        "realized_rmse": 1240.38,
+        "realized_r": -0.2214,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1240.38
+      },
+      {
+        "tick": 2,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2888,
+        "prediction_drift_score": 0.6829,
+        "labels_arrived_for_tick": 1.0,
+        "realized_rmse": 975.59,
+        "realized_r": -0.1443,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 975.59
+      },
+      {
+        "tick": 3,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.2885,
+        "prediction_drift_score": 0.7813,
+        "labels_arrived_for_tick": 2.0,
+        "realized_rmse": 1023.87,
+        "realized_r": -0.01,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1023.87
+      },
+      {
+        "tick": 4,
+        "scenario_event": "covariate_shift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.4876,
+        "prediction_drift_score": 0.6215,
+        "labels_arrived_for_tick": 3.0,
+        "realized_rmse": 1106.37,
+        "realized_r": 0.025,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1106.37
+      },
+      {
+        "tick": 5,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0741,
+        "genotype_drift_score": 0.415,
+        "prediction_drift_score": 0.789,
+        "labels_arrived_for_tick": 4.0,
+        "realized_rmse": 1518.19,
+        "realized_r": -0.0362,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1518.19
+      },
+      {
+        "tick": 6,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1111,
+        "genotype_drift_score": 0.5653,
+        "prediction_drift_score": 0.6231,
+        "labels_arrived_for_tick": 5.0,
+        "realized_rmse": 1295.31,
+        "realized_r": -0.0029,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1295.31
+      },
+      {
+        "tick": 7,
+        "scenario_event": "genotype_shift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.1852,
+        "genotype_drift_score": 0.7306,
+        "prediction_drift_score": 0.8205,
+        "labels_arrived_for_tick": 6.0,
+        "realized_rmse": 1678.86,
+        "realized_r": 0.026,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 1,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1678.86
+      },
+      {
+        "tick": 8,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1852,
+        "genotype_drift_score": 0.6917,
+        "prediction_drift_score": 0.5666,
+        "labels_arrived_for_tick": 7.0,
+        "realized_rmse": 2243.35,
+        "realized_r": -0.7139,
+        "trigger_fired": true,
+        "trigger_reason": "Realized performance decay: RMSE degraded by 66.2% (2243.3 vs baseline 1350.0 kg/ha)",
+        "retrain_run_id": "run_8_random_stress",
+        "champion_version": 2,
+        "challenger_version": 2.0,
+        "gate_result": "PASSED",
+        "promoted": true,
+        "frozen_baseline_rmse": 2243.35
+      },
+      {
+        "tick": 9,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.0,
+        "genotype_drift_score": 0.2612,
+        "prediction_drift_score": 0.1833,
+        "labels_arrived_for_tick": 8.0,
+        "realized_rmse": 1676.23,
+        "realized_r": -0.1963,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1676.23
+      },
+      {
+        "tick": 10,
+        "scenario_event": "concept_drift",
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2239,
+        "prediction_drift_score": 0.5533,
+        "labels_arrived_for_tick": 9.0,
+        "realized_rmse": 899.77,
+        "realized_r": 0.609,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1271.81
+      },
+      {
+        "tick": 11,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3041,
+        "prediction_drift_score": 0.32,
+        "labels_arrived_for_tick": 10.0,
+        "realized_rmse": 994.5,
+        "realized_r": 0.6322,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2267.36
+      },
+      {
+        "tick": 12,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.2641,
+        "prediction_drift_score": 0.6533,
+        "labels_arrived_for_tick": 11.0,
+        "realized_rmse": 1062.1,
+        "realized_r": 0.4475,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 1742.07
+      },
+      {
+        "tick": 13,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3076,
+        "prediction_drift_score": 0.4,
+        "labels_arrived_for_tick": 12.0,
+        "realized_rmse": 1172.93,
+        "realized_r": 0.3611,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2432.18
+      },
+      {
+        "tick": 14,
+        "scenario_event": "data_quality",
+        "n_lines": 300,
+        "covariate_drift_score": 0.037,
+        "genotype_drift_score": 0.3227,
+        "prediction_drift_score": 0.74,
+        "labels_arrived_for_tick": 13.0,
+        "realized_rmse": 1079.91,
+        "realized_r": 0.4137,
+        "trigger_fired": false,
+        "trigger_reason": "Data quality incident isolated to quarantine \u2014 retrain blocked",
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2150.46
+      },
+      {
+        "tick": 15,
+        "scenario_event": null,
+        "n_lines": 300,
+        "covariate_drift_score": 0.1111,
+        "genotype_drift_score": 0.3408,
+        "prediction_drift_score": 0.49,
+        "labels_arrived_for_tick": 14.0,
+        "realized_rmse": 1100.47,
+        "realized_r": 0.3653,
+        "trigger_fired": false,
+        "trigger_reason": null,
+        "retrain_run_id": null,
+        "champion_version": 2,
+        "challenger_version": null,
+        "gate_result": null,
+        "promoted": false,
+        "frozen_baseline_rmse": 2792.05
+      }
+    ]
+  }
+};
+    let currentScenario = 'storyline_demo';
+
+    function switchLifecycleScenario(scenarioName) {
+        if (!SCENARIOS[scenarioName]) return;
+        currentScenario = scenarioName;
+
+        document.querySelectorAll('.lifecycle-tab-btn').forEach(btn => {
+            const active = btn.dataset.scenario === scenarioName;
+            btn.classList.toggle('active', active);
+        });
+
+        const meta = SCENARIOS[scenarioName].meta;
+        const rows = SCENARIOS[scenarioName].rows;
+
+        const kpiAdaptive = document.getElementById('kpi-adaptive-rmse');
+        if (kpiAdaptive) kpiAdaptive.innerHTML = `${meta.adaptiveRmse} <span class="unit">kg/ha</span>`;
+
+        const kpiAdvantage = document.getElementById('kpi-rmse-advantage');
+        if (kpiAdvantage) kpiAdvantage.textContent = meta.rmseAdvantage;
+
+        const kpiFrozen = document.getElementById('kpi-frozen-rmse');
+        if (kpiFrozen) kpiFrozen.innerHTML = `${meta.frozenRmse} <span class="unit">kg/ha</span>`;
+
+        const kpiFrozenDecay = document.getElementById('kpi-frozen-decay');
+        if (kpiFrozenDecay) kpiFrozenDecay.textContent = meta.frozenDecay;
+
+        const kpiRetrain = document.getElementById('kpi-retrain-count');
+        if (kpiRetrain) kpiRetrain.textContent = meta.retrainCount;
+
+        const kpiRetrainReasons = document.getElementById('kpi-retrain-reasons');
+        if (kpiRetrainReasons) kpiRetrainReasons.innerHTML = meta.retrainReasons;
+
+        const kpiQuarantine = document.getElementById('kpi-quarantine-count');
+        if (kpiQuarantine) kpiQuarantine.textContent = meta.quarantineCount;
+
+        const hashEl = document.getElementById('sim-ledger-hash');
+        if (hashEl) hashEl.textContent = `SHA-256: ${meta.hash.slice(0, 8)}...${meta.hash.slice(-8)}`;
+
+        const imgEl = document.getElementById('lifecycle-timeline-img');
+        if (imgEl) imgEl.src = meta.image;
+
+        const countEl = document.getElementById('ledger-row-count');
+        if (countEl) countEl.textContent = `${rows.length} Virtual Seasons Recorded`;
+
+        const tbody = document.getElementById('lifecycle-ledger-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        rows.forEach(r => {
+            const tr = document.createElement('tr');
+            
+            let eventHtml = '<span class="status-pill status-pill-none">&mdash;</span>';
+            if (r.scenario_event) {
+                eventHtml = `<span class="status-pill status-pill-triggered">${r.scenario_event}</span>`;
+            }
+
+            const covScore = r.covariate_drift_score != null ? r.covariate_drift_score.toFixed(3) : '0.000';
+            const covColor = r.covariate_drift_score >= 0.15 ? 'var(--accent-amber)' : 'var(--ink-secondary)';
+
+            const genoScore = r.genotype_drift_score != null ? r.genotype_drift_score.toFixed(3) : '0.000';
+            const genoColor = r.genotype_drift_score >= 0.50 ? 'var(--accent-clay)' : 'var(--ink-secondary)';
+
+            const predScore = r.prediction_drift_score != null ? r.prediction_drift_score.toFixed(3) : '&mdash;';
+
+            const adaptiveRmse = r.realized_rmse != null ? `<span style="color:var(--accent-moss); font-family:var(--font-mono); font-weight:600;">${r.realized_rmse.toFixed(1)}</span>` : '<span class="status-pill status-pill-none">&mdash;</span>';
+            const frozenRmse = r.frozen_baseline_rmse != null ? `<span style="color:var(--accent-clay); font-family:var(--font-mono); font-weight:600;">${r.frozen_baseline_rmse.toFixed(1)}</span>` : '<span class="status-pill status-pill-none">&mdash;</span>';
+
+            const triggerHtml = r.trigger_fired 
+                ? '<span class="status-pill status-pill-triggered">TRIGGERED</span>'
+                : '<span class="status-pill status-pill-none">No</span>';
+
+            let gateHtml = '<span class="status-pill status-pill-none">&mdash;</span>';
+            if (r.gate_result === 'passed') {
+                gateHtml = '<span class="status-pill status-pill-passed">PASSED</span>';
+            } else if (r.gate_result) {
+                gateHtml = `<span class="status-pill">${r.gate_result.toUpperCase()}</span>`;
+            }
+
+            const champHtml = `<span style="font-family:var(--font-mono); font-weight:600; color:var(--accent-moss);">v${r.champion_version}</span>`;
+
+            tr.innerHTML = `
+                <td style="font-family:var(--font-mono); font-weight:600; color:var(--ink-primary);">${r.tick}</td>
+                <td>${eventHtml}</td>
+                <td style="font-family:var(--font-mono); color:var(--ink-secondary);">${r.n_lines}</td>
+                <td style="font-family:var(--font-mono); color:${covColor};">${covScore}</td>
+                <td style="font-family:var(--font-mono); color:${genoColor};">${genoScore}</td>
+                <td style="font-family:var(--font-mono); color:var(--ink-secondary);">${predScore}</td>
+                <td>${adaptiveRmse}</td>
+                <td>${frozenRmse}</td>
+                <td>${triggerHtml}</td>
+                <td>${gateHtml}</td>
+                <td>${champHtml}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function exportCurrentLedger() {
+        const scenario = SCENARIOS[currentScenario];
+        if (!scenario) return;
+        const rows = scenario.rows;
+        if (!rows || !rows.length) return;
+
+        const headers = Object.keys(rows[0]);
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => headers.map(fieldName => {
+                const val = row[fieldName];
+                if (val === null || val === undefined) return '';
+                if (typeof val === 'string' && (val.includes(',') || val.includes('"'))) {
+                    return `"${val.replace(/"/g, '""')}"`;
+                }
+                return val;
+            }).join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', `genotrack_simulation_ledger_${currentScenario}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    window.switchLifecycleScenario = switchLifecycleScenario;
+    window.exportCurrentLedger = exportCurrentLedger;
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => switchLifecycleScenario('storyline_demo'), { once: true });
+    } else {
+        switchLifecycleScenario('storyline_demo');
+    }
+})();
+</script>
+
 </body>
 </html>
