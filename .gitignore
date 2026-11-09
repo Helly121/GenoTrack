@@ -105,3 +105,8 @@ scratch/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Jury preparation documents
+docs/*Jury_Brief*
+docs/cheat_sheet.md
+
