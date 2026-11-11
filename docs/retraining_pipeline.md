@@ -152,7 +152,7 @@ Rather than naively testing 67,084 individual markers—which would cause severe
 
 1. **Environmental Covariate Z-Scores:**  
    Evaluates 6 meteorological variables against historical seasonal baselines (adjusted for natural Dry Season vs Wet Season cycles):
-   $$Z = \frac{|x_{\text{curr}} - \mu_{\text{seasonal\_ref}}|}{\sigma_{\text{ref}}}$$
+   $$Z = \frac{|x_{\text{curr}} - \mu_{\text{seasonal, ref}}|}{\sigma_{\text{ref}}}$$
    An environmental feature is flagged if $Z > 1.8$ (`monitoring/thresholds.yaml:6`).
 2. **Top-20 Genotype PCs (Two-Sample Kolmogorov-Smirnov Test):**  
    Genotypes are projected onto the top 20 reference Principal Components. A two-sample KS test evaluates whether the empirical cumulative distribution function has shifted:
