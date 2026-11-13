@@ -1,15 +1,15 @@
-# GenoTrack — Reproducible MLOps Pipeline for Genomic Selection
+# TerraBreed — Reproducible MLOps Pipeline for Genomic Selection
+> *Breeding crops for a changing Earth.*
 
-
-**GenoTrack** is a production-grade, crop-agnostic MLOps pipeline for **Genomic Selection (GS)** in digital agriculture and plant breeding. It predicts candidate crop phenotypic performance (grain yield, flowering time, plant height, maturity, lodging) directly from high-density genetic marker data (Single Nucleotide Polymorphisms / SNPs), providing full end-to-end lineage, strict auditability, automated model governance, and real-time observability from raw data ingestion to a served REST API and 3D scientific dashboard.
+**TerraBreed** is a production-grade, crop-agnostic MLOps pipeline for **Genomic Selection (GS)** in digital agriculture and plant breeding. It predicts candidate crop phenotypic performance (grain yield, flowering time, plant height, maturity, lodging) directly from high-density genetic marker data (Single Nucleotide Polymorphisms / SNPs), providing full end-to-end lineage, strict auditability, automated model governance, and real-time observability from raw data ingestion to a served REST API and 3D scientific dashboard.
 
 ---
 
 ## 1. MLOps Toolchain Overview
 
-GenoTrack implements a complete, enterprise-grade MLOps architecture:
+TerraBreed implements a complete, enterprise-grade MLOps architecture:
 
-| Tool | Responsibility in GenoTrack | Key Files & Artifacts |
+| Tool | Responsibility in TerraBreed | Key Files & Artifacts |
 |---|---|---|
 | **Metaflow** | Directed Acyclic Graph (DAG) pipeline orchestration with rich, visual `@card` step reports | [`pipelines/flow.py`](pipelines/flow.py), [`pipelines/compat.py`](pipelines/compat.py) |
 | **MLflow** | Experiment tracking, hyperparameter logging, run comparison history, and staged Model Registry (`Staging` $\rightarrow$ `Production`) | [`src/models/registry.py`](src/models/registry.py), [`src/models/seed_mlflow.py`](src/models/seed_mlflow.py), `mlflow.db` |
@@ -45,7 +45,7 @@ flowchart TD
 
     subgraph Tracking["3. MLflow Experiment Tracking & Registry"]
         TRAIN -->|Params, Metrics, Artifacts| MLFLOW["MLflow Tracking Server\n(sqlite:///mlflow.db)"]
-        PROMOTE -->|Register Version| REGISTRY["MLflow Model Registry\n(GenoTrack-GxE-Yield: Staging -> Production)"]
+        PROMOTE -->|Register Version| REGISTRY["MLflow Model Registry\n(TerraBreed-GxE-Yield: Staging -> Production)"]
     end
 
     subgraph ServingObservability["4. Serving, Explainability & Observability"]
@@ -101,7 +101,7 @@ The matrix $K \in \mathbb{R}^{N \times N}$ represents the realized kinship struc
 ### 3.6 Kinship-Stratified Cross-Validation vs. Genetic Data Leakage
 Crop diversity panels exhibit deep phylogenetic subpopulation structure (*Indica*, *Japonica*, *Aus*, *Aromatic*). A naive unstratified random split creates profound data leakage: siblings and close relatives present across both train and test splits allow models to memorize familial kinship rather than learning true causal marker effects, artificially inflating correlation to $r = 0.8910$.
 
-GenoTrack neutralizes genetic leakage via:
+TerraBreed neutralizes genetic leakage via:
 1. **Patterson-Standardized PCA:** Decomposing standardized matrix $Z$ into top orthogonal eigenvectors ($PCs$).
 2. **Subpopulation Clustering:** $k$-Means clustering on top 10 $PCs$ with automated fallback to Ward-linkage Agglomerative Clustering if cluster size falls below 15 accessions.
 3. **Stratified Fold Allocation:** `StratifiedKFold` ensures every cross-validation fold tests generalization across genetically distinct phylogenetic clades.
@@ -213,7 +213,7 @@ The serving layer ([`src/serve/app.py`](src/serve/app.py)) provides sub-15ms RES
 
 ## 7. Automated Model Governance & Validation Gates
 
-GenoTrack enforces rigorous, evidence-based gating before any model is trusted in production:
+TerraBreed enforces rigorous, evidence-based gating before any model is trusted in production:
 1. **Mean Cross-Validation Gate:** Challenger must achieve Pearson correlation $r \ge 0.75$ and outperform the linear baseline by $\ge 10\%$.
 2. **Fold Stability Invariance:** Fold standard deviation must satisfy $\sigma < 0.05$; no single fold may regress by $>0.05$ below the mean.
 3. **Production Non-Regression Check:** Challenger must outperform the incumbent `Production` model in the registry.

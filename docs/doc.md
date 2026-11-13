@@ -1,6 +1,7 @@
-# GenoTrack
+# TerraBreed
+> *Breeding crops for a changing Earth.*
 
-GenoTrack is a production-grade, crop-agnostic MLOps platform for **Genomic Selection (GS)**. It predicts mature crop harvest traits (e.g. rice grain yield in kg/ha) directly from seedling DNA marker profiles (SNPs) and environmental trial factors, enforcing strict data lineage, population-structure-aware validation, model governance gates, and continuous drift monitoring.
+TerraBreed is a production-grade, crop-agnostic MLOps platform for **Genomic Selection (GS)**. It predicts mature crop harvest traits (e.g. rice grain yield in kg/ha) directly from seedling DNA marker profiles (SNPs) and environmental trial factors, enforcing strict data lineage, population-structure-aware validation, model governance gates, and continuous drift monitoring.
 
 ---
 

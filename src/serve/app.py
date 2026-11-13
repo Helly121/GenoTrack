@@ -1,10 +1,10 @@
 """
 src/serve/app.py
-Production FastAPI serving layer for GenoTrack.
+Production FastAPI serving layer for TerraBreed.
 Strictly environment-aware per Section 6.8 of spec.md.
 Exposes /health, /environments, /predict/sample, /predict/dosage,
 /explain/locus/{marker_id}, and Prometheus /metrics endpoints.
-Also serves the interactive GenoTrack dashboard at / and /dashboard.
+Also serves the interactive TerraBreed dashboard at / and /dashboard.
 """
 from contextlib import asynccontextmanager
 import json
@@ -105,8 +105,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="GenoTrack MLOps Genomic Selection API",
-    description="Environment-aware genomic prediction service and observability engine for crop breeding programs.",
+    title="TerraBreed MLOps Genomic Selection API",
+    description="Environment-aware genomic prediction service and observability engine for crop breeding programs. Breeding crops for a changing Earth.",
     version="1.0.0",
     lifespan=lifespan,
 )

@@ -1,4 +1,5 @@
-# GenoTrack: Closed-Loop Retraining & Continuous Simulation Pipeline
+# TerraBreed: Closed-Loop Retraining & Continuous Simulation Pipeline
+> *Breeding crops for a changing Earth.*
 
 **System Component:** Virtual Breeding Program & Autonomous Retraining Cycle  
 **Orchestrator Path:** `simulation/run_lifecycle.py`  
@@ -20,7 +21,7 @@ In classical machine learning benchmarks, models are evaluated on static, pre-co
 3. **Climatic Volatility & Concept Drift:**  
    Genotype-by-Environment (G×E) interactions mean that an unseasonal drought, heat spike during flowering, or pest pressure will alter how genes express themselves, causing static models to degrade silently.
 4. **Proprietary Data Constraint & The Simulator Solution:**  
-   Because live, multi-season streaming data from commercial seed companies is proprietary and unobtainable for academic research, GenoTrack features a **Virtual Breeding Program Simulator**. The simulator streams realistic seasons into the system using quantitative genetics first principles (Haldane recombination, infinitesimal polygenic architecture, G×E reaction norms).
+   Because live, multi-season streaming data from commercial seed companies is proprietary and unobtainable for academic research, TerraBreed features a **Virtual Breeding Program Simulator**. The simulator streams realistic seasons into the system using quantitative genetics first principles (Haldane recombination, infinitesimal polygenic architecture, G×E reaction norms).
 
 
 > **Strict Operational Boundary (Spec Principle 1):**  
@@ -30,7 +31,7 @@ In classical machine learning benchmarks, models are evaluated on static, pre-co
 
 ## 2. What the User-Attached Image Represents
 
-The image provided by the user is a crop of the **Simulation Control Bar** on the GenoTrack Enterprise Web Dashboard (`index.html` $\to$ **Lifecycle & Simulation** tab):
+The image provided by the user is a crop of the **Simulation Control Bar** on the TerraBreed Enterprise Web Dashboard (`index.html` $\to$ **Lifecycle & Simulation** tab):
 
 ```
 +---------------------------------------------------------------------------------------------------------------------------------------+
@@ -46,7 +47,7 @@ The image provided by the user is a crop of the **Simulation Control Bar** on th
 
 1. **The Notice Banner (`SIMULATED DATA • VIRTUAL BREEDING PROGRAM`):**
    - **Amber Warning Badge:** Enforces epistemic honesty. Clearly tells the user, evaluators, and faculty that the metrics below represent an operational stress-test, preventing confusion with the real IRRI benchmark ($r = 0.8122$).
-   - **Notice Text:** Explains that the view demonstrates how GenoTrack autonomously handles four specific production failure modes: controlled covariate shifts (climate warming), germplasm immigration (genetic shift), QTL concept drift (altered gene expression), and field plot QC anomalies (dead plants/missing hills).
+   - **Notice Text:** Explains that the view demonstrates how TerraBreed autonomously handles four specific production failure modes: controlled covariate shifts (climate warming), germplasm immigration (genetic shift), QTL concept drift (altered gene expression), and field plot QC anomalies (dead plants/missing hills).
 2. **The Active Scenario Tab — `Stable Control (Zero Events)`:**
    - **Currently Selected in the Image (Green outline & indicator dot):** This scenario runs for 16 consecutive virtual seasons with **zero injected shocks or anomalies**.
    - **Its Purpose:** Used as a scientific control to measure the **false-positive trigger rate** (false alarms).
@@ -62,7 +63,7 @@ The image provided by the user is a crop of the **Simulation Control Bar** on th
    - The exact SHA-256 hash computed over all 17 columns and 16 rows of the `stable_control` operational ledger.
    - Any independent execution with `--seed 42` produces this **exact byte-identical hash**, proving total mathematical determinism.
 5. **`↓ Export Ledger CSV` Button:**
-   - Triggers an instant browser download of the active scenario's full audit ledger (`genotrack_simulation_ledger_stable_control.csv`), allowing external audit in Excel, R, or Python.
+   - Triggers an instant browser download of the active scenario's full audit ledger (`terrabreed_simulation_ledger_stable_control.csv`), allowing external audit in Excel, R, or Python.
 
 ---
 

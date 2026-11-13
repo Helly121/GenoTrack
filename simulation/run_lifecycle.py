@@ -625,7 +625,7 @@ def main():
     ledger = orchestrator.run()
     df_ledger = ledger.to_dataframe()
     print("\n" + "=" * 90)
-    print(" GENOTRACK VIRTUAL BREEDING LIFECYCLE LEDGER")
+    print(" TERRABREED VIRTUAL BREEDING LIFECYCLE LEDGER")
     print("=" * 90)
     print(df_ledger[["tick", "scenario_event", "covariate_drift_score", "genotype_drift_score", "realized_rmse", "frozen_baseline_rmse", "trigger_fired", "champion_version"]].to_string(index=False))
     print("=" * 90)
