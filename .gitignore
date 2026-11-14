@@ -72,6 +72,7 @@ grafana_data/
 # DVC local storage & cache
 .dvc/cache
 .dvc/tmp
+data/dvc_remote/
 
 # Large raw datasets and binary interim/processed files (GitHub 100MB limit)
 datasets/

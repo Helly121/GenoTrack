@@ -19,7 +19,7 @@ TerraBreed implements a complete, enterprise-grade MLOps architecture:
 | **FastAPI** | High-throughput asynchronous REST serving layer with static dashboard hosting and OpenAPI specification | [`src/serve/app.py`](src/serve/app.py), [`index.html`](index.html) |
 | **Docker Compose** | Multi-container stack orchestrating API (8008), Prometheus (9090), Grafana (3001), and MLflow (5000) | [`docker-compose.yml`](docker-compose.yml), [`Dockerfile`](Dockerfile) |
 | **GitHub Actions** | Automated CI/CD (Code CI, Data CI, Continuous Training) and lightweight RBAC gating Production via Environment Protection Rules | [`.github/workflows/`](.github/workflows/) |
-| **Pandera & DVC** | Rigorous tabular schema contracts, missingness quarantine logging, and reproducible data pipeline stages | [`src/ingest/schemas.py`](src/ingest/schemas.py), [`pipelines/dvc.yaml`](pipelines/dvc.yaml) |
+| **Pandera & DVC** | Rigorous tabular schema contracts, missingness quarantine logging, and reproducible data pipeline stages | [`src/ingest/schemas.py`](src/ingest/schemas.py), [`dvc.yaml`](dvc.yaml) |
 
 ---
 

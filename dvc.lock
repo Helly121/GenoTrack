@@ -1,0 +1,157 @@
+schema: '2.0'
+stages:
+  setup_data:
+    cmd: python pipelines/setup_data.py
+    deps:
+    - path: datasets/Rice Diversity
+      hash: md5
+      md5: 6b5cb51136b28e2a649575e2f78130f1.dir
+      size: 89673664
+      nfiles: 9
+    outs:
+    - path: data/raw/rice/MET_crfilt_.75_allchrom.hmp.txt
+      hash: md5
+      md5: 6dc246a767d1c80e2ab7a5e98d1456bb
+      size: 89380391
+    - path: data/raw/rice/phenotype
+      hash: md5
+      md5: 0d2fe41371f1d770bf31340793b5ea24.dir
+      size: 293273
+      nfiles: 8
+  ingest:
+    cmd: python -m src.ingest.pipeline
+    deps:
+    - path: crops/rice/adapter.py
+      hash: md5
+      md5: d6ca65aaa0de458fbbfa042030558da3
+      size: 8405
+    - path: crops/rice/config.yaml
+      hash: md5
+      md5: be0091e94820bb99baafccc9ef83c69a
+      size: 885
+    - path: data/raw/rice/MET_crfilt_.75_allchrom.hmp.txt
+      hash: md5
+      md5: 6dc246a767d1c80e2ab7a5e98d1456bb
+      size: 89380391
+    - path: data/raw/rice/phenotype
+      hash: md5
+      md5: 0d2fe41371f1d770bf31340793b5ea24.dir
+      size: 293273
+      nfiles: 8
+    - path: src/ingest/pipeline.py
+      hash: md5
+      md5: af37585cc4e1fba0d7e5f91c75a314d8
+      size: 4447
+    outs:
+    - path: data/interim/canonical_genotype.parquet
+      hash: md5
+      md5: 655068f6788e8e7e2b8beda439677fbf
+      size: 176944430
+    - path: data/interim/canonical_phenotype.parquet
+      hash: md5
+      md5: 30fb20e530aaae3b1ae71ff14da07807
+      size: 113021
+  clean:
+    cmd: python -m src.clean.qc
+    deps:
+    - path: crops/rice/config.yaml
+      hash: md5
+      md5: be0091e94820bb99baafccc9ef83c69a
+      size: 885
+    - path: data/interim/canonical_genotype.parquet
+      hash: md5
+      md5: 655068f6788e8e7e2b8beda439677fbf
+      size: 176944430
+    - path: data/interim/canonical_phenotype.parquet
+      hash: md5
+      md5: 30fb20e530aaae3b1ae71ff14da07807
+      size: 113021
+    - path: src/clean/qc.py
+      hash: md5
+      md5: 3d77a79c0be6924e971df6d1f2d13f1f
+      size: 10938
+    outs:
+    - path: data/interim/cleaned_genotype.parquet
+      hash: md5
+      md5: 45180287fae76babc0073c2b73bd755e
+      size: 105630734
+    - path: data/interim/cleaned_phenotype.parquet
+      hash: md5
+      md5: 39f10773669d5a5122f07e220cac0165
+      size: 96278
+    - path: data/processed/manifest.json
+      hash: md5
+      md5: d01bf1698260f6b9b4103b7ef6b6b377
+      size: 1410
+  features:
+    cmd: python -m src.features.pipeline
+    deps:
+    - path: crops/rice/config.yaml
+      hash: md5
+      md5: be0091e94820bb99baafccc9ef83c69a
+      size: 885
+    - path: crops/rice/traits.yaml
+      hash: md5
+      md5: 790dca04a550b5e68690b0d9cc0a4c21
+      size: 993
+    - path: data/interim/cleaned_genotype.parquet
+      hash: md5
+      md5: 45180287fae76babc0073c2b73bd755e
+      size: 105630734
+    - path: data/interim/cleaned_phenotype.parquet
+      hash: md5
+      md5: 39f10773669d5a5122f07e220cac0165
+      size: 96278
+    - path: src/features/pipeline.py
+      hash: md5
+      md5: d1606c0bb508d82b54d650cb98a8b37c
+      size: 8140
+    outs:
+    - path: data/processed/dosage_matrix.parquet
+      hash: md5
+      md5: a5c00df8c5c24885513caab3d7325121
+      size: 43423319
+    - path: data/processed/feature_metadata.json
+      hash: md5
+      md5: 0e79d851cbe3bbef2d13079627f47938
+      size: 1331511
+    - path: data/processed/model_dataset_grain_yield.parquet
+      hash: md5
+      md5: 69c9ab1ca5e2433e7833978c9ef37217
+      size: 44433
+  train:
+    cmd: python -m src.models.train
+    deps:
+    - path: crops/rice/config.yaml
+      hash: md5
+      md5: be0091e94820bb99baafccc9ef83c69a
+      size: 885
+    - path: data/processed/feature_metadata.json
+      hash: md5
+      md5: 0e79d851cbe3bbef2d13079627f47938
+      size: 1331511
+    - path: data/processed/model_dataset_grain_yield.parquet
+      hash: md5
+      md5: 69c9ab1ca5e2433e7833978c9ef37217
+      size: 44433
+    - path: src/models/gxe.py
+      hash: md5
+      md5: 4bf22ccc77e9f7c9ae4d42bf0873ad34
+      size: 7136
+    - path: src/models/train.py
+      hash: md5
+      md5: 547ae7d37185e0c3a48e5eac58a54408
+      size: 9274
+    outs:
+    - path: data/models/baseline_rice_grain_yield.joblib
+      hash: md5
+      md5: 86c05436c02a18531530dcf049481781
+      size: 2417583
+    - path: data/models/challenger_rice_grain_yield.joblib
+      hash: md5
+      md5: 8b9bcba4783efcf9ccf6e88c0f025143
+      size: 204471
+    - path: data/processed/training_results_grain_yield.json
+      hash: md5
+      md5: a8a1c91ebf4278e5cf9d4e0bfa5f2109
+      size: 4594

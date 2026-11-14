@@ -29,7 +29,8 @@ stages:
     outs:
       - data/interim/cleaned_genotype.parquet
       - data/interim/cleaned_phenotype.parquet
-      - data/processed/manifest.json
+      - data/processed/manifest.json:
+          cache: false
 
   features:
     cmd: python -m src.features.pipeline
@@ -42,7 +43,8 @@ stages:
     outs:
       - data/processed/dosage_matrix.parquet
       - data/processed/model_dataset_grain_yield.parquet
-      - data/processed/feature_metadata.json
+      - data/processed/feature_metadata.json:
+          cache: false
 
   train:
     cmd: python -m src.models.train
@@ -55,4 +57,5 @@ stages:
     outs:
       - data/models/baseline_rice_grain_yield.joblib
       - data/models/challenger_rice_grain_yield.joblib
-      - data/processed/training_results_grain_yield.json
+      - data/processed/training_results_grain_yield.json:
+          cache: false
