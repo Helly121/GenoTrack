@@ -3081,6 +3081,46 @@
             gap: 14px;
         }
 
+        .export-btn {
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            color: var(--ink-secondary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            user-select: none;
+        }
+
+        .export-btn svg {
+            stroke: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.15s ease, stroke 0.15s ease;
+        }
+
+        .export-btn:hover {
+            background: rgba(122, 155, 110, 0.12);
+            border-color: var(--accent-moss);
+            color: var(--ink-primary);
+        }
+
+        .export-btn:hover svg {
+            transform: translateY(1px);
+            stroke: var(--accent-moss);
+        }
+
+        .export-btn:active {
+            transform: scale(0.97);
+        }
+
         .lifecycle-kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -3665,8 +3705,13 @@
                         </div>
                         <div class="lifecycle-meta-actions">
                             <span class="data-mono text-muted" id="sim-ledger-hash" style="font-size:11px; color:var(--ink-secondary);">SHA-256: 658b218d...</span>
-                            <button class="export-btn" type="button" onclick="window.exportCurrentLedger()">
-                                &darr; Export Ledger CSV
+                            <button class="export-btn" type="button" onclick="window.exportCurrentLedger()" title="Export simulation ledger as CSV" aria-label="Export simulation ledger as CSV">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                <span>Export Ledger CSV</span>
                             </button>
                         </div>
                     </div>
