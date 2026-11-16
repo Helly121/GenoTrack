@@ -66,7 +66,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "sum(genotrack_predictions_total)",
+          "expr": "sum(genotrack_predictions_total) or vector(0)",
           "legendFormat": "Inferences",
           "refId": "A"
         }
@@ -101,7 +101,7 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "(histogram_quantile(0.95, sum(rate(genotrack_inference_latency_seconds_bucket[5m])) by (le)) or histogram_quantile(0.95, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000",
+          "expr": "((histogram_quantile(0.95, sum(rate(genotrack_inference_latency_seconds_bucket[5m])) by (le)) or histogram_quantile(0.95, sum(genotrack_inference_latency_seconds_bucket) by (le))) * 1000) or vector(0)",
           "legendFormat": "p95",
           "refId": "A"
         }
@@ -139,7 +139,7 @@
       "type": "gauge",
       "targets": [
         {
-          "expr": "max(genotrack_covariate_missing_hill_ratio)",
+          "expr": "max(genotrack_covariate_missing_hill_ratio) or vector(0)",
           "legendFormat": "Max Drift",
           "refId": "A"
         }

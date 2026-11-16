@@ -104,10 +104,20 @@ def load_model_assets(crop: str = "rice", trait: str = "grain_yield"):
         CACHE["dosage_matrix"] = pd.read_parquet(dosage_file)
 
 
+def init_metrics_baseline():
+    """Pre-initialize Prometheus series with zero values so Grafana never shows 'No data'."""
+    default_envs = ["across_environments", "2009_DS", "2009_WS", "2010_DS", "2010_WS", "2011_DS", "2011_WS"]
+    for env in default_envs:
+        PREDICTIONS_COUNTER.labels(environment=env, target_trait="grain_yield", status="success")
+        COVARIATE_DRIFT.labels(environment=env).set(0.0)
+    INFERENCE_LATENCY.labels(endpoint="/predict/sample")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Modern lifespan handler replacing deprecated startup event."""
     load_model_assets()
+    init_metrics_baseline()
     print("\n" + "=" * 72)
     print("  TERRABREED SCIENTIFIC DASHBOARD READY!")
     print("  --> BROWSER URL:  http://localhost:8008/  (or http://127.0.0.1:8008/)")
