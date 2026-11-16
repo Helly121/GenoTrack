@@ -1,7 +1,7 @@
 # TerraBreed — Reproducible MLOps Pipeline for Genomic Selection
 > *Breeding crops for a changing Earth.*
 
-**TerraBreed** is a production-grade, crop-agnostic MLOps pipeline for **Genomic Selection (GS)** in digital agriculture and plant breeding. It predicts candidate crop phenotypic performance (grain yield, flowering time, plant height, maturity, lodging) directly from high-density genetic marker data (Single Nucleotide Polymorphisms / SNPs), providing full end-to-end lineage, strict auditability, automated model governance, and real-time observability from raw data ingestion to a served REST API and 3D scientific dashboard.
+**TerraBreed** is a production-grade, crop-agnostic MLOps pipeline for **Genomic Selection (GS)** in digital agriculture and plant breeding. It predicts candidate crop phenotypic performance (grain yield, flowering time, plant height, maturity, lodging) directly from high-density genetic marker data (Single Nucleotide Polymorphisms / SNPs), providing full end-to-end lineage, strict auditability, automated model governance, multi-season drift simulation, and real-time observability from raw data ingestion to a served REST API and 3D scientific dashboard.
 
 ---
 
@@ -12,6 +12,7 @@ TerraBreed implements a complete, enterprise-grade MLOps architecture:
 | Tool | Responsibility in TerraBreed | Key Files & Artifacts |
 |---|---|---|
 | **Metaflow** | Directed Acyclic Graph (DAG) pipeline orchestration with rich, visual `@card` step reports | [`pipelines/flow.py`](pipelines/flow.py), [`pipelines/compat.py`](pipelines/compat.py) |
+| **DVC** | Data version control, reproducible data DAG stages, content-addressable caching, and local/cloud storage remotes | [`dvc.yaml`](dvc.yaml), [`dvc.lock`](dvc.lock), `data/dvc_remote/` |
 | **MLflow** | Experiment tracking, hyperparameter logging, run comparison history, and staged Model Registry (`Staging` $\rightarrow$ `Production`) | [`src/models/registry.py`](src/models/registry.py), [`src/models/seed_mlflow.py`](src/models/seed_mlflow.py), `mlflow.db` |
 | **SHAP** | Per-locus genomic feature attribution mapped to chromosome/base-pair positions; powers the REST API and the 3D Locus Inspector | [`src/models/explain.py`](src/models/explain.py), [`src/serve/app.py`](src/serve/app.py) |
 | **Prometheus** | Real-time telemetry scraper collecting prediction counts, p50/p95 latency, yield distributions, covariate drift, and active model versions | [`src/serve/app.py`](src/serve/app.py) (`/metrics`), [`monitoring/prometheus/`](monitoring/prometheus/) |
@@ -19,7 +20,8 @@ TerraBreed implements a complete, enterprise-grade MLOps architecture:
 | **FastAPI** | High-throughput asynchronous REST serving layer with static dashboard hosting and OpenAPI specification | [`src/serve/app.py`](src/serve/app.py), [`index.html`](index.html) |
 | **Docker Compose** | Multi-container stack orchestrating API (8008), Prometheus (9090), Grafana (3001), and MLflow (5000) | [`docker-compose.yml`](docker-compose.yml), [`Dockerfile`](Dockerfile) |
 | **GitHub Actions** | Automated CI/CD (Code CI, Data CI, Continuous Training) and lightweight RBAC gating Production via Environment Protection Rules | [`.github/workflows/`](.github/workflows/) |
-| **Pandera & DVC** | Rigorous tabular schema contracts, missingness quarantine logging, and reproducible data pipeline stages | [`src/ingest/schemas.py`](src/ingest/schemas.py), [`dvc.yaml`](dvc.yaml) |
+| **Pandera** | Rigorous tabular schema contracts, field validation, and quarantined anomaly logging | [`src/ingest/schemas.py`](src/ingest/schemas.py), `data/interim/quarantined_*.csv` |
+| **Simulation & Retraining** | 16-season virtual breeding simulator, label lag ($L=1$), drift detection (Wasserstein, Page-Hinkley), and closed-loop retraining | [`simulation/`](simulation/), [`monitoring/drift_detector.py`](monitoring/drift_detector.py), [`monitoring/policy.py`](monitoring/policy.py) |
 
 ---
 
@@ -27,12 +29,13 @@ TerraBreed implements a complete, enterprise-grade MLOps architecture:
 
 ```mermaid
 flowchart TD
-    subgraph DataIngest["1. Ingestion & Quality Control (Pandera)"]
+    subgraph DataIngest["1. Ingestion & Quality Control (Pandera & DVC)"]
         RAW["Raw Crop Trials\n(HapMap, VCF, Phenotype CSV)"] --> ADAPT["Crop Adapter\n(crops/<crop>/adapter.py)"]
         ADAPT --> SCHEMAS["Pandera Contract Validation\n(Genotype & Phenotype Schemas)"]
         SCHEMAS --> QC["Vectorized QC Filters\n(Missingness < 20%, MAF >= 0.05)"]
         QC -->|Rejected Markers/Samples| QUAR["Quarantine Logs\n(data/interim/quarantined_*.csv)"]
-        QC -->|Passed| MANIFEST["Audit Manifest\n(data/processed/manifest.json)"]
+        QC -->|Passed Clean Data| DVC_STORE["DVC Content Cache & Remote\n(data/dvc_remote/)"]
+        DVC_STORE --> MANIFEST["Audit Manifest\n(data/processed/manifest.json)"]
     end
 
     subgraph Orchestration["2. Metaflow DAG Orchestration & Cards"]
@@ -56,7 +59,17 @@ flowchart TD
         PROM --> GRAF["Grafana Dashboards\n(Pre-Provisioned SLA & Ops Panels)"]
     end
 
-    subgraph Governance["5. Governance & CI/CD (GitHub Actions)"]
+    subgraph RetrainingLoop["5. Multi-Season Simulation & Autonomous Retraining"]
+        SIM["Virtual Breeding Simulator\n(16 Seasons, Haldane Crossover, GxE Shocks)"] --> LAG["Label Lag Buffer\n(Seedling DNA at t, Ground Truth at t+1)"]
+        LAG --> DETECT["Drift Monitoring Engine\n(Wasserstein Distance, Page-Hinkley, QC Spikes)"]
+        DETECT --> POLICY{"Autonomous Policy\n(Persistence K=2, Cooldown)"}
+        POLICY -->|Trigger Retrain| RETRAIN["Automated Retraining & Validation Gate"]
+        RETRAIN -->|Beats Champion >= 5%| REGISTRY
+        POLICY -->|Status & Metrics| LEDGER["Immutable Simulation Ledger\n(ledger.parquet, CSV Export)"]
+        LEDGER -.-> UI
+    end
+
+    subgraph Governance["6. Governance & CI/CD (GitHub Actions)"]
         GH_CODE["Code CI\n(Linting, Unit Tests, Coverage)"]
         GH_DATA["Data CI\n(Pandera Contract Invariance)"]
         GH_DEPLOY["Deploy Pipeline\n(Staging -> Human Approval -> Production)"]
@@ -127,7 +140,7 @@ This enables breeders to validate model reasoning against known Quantitative Tra
 
 ## 4. Empirical Performance Benchmarks & Ablation Studies
 
-### 4.1 Model Benchmark on Rice Grain Yield ($Kg/ha$)
+### 4.1 Model Benchmark on Rice Grain Yield ($kg/ha$)
 Evaluated against 108,025 SNP markers and 368 biological accessions across 8 multi-season replicated yield trials (2009–2012):
 
 | Model Architecture | Cross-Validation Strategy | Mean Pearson $r$ | RMSE ($kg/ha$) | Fold Stability ($\sigma$) | Status & Governance |
@@ -165,7 +178,37 @@ python -m pipelines.flow card view validation_gate
 python -m pipelines.flow card server --port 8324
 ```
 
-### 5.2 Experiment Tracking & Model Registry (MLflow)
+### 5.2 Data Version Control & Storage Remote (DVC)
+TerraBreed uses **DVC** ([`dvc.yaml`](dvc.yaml)) to manage large genomic matrices, intermediate parquets, and serialized models, keeping the Git repository lightweight while guaranteeing byte-level reproducibility:
+
+```
+setup_data ──> ingest ──> clean ──> features ──> train
+```
+
+* **DVC DAG Stages:**
+  - `setup_data`: Unpacks and links raw genomic HapMap files and phenotype CSV trials.
+  - `ingest`: Parses raw files into canonical Pandera-validated genotype and phenotype parquets.
+  - `clean`: Executes vectorized QC filters (MAF $\ge 0.05$, missingness $< 20\%$) and logs quarantined records.
+  - `features`: Generates ploidy-parameterized dosage matrix and Patterson-standardized PCA eigenvectors.
+  - `train`: Fits G×E Ridge baseline and XGBoost champion models with cross-validation.
+* **Separation of Concerns:** Heavy matrices and binaries are cached in `.dvc/cache` and synced to the local/cloud remote (`data/dvc_remote/`), while lightweight audit metadata (`manifest.json`, `feature_metadata.json`, `training_results_grain_yield.json`) is tracked directly by Git (`cache: false`).
+* **Integrity Commands:**
+  ```bash
+  # Check DVC pipeline status and stage staleness
+  dvc status
+
+  # Visualize data dependency Directed Acyclic Graph
+  dvc dag
+
+  # Reproduce end-to-end pipeline stages
+  dvc repro
+
+  # Synchronize data with storage remote
+  dvc push
+  dvc pull
+  ```
+
+### 5.3 Experiment Tracking & Model Registry (MLflow)
 * **Backend Store:** High-performance, zero-maintenance SQLite store (`sqlite:///mlflow.db`).
 * **Artifact Tracking:** Logs dataset hashes, config YAML files, hyperparameter trees, and per-fold Pearson $r$/RMSE distributions.
 * **Model Lifecycle Stages:** Enforces formal stage transitions: `Staging` $\rightarrow$ `Production` $\rightarrow$ `Archived`.
@@ -176,7 +219,7 @@ python -m pipelines.flow card server --port 8324
 mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
 ```
 
-### 5.3 Real-Time Observability & Telemetry (Prometheus & Grafana)
+### 5.4 Real-Time Observability & Telemetry (Prometheus & Grafana)
 FastAPI exports real-time telemetry on `/metrics`, scraped by Prometheus every 5 seconds and visualized on Grafana.
 
 #### Exported Prometheus Metrics
@@ -198,20 +241,66 @@ FastAPI exports real-time telemetry on `/metrics`, scraped by Prometheus every 5
 
 ---
 
-## 6. Model Serving & Scientific Dashboard
+## 6. Multi-Season Virtual Breeding & Closed-Loop Retraining
 
-The serving layer ([`src/serve/app.py`](src/serve/app.py)) provides sub-15ms REST APIs and hosts an interactive WebGL 3D Genomic Locus Inspector.
+In agricultural machine learning, deployed models encounter an operational reality characterized by **delayed ground truth ($L=1$ Season)**, **directional breeding drift**, and **climatic volatility**:
 
-### Core Endpoints
-* `POST /predict/sample`: Predicts performance for an accession ID in a given environment with additive decomposition.
-* `POST /predict/dosage`: Evaluates raw synthetic dosage vectors for breeding simulations.
-* `GET /explain/locus/{marker_id}`: Retrieves biological chromosomal coordinates and SHAP importance for a locus.
-* `GET /metrics`: Standard Prometheus metrics export.
-* `GET /docs`: Interactive Swagger / OpenAPI documentation.
+1. **Delayed Ground Truth:** Juvenile seedling DNA is genotyped at planting (tick $t$), but actual mature grain yield is only harvested 4–6 months later (tick $t+1$).
+2. **Directional Genetic Drift:** Artificial selection systematically enriches favorable alleles ($p_j \to 1.0$) and depletes variance across successive breeding cycles.
+3. **Simulated Breeding Program Engine:** Because commercial seed companies treat multi-decade streaming trial data as proprietary IP, TerraBreed implements a first-principles **Virtual Breeding Program Simulator** ([`simulation/run_lifecycle.py`](simulation/run_lifecycle.py)) modeling Haldane recombination crossovers, polygenic infinitesimal inheritance, and non-linear G×E reaction norms.
+
+> **Epistemic Honesty:** Headline baseline accuracy ($r = 0.8122$, RMSE $768.8\text{ kg/ha}$) is fixed on real historical IRRI field trials (368 accessions). The 16-season simulation demonstrates the **autonomous MLOps lifecycle**, and all simulated outputs are explicitly badged **"SIMULATED"** across dashboards and ledgers.
+
+### 6.1 Three Stress-Test Scenarios
+* **`Storyline Demo` (16 Ticks):** Primary demonstration featuring four curated operational failure modes:
+  - *Tick 5:* Covariate shift ($+2.0^\circ\text{C}$ temperature shock, $0.7\times$ rainfall).
+  - *Tick 8:* Germplasm immigration ($25\%$ immigrant lines introduced into breeding pool).
+  - *Tick 11:* Concept drift (*Hd1* flowering locus effect multiplier shifts by $-0.5$).
+  - *Tick 13:* Data quality shock ($40\%$ missing hill plot failure, $2\%$ corrupted allele calls).
+* **`Stable Control` (Zero Events):** Control run over 16 seasons with zero injected anomalies. Rigorously verifies the **false-positive alarm gate** ($\le 1/16$ false retrains).
+* **`Random Stress` (Held-Out):** Stochastic shock generator testing robustness under unexpected environmental extremes.
+
+### 6.2 Tri-Fold Drift Monitoring & Decision Policy
+The autonomous monitoring engine ([`monitoring/drift_detector.py`](monitoring/drift_detector.py)) tracks three complementary health signals:
+* **Covariate Shift:** 2-Wasserstein distance ($W_2 > 0.15$) over environmental covariates (temperature, rainfall, solar radiation).
+* **Concept Drift / Performance Degradation:** Page-Hinkley cumulative score ($PH > 20.0$) detecting persistent error growth.
+* **Data Quality Quarantine:** Pandera quarantine isolation ($> 5\%$ quarantined plots blocks retraining to prevent poisoning).
+
+**Retraining Cadence & Gating:**
+Retraining is evaluated at seasonal harvest checkpoints and requires **$K=2$ consecutive ticks of detected drift** plus a mandatory **2-season cooldown** to prevent costly pipeline thrashing. Challenger models must pass validation gating (outperforming the incumbent production model by $\ge 5\%$ on held-out harvest data) before promotion to `Production`.
+
+### 6.3 Immutable Simulation Ledger & Audit Trail
+Every simulated season, prediction, drift metric, and retraining event is committed to an immutable ledger (`data/simulation/ledger.parquet`, [`docs/lifecycle/ledger.csv`](docs/lifecycle/ledger.csv)) with SHA-256 fingerprinting. The interactive web dashboard provides one-click CSV ledger export with full column provenance.
+
+```bash
+# Run 16-season virtual breeding lifecycle simulation
+python -m simulation.run_lifecycle --scenario storyline_demo --ticks 16
+
+# Verify lifecycle acceptance criteria (false alarms, recovery, quarantine)
+python -m simulation.verify_lifecycle_acceptance
+```
 
 ---
 
-## 7. Automated Model Governance & Validation Gates
+## 7. Model Serving & Scientific Dashboard
+
+The serving layer ([`src/serve/app.py`](src/serve/app.py)) provides sub-15ms REST APIs and hosts an interactive WebGL 3D Genomic Locus Inspector and Lifecycle Simulation Dashboard ([`index.html`](index.html)).
+
+### Core Endpoints
+* `POST /predict/sample`: Predicts performance for an accession ID in a given environment with additive G×E decomposition.
+* `POST /predict/dosage`: Evaluates raw synthetic dosage vectors for breeding simulations.
+* `GET /explain/locus/{marker_id}`: Retrieves biological chromosomal coordinates and SHAP importance for a locus.
+* `GET /metrics`: Standard Prometheus telemetry exposition endpoint.
+* `GET /docs`: Interactive Swagger / OpenAPI documentation.
+
+### Interactive Dashboard Features
+* **Precision Agronomy Cockpit:** Real-time accession yield predictions across trial locations.
+* **3D Genomic Locus Inspector:** Three.js chromosome visualizer displaying per-locus SHAP attributions against known QTLs.
+* **Lifecycle & Retraining Monitor:** Interactive scenario switcher (Storyline, Stable Control, Random Stress), KPI telemetry cards, dynamic multi-season drift timeline, and one-click CSV Ledger export.
+
+---
+
+## 8. Automated Model Governance & Validation Gates
 
 TerraBreed enforces rigorous, evidence-based gating before any model is trusted in production:
 1. **Mean Cross-Validation Gate:** Challenger must achieve Pearson correlation $r \ge 0.75$ and outperform the linear baseline by $\ge 10\%$.
@@ -221,7 +310,7 @@ TerraBreed enforces rigorous, evidence-based gating before any model is trusted 
 
 ---
 
-## 8. Extending to a New Crop (Crop Portability)
+## 9. Extending to a New Crop (Crop Portability)
 
 Adding a new crop (e.g. `maize` or hexaploid `wheat`) requires **zero modifications to `src/`**:
 
@@ -242,9 +331,9 @@ Adding a new crop (e.g. `maize` or hexaploid `wheat`) requires **zero modificati
 
 ---
 
-## 9. Quickstart & Presentation Controller
+## 10. Quickstart & Presentation Controller
 
-### 9.1 Installation
+### 10.1 Installation
 ```bash
 git clone https://github.com/Helly121/GenoTrack.git
 cd GenoTrack
@@ -258,13 +347,24 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-### 9.2 Running Unit & Integration Tests
-Verify all 16 unit and integration tests pass:
+### 10.2 Comprehensive Test Suite
+Verify all **29 unit and integration tests** pass across the 7 test modules:
 ```bash
 pytest tests/ -v
 ```
 
-### 9.3 Launching with Docker Compose
+| Test Module | Coverage Scope | Test Count |
+|:---|:---|:---:|
+| [`tests/test_adapter.py`](tests/test_adapter.py) | HapMap/VCF parsing, ploidy checks, and Pandera contracts | 2 |
+| [`tests/test_features.py`](tests/test_features.py) | Dosage encoding, Patterson standardization, and kinship PCA | 5 |
+| [`tests/test_gxe_models.py`](tests/test_gxe_models.py) | Ridge baseline, G×E XGBoost, and validation gate logic | 3 |
+| [`tests/test_serve.py`](tests/test_serve.py) | FastAPI endpoints, Prometheus metrics, and SHAP explainability | 6 |
+| [`tests/test_simulation_contracts.py`](tests/test_simulation_contracts.py) | Scenario configuration schemas, event bounds, and ledger hashing | 5 |
+| [`tests/test_simulation_engine.py`](tests/test_simulation_engine.py) | Simulator determinism, Pandera passing, and truth isolation | 3 |
+| [`tests/test_simulation_policy.py`](tests/test_simulation_policy.py) | $K=2$ persistence, cooldown enforcement, and QC quarantine defense | 5 |
+| **Total** | | **29 / 29 Passing** |
+
+### 10.3 Launching with Docker Compose
 Spin up the complete MLOps stack in one command:
 ```bash
 docker compose up -d
@@ -272,7 +372,7 @@ docker compose up -d
 
 | Service | URL | Purpose |
 |:---|:---|:---|
-| **Scientific Dashboard** | [http://localhost:8008/](http://localhost:8008/) | Precision dashboard & 3D Genomic Locus Inspector |
+| **Scientific Dashboard** | [http://localhost:8008/](http://localhost:8008/) | Precision dashboard, 3D Locus Inspector & Lifecycle Monitor |
 | **FastAPI Swagger Docs** | [http://localhost:8008/docs](http://localhost:8008/docs) | Interactive OpenAPI REST specification |
 | **Prometheus Alerts** | [http://localhost:9090/alerts](http://localhost:9090/alerts) | Active MLOps SLA & covariate drift alert rules |
 | **Prometheus Targets** | [http://localhost:9090/targets](http://localhost:9090/targets) | 100% UP health status of API scraper |
@@ -280,10 +380,43 @@ docker compose up -d
 | **MLflow UI** | [http://localhost:5000](http://localhost:5000) | Experiment tracking & Model Registry |
 | **Metaflow Card Server** | [http://localhost:8324](http://localhost:8324) | Visual step reports for pipeline DAG runs |
 
-### 9.4 Interactive Demo Controller
-Windows users can execute [`demo_commands.bat`](demo_commands.bat) for an interactive menu to start services, run the pipeline, stream synthetic telemetry traffic, and view browser dashboards with a single keystroke.
+### 10.4 Interactive Presentation Controller
+Windows users can execute [`demo_commands.bat`](demo_commands.bat) for a single-keystroke interactive controller:
+
+```
+===============================================================================
+               TERRABREED MLOPS DEMO & PRESENTATION CONTROLLER
+                    "Breeding crops for a changing Earth."
+===============================================================================
+
+ [SERVICES & OBSERVABILITY]
+   1. Start FastAPI Serving API (Port 8008)
+   2. Start MLflow Tracking UI (Port 5000)
+   3. Start Docker Prometheus & Grafana Stack (Ports 9090 & 3001)
+   4. Start Continuous Telemetry Generator (Traffic Stream into Grafana)
+
+ [DATA LINEAGE & PIPELINE ORCHESTRATION]
+   5. Display DVC Lineage DAG & Data Status (dvc dag & dvc status)
+   6. Run Metaflow End-to-End Pipeline DAG (python pipelines/flow.py run)
+   7. View Metaflow Validation Gate HTML Card (In Browser)
+   8. Start Metaflow Card Viewer Server (Port 8324)
+
+ [LIFECYCLE SIMULATION & TEST SUITE]
+   9. Run 16-Season Virtual Breeding Lifecycle Simulation
+   T. Run Comprehensive Pytest Suite (29/29 Unit Tests)
+   O. Open All Presentation Web Pages in Browser
+   0. Exit
+```
 
 ---
 
-## 10. License
+## 11. Key Technical Documentation
+
+For in-depth mathematical derivations, engineering justifications, and committee briefs:
+* **[TerraBreed Jury & Faculty Defense Brief](docs/TerraBreed_Jury_Brief.md):** 10-section exhaustive report covering ploidy dosage algebra, VanRaden kinship mathematics, Patterson standardization proofs, validation gate contracts, and production deployment checklists.
+* **[Closed-Loop Retraining & Simulation Architecture](docs/retraining_pipeline.md):** Technical specification of the 16-season virtual breeding simulator, delayed label lag buffer ($L=1$), drift detection thresholds, and automated retraining policy.
+
+---
+
+## 12. License
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
