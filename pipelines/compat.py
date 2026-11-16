@@ -44,8 +44,11 @@ def ensure_posix_compat():
         def _safe_rename(src, dst):
             try:
                 _orig_rename(src, dst)
-            except FileExistsError:
-                os.replace(src, dst)
+            except (FileExistsError, PermissionError):
+                try:
+                    os.replace(src, dst)
+                except Exception:
+                    _orig_rename(src, dst)
         os.rename = _safe_rename
 
         # Patch os.remove and os.unlink to safely ignore Windows file lock issues during temp cleanup
@@ -57,6 +60,54 @@ def ensure_posix_compat():
                 pass
         os.remove = _safe_remove
         os.unlink = _safe_remove
+
+        # Ensure Metaflow client cache uses a valid Windows path instead of /tmp
+        win_client_cache = os.path.join(tempfile.gettempdir(), "metaflow_client")
+        if "METAFLOW_CLIENT_CACHE_PATH" not in os.environ or os.environ["METAFLOW_CLIENT_CACHE_PATH"].startswith("/tmp"):
+            os.environ["METAFLOW_CLIENT_CACHE_PATH"] = win_client_cache
+        try:
+            import metaflow.metaflow_config as _mc
+            _mc.CLIENT_CACHE_PATH = win_client_cache
+        except Exception:
+            pass
+
+        try:
+            import time
+            import metaflow.client.filecache as _mfc
+            _mfc.CLIENT_CACHE_PATH = win_client_cache
+
+            def _safe_create_file(self, path, value):
+                if self._objects is None:
+                    self._index_objects()
+                dirname = os.path.dirname(path)
+                try:
+                    _mfc.FileCache._makedirs(dirname)
+                except Exception:
+                    raise _mfc.FileCacheException("Could not create directory: %s" % dirname)
+                tmpfile = tempfile.NamedTemporaryFile(dir=dirname, prefix="dlobj", delete=False)
+                try:
+                    tmpfile.write(value)
+                    tmpfile.flush()
+                    tmpfile.close()
+                    os.replace(tmpfile.name, path)
+                except Exception:
+                    try:
+                        tmpfile.close()
+                    except Exception:
+                        pass
+                    try:
+                        os.unlink(tmpfile.name)
+                    except Exception:
+                        pass
+                    raise
+                size = os.path.getsize(path)
+                self._total += size
+                self._objects.append((int(time.time()), size, path))
+                self._garbage_collect()
+
+            _mfc.FileCache.create_file = _safe_create_file
+        except Exception:
+            pass
 
         try:
             import msvcrt
