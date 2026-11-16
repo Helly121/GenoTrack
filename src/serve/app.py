@@ -15,7 +15,9 @@ import joblib
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Response
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 import prometheus_client
@@ -28,6 +30,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODELS_DIR = PROJECT_ROOT / "data" / "models"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 INDEX_HTML = PROJECT_ROOT / "index.html"
+LIFECYCLE_DIR = PROJECT_ROOT / "docs" / "lifecycle"
 
 # In-memory model cache
 CACHE = {
@@ -77,6 +80,9 @@ MODEL_VERSION_GAUGE = Gauge(
 
 def load_model_assets(crop: str = "rice", trait: str = "grain_yield"):
     """Load production model, feature metadata, and processed dosage matrix."""
+    if CACHE["model"] is not None:
+        return
+
     model_file = MODELS_DIR / f"production_{crop}_{trait}.joblib"
     meta_file = MODELS_DIR / f"production_{crop}_{trait}.json"
     feat_file = PROCESSED_DIR / "feature_metadata.json"
@@ -101,6 +107,12 @@ def load_model_assets(crop: str = "rice", trait: str = "grain_yield"):
 async def lifespan(app: FastAPI):
     """Modern lifespan handler replacing deprecated startup event."""
     load_model_assets()
+    print("\n" + "=" * 72)
+    print("  TERRABREED SCIENTIFIC DASHBOARD READY!")
+    print("  --> BROWSER URL:  http://localhost:8008/  (or http://127.0.0.1:8008/)")
+    print("  --> SWAGGER DOCS: http://localhost:8008/docs")
+    print("  Note: Windows blocks '0.0.0.0' in browsers; always use 'localhost:8008'")
+    print("=" * 72 + "\n")
     yield
 
 
@@ -110,6 +122,19 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+# Enable CORS for local dashboards (e.g. VS Code Live Server on :5500, or any host port)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve lifecycle timeline charts and static artifacts for index.html
+if LIFECYCLE_DIR.exists():
+    app.mount("/docs/lifecycle", StaticFiles(directory=str(LIFECYCLE_DIR)), name="lifecycle_docs")
 
 
 # -------------------------------------------------------------

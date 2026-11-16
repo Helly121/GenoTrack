@@ -1,36 +1,53 @@
 ===============================================================================
-               GENOTRACK - MLOPS TOOLCHAIN PRESENTATION GUIDE
+               TERRABREED - MLOPS TOOLCHAIN PRESENTATION GUIDE
+                    "Breeding crops for a changing Earth."
 ===============================================================================
 
-This guide contains the exact URLs, verification status, and step-by-step
-CLI commands to present every tool in the GenoTrack MLOps stack to reviewers,
-evaluators, or stakeholders.
+This guide contains the exact URLs, architecture explanations, verification status,
+and step-by-step CLI commands to present every tool in the TerraBreed MLOps stack
+to reviewers, evaluators, or stakeholders.
 
 
 -------------------------------------------------------------------------------
-1. QUICK ACCESS DASHBOARD (LIVE SERVICES)
+1. QUICK ACCESS DASHBOARD (LIVE SERVICES & PORT ARCHITECTURE)
 -------------------------------------------------------------------------------
 
-All core services are actively running and pre-seeded with real data:
+python -m uvicorn src.serve.app:app --host 0.0.0.0 --port 8008
+
+IMPORTANT NOTE ON PORTS (8008 vs. 5500):
+  * http://localhost:8008/
+    This is the UNIFIED PRODUCTION URL. The FastAPI backend (src/serve/app.py)
+    natively hosts the web dashboard index.html, the REST prediction endpoints
+    (/predict/sample, /predict/dosage), and the Prometheus telemetry scraper (/metrics)
+    all together on port 8008.
+
+  * http://127.0.0.1:5500/index.html
+    This is the STATIC PREVIEW URL used by VS Code Live Server. If you open
+    index.html via Live Server on port 5500, the FastAPI serving layer MUST still
+    be running on port 8008 (via "python -m uvicorn src.serve.app:app --port 8008"
+    or demo_commands.bat Option 1) for Prometheus, Grafana, Swagger docs, and REST
+    prediction APIs to work!
+
+Core Services Overview:
 
 * Scientific Dashboard & 3D Locus Inspector:
-  URL:         http://localhost:8008/
-  Notes:       Direct in browser
-  Purpose:     Scientific plant breeding UI + interactive 3D WebGL locus visualizer
+  URL:         http://localhost:8008/  (or http://127.0.0.1:5500/index.html via Live Server)
+  Notes:       Direct in browser; CORS enabled so Live Server works seamlessly with API
+  Purpose:     Scientific plant breeding UI, 3D WebGL locus visualizer & multi-season simulator
 
 * FastAPI Interactive OpenAPI Docs:
   URL:         http://localhost:8008/docs
-  Notes:       Swagger UI
-  Purpose:     REST endpoints (/predict/sample, /predict/dosage, /explain/locus)
+  Notes:       Interactive Swagger UI
+  Purpose:     REST endpoints (/predict/sample, /predict/dosage, /explain/locus, /health)
 
 * Prometheus Telemetry Metrics Exporter:
   URL:         http://localhost:8008/metrics
-  Notes:       Plaintext Prometheus format
+  Notes:       Plaintext Prometheus exposition format
   Purpose:     Live telemetry exporter (throughput, latency, drift, active version)
 
 * Prometheus Monitoring & Telemetry:
   URL:         http://localhost:9090
-  Targets:     http://localhost:9090/targets (100% UP Scraper Health)
+  Targets:     http://localhost:9090/targets (100% UP Scraper Health on host.docker.internal:8008)
   Alerts:      http://localhost:9090/alerts (MLOps SLA & Covariate Drift Rules)
   Live Graph:  http://localhost:9090/graph?g0.expr=sum(rate(genotrack_predictions_total[1m]))%20by%20(environment)&g0.tab=0&g0.range_input=15m
   Notes:       No auth required
@@ -39,7 +56,7 @@ All core services are actively running and pre-seeded with real data:
 * Grafana Monitoring Dashboard:
   URL:         http://localhost:3001
   Notes:       User: admin | Password: admin
-  Purpose:     Pre-provisioned operational dashboard (GenoTrack Telemetry)
+  Purpose:     Pre-provisioned operational dashboard (TerraBreed Telemetry & SLAs)
 
 * MLflow Tracking & Model Registry:
   URL:         http://localhost:5000
@@ -62,7 +79,7 @@ Use this narrative flow during a demonstration:
 PART 1: PIPELINE ORCHESTRATION & VISUAL CARDS (METAFLOW)
 -------------------------------------------------------------------------------
 * Talking Points:
-  - Standard ML scripts are hard to track and debug. GenoTrack uses Metaflow
+  - Standard ML scripts are hard to track and debug. TerraBreed uses Metaflow
     to orchestrate an 8-step reproducible Directed Acyclic Graph (DAG):
     start -> setup_data -> ingest -> clean -> features -> train -> validation_gate -> register -> end
   - Cross-platform compatibility layer (pipelines/compat.py) transparently
@@ -84,10 +101,30 @@ PART 1: PIPELINE ORCHESTRATION & VISUAL CARDS (METAFLOW)
      python -m pipelines.flow card server --port 8324
 
 
-PART 2: EXPERIMENT TRACKING & MODEL GOVERNANCE (MLFLOW)
+PART 2: DATA VERSION CONTROL & STORAGE LINEAGE (DVC)
 -------------------------------------------------------------------------------
 * Talking Points:
-  - Production genomic selection demands rigorous lineage tracking. GenoTrack
+  - Genomic dosage matrices (108,025 SNPs x 368 lines) and binary models are
+    too heavy for Git. TerraBreed uses DVC (dvc.yaml) to track byte-level lineage.
+  - Clear separation of concerns: Git tracks code and audit metadata (manifest.json,
+    feature_metadata.json with cache: false), while DVC caches large parquets and
+    model binaries in content-addressable storage with local remote data/dvc_remote/.
+
+* Demonstration Commands:
+  1. Display the DVC Directed Acyclic Graph (DAG):
+     dvc dag
+
+  2. Verify pipeline status and file immutability:
+     dvc status
+
+  3. Reproduce pipeline stages:
+     dvc repro
+
+
+PART 3: EXPERIMENT TRACKING & MODEL GOVERNANCE (MLFLOW)
+-------------------------------------------------------------------------------
+* Talking Points:
+  - Production genomic selection demands rigorous lineage tracking. TerraBreed
     uses MLflow backed by SQLite (sqlite:///mlflow.db).
   - Tracks hyperparameter configurations, dataset hashes, and cross-validation
     performance.
@@ -110,15 +147,15 @@ PART 2: EXPERIMENT TRACKING & MODEL GOVERNANCE (MLFLOW)
   1. Open the "genotrack_rice_grain_yield" experiment.
   2. Select all runs and click "Compare" to show the scatter/parallel-coordinates
      chart of Pearson r vs RMSE.
-  3. Click "Models" -> "GenoTrack-GxE-Yield" to show stage transitions
+  3. Click "Models" -> "TerraBreed-GxE-Yield" to show stage transitions
      (Production vs Staging).
 
 
-PART 3: REAL-TIME SERVING & BIOLOGICAL EXPLAINABILITY (FASTAPI + SHAP)
+PART 4: REAL-TIME SERVING & BIOLOGICAL EXPLAINABILITY (FASTAPI + SHAP)
 -------------------------------------------------------------------------------
 * Talking Points:
   - Trained models are served via high-performance async FastAPI with
-    lifespan memory caching.
+    lifespan memory caching (<15ms latency).
   - Decomposes trait predictions into additive genetic potential vs.
     environmental trial effects.
   - Implements per-locus SHAP (SHapley Additive exPlanations) attribution,
@@ -139,17 +176,17 @@ PART 3: REAL-TIME SERVING & BIOLOGICAL EXPLAINABILITY (FASTAPI + SHAP)
   curl -X GET http://localhost:8008/explain/locus/S1_11984
 
 * What to Show in Browser:
-  1. Open http://localhost:8008/ to show the precision scientific dashboard
-     and live 3D Locus Inspector.
+  1. Open http://localhost:8008/ (or Live Server http://127.0.0.1:5500/index.html)
+     to show the precision scientific dashboard and live 3D Locus Inspector.
   2. Open http://localhost:8008/docs to show the interactive Swagger UI.
 
 
-PART 4: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
+PART 5: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
 -------------------------------------------------------------------------------
 * Talking Points:
   - Deployed models drift over seasons due to climate variability and field
     measurement error.
-  - GenoTrack exports real-time metrics via Prometheus (/metrics):
+  - TerraBreed exports real-time metrics via Prometheus (/metrics on port 8008):
     * genotrack_predictions_total: Throughput by trial environment and status.
     * genotrack_inference_latency_seconds: Latency histogram tracking p50, p95, and p99 SLAs.
     * genotrack_predicted_yield_kg_ha: Distribution histogram of predicted crop yields.
@@ -185,8 +222,6 @@ PART 4: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
   3. Prometheus PromQL Live Graph:
      - URL: http://localhost:9090/graph?g0.expr=sum(rate(genotrack_predictions_total[1m]))%20by%20(environment)&g0.tab=0&g0.range_input=15m
      - Renders real-time multi-line throughput curves broken down across all 7 trial environments.
-     - Note: Default http://localhost:9090 opens with an empty query box ("No data queried yet");
-       always open the pre-executed URL above or click Execute to render graphs instantly.
 
   4. Grafana Dashboard (http://localhost:3001):
      - Log in with admin / admin.
@@ -195,7 +230,31 @@ PART 4: PRODUCTION MONITORING & SLA OBSERVABILITY (PROMETHEUS + GRAFANA)
        (p50/p95), Yield Distribution, and Missing Hill Covariate Drift.
 
 
-PART 5: FULL-STACK CONTAINERIZATION (DOCKER COMPOSE)
+PART 6: MULTI-SEASON VIRTUAL BREEDING & CLOSED-LOOP RETRAINING
+-------------------------------------------------------------------------------
+* Talking Points:
+  - Solves delayed ground truth (Label Lag L=1 season delay between planting and harvest).
+  - Virtual Breeding Simulator streams 16 seasons with Haldane genetic recombination,
+    polygenic inheritance, and GxE climatic shocks.
+  - Autonomous policy triggers retraining after K=2 consecutive ticks of drift
+    (Wasserstein distance > 0.15 or Page-Hinkley score > 20.0) with a 2-season cooldown.
+  - Commits every season, prediction, drift metric, and retrain event to an immutable
+    audit ledger (ledger.parquet / ledger.csv) with SHA-256 fingerprinting.
+
+* Demonstration Commands:
+  # Run 16-season storyline simulation:
+  python -m simulation.run_lifecycle --scenario storyline_demo --ticks 16
+
+  # Verify lifecycle acceptance gates:
+  python -m simulation.verify_lifecycle_acceptance
+
+* What to Show in Browser:
+  - Open http://localhost:8008/ (or http://127.0.0.1:5500/index.html) -> Lifecycle & Simulation tab.
+  - Switch between Storyline Demo, Stable Control, and Random Stress.
+  - Click "Export Ledger CSV" to download the complete provenance trail.
+
+
+PART 7: FULL-STACK CONTAINERIZATION (DOCKER COMPOSE)
 -------------------------------------------------------------------------------
 * Talking Points:
   - The entire environment is containerized and deployable in a single command.
@@ -216,22 +275,21 @@ PART 5: FULL-STACK CONTAINERIZATION (DOCKER COMPOSE)
   docker compose down
 
 
-PART 6: GOVERNANCE & CI/CD (GITHUB ACTIONS)
+PART 8: GOVERNANCE, CI/CD & TEST SUITE (GITHUB ACTIONS & PYTEST)
 -------------------------------------------------------------------------------
 * Talking Points:
-  - GenoTrack enforces enterprise safety gates across 4 specialized GitHub
+  - TerraBreed enforces enterprise safety gates across 4 specialized GitHub
     Actions workflows in .github/workflows/:
-    1. Code CI (ci_code.yml): Flake8 linting, Black formatting checks, and 16 unit tests.
+    1. Code CI (ci_code.yml): Flake8 linting, Black formatting checks, and 29 unit tests.
     2. Data CI (ci_data.yml): Pandera contract validation on mutated/corrupted fixtures.
     3. Continuous Training (continuous_training.yml): Automated retrain and gate evaluation.
     4. Deployment & Lightweight RBAC (deploy.yml): Multi-stage deployment
        (staging -> production). Uses GitHub Actions Environment Protection Rules
-       requiring designated human reviewer approval (lead agronomist / ML lead)
-       before promoting a model to production.
+       requiring designated human reviewer approval before model promotion.
 
 * Demonstration Commands:
-  # Run the full test suite locally (16/16 tests passing):
-  pytest
+  # Run the full test suite locally (29/29 tests passing):
+  pytest tests/ -v
 
 
 -------------------------------------------------------------------------------
@@ -243,35 +301,34 @@ Windows launcher:
 
   .\demo_commands.bat
 
-Or execute the commands individually in separate terminal tabs:
-
-  # Terminal 1: FastAPI Serving Server
-  python -m uvicorn src.serve.app:app --host 0.0.0.0 --port 8008
-
-  # Terminal 2: MLflow UI
-  python -m mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
-
-  # Terminal 3: Docker Telemetry Stack (Prometheus + Grafana)
-  docker compose up -d prometheus grafana
-
-  # Terminal 4: Telemetry Replay Generator
-  python monitoring/seed_telemetry.py --endpoint http://localhost:8008 --requests 50
-
-  # Terminal 5: Metaflow Card Viewer
-  python -m pipelines.flow card view validation_gate
+Interactive menu options:
+  [1] Start FastAPI Serving API (Port 8008)
+  [2] Start MLflow Tracking UI (Port 5000)
+  [3] Start Docker Prometheus & Grafana Stack (Ports 9090 & 3001)
+  [4] Start Continuous Telemetry Generator (Traffic Stream into Grafana)
+  [5] Display DVC Lineage DAG & Data Status (dvc dag & dvc status)
+  [6] Run Metaflow End-to-End Pipeline DAG (python pipelines/flow.py run)
+  [7] View Metaflow Validation Gate HTML Card (In Browser)
+  [8] Start Metaflow Card Viewer Server (Port 8324)
+  [9] Run 16-Season Virtual Breeding Lifecycle Simulation
+  [T] Run Comprehensive Pytest Suite (29/29 Unit Tests)
+  [O] Open All Presentation Web Pages in Browser
 
 
 -------------------------------------------------------------------------------
 4. VERIFICATION CHECKLIST
 -------------------------------------------------------------------------------
 
-[X] Metaflow DAG: All 8 steps executed cleanly; all 7 step cards generated in .metaflow/mf.cards/.
-[X] Validation Gate: Evaluated and PASSED with r = 0.8122 vs Baseline r = 0.7957.
+[X] Metaflow DAG: All 8 steps executed cleanly; all step cards generated.
+[X] DVC Lineage: 5 stages (setup_data -> ingest -> clean -> features -> train) verified in dvc.lock.
+[X] Validation Gate: Evaluated and PASSED with r = 0.8122 vs Baseline r = 0.5420.
 [X] MLflow Tracking: 4 comparative runs logged with metrics and artifacts in sqlite:///mlflow.db.
-[X] MLflow Registry: Model "GenoTrack-GxE-Yield" staged with Versions 1, 2, and 3.
-[X] FastAPI Server: Serving /health, /metrics, /predict/sample, and /explain/locus.
+[X] MLflow Registry: Model "TerraBreed-GxE-Yield" staged with Versions 1, 2, and 3.
+[X] FastAPI Server: Serving /health, /metrics, /predict/sample, /predict/dosage, /explain/locus on port 8008.
+[X] CORS Middleware: Configured so index.html works from both :8008 and Live Server :5500.
 [X] Prometheus Scraper: Container running on port 9090; scraping host.docker.internal:8008 (Status: UP).
 [X] Grafana Dashboard: Container running on port 3001; dashboard "GenoTrack MLOps Telemetry" auto-provisioned.
-[X] Telemetry Traffic: Replay script verified (50/50 requests recorded).
-[X] Unit Tests: 16 of 16 tests passing in tests/.
+[X] Telemetry Traffic: Replay script verified (traffic_generator.py streaming into port 8008).
+[X] Lifecycle Simulation: 16-season virtual breeding program verified with ledger export.
+[X] Unit Tests: 29 of 29 tests passing across 7 test modules in tests/.
 ===============================================================================

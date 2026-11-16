@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: genotrack-api
     ports:
-      - "8000:8000"
+      - "8008:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - MLFLOW_TRACKING_URI=sqlite:///mlflow.db

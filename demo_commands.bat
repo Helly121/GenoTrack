@@ -60,6 +60,7 @@ goto MENU
 echo Starting FastAPI Serving Layer on http://localhost:8008...
 start "TerraBreed API" python -m uvicorn src.serve.app:app --host 0.0.0.0 --port 8008
 timeout /t 3 >nul
+start http://localhost:8008/
 goto MENU
 
 :START_MLFLOW
