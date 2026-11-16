@@ -31,6 +31,7 @@ MODELS_DIR = PROJECT_ROOT / "data" / "models"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 INDEX_HTML = PROJECT_ROOT / "index.html"
 LIFECYCLE_DIR = PROJECT_ROOT / "docs" / "lifecycle"
+FAVICON_SVG = PROJECT_ROOT / "favicon.svg"
 
 # In-memory model cache
 CACHE = {
@@ -138,15 +139,24 @@ if LIFECYCLE_DIR.exists():
 
 
 # -------------------------------------------------------------
-# Static Dashboard Endpoints
+# Static Dashboard & Asset Endpoints
 # -------------------------------------------------------------
+@app.get("/favicon.ico", include_in_schema=False)
+@app.get("/favicon.svg", include_in_schema=False)
+def get_favicon():
+    """Serves the seed/leaf favicon with 200 OK."""
+    if FAVICON_SVG.exists():
+        return FileResponse(FAVICON_SVG, media_type="image/svg+xml")
+    return Response(status_code=404)
+
+
 @app.get("/", response_class=HTMLResponse)
 @app.get("/dashboard", response_class=HTMLResponse)
 def serve_dashboard():
-    """Serves the GenoTrack web dashboard directly from the application."""
+    """Serves the TerraBreed web dashboard directly from the application."""
     if INDEX_HTML.exists():
         return FileResponse(INDEX_HTML)
-    return HTMLResponse("<h2>GenoTrack dashboard file index.html not found.</h2>", status_code=404)
+    return HTMLResponse("<h2>TerraBreed dashboard file index.html not found.</h2>", status_code=404)
 
 
 # -------------------------------------------------------------
